@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F0E1A9B9AEA00FEAB0E /* main.m */; };
+		BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */; };
+		BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F141A9B9AEA00FEAB0E /* ViewController.m */; };
+		BE085F1A1A9B9AEA00FEAB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE085F191A9B9AEA00FEAB0E /* Images.xcassets */; };
+		BE085F1D1A9B9AEA00FEAB0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE085F1B1A9B9AEA00FEAB0E /* LaunchScreen.xib */; };
+		BE085F291A9B9AEA00FEAB0E /* ArkhamHorrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F281A9B9AEA00FEAB0E /* ArkhamHorrorTests.m */; };
+		BE085F331A9B9B0000FEAB0E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE085F321A9B9B0000FEAB0E /* ViewController.xib */; };
+		BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */; };
+		BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */; };
+		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
+		BE085F4A1A9BB9C200FEAB0E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F491A9BB9C200FEAB0E /* Game.m */; };
+		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
+		BE436DA21A9BC72B0091BBF9 /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */; };
+		BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */; };
+		BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD4E1A9C5A8D0034581D /* Item.m */; };
+		BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD511A9CD46A0034581D /* JSTest.m */; };
+		BE4CFD551A9CF3400034581D /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD541A9CF3400034581D /* Board.m */; };
+		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE085F231A9B9AEA00FEAB0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE085F011A9B9AE900FEAB0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE085F081A9B9AE900FEAB0E;
+			remoteInfo = ArkhamHorror;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BE085F091A9B9AE900FEAB0E /* ArkhamHorror.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArkhamHorror.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE085F0D1A9B9AEA00FEAB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE085F0E1A9B9AEA00FEAB0E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE085F101A9B9AEA00FEAB0E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE085F131A9B9AEA00FEAB0E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BE085F141A9B9AEA00FEAB0E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BE085F191A9B9AEA00FEAB0E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BE085F1C1A9B9AEA00FEAB0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BE085F221A9B9AEA00FEAB0E /* ArkhamHorrorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArkhamHorrorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE085F271A9B9AEA00FEAB0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE085F281A9B9AEA00FEAB0E /* ArkhamHorrorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArkhamHorrorTests.m; sourceTree = "<group>"; };
+		BE085F321A9B9B0000FEAB0E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		BE085F391A9B9C9D00FEAB0E /* Investigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Investigator.h; sourceTree = "<group>"; };
+		BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Investigator.m; sourceTree = "<group>"; };
+		BE085F3C1A9B9E8600FEAB0E /* AncientOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AncientOne.h; sourceTree = "<group>"; };
+		BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AncientOne.m; sourceTree = "<group>"; };
+		BE085F451A9BB22800FEAB0E /* GameLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLoop.h; sourceTree = "<group>"; };
+		BE085F461A9BB22800FEAB0E /* GameLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLoop.m; sourceTree = "<group>"; };
+		BE085F481A9BB9C200FEAB0E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		BE085F491A9BB9C200FEAB0E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		BE085F4B1A9BBA7A00FEAB0E /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameDefaults.plist; sourceTree = "<group>"; };
+		BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCheck.h; sourceTree = "<group>"; };
+		BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCheck.m; sourceTree = "<group>"; };
+		BE4CFD4D1A9C5A8D0034581D /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		BE4CFD4E1A9C5A8D0034581D /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		BE4CFD501A9CD46A0034581D /* JSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTest.h; sourceTree = "<group>"; };
+		BE4CFD511A9CD46A0034581D /* JSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTest.m; sourceTree = "<group>"; };
+		BE4CFD531A9CF3400034581D /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		BE4CFD541A9CF3400034581D /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
+		BE4CFD561A9CF37B0034581D /* Neighborhood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neighborhood.h; sourceTree = "<group>"; };
+		BE4CFD571A9CF37B0034581D /* Neighborhood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Neighborhood.m; sourceTree = "<group>"; };
+		BE4CFD5A1A9CF8900034581D /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE085F061A9B9AE900FEAB0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE085F1F1A9B9AEA00FEAB0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE085F001A9B9AE900FEAB0E = {
+			isa = PBXGroup;
+			children = (
+				BE085F0B1A9B9AE900FEAB0E /* ArkhamHorror */,
+				BE085F251A9B9AEA00FEAB0E /* ArkhamHorrorTests */,
+				BE085F0A1A9B9AE900FEAB0E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE085F0A1A9B9AE900FEAB0E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F091A9B9AE900FEAB0E /* ArkhamHorror.app */,
+				BE085F221A9B9AEA00FEAB0E /* ArkhamHorrorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE085F0B1A9B9AE900FEAB0E /* ArkhamHorror */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F101A9B9AEA00FEAB0E /* AppDelegate.h */,
+				BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */,
+				BE436DA01A9BC6F20091BBF9 /* game defaults */,
+				BE4CFD5B1A9CF96F0034581D /* Utils */,
+				BE085F341A9B9C7600FEAB0E /* models */,
+				BE085F351A9B9C7C00FEAB0E /* view controllers */,
+				BE085F191A9B9AEA00FEAB0E /* Images.xcassets */,
+				BE085F1B1A9B9AEA00FEAB0E /* LaunchScreen.xib */,
+				BE085F0C1A9B9AE900FEAB0E /* Supporting Files */,
+			);
+			path = ArkhamHorror;
+			sourceTree = "<group>";
+		};
+		BE085F0C1A9B9AE900FEAB0E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F0D1A9B9AEA00FEAB0E /* Info.plist */,
+				BE085F0E1A9B9AEA00FEAB0E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE085F251A9B9AEA00FEAB0E /* ArkhamHorrorTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F281A9B9AEA00FEAB0E /* ArkhamHorrorTests.m */,
+				BE085F261A9B9AEA00FEAB0E /* Supporting Files */,
+			);
+			path = ArkhamHorrorTests;
+			sourceTree = "<group>";
+		};
+		BE085F261A9B9AEA00FEAB0E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F271A9B9AEA00FEAB0E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE085F341A9B9C7600FEAB0E /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F391A9B9C9D00FEAB0E /* Investigator.h */,
+				BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */,
+				BE085F3C1A9B9E8600FEAB0E /* AncientOne.h */,
+				BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */,
+				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
+				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
+				BE085F481A9BB9C200FEAB0E /* Game.h */,
+				BE085F491A9BB9C200FEAB0E /* Game.m */,
+				BE4CFD4D1A9C5A8D0034581D /* Item.h */,
+				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
+				BE4CFD591A9CF3840034581D /* board+locations */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		BE085F351A9B9C7C00FEAB0E /* view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F321A9B9B0000FEAB0E /* ViewController.xib */,
+				BE085F131A9B9AEA00FEAB0E /* ViewController.h */,
+				BE085F141A9B9AEA00FEAB0E /* ViewController.m */,
+			);
+			name = "view controllers";
+			sourceTree = "<group>";
+		};
+		BE436DA01A9BC6F20091BBF9 /* game defaults */ = {
+			isa = PBXGroup;
+			children = (
+				BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */,
+			);
+			name = "game defaults";
+			sourceTree = "<group>";
+		};
+		BE4CFD591A9CF3840034581D /* board+locations */ = {
+			isa = PBXGroup;
+			children = (
+				BE4CFD531A9CF3400034581D /* Board.h */,
+				BE4CFD541A9CF3400034581D /* Board.m */,
+				BE4CFD5C1A9D061D0034581D /* locations */,
+				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
+				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
+			);
+			name = "board+locations";
+			sourceTree = "<group>";
+		};
+		BE4CFD5B1A9CF96F0034581D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BE4CFD5A1A9CF8900034581D /* Defines.h */,
+				BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */,
+				BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */,
+				BE4CFD501A9CD46A0034581D /* JSTest.h */,
+				BE4CFD511A9CD46A0034581D /* JSTest.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		BE4CFD5C1A9D061D0034581D /* locations */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F4B1A9BBA7A00FEAB0E /* Location.h */,
+				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
+			);
+			name = locations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE085F081A9B9AE900FEAB0E /* ArkhamHorror */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE085F2C1A9B9AEA00FEAB0E /* Build configuration list for PBXNativeTarget "ArkhamHorror" */;
+			buildPhases = (
+				BE085F051A9B9AE900FEAB0E /* Sources */,
+				BE085F061A9B9AE900FEAB0E /* Frameworks */,
+				BE085F071A9B9AE900FEAB0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArkhamHorror;
+			productName = ArkhamHorror;
+			productReference = BE085F091A9B9AE900FEAB0E /* ArkhamHorror.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BE085F211A9B9AEA00FEAB0E /* ArkhamHorrorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE085F2F1A9B9AEA00FEAB0E /* Build configuration list for PBXNativeTarget "ArkhamHorrorTests" */;
+			buildPhases = (
+				BE085F1E1A9B9AEA00FEAB0E /* Sources */,
+				BE085F1F1A9B9AEA00FEAB0E /* Frameworks */,
+				BE085F201A9B9AEA00FEAB0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE085F241A9B9AEA00FEAB0E /* PBXTargetDependency */,
+			);
+			name = ArkhamHorrorTests;
+			productName = ArkhamHorrorTests;
+			productReference = BE085F221A9B9AEA00FEAB0E /* ArkhamHorrorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE085F011A9B9AE900FEAB0E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Sleepy;
+				TargetAttributes = {
+					BE085F081A9B9AE900FEAB0E = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					BE085F211A9B9AEA00FEAB0E = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = BE085F081A9B9AE900FEAB0E;
+					};
+				};
+			};
+			buildConfigurationList = BE085F041A9B9AE900FEAB0E /* Build configuration list for PBXProject "ArkhamHorror" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE085F001A9B9AE900FEAB0E;
+			productRefGroup = BE085F0A1A9B9AE900FEAB0E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE085F081A9B9AE900FEAB0E /* ArkhamHorror */,
+				BE085F211A9B9AEA00FEAB0E /* ArkhamHorrorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE085F071A9B9AE900FEAB0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE085F1D1A9B9AEA00FEAB0E /* LaunchScreen.xib in Resources */,
+				BE085F331A9B9B0000FEAB0E /* ViewController.xib in Resources */,
+				BE436DA21A9BC72B0091BBF9 /* GameDefaults.plist in Resources */,
+				BE085F1A1A9B9AEA00FEAB0E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE085F201A9B9AEA00FEAB0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE085F051A9B9AE900FEAB0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */,
+				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
+				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
+				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
+				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
+				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
+				BE4CFD551A9CF3400034581D /* Board.m in Sources */,
+				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
+				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
+				BE085F4A1A9BB9C200FEAB0E /* Game.m in Sources */,
+				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
+				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,
+				BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE085F1E1A9B9AEA00FEAB0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE085F291A9B9AEA00FEAB0E /* ArkhamHorrorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE085F241A9B9AEA00FEAB0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE085F081A9B9AE900FEAB0E /* ArkhamHorror */;
+			targetProxy = BE085F231A9B9AEA00FEAB0E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BE085F1B1A9B9AEA00FEAB0E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE085F1C1A9B9AEA00FEAB0E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE085F2A1A9B9AEA00FEAB0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE085F2B1A9B9AEA00FEAB0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE085F2D1A9B9AEA00FEAB0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ArkhamHorror/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BE085F2E1A9B9AEA00FEAB0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ArkhamHorror/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BE085F301A9B9AEA00FEAB0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ArkhamHorrorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArkhamHorror.app/ArkhamHorror";
+			};
+			name = Debug;
+		};
+		BE085F311A9B9AEA00FEAB0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ArkhamHorrorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArkhamHorror.app/ArkhamHorror";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE085F041A9B9AE900FEAB0E /* Build configuration list for PBXProject "ArkhamHorror" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE085F2A1A9B9AEA00FEAB0E /* Debug */,
+				BE085F2B1A9B9AEA00FEAB0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE085F2C1A9B9AEA00FEAB0E /* Build configuration list for PBXNativeTarget "ArkhamHorror" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE085F2D1A9B9AEA00FEAB0E /* Debug */,
+				BE085F2E1A9B9AEA00FEAB0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE085F2F1A9B9AEA00FEAB0E /* Build configuration list for PBXNativeTarget "ArkhamHorrorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE085F301A9B9AEA00FEAB0E /* Debug */,
+				BE085F311A9B9AEA00FEAB0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE085F011A9B9AE900FEAB0E /* Project object */;
+}

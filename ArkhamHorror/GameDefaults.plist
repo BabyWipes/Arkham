@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Neighborhoods</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>French Hill</string>
+			<key>Locations</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>The Witch House</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>Investigators</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Mike Cornell</string>
+			<key>occupation</key>
+			<string>Merman</string>
+			<key>focus</key>
+			<integer>3</integer>
+			<key>money</key>
+			<integer>5</integer>
+			<key>clues</key>
+			<integer>0</integer>
+			<key>max_sanity</key>
+			<integer>6</integer>
+			<key>max_stamina</key>
+			<integer>6</integer>
+			<key>min_speed</key>
+			<integer>1</integer>
+			<key>min_sneak</key>
+			<integer>1</integer>
+			<key>min_fight</key>
+			<integer>1</integer>
+			<key>min_will</key>
+			<integer>1</integer>
+			<key>min_lore</key>
+			<integer>1</integer>
+			<key>min_luck</key>
+			<integer>1</integer>
+			<key>fixed_items</key>
+			<array>
+				<integer>68</integer>
+			</array>
+			<key>random_commons</key>
+			<integer>0</integer>
+			<key>random_uniques</key>
+			<integer>0</integer>
+			<key>random_spells</key>
+			<integer>0</integer>
+			<key>random_skills</key>
+			<integer>0</integer>
+			<key>random_allies</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+</dict>
+</plist>
