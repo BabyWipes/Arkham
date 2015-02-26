@@ -58,9 +58,26 @@
                              rivertown,
                              southside,
                              uptown];
+    
+    downtown.colorlessStreetConnection = merchantDistrict;
+    downtown.whiteStreetConnection = easttown;
+    downtown.blackStreetConnection = northside;
+    
+    easttown.whiteStreetConnection = rivertown;
+    
+    frenchHill.blackStreetConnection = rivertown;
+    frenchHill.whiteStreetConnection = southside;
+    frenchHill.colorlessStreetConnection = miskatonicUniversity;
+    
+    merchantDistrict.whiteStreetConnection = northside;
+    merchantDistrict.blackStreetConnection = miskatonicUniversity;
+    
+    miskatonicUniversity.blackStreetConnection = uptown;
+    
+    southside.blackStreetConnection = uptown;
+    
+    NSLog(@"connections %@, %@, %@, %@, %@",downtown,merchantDistrict,downtown.colorlessStreetConnection, merchantDistrict.colorlessStreetConnection,downtown.colorlessStreetConnection.colorlessStreetConnection);
 
-    
-    
     //// downtown
     BankLocation *bank = [[BankLocation alloc] init]; // get bank loan if has none
     HealerLocation *asylum = [[HealerLocation alloc] initWithHealsSanity:YES]; // 1 free sanity or pay 2 max sanity

@@ -10,6 +10,7 @@
 #import "Investigator.h"
 #import "SkillCheck.h"
 #import "JSTest.h"
+#import "Board.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -21,15 +22,17 @@
 
 - (void)viewDidLoad {
     
-    [JSTest testJS];
     
     [super viewDidLoad];
     self.titleLabel.text = [NSString stringWithFormat:@"Arkham Horror v:%@",[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]];
     self.titleLabel.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:.1];
-    [self loadDefaultGame];
-    [SkillCheck skillCheck:0];
+    Board *arkham = [Board arkhamBoard];
     
+    //[self loadDefaultGame];
+    //[JSTest testJS];
 }
+
+
 
 -(void)loadDefaultGame {
     NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];

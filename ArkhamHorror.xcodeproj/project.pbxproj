@@ -194,7 +194,8 @@
 			children = (
 				BE4CFD531A9CF3400034581D /* Board.h */,
 				BE4CFD541A9CF3400034581D /* Board.m */,
-				BE4CFD5C1A9D061D0034581D /* locations */,
+				BE085F4B1A9BBA7A00FEAB0E /* Location.h */,
+				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
 				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
 				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
 			);
@@ -211,15 +212,6 @@
 				BE4CFD511A9CD46A0034581D /* JSTest.m */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		BE4CFD5C1A9D061D0034581D /* locations */ = {
-			isa = PBXGroup;
-			children = (
-				BE085F4B1A9BBA7A00FEAB0E /* Location.h */,
-				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
-			);
-			name = locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

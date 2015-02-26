@@ -11,8 +11,14 @@
 @interface Neighborhood : NSObject
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSUInteger neighborhoodID;
-@property (strong, nonatomic) NSArray *whiteStreetConnections;
-@property (strong, nonatomic) NSArray *blackStreetConnections;
+@property (strong, nonatomic) Neighborhood *whiteStreetConnection;
+@property (strong, nonatomic) Neighborhood *blackStreetConnection;
+@property (strong, nonatomic) Neighborhood *colorlessStreetConnection;
 @property (strong, nonatomic) NSArray *locations;
+
+@end
+
+@interface MerchantDistrictNeighborhood : Neighborhood
+@property (strong, nonatomic) Neighborhood *secondaryColorlessStreetConnection;
 
 @end

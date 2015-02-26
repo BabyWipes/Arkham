@@ -201,4 +201,9 @@
     // manditory? choice? wiki and rules conflict
 }
 
+#pragma mark - Description
+-(NSString*)description {
+    return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];
+}
+
 @end
