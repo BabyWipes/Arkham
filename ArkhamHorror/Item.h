@@ -8,15 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, ItemClassification){
+    ItemClassificationNone = 0,
+    ItemClassificationPhysicalWeapon,
+    ItemClassificationMagicalWeapon,
+    ItemClassificationTome
+};
+
 @interface Item : NSObject
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;
 @property (nonatomic) BOOL isExhausted;
 @property (nonatomic) BOOL shouldDiscard;
+@property (nonatomic) ItemClassification itemClass;
 
 @property (strong, nonatomic) NSArray *eventFlags; // things a player holding this item needs to pay attention to
 
+-(instancetype)initWithProperties:(NSDictionary*)properties;
 
 /*
  COMMONS
@@ -67,10 +76,10 @@
  Obsidian Statue                     $4	  1 // discard, cancel all sanity or stamina damage form one source
  Pallid Mask                         $4	  1 // +2 evade check
  Ruby of R'lyeh                      $8	  1 // +3 move
- Flute of the Outer Gods             $8	  1 // discard, -3 San -3 Sta, before combat check: if pass a horror check, defeat all monsters in your area. 
-                                               can't be used vs ancient one
- Warding Statue                      $6	  1 // discard, after failing Combat check, reduce the monster's combat damage to 0 Stamina. 
-                                               OR discard, cancel Ancient One's entire attack for 1 turn
+ Flute of the Outer Gods             $8	  1 // discard, -3 San -3 Sta, before combat check: if pass a horror check, defeat all monsters in your area.
+ can't be used vs ancient one
+ Warding Statue                      $6	  1 // discard, after failing Combat check, reduce the monster's combat damage to 0 Stamina.
+ OR discard, cancel Ancient One's entire attack for 1 turn
  
  UNIQUE WEAPONS (still unique items, but has hands cost)
  Item                   Type        Hands   Price   Count
@@ -98,8 +107,8 @@
  Mists of Releh             Special      0        0     4 // cast + exhaust to pass evade check, modifier == monsters awareness
  Bind Monster               +4           2        2		2 // discard, pass 1 combat check. must roll successes = monster's toughness to cast. can't use vs ancient one
  Red Sign of Shudde M'ell	-1           1        1		2 // exhaust, lower monster's toughness by 1 (minimum of 1) + ignore 1 of its special abilities
-                                                             (not Magical Immunity) until end of combat. (only special abilities marked in bold can be
-                                                             chosen to be ignored, i.e. not special combat abilities like the Nightgaunt has.)
+ (not Magical Immunity) until end of combat. (only special abilities marked in bold can be
+ chosen to be ignored, i.e. not special combat abilities like the Nightgaunt has.)
  
  */
 @end

@@ -19,6 +19,8 @@
 		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
 		BE085F4A1A9BB9C200FEAB0E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F491A9BB9C200FEAB0E /* Game.m */; };
 		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
+		BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
+		BE3D4F5B1A9FD6B80073EDEE /* GameEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */; };
 		BE436DA21A9BC72B0091BBF9 /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */; };
 		BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */; };
 		BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD4E1A9C5A8D0034581D /* Item.m */; };
@@ -61,6 +63,10 @@
 		BE085F491A9BB9C200FEAB0E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		BE085F4B1A9BBA7A00FEAB0E /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		BE3D4F551A9FD4900073EDEE /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
+		BE3D4F561A9FD4900073EDEE /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
+		BE3D4F591A9FD6B80073EDEE /* GameEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEvents.h; sourceTree = "<group>"; };
+		BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEvents.m; sourceTree = "<group>"; };
 		BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameDefaults.plist; sourceTree = "<group>"; };
 		BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCheck.h; sourceTree = "<group>"; };
 		BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCheck.m; sourceTree = "<group>"; };
@@ -158,8 +164,7 @@
 			children = (
 				BE085F391A9B9C9D00FEAB0E /* Investigator.h */,
 				BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */,
-				BE085F3C1A9B9E8600FEAB0E /* AncientOne.h */,
-				BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */,
+				BE3D4F581A9FD4970073EDEE /* bad guys */,
 				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
 				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
 				BE085F481A9BB9C200FEAB0E /* Game.h */,
@@ -167,6 +172,8 @@
 				BE4CFD4D1A9C5A8D0034581D /* Item.h */,
 				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
 				BE4CFD591A9CF3840034581D /* board+locations */,
+				BE3D4F591A9FD6B80073EDEE /* GameEvents.h */,
+				BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -179,6 +186,17 @@
 				BE085F141A9B9AEA00FEAB0E /* ViewController.m */,
 			);
 			name = "view controllers";
+			sourceTree = "<group>";
+		};
+		BE3D4F581A9FD4970073EDEE /* bad guys */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F3C1A9B9E8600FEAB0E /* AncientOne.h */,
+				BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */,
+				BE3D4F551A9FD4900073EDEE /* Monster.h */,
+				BE3D4F561A9FD4900073EDEE /* Monster.m */,
+			);
+			name = "bad guys";
 			sourceTree = "<group>";
 		};
 		BE436DA01A9BC6F20091BBF9 /* game defaults */ = {
@@ -319,7 +337,9 @@
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
 				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
+				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
 				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
+				BE3D4F5B1A9FD6B80073EDEE /* GameEvents.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
 				BE4CFD551A9CF3400034581D /* Board.m in Sources */,
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
