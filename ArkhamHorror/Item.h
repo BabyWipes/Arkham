@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Card.h"
 
 typedef NS_ENUM(NSUInteger, ItemClassification){
     ItemClassificationNone = 0,
@@ -15,7 +16,8 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
     ItemClassificationTome
 };
 
-@interface Item : NSObject
+@interface Item : Card
+
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;
@@ -26,6 +28,11 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
 @property (strong, nonatomic) NSArray *eventFlags; // things a player holding this item needs to pay attention to
 
 -(instancetype)initWithProperties:(NSDictionary*)properties;
+
+@end
+
+
+
 
 /*
  COMMONS
@@ -94,7 +101,7 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
  
  ///
  SPELLS
- Spell                      Casting mod  SAN cost Hands   Count
+ Spell                      Casting mod  SAN cost Hands Count
  ------------------------------------------------------------------------
  Wither                     0            0        1		6 // exhaust, +3 combat until end of this combat
  Shrivelling                -1           1        1		5 // exhaust, +6 combat until end of this combat
@@ -104,12 +111,26 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
  Flesh Ward                 -2           1        0     4 // exhaust, ignore all stamina damage from one source, discard on ancient one awakening
  Voice of Ra                -1           1        0     3 // exhaust to gain +1 to all skill checks until end of turn
  Heal                       +1           1        0     3 // (upkeep, optional) exhaust, stamina += successes of spell check. target 1 player in location
- Mists of Releh             Special      0        0     4 // cast + exhaust to pass evade check, modifier == monsters awareness
+ Mists of Releh             Special      0        0     4 // cast + exhaust to pass evade check, casting modifier == monsters awareness
  Bind Monster               +4           2        2		2 // discard, pass 1 combat check. must roll successes = monster's toughness to cast. can't use vs ancient one
  Red Sign of Shudde M'ell	-1           1        1		2 // exhaust, lower monster's toughness by 1 (minimum of 1) + ignore 1 of its special abilities
  (not Magical Immunity) until end of combat. (only special abilities marked in bold can be
  chosen to be ignored, i.e. not special combat abilities like the Nightgaunt has.)
  
+ 
+ ///
+ SKILLS             Effect
+ -------------------------
+ Bravery            exhaust, re-roll horror check
+ Expert Occultist   exhaust, re-roll spell check
+ Marksman           exhaust, re-roll combat check
+ Stealth            exhaust, re-roll evade check
+ Fight              +1 fight, when you spend a clue to add fight, add an extra die
+ Lore               +1 lore, when you spend a clue to add lore, add an extra die
+ Luck               +1 luck, when you spend a clue to add luck, add an extra die
+ Sneak              +1 sneak, when you spend a clue to add sneak, add an extra die
+ Speed              +1 speed, when you spend a clue to add speed, add an extra die
+ Will               +1 will, when you spend a clue to add will, add an extra die
+ 
+ 
  */
-@end
-
