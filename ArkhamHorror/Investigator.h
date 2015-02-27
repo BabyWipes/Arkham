@@ -67,4 +67,36 @@
 -(NSString*)skillsString;
 
 
+
+
+/*
+ 
+ INVESTIGATORS
+ Name               Occupation      Home                    Sanity	Stamina	Focus
+ -------------------------------------------------------------------------------
+ Amanda Sharpe      Student         Bank of Arkham          5       5       3
+ "Ashcan" Pete      Drifter         River Docks             4       6       1
+ Bob Jenkins        Salesman        General Store           4       6       1
+ Carolyn Fern       Psychologist	Arkham Asylum           6       4       2
+ Darrell Simmons    Photographer	Newspaper               4       6       2
+ Dexter Drake       Magician        Ye Olde Magick Shoppe	5       5       2
+ Gloria Goldberg    Author          Velma's Diner           6       4       2
+ Harvey Walters     Professor       Administration Building 7       3       2
+ Jenny Barnes       Dilettante      Train Station           6       4       1
+ Joe Diamond        Private Eye     Police Station          4       6       3
+ Kate Winthrop      Scientist       Science Building        6       4       1
+ Mandy Thompson     Researcher      Library                 5       5       2
+ Michael McGlen     Gangster        Ma's Boarding House     3       7       1
+ Monterey Jack      Archeologist	Curiositie Shoppe       3       7       2
+ Sister Mary        Nun             South Church            7       3       1
+ Vincent Lee        Doctor          St. Mary's Hospital     5       5       2
+ 
+ */
+
+
+
+
+
+
+
 @end

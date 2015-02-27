@@ -29,7 +29,6 @@
                 self.itemClass = ItemClassificationTome;
             }
         }
-        
     }
     return self;
 }
