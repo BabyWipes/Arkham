@@ -14,6 +14,9 @@ typedef NS_ENUM(NSUInteger, CardType) {
     CardTypeSpell,
     CardTypeSkill,
     CardTypeAlly,
+    CardTypeArkhamEncounter,
+    CardTypeOtherWorldEncounter,
+    CardTypeMythos
     
 };
 

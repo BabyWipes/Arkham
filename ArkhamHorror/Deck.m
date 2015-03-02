@@ -23,7 +23,7 @@
     return self;
 }
 
--(Card*)draw {
+-(Card*)drawOne {
     Card *card = nil;
     if (self.underlyingArray.count > 0){
         card = self.underlyingArray[0];

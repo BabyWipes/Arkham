@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSUInteger locationID;
 @property (nonatomic) BOOL isStable;
+@property (strong, nonatomic) Deck *encounterDeck;
 
 -(instancetype)initWithStability:(BOOL)isStable;
 
@@ -34,6 +35,7 @@
 @end
 
 @interface LodgeLocation : Location
+@property (strong, nonatomic) Deck *innerSanctumLocation;
 -(void)innerSanctumEncounter;
 @end
 

@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
+                <outlet property="inputField" destination="X4U-Bl-DmR" id="Xyk-O3-jVC"/>
+                <outlet property="textBox" destination="Amo-GY-4SL" id="ocE-s7-q4Y"/>
                 <outlet property="titleLabel" destination="6df-zF-5Gt" id="EW9-tJ-TBg"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fo9-RB-qca"/>
             </connections>
@@ -24,12 +26,34 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X4U-Bl-DmR">
+                    <rect key="frame" x="8" y="562" width="584" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="fQS-6R-hhH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Amo-GY-4SL">
+                    <rect key="frame" x="8" y="49" width="584" height="505"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="X4U-Bl-DmR" secondAttribute="bottom" constant="8" id="23M-gK-YvH"/>
+                <constraint firstItem="Amo-GY-4SL" firstAttribute="top" secondItem="6df-zF-5Gt" secondAttribute="bottom" constant="8" id="2fB-ua-Tvn"/>
+                <constraint firstAttribute="trailing" secondItem="Amo-GY-4SL" secondAttribute="trailing" constant="8" id="6Kf-dQ-cAA"/>
                 <constraint firstItem="6df-zF-5Gt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Dle-u0-5bF"/>
                 <constraint firstAttribute="trailing" secondItem="6df-zF-5Gt" secondAttribute="trailing" constant="8" id="EIX-hx-XmS"/>
+                <constraint firstItem="Amo-GY-4SL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="L4t-ar-Een"/>
                 <constraint firstItem="6df-zF-5Gt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="kgL-Pm-L5M"/>
+                <constraint firstAttribute="trailing" secondItem="X4U-Bl-DmR" secondAttribute="trailing" constant="8" id="kt6-c6-ukA"/>
+                <constraint firstItem="X4U-Bl-DmR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="lgn-5P-lfi"/>
+                <constraint firstItem="X4U-Bl-DmR" firstAttribute="top" secondItem="Amo-GY-4SL" secondAttribute="bottom" constant="8" id="uIQ-bB-LSy"/>
             </constraints>
         </view>
     </objects>

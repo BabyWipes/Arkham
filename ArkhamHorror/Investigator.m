@@ -19,7 +19,7 @@
 @implementation Investigator
 
 #pragma mark - Init
--(instancetype)initWithProperties:(NSDictionary*)properties {
+-(instancetype)initWithProperties:(NSDictionary*)properties{
     self = [super init];
     if (self){
         self.commonItems = [NSMutableArray new];
@@ -50,16 +50,6 @@
         self.speedSneakSlider = 0;
         self.fightWillSlider = 0;
         self.loreLuckSlider = 0;
-        
-        NSArray *startingFixedItems = properties[@"fixed_items"]; // array of itemIDs (NSUIntegers), draw these specific items from deck
-        
-        // draw this many cards from the decks
-        NSInteger randomCommons = [properties[@"random_commons"] integerValue];
-        NSInteger randomUniques = [properties[@"random_uniques"] integerValue];
-        NSInteger randomSkills = [properties[@"random_skills"] integerValue];
-        NSInteger randomSpells = [properties[@"random_spells"] integerValue];
-        NSInteger randomAllies = [properties[@"random_allies"] integerValue];
-
 
     }
     

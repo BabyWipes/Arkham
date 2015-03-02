@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Deck.h"
+#import "Game.h"
 
 @interface Investigator : NSObject
 @property (strong, nonatomic) NSString *name;
@@ -63,7 +65,9 @@
 
 @property (nonatomic) NSInteger retainers;
 
+// initialize a player with predefined properties
 -(instancetype)initWithProperties:(NSDictionary*)properties;
+
 -(NSString*)skillsString;
 
 
@@ -172,6 +176,7 @@
  Sister Mary        is never Lost in Time and Space. Instead, if Sanity is 0, returns to Asylum. If Stamina is 0, returns to Hospital. else, returns to Church
  Vincent Lee        During upkeep, heal self or 1 investigator in location 1 stamina, cannot exceed max
  
+ Amanda onSkillDraw, drawCount+1, discardCount+1
  */
 
 

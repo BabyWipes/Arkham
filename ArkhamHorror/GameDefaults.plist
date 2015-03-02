@@ -47,7 +47,8 @@
 			<integer>1</integer>
 			<key>fixed_items</key>
 			<array>
-				<integer>68</integer>
+				<integer>2</integer>
+				<integer>1</integer>
 			</array>
 			<key>random_commons</key>
 			<integer>0</integer>
@@ -56,8 +57,6 @@
 			<key>random_spells</key>
 			<integer>0</integer>
 			<key>random_skills</key>
-			<integer>0</integer>
-			<key>random_allies</key>
 			<integer>0</integer>
 		</dict>
 	</array>

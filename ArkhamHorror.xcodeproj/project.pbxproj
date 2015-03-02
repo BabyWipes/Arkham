@@ -17,7 +17,6 @@
 		BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */; };
 		BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */; };
 		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
-		BE085F4A1A9BB9C200FEAB0E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F491A9BB9C200FEAB0E /* Game.m */; };
 		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
 		BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
 		BE3D4F5B1A9FD6B80073EDEE /* GameEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */; };
@@ -29,6 +28,7 @@
 		BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD511A9CD46A0034581D /* JSTest.m */; };
 		BE4CFD551A9CF3400034581D /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD541A9CF3400034581D /* Board.m */; };
 		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
+		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +61,6 @@
 		BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AncientOne.m; sourceTree = "<group>"; };
 		BE085F451A9BB22800FEAB0E /* GameLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLoop.h; sourceTree = "<group>"; };
 		BE085F461A9BB22800FEAB0E /* GameLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLoop.m; sourceTree = "<group>"; };
-		BE085F481A9BB9C200FEAB0E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		BE085F491A9BB9C200FEAB0E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		BE085F4B1A9BBA7A00FEAB0E /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		BE3D4F551A9FD4900073EDEE /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
@@ -85,6 +83,8 @@
 		BE4CFD561A9CF37B0034581D /* Neighborhood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neighborhood.h; sourceTree = "<group>"; };
 		BE4CFD571A9CF37B0034581D /* Neighborhood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Neighborhood.m; sourceTree = "<group>"; };
 		BE4CFD5A1A9CF8900034581D /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +173,6 @@
 				BE3D4F581A9FD4970073EDEE /* bad guys */,
 				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
 				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
-				BE085F481A9BB9C200FEAB0E /* Game.h */,
-				BE085F491A9BB9C200FEAB0E /* Game.m */,
 				BE4CFD4D1A9C5A8D0034581D /* Item.h */,
 				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
 				BE4CFD591A9CF3840034581D /* board+locations */,
@@ -184,6 +182,8 @@
 				BE3D4F611AA1219C0073EDEE /* Deck.m */,
 				BE3D4F631AA1224B0073EDEE /* Card.h */,
 				BE3D4F641AA1224B0073EDEE /* Card.m */,
+				BEA88DE81AA50959000D9972 /* Game.h */,
+				BEA88DE91AA50959000D9972 /* Game.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -343,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEA88DEA1AA50959000D9972 /* Game.m in Sources */,
 				BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */,
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
 				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
@@ -356,7 +357,6 @@
 				BE4CFD551A9CF3400034581D /* Board.m in Sources */,
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
 				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
-				BE085F4A1A9BB9C200FEAB0E /* Game.m in Sources */,
 				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
 				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,
 				BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */,

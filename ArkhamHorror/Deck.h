@@ -12,8 +12,8 @@
 @interface Deck : NSObject
 @property (nonatomic) CardType cardType;
 
-// returns a Card of type <type>
--(Card*)draw;
+// returns <keepCount> Card of type <deck.cardType> from a selection of <drawCount> cards
+-(Card*)drawOne;
 
 // puts a Card of type <type> to the bottom of the deck
 -(void)discard:(Card*)card;
