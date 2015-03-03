@@ -134,6 +134,27 @@
     }
 }
 
+#pragma mark - Stamina + Sanity
+
+-(void)setMaxSanity:(NSInteger)maxSanity {
+    if (_maxSanity != maxSanity){
+        _maxSanity = maxSanity;
+        if (self.sanity > maxSanity){
+            self.sanity = _maxSanity;
+        }
+    }
+}
+
+-(void)setMaxStamina:(NSInteger)maxStamina {
+    if (_maxStamina != maxStamina){
+        _maxStamina = maxStamina;
+        if (self.stamina > maxStamina){
+            self.stamina = _maxStamina;
+        }
+    }
+}
+
+
 #pragma mark - Description
 -(NSString*)description {
     return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];
