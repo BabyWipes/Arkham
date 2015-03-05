@@ -6,7 +6,10 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Monster;
+
 #import <Foundation/Foundation.h>
+#import "Movable.h"
 
 typedef NS_ENUM(NSUInteger, MonsterMovementType){
     MonsterMovementTypeNormal = 0,
@@ -16,7 +19,24 @@ typedef NS_ENUM(NSUInteger, MonsterMovementType){
     MonsterMovementTypeUnique
 };
 
-@interface Monster : NSObject
+typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
+    MonsterDimensionSymbolCircle,
+    MonsterDimensionSymbolCrescent,
+    MonsterDimensionSymbolTriangle,
+    MonsterDimensionSymbolHexagon,
+    MonsterDimensionSymbolSquare,
+    MonsterDimensionSymbolDiamond,
+    MonsterDimensionSymbolStar,
+    MonsterDimensionSymbolSlash,
+    MonsterDimensionSymbolPlus,
+};
+
+@interface Dimension : NSObject
+@property (nonatomic) MonsterDimensionSymbol value;
+-(BOOL)equalsDimension:(Dimension*)other;
+@end
+
+@interface Monster : Movable
 @property (strong, nonatomic) NSString *name;
 
 @property (nonatomic) NSInteger toughness;
@@ -26,6 +46,7 @@ typedef NS_ENUM(NSUInteger, MonsterMovementType){
 @property (nonatomic) NSInteger horrorDamage;
 
 @property (nonatomic) MonsterMovementType movementType;
+@property (nonatomic) Dimension *dimension;
 
 @property (nonatomic) BOOL canAmbush;
 @property (nonatomic) BOOL isEndless;
@@ -44,7 +65,7 @@ typedef NS_ENUM(NSUInteger, MonsterMovementType){
 @end
 
 @interface ChthonianMonster : Monster
-// earthquake attack
+// instead of moving, roll a die, on 4-6, all investigators in Arkham (not other world) lose 1 STA
 @end
 @interface DimensionalShamblerMonster : Monster
 // if you fail a combat check against this, you are lost in time and space

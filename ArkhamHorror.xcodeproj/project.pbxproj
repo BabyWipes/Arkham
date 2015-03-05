@@ -29,6 +29,8 @@
 		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
 		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
+		BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0531AA8B74C00ADFC88 /* Mythos.m */; };
+		BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0571AA8BB6600ADFC88 /* Movable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,10 @@
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
 		BEF0D04F1AA794E700ADFC88 /* Ally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ally.m; sourceTree = "<group>"; };
+		BEF0D0521AA8B74C00ADFC88 /* Mythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mythos.h; sourceTree = "<group>"; };
+		BEF0D0531AA8B74C00ADFC88 /* Mythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mythos.m; sourceTree = "<group>"; };
+		BEF0D0561AA8BB6600ADFC88 /* Movable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movable.h; sourceTree = "<group>"; };
+		BEF0D0571AA8BB6600ADFC88 /* Movable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +185,8 @@
 				BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */,
 				BEA88DE81AA50959000D9972 /* Game.h */,
 				BEA88DE91AA50959000D9972 /* Game.m */,
+				BEF0D0561AA8BB6600ADFC88 /* Movable.h */,
+				BEF0D0571AA8BB6600ADFC88 /* Movable.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -246,6 +254,8 @@
 				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
 				BEF0D04E1AA794E700ADFC88 /* Ally.h */,
 				BEF0D04F1AA794E700ADFC88 /* Ally.m */,
+				BEF0D0521AA8B74C00ADFC88 /* Mythos.h */,
+				BEF0D0531AA8B74C00ADFC88 /* Mythos.m */,
 			);
 			name = cards;
 			sourceTree = "<group>";
@@ -352,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEA88DEA1AA50959000D9972 /* Game.m in Sources */,
+				BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */,
 				BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */,
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
 				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
@@ -361,6 +372,7 @@
 				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
 				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
+				BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */,
 				BE4CFD551A9CF3400034581D /* Board.m in Sources */,
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
 				BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */,

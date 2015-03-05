@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Investigator;
+
 #import <Foundation/Foundation.h>
 #import "NSMutableArray+Deck.h"
 #import "Game.h"
+#import "Movable.h"
 
-@interface Investigator : NSObject
+@interface Investigator : Movable
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *occupation;
 @property (strong, nonatomic) NSString *home;

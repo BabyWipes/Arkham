@@ -14,6 +14,7 @@
 #import "Board.h"
 #import "AncientOne.h"
 #import "Ally.h"
+#import "Mythos.h"
 
 @interface Game : NSObject
 @property (strong, nonatomic) Board *board;
@@ -44,6 +45,13 @@
 @property (nonatomic) NSInteger maxGatesOpen;
 
 @property (nonatomic) BOOL arkhamIsOverrun;
+
+@property (strong,nonatomic) Mythos *currentMythosEnvironment;
+@property (strong,nonatomic) Mythos *currentMythosRumor;
+@property (strong,nonatomic) Mythos *currentMythosHeadline;
+
+@property (strong, nonatomic) NSArray *currentMythosWhiteDimensions;
+@property (strong, nonatomic) NSArray *currentMythosBlackDimensions;
 
 +(instancetype)currentGame; // singleton for everyone to access
 -(instancetype)initArkhamHorror;

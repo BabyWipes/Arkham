@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Item;
+
 #import <Foundation/Foundation.h>
 #import "Card.h"
 

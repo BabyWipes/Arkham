@@ -7,6 +7,26 @@
 //
 
 #import "Monster.h"
+#import "Game.h"
+#import "Location.h"
+#import "Neighborhood.h"
+
+@implementation Dimension
++(instancetype)type:(MonsterDimensionSymbol)type{
+    return [[Dimension alloc] initWithType:type];
+}
+-(instancetype)initWithType:(MonsterDimensionSymbol)type {
+    self = [super init];
+    if (self){
+        self.value = type;
+    }
+    return self;
+}
+-(BOOL)equalsDimension:(Dimension*)other{
+    return (self.value == other.value);
+}
+
+@end
 
 @implementation Monster
 -(id)initWithProperties:(NSDictionary *)properties {
@@ -49,15 +69,92 @@
         else {
             self.movementType = MonsterMovementTypeNormal;
         }
-
-
-
+        
+        NSString *dimensionString = properties[@"dimension"];
+        if ([dimensionString isEqualToString:@"Triangle"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolTriangle];
+        }
+        else if ([dimensionString isEqualToString:@"Square"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolSquare];
+        }
+        else if ([dimensionString isEqualToString:@"Diamond"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolDiamond];
+        }
+        else if ([dimensionString isEqualToString:@"Hexagon"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolHexagon];
+        }
+        else if ([dimensionString isEqualToString:@"Slash"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolSlash];
+        }
+        else if ([dimensionString isEqualToString:@"Plus"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolPlus];
+        }
+        else if ([dimensionString isEqualToString:@"Star"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolStar];
+        }
+        else if ([dimensionString isEqualToString:@"Crescent"]){
+            self.dimension = [Dimension type:MonsterDimensionSymbolCrescent];
+        }
+        else {
+            self.dimension = [Dimension type:MonsterDimensionSymbolCircle];
+        }
     }
     return self;
+}
+-(void)move {
+    if (self.movementType == MonsterMovementTypeNormal){
+        [self moveNormally];
+    }
+    else if (self.movementType == MonsterMovementTypeFlying){
+        [self moveFlying];
+    }
+    else if (self.movementType == MonsterMovementTypeFast){
+        // move normally twice
+        [self move];
+        [self move];
+    }
+    else if (self.movementType == MonsterMovementTypeUnique) {
+        [self moveUnique];
+    }
+    else if (self.movementType == MonsterMovementTypeStationary){
+        
+    }
+}
+-(void)moveNormally {
+    if (self.currentLocation.investigatorsHere.count > 0){
+        // stay put
+        return;
+    }
+    else if (!self.inInStreet){
+        self.currentLocation = self.currentNeighborhood.street;
+    }
+    else {
+        for (Dimension *dimension in [Game currentGame].currentMythosWhiteDimensions) {
+            if ([dimension equalsDimension:self.dimension]) {
+                self.currentLocation = self.currentNeighborhood.whiteStreetConnection.street;
+                return;
+            }
+        }
+        for (Dimension *dimension in [Game currentGame].currentMythosBlackDimensions) {
+            if ([dimension equalsDimension:self.dimension]) {
+                self.currentLocation = self.currentNeighborhood.blackStreetConnection.street;
+                return;
+            }
+        }
+    }
+}
+-(void)moveFlying {
+    
+}
+-(void)moveUnique {
+    // pass, implement in subclasses
 }
 @end
 
 @implementation ChthonianMonster
+-(void)move {
+    // roll die, on 4-6, all players lose 1 STA
+}
 @end
 
 @implementation DimensionalShamblerMonster

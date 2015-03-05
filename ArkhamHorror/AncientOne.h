@@ -12,6 +12,7 @@
 #import "Monster.h"
 #import "Investigator.h"
 
+
 @interface AncientOne : NSObject
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger combatRating;

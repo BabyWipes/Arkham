@@ -7,6 +7,7 @@
 //
 
 @class Board;
+
 #import <Foundation/Foundation.h>
 
 @interface Board : NSObject

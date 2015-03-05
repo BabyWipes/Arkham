@@ -10,6 +10,14 @@
 
 @implementation Neighborhood
 
+-(instancetype)init {
+    self = [super init];
+    if (self){
+        self.street = [Location street];
+    }
+    return self;
+}
+
 -(void)setWhiteStreetConnection:(Neighborhood *)whiteStreetConnection {
     if (_whiteStreetConnection != whiteStreetConnection){
         _whiteStreetConnection = whiteStreetConnection;

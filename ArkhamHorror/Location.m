@@ -9,11 +9,17 @@
 #import "Location.h"
 
 @implementation Location
-
++(instancetype)street {
+    Location *street = [[Location alloc] init];
+    street.name = @"Street";
+    return street;
+}
 -(instancetype)init {
     self = [super init];
     if (self){
         self.isStable = YES;
+        self.investigatorsHere = [NSMutableArray new];
+        self.monstersHere = [NSMutableArray new];
     }
     return self;
 }

@@ -5,9 +5,10 @@
 //  Created by Michael Cornell on 2/23/15.
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
+
 @class Location;
+
 #import <Foundation/Foundation.h>
-#import "Defines.h"
 #import "Investigator.h"
 
 // base class, locations with no special encounters are this
@@ -15,13 +16,12 @@
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSUInteger locationID;
 @property (nonatomic) BOOL isStable;
-@property (strong, nonatomic) NSMutableArray *encounterDeck;
+@property (strong, nonatomic) NSMutableArray *investigatorsHere;
+@property (strong, nonatomic) NSMutableArray *monstersHere;
 
 -(instancetype)initWithStability:(BOOL)isStable;
-
++(instancetype)street;
 @end
-
-
 
 @interface HealerLocation : Location // asylum and hospital
 @property (nonatomic) BOOL healsSanity; // if no, heals stamina
