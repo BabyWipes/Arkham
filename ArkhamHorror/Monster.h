@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Movable.h"
+#import "Investigator.h"
 
 typedef NS_ENUM(NSUInteger, MonsterMovementType){
     MonsterMovementTypeNormal = 0,
@@ -64,6 +65,8 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 @property (nonatomic) NSInteger overwhelmingRating;
 
 -(id)initWithProperties:(NSDictionary*)properties;
+-(void)dealHorrorDamage:(Investigator*)investigator;
+-(void)dealCombatDamage:(Investigator*)investigator;
 -(void)move;
 @end
 

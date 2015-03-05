@@ -10,6 +10,7 @@
 #import "Game.h"
 #import "Location.h"
 #import "Neighborhood.h"
+#import "Die.h"
 
 @implementation Dimension
 +(instancetype)type:(MonsterDimensionSymbol)type{
@@ -237,15 +238,34 @@
 -(void)moveUnique {
     // pass, implement in subclasses
 }
+-(void)dealHorrorDamage:(Investigator*)investigator {
+    investigator.sanity-=self.horrorDamage;
+}
+
+-(void)dealCombatDamage:(Investigator*)investigator {
+    investigator.stamina-=self.combatDamage;
+}
 @end
 
 @implementation ChthonianMonster
 -(void)moveUnique {
     // roll die, on 4-6, all players lose 1 STA
+    if ([Die d6] >= 4){
+        for (Investigator *player in [Game currentGame].investigators){
+            player.stamina--;
+            if (player.stamina == 0){
+                // KO'ed!
+            }
+        }
+    }
 }
 @end
 
 @implementation DimensionalShamblerMonster
+// on combat check fail, investigator is lost in time and space
+-(void)dealCombatDamage:(Investigator*)investigator {
+    
+}
 @end
 
 @implementation ElderThingMonster

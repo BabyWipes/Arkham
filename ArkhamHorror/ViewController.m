@@ -10,7 +10,6 @@
 #import "Investigator.h"
 #import "SkillCheck.h"
 #import "JSTest.h"
-#import "Board.h"
 #import "Game.h"
 
 @interface ViewController ()

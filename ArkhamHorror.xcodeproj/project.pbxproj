@@ -30,6 +30,7 @@
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
 		BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0531AA8B74C00ADFC88 /* Mythos.m */; };
 		BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0571AA8BB6600ADFC88 /* Movable.m */; };
+		BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D05A1AA9148500ADFC88 /* Die.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		BEF0D0531AA8B74C00ADFC88 /* Mythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mythos.m; sourceTree = "<group>"; };
 		BEF0D0561AA8BB6600ADFC88 /* Movable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movable.h; sourceTree = "<group>"; };
 		BEF0D0571AA8BB6600ADFC88 /* Movable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movable.m; sourceTree = "<group>"; };
+		BEF0D0591AA9148500ADFC88 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
+		BEF0D05A1AA9148500ADFC88 /* Die.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Die.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 				BE085F191A9B9AEA00FEAB0E /* Images.xcassets */,
 				BE085F1B1A9B9AEA00FEAB0E /* LaunchScreen.xib */,
 				BE085F0C1A9B9AE900FEAB0E /* Supporting Files */,
+				BEF0D0591AA9148500ADFC88 /* Die.h */,
+				BEF0D05A1AA9148500ADFC88 /* Die.m */,
 			);
 			path = ArkhamHorror;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
+				BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */,
 				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
 				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
