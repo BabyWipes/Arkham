@@ -8,6 +8,8 @@
 
 #import "AncientOne.h"
 
+#pragma mark - Prototype
+
 @implementation AncientOne
 -(instancetype)init {
     self = [super init];
@@ -17,13 +19,18 @@
         self.maxDoom = 15;
         self.doomCounter = 0;
         self.attackDifficultyModifier = 1;
+        
+        self.isPhysicallyImmune = NO;
+        self.isPhysicallyResistant = NO;
+        self.isMagicallyImmune = NO;
+        self.isMagicallyResistant = NO;
     }
     return self;
 }
 -(void)applySetupEffect{
     //pass
 }
--(void)buffWorshippers:(NSMutableArray*)monsterCup{
+-(void)buffWorshippers{
     //pass
 }
 -(void)awaken{
@@ -33,6 +40,8 @@
     //pass
 }
 @end
+
+#pragma mark - Azathoth
 
 @implementation AncientOneAzathoth
 -(instancetype)init {
@@ -45,11 +54,9 @@
     }
     return self;
 }
--(void)applySetupEffect {
-    // nothing
-}
--(void)buffWorshippers:(NSMutableArray*)monsterCup{
-    for (Monster *monster in monsterCup){
+
+-(void)buffWorshippers {
+    for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster isKindOfClass:[Monster class]]){ // TODO maniac
             monster.toughness+=1;
         }
@@ -62,6 +69,8 @@
     // lose game
 }
 @end
+
+#pragma mark - Cthulhu
 
 @implementation AncientOneCthulhu
 -(instancetype)init {
@@ -76,9 +85,13 @@
 }
 -(void)applySetupEffect {
     // all players max SAN -1, max STA -1
+    for (Investigator *investigator in [Game currentGame].investigators){
+        investigator.maxSanity--;
+        investigator.maxStamina--;
+    }
 }
--(void)buffWorshippers:(NSMutableArray*)monsterCup{
-    for (Monster *monster in monsterCup){
+-(void)buffWorshippers {
+    for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
             monster.horrorRating = -2;
             monster.horrorDamage = 2;
@@ -87,8 +100,7 @@
 }
 
 -(void)attack {
-    NSArray *investigators = @[]; // todo get investigators from game
-    for (Investigator *player in investigators){
+    for (Investigator *player in [Game currentGame].investigators){
         // prompt, pick lose 1 max SAN or 1 max STA
         
         player.maxSanity--; // OR
@@ -106,34 +118,36 @@
 }
 @end
 
+#pragma mark - Hastur
+
 @implementation AncientOneHastur
 -(instancetype)init {
     self = [super init];
     if (self){
         self.name = @"Hastur";
-        // self.combatRating == game's terror level
+        self.combatRating = 0;// on awaken == game's terror level
         self.maxDoom = 13;
         self.doomCounter = 0;
+        self.isPhysicallyResistant = YES;
     }
     return self;
 }
 -(void)applySetupEffect{
-    // cost to seal gates = 8 clues;
+    [Game currentGame].gateSealCost = 8;
 }
 -(void)awaken {
-    self.combatRating = 0; // TODO set to Games terror level
+    self.combatRating = [Game currentGame].terrorLevel * -1;
 }
--(void)buffWorshippers:(NSMutableArray*)monsterCup{
-    for (Monster *monster in monsterCup){
+-(void)buffWorshippers {
+    for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
-            monster.isFlying = YES;
+            monster.movementType = MonsterMovementTypeFlying;
             monster.combatRating = -2;
         }
     }
 }
 -(void)attack{
-    NSArray *investigators = @[]; // todo get investigators from game
-    for (Investigator *player in investigators){
+    for (Investigator *player in [Game currentGame].investigators){
         // prompt luck check of self.attackDifficultyModifer
         // on fail, lose 2 SAN
         player.sanity-=2;
@@ -144,6 +158,8 @@
     self.attackDifficultyModifier--;
 }
 @end
+
+#pragma mark - Ithaqua
 
 @implementation AncientOneIthaqua
 -(instancetype)init {
@@ -157,11 +173,11 @@
     return self;
 }
 -(void)applySetupEffect{
-    // tell game to ignore all weather effects
+    [Game currentGame].ignoresWeatherMythos = YES;
     // tell game to inflict 1 sta of damage to every player in street at end of mythos phase
 }
--(void)buffWorshippers:(NSMutableArray*)monsterCup{
-    for (Monster *monster in monsterCup){
+-(void)buffWorshippers {
+    for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
             monster.toughness+=2;
         }
@@ -172,41 +188,150 @@
  
 }
 -(void)attack{
-    NSArray *investigators = @[]; // todo get investigators from game
-    for (Investigator *player in investigators){
+    for (Investigator *player in [Game currentGame].investigators){
         // prompt fight check of self.attackDifficultyModifer
         // on fail, lose 2 STA
         player.stamina-=2;
         if (player.stamina == 0){
             // devoured!
         }
-        
     }
     self.attackDifficultyModifier--;
 }
 @end
 
+#pragma mark - Nyarlathotep
+
 @implementation AncientOneNyarlathotep
+
+-(instancetype)init {
+    self = [super init];
+    if (self){
+        self.name = @"Nyarlathotep";
+        self.combatRating = -4;
+        self.maxDoom = 11;
+        self.doomCounter = 0;
+        self.isMagicallyResistant = YES;
+    }
+    return self;
+}
+
+-(void)applySetupEffect{
+    //TODO add the 5 mask mosnters
+    Monster *maskMonster = [[Monster alloc] init];
+    [[Game currentGame].monsterCup addObject:maskMonster];
+}
+
 -(void)attack{
-    NSArray *investigators = @[]; // todo get investigators from game
-    for (Investigator *player in investigators){
+    for (Investigator *player in [Game currentGame].investigators){
         // prompt lore check of self.attackDifficultyModifer
         // on fail, lose 1 clue
         if (player.clues == 0){
-            //devoured@
+            //devoured!
         }
     }
     self.attackDifficultyModifier--;
 }
 @end
 
+#pragma mark - Shub Niggurath
+
 @implementation AncientOneShubNiggurath
+
+-(instancetype)init {
+    self = [super init];
+    if (self){
+        self.name = @"Shub-Niggurath";
+        self.combatRating = -5;
+        self.maxDoom = 12;
+        self.doomCounter = 0;
+        self.isPhysicallyImmune = YES;
+    }
+    return self;
+}
+
+-(void)applySetupEffect{
+    for (Monster *monster in [Game currentGame].monsterCup){
+        monster.toughness++;
+    }
+}
+
+-(void)attack{
+    for (Investigator *player in [Game currentGame].investigators){
+        // prompt sneak check of self.attackDifficultyModifer
+        // on fail, lose 1 monsterTrophy
+        if (player.monsterTrophies == 0){
+            //devoured!
+        }
+    }
+    self.attackDifficultyModifier--;
+}
 @end
+
+#pragma mark - Yig
 
 @implementation AncientOneYig
+
+-(instancetype)init {
+    self = [super init];
+    if (self){
+        self.name = @"Yig";
+        self.combatRating = -3;
+        self.maxDoom = 10;
+        self.doomCounter = 0;
+    }
+    return self;
+}
+
+-(void)applySetupEffect{
+    // gain 1 doom token when investigator is lost in time and space
+}
+
+-(void)attack{
+    for (Investigator *player in [Game currentGame].investigators){
+        // prompt speed check of self.attackDifficultyModifer
+        // on fail lose 1 SAN + 1 STA
+        player.sanity--;
+        player.stamina--;
+        if (player.sanity == 0 || player.stamina == 0){
+            //devoured!
+        }
+    }
+    self.attackDifficultyModifier--;
+}
 @end
 
+#pragma mark - Yog Sothoth
+
 @implementation AncientOneYogSothoth
+-(instancetype)init {
+    self = [super init];
+    if (self){
+        self.name = @"Yog-Sothoth";
+        self.combatRating = -5;
+        self.maxDoom = 12;
+        self.doomCounter = 0;
+        self.isMagicallyImmune = YES;
+    }
+    return self;
+}
+
+-(void)applySetupEffect{
+    [Game currentGame].gateDifficultyModifier++;
+    
+    //TODO if player is lost in time+space they are instead devoured
+}
+
+-(void)attack{
+    for (Investigator *player in [Game currentGame].investigators){
+        // prompt will check of self.attackDifficultyModifer
+        // on fail, lose 1 gate trophy
+        if (player.gateTrophies == 0){
+            //devoured!
+        }
+    }
+    self.attackDifficultyModifier--;
+}
 @end
 
 

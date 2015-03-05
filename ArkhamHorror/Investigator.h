@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Deck.h"
+#import "NSMutableArray+Deck.h"
 #import "Game.h"
 
 @interface Investigator : NSObject
@@ -50,6 +50,9 @@
 @property (nonatomic) NSMutableArray *skills;
 @property (nonatomic) NSMutableArray *spells;
 @property (nonatomic) NSMutableArray *allies;
+
+@property (nonatomic) NSInteger *monsterTrophies;
+@property (nonatomic) NSInteger *gateTrophies;
 
 @property (nonatomic) BOOL isBlessed;
 @property (nonatomic) BOOL isCursed;

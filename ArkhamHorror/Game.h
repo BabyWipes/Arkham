@@ -6,25 +6,47 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Game;
+
 #import <Foundation/Foundation.h>
-#import "Deck.h"
+#import "NSMutableArray+Deck.h"
 #import "Investigator.h"
 #import "Board.h"
+#import "AncientOne.h"
+#import "Ally.h"
 
 @interface Game : NSObject
 @property (strong, nonatomic) Board *board;
+@property (strong, nonatomic) AncientOne *ancientOne;
 
-@property (strong, nonatomic) Deck *commonsDeck;
-@property (strong, nonatomic) Deck *uniquesDeck;
-@property (strong, nonatomic) Deck *spellsDeck;
-@property (strong, nonatomic) Deck *skillsDeck;
-@property (strong, nonatomic) Deck *alliesDeck;
+@property (strong, nonatomic) NSMutableArray *commonsDeck;
+@property (strong, nonatomic) NSMutableArray *uniquesDeck;
+@property (strong, nonatomic) NSMutableArray *spellsDeck;
+@property (strong, nonatomic) NSMutableArray *skillsDeck;
+@property (strong, nonatomic) NSMutableArray *alliesDeck;
+@property (strong, nonatomic) NSMutableArray *mythosDeck;
 
-@property (strong, nonatomic) Deck *mythosDeck;
+@property (strong, nonatomic) NSMutableArray *investigators;
+@property (strong, nonatomic) NSMutableArray *monsterCup;
+@property (strong, nonatomic) NSMutableArray *outskirts;
 
-@property (strong, nonatomic) NSMutableArray *players;
+@property (strong, nonatomic) NSMutableArray *removedFromGameDeck;
 
-+(instancetype)arkhamHorror;
+@property (nonatomic) BOOL ignoresWeatherMythos;
+
+@property (nonatomic) NSInteger terrorLevel;
+@property (nonatomic) NSInteger maxMonstersInArkham;
+@property (nonatomic) NSInteger maxMonstersInOutskirts;
+
+@property (nonatomic) NSInteger gateDifficultyModifier; //increases/decreases difficulty of closing/sealing gates
+@property (nonatomic) NSInteger gateSealCost; // cost to seal a gate
+
+@property (nonatomic) NSInteger maxGatesOpen;
+
+@property (nonatomic) BOOL arkhamIsOverrun;
+
++(instancetype)currentGame; // singleton for everyone to access
+-(instancetype)initArkhamHorror;
 
 // select ancient one
 // setup decks

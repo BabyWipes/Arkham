@@ -19,8 +19,7 @@
 		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
 		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
 		BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
-		BE3D4F5B1A9FD6B80073EDEE /* GameEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */; };
-		BE3D4F621AA1219C0073EDEE /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* Deck.m */; };
+		BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */; };
 		BE3D4F651AA1224B0073EDEE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F641AA1224B0073EDEE /* Card.m */; };
 		BE436DA21A9BC72B0091BBF9 /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */; };
 		BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */; };
@@ -29,6 +28,7 @@
 		BE4CFD551A9CF3400034581D /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD541A9CF3400034581D /* Board.m */; };
 		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
 		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
+		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,10 +65,8 @@
 		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		BE3D4F551A9FD4900073EDEE /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		BE3D4F561A9FD4900073EDEE /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
-		BE3D4F591A9FD6B80073EDEE /* GameEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEvents.h; sourceTree = "<group>"; };
-		BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEvents.m; sourceTree = "<group>"; };
-		BE3D4F601AA1219C0073EDEE /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
-		BE3D4F611AA1219C0073EDEE /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Deck.h"; sourceTree = "<group>"; };
+		BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Deck.m"; sourceTree = "<group>"; };
 		BE3D4F631AA1224B0073EDEE /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		BE3D4F641AA1224B0073EDEE /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameDefaults.plist; sourceTree = "<group>"; };
@@ -85,6 +83,8 @@
 		BE4CFD5A1A9CF8900034581D /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
+		BEF0D04F1AA794E700ADFC88 /* Ally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ally.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,15 +173,10 @@
 				BE3D4F581A9FD4970073EDEE /* bad guys */,
 				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
 				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
-				BE4CFD4D1A9C5A8D0034581D /* Item.h */,
-				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
+				BEF0D0511AA794FE00ADFC88 /* cards */,
 				BE4CFD591A9CF3840034581D /* board+locations */,
-				BE3D4F591A9FD6B80073EDEE /* GameEvents.h */,
-				BE3D4F5A1A9FD6B80073EDEE /* GameEvents.m */,
-				BE3D4F601AA1219C0073EDEE /* Deck.h */,
-				BE3D4F611AA1219C0073EDEE /* Deck.m */,
-				BE3D4F631AA1224B0073EDEE /* Card.h */,
-				BE3D4F641AA1224B0073EDEE /* Card.m */,
+				BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */,
+				BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */,
 				BEA88DE81AA50959000D9972 /* Game.h */,
 				BEA88DE91AA50959000D9972 /* Game.m */,
 			);
@@ -240,6 +235,19 @@
 				BE4CFD511A9CD46A0034581D /* JSTest.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		BEF0D0511AA794FE00ADFC88 /* cards */ = {
+			isa = PBXGroup;
+			children = (
+				BE3D4F631AA1224B0073EDEE /* Card.h */,
+				BE3D4F641AA1224B0073EDEE /* Card.m */,
+				BE4CFD4D1A9C5A8D0034581D /* Item.h */,
+				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
+				BEF0D04E1AA794E700ADFC88 /* Ally.h */,
+				BEF0D04F1AA794E700ADFC88 /* Ally.m */,
+			);
+			name = cards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,11 +359,11 @@
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
 				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
-				BE3D4F5B1A9FD6B80073EDEE /* GameEvents.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
-				BE3D4F621AA1219C0073EDEE /* Deck.m in Sources */,
+				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
 				BE4CFD551A9CF3400034581D /* Board.m in Sources */,
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
+				BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */,
 				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
 				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
 				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,

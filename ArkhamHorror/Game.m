@@ -10,39 +10,100 @@
 
 @implementation Game
 
++(instancetype)currentGame {
+    static Game *instance = nil;
+    static dispatch_once_t singletonOnceToken;
+    dispatch_once(&singletonOnceToken, ^{
+        instance = [[Game alloc] initArkhamHorror];
+    });
+    return instance;
+}
+
 #pragma mark - setup
 
-+(instancetype)arkhamHorror {
-    
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
-    NSDictionary* gameDefaults =  [NSDictionary dictionaryWithContentsOfFile:path];
-    if (!gameDefaults) {
-        NSLog(@"Game Defaults couldn't be found!");
+-(instancetype)initArkhamHorror {
+    self = [super init];
+    if (self){
+        
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
+        NSDictionary* gameDefaults =  [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        if (!gameDefaults) {
+            NSLog(@"Game Defaults couldn't be found!");
+        }
+        
+        self.board = [Board arkhamBoard];
+        self.commonsDeck = [NSMutableArray new];
+        self.uniquesDeck = [NSMutableArray new];
+        self.spellsDeck = [NSMutableArray new];
+        self.skillsDeck = [NSMutableArray new];
+        self.alliesDeck = [NSMutableArray new];
+        self.mythosDeck = [NSMutableArray new];
+        
+        [self setupMonsterCup];
+        self.outskirts = [NSMutableArray new];
+        
+        self.gateSealCost = 5;
+        self.gateDifficultyModifier = 0;
+        
+        
+        NSArray *investigators = gameDefaults[@"Investigators"];
+        self.investigators = [NSMutableArray new];
+        [self setupPlayer:investigators[0]];
+        
+        self.maxMonstersInOutskirts = 8 - self.investigators.count;
+        self.maxMonstersInArkham = self.investigators.count + 3;
+        
+        if (self.investigators.count < 3) { self.maxGatesOpen = 8; } // if this many gates open at the same time, ancient one awakens
+        else if (self.investigators.count < 5) { self.maxGatesOpen = 7; }
+        else if (self.investigators.count < 7) { self.maxGatesOpen = 6; }
+        else  {self.maxGatesOpen = 5;}
     }
+    return self;
     
-    Game *game = [[Game alloc] init];
-    game.board = [Board arkhamBoard];
-    game.commonsDeck = [[Deck alloc] initWithCardType:CardTypeCommonItem];
-    game.uniquesDeck = [[Deck alloc] initWithCardType:CardTypeUniqueItem];
-    game.spellsDeck = [[Deck alloc] initWithCardType:CardTypeSpell];
-    game.skillsDeck = [[Deck alloc] initWithCardType:CardTypeSkill];
-    game.alliesDeck = [[Deck alloc] initWithCardType:CardTypeAlly];
-    game.mythosDeck = [[Deck alloc] initWithCardType:CardTypeMythos];
-    
-    
-    NSString *string = [game getInput:@"PROMPT"];
-    NSLog(@"RET:%@",string);
-    NSInteger integer = [game getInt];
-    NSLog(@"RET:%li",integer);
-    NSInteger boolVal = [game getBool];
-    NSLog(@"RET:%@",boolVal ? @"YES":@"NO");
+}
 
-    NSArray *investigators = gameDefaults[@"Investigators"];
-    game.players = [NSMutableArray new];
+-(void)setupMonsterCup {
+    self.monsterCup = [NSMutableArray new];
     
-    [game setupPlayer:investigators[0]];
-    return game;
+}
+
+-(void)incrementTerror {
+    self.terrorLevel++;
+    // remove random ally from deck
     
+    Ally *ally = (Ally*)[self.alliesDeck drawOne];
+    [self.removedFromGameDeck addObject:ally];
+    
+    if (self.terrorLevel == 3){
+        // close gen store
+    }
+    if (self.terrorLevel == 6){
+        // close unique store
+    }
+    if (self.terrorLevel == 9){
+        // close spell store
+    }
+    if (self.terrorLevel == 10){ // overrun!
+        self.arkhamIsOverrun = YES;
+        [self.monsterCup addObjectsFromArray:self.outskirts];
+        [self.outskirts removeAllObjects];
+        self.ancientOne.doomCounter++;
+    }
+}
+
+-(void)addMonsterToOutskirts:(Monster*)monster {
+    if (!self.arkhamIsOverrun){
+        [self.outskirts addObject:monster];
+        if (self.outskirts.count == self.maxMonstersInOutskirts){
+            [self.monsterCup addObjectsFromArray:self.outskirts];
+            [self.outskirts removeAllObjects];
+            [self incrementTerror];
+        }
+    }
+    else {
+        // arkham is overrun, you shouldn't be adding mosnters to outskirts
+    }
 }
 
 -(void)setupPlayer:(NSDictionary*)playerDict {
@@ -64,21 +125,19 @@
     [self draw:randomSpells player:investigator keep:randomSpells deck:self.spellsDeck];
     [self draw:randomSkills player:investigator keep:randomSkills deck:self.skillsDeck];
     
-    [self.players addObject:investigator];
+    [self.investigators addObject:investigator];
 }
 
 #pragma mark - actions
 
 -(void)adjustSkills:(Investigator*)player unlimited:(BOOL)unlimited{
-    int adjustsLeft = player.focus;
-    NSLog(@"done adjusting? %i",doneAdjusting);
-    
-    
+    int adjustsLeft = (int)player.focus;
+    adjustsLeft = 0;
     
 }
 
 
--(void)draw:(NSInteger)drawCount player:(Investigator*)player keep:(NSInteger)keepCount deck:(Deck*)deck{
+-(void)draw:(NSInteger)drawCount player:(Investigator*)player keep:(NSInteger)keepCount deck:(NSMutableArray*)deck{
     if (keepCount > drawCount){
         NSLog(@"You can't keep more cards than you draw! dummy");
         return;

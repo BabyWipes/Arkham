@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class AncientOne;
+
 #import <Foundation/Foundation.h>
 #import "Monster.h"
 #import "Investigator.h"
@@ -16,9 +18,13 @@
 @property (nonatomic) NSInteger doomCounter;
 @property (nonatomic) NSInteger maxDoom;
 @property (nonatomic) NSInteger attackDifficultyModifier;
+@property (nonatomic) BOOL isPhysicallyResistant;
+@property (nonatomic) BOOL isMagicallyResistant;
+@property (nonatomic) BOOL isPhysicallyImmune;
+@property (nonatomic) BOOL isMagicallyImmune;
 
 -(void)applySetupEffect;
--(void)buffWorshippers:(NSMutableArray*)monsterCup;
+-(void)buffWorshippers;
 -(void)awaken;
 -(void)attack;
 

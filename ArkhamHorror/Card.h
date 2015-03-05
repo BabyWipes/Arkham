@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Card;
+
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, CardType) {

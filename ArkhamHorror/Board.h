@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+@class Board;
 #import <Foundation/Foundation.h>
 
 @interface Board : NSObject

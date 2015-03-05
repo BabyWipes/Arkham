@@ -42,7 +42,7 @@
 }
 
 -(void)loadNewGame {
-    Game *game = [Game arkhamHorror];
+    Game *game = [Game currentGame];
 }
 
 
@@ -72,16 +72,6 @@
 
 -(void)appendToTextBox:(NSString*)message {
     self.textBox.text = [NSString stringWithFormat:@"%@\n%@",self.textBox.text,message];
-}
--(BOOL)getBool {
-    NSString *input = [self getInput:@"Please enter a 1 or 0"];
-    NSInteger boolVal = [input boolValue];
-    return boolVal;
-}
--(NSInteger)getInt {
-    NSString *input = [self getInput:@"Please enter a number"];
-    NSInteger intVal = [input integerValue];
-    return intVal;
 }
 
 #pragma mark - Cocoa
