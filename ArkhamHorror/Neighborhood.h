@@ -20,9 +20,10 @@
 @property (strong, nonatomic) Neighborhood *colorlessStreetConnection;
 @property (strong, nonatomic) NSArray *locations;
 @property (strong, nonatomic) Location *street;
+
++(NSArray*)arkhamBoard;
 @end
 
 @interface MerchantDistrictNeighborhood : Neighborhood
 @property (strong, nonatomic) Neighborhood *secondaryColorlessStreetConnection;
-
 @end

@@ -12,11 +12,13 @@
 +(instancetype)street {
     Location *street = [[Location alloc] init];
     street.name = @"Street";
+    street.isStreet = YES;
     return street;
 }
 -(instancetype)init {
     self = [super init];
     if (self){
+        self.isStreet = NO;
         self.isStable = YES;
         self.investigatorsHere = [NSMutableArray new];
         self.monstersHere = [NSMutableArray new];
@@ -25,7 +27,7 @@
 }
 
 -(instancetype)initWithStability:(BOOL)isStable{
-    self = [super init];
+    self = [self init];
     if (self){
         self.isStable = isStable;
     }

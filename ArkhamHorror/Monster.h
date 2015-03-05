@@ -53,6 +53,8 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 @property (nonatomic) BOOL isUndead;
 @property (nonatomic) BOOL isMaskMonster;
 
+@property (nonatomic) BOOL isInSky;
+
 @property (nonatomic) BOOL physicallyResistant;
 @property (nonatomic) BOOL magicallyResistant;
 @property (nonatomic) BOOL physicallyImmune;
@@ -62,6 +64,7 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 @property (nonatomic) NSInteger overwhelmingRating;
 
 -(id)initWithProperties:(NSDictionary*)properties;
+-(void)move;
 @end
 
 @interface ChthonianMonster : Monster

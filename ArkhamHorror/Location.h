@@ -16,8 +16,10 @@
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSUInteger locationID;
 @property (nonatomic) BOOL isStable;
+@property (nonatomic) BOOL isStreet;
 @property (strong, nonatomic) NSMutableArray *investigatorsHere;
 @property (strong, nonatomic) NSMutableArray *monstersHere;
+@property (weak, nonatomic) Neighborhood *neighborhood;
 
 -(instancetype)initWithStability:(BOOL)isStable;
 +(instancetype)street;

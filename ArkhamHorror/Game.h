@@ -11,13 +11,12 @@
 #import <Foundation/Foundation.h>
 #import "NSMutableArray+Deck.h"
 #import "Investigator.h"
-#import "Board.h"
 #import "AncientOne.h"
 #import "Ally.h"
 #import "Mythos.h"
 
 @interface Game : NSObject
-@property (strong, nonatomic) Board *board;
+@property (strong, nonatomic) NSArray *neighborhoods;
 @property (strong, nonatomic) AncientOne *ancientOne;
 
 @property (strong, nonatomic) NSMutableArray *commonsDeck;
@@ -30,6 +29,8 @@
 @property (strong, nonatomic) NSMutableArray *investigators;
 @property (strong, nonatomic) NSMutableArray *monsterCup;
 @property (strong, nonatomic) NSMutableArray *outskirts;
+@property (strong, nonatomic) NSMutableArray *sky;
+@property (strong, nonatomic) NSMutableArray *lostInTimeAndSpace;
 
 @property (strong, nonatomic) NSMutableArray *removedFromGameDeck;
 

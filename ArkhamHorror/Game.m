@@ -7,6 +7,7 @@
 //
 
 #import "Game.h"
+#import "Neighborhood.h"
 
 @implementation Game
 
@@ -32,7 +33,7 @@
             NSLog(@"Game Defaults couldn't be found!");
         }
         
-        self.board = [Board arkhamBoard];
+        self.neighborhoods = [Neighborhood arkhamBoard];
         self.commonsDeck = [NSMutableArray new];
         self.uniquesDeck = [NSMutableArray new];
         self.spellsDeck = [NSMutableArray new];

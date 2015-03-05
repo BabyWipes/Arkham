@@ -51,7 +51,7 @@
         
         self.nightmarishRating = [properties[@"nightmarish"] integerValue];
         self.overwhelmingRating = [properties[@"overwhelming"] integerValue];
-
+        
         
         NSString *movementString = properties[@"movement"];
         if ([movementString isEqualToString:@"Flying"]){
@@ -131,20 +131,108 @@
     else {
         for (Dimension *dimension in [Game currentGame].currentMythosWhiteDimensions) {
             if ([dimension equalsDimension:self.dimension]) {
-                self.currentLocation = self.currentNeighborhood.whiteStreetConnection.street;
+                self.currentNeighborhood = self.currentNeighborhood.whiteStreetConnection;
+                self.currentLocation = self.currentNeighborhood.street;
                 return;
             }
         }
         for (Dimension *dimension in [Game currentGame].currentMythosBlackDimensions) {
             if ([dimension equalsDimension:self.dimension]) {
-                self.currentLocation = self.currentNeighborhood.blackStreetConnection.street;
+                self.currentNeighborhood = self.currentNeighborhood.blackStreetConnection;
+                self.currentLocation = self.currentNeighborhood.street;
                 return;
             }
         }
     }
 }
 -(void)moveFlying {
+    if (self.isInSky){
+        Location *dest = [self selectNearestLocationForFlyers];
+        if (dest){ // swoop!
+            [[Game currentGame].sky removeObject:self];
+            self.isInSky = NO;
+            self.currentLocation = dest;
+            self.currentNeighborhood = self.currentLocation.neighborhood;
+        }
+        else {
+            // no one to attack, stay in the sky
+        }
+    }
+    else {
+        if (self.currentLocation.investigatorsHere.count > 0){
+            // stay put
+        }
+        // at a location, if theres someone in the st, move there
+        else if (!self.currentLocation.isStreet && self.currentNeighborhood.street.investigatorsHere.count > 0){
+            self.currentLocation = self.currentNeighborhood.street;
+        }
+        else if (self.currentLocation.isStreet){
+            
+            Location *dest = [self selectNearestLocationForFlyers];
+            if (dest){
+                self.currentLocation = dest;
+                self.currentNeighborhood = self.currentLocation.neighborhood;
+            }
+            else {
+                // to the sky!
+                self.isInSky = YES;
+                self.currentLocation = nil;
+                self.currentNeighborhood = nil;
+                [[Game currentGame].sky addObject:self];
+            }
+        }
+    }
+}
+
+-(Location*)selectNearestLocationForFlyers {
+    NSMutableArray *dests = [NSMutableArray new];
     
+    if (self.currentNeighborhood.whiteStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if (self.currentNeighborhood.blackStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if (self.currentNeighborhood.colorlessStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if ([self.currentNeighborhood respondsToSelector:@selector(secondaryColorlessStreetConnection)]){
+        if ([(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street.investigatorsHere.count > 0){
+            [dests addObject:[(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street];
+        }
+    }
+    
+    if (dests.count > 1){
+        Location *target = dests[0];
+        Location *tieLocation = nil;
+        NSInteger minSneak = [(Investigator*)[(Location*)dests[0] investigatorsHere][0] sneak];
+        BOOL hasTie = NO;
+        for (Location *loc in dests){
+            for (Investigator *player in loc.investigatorsHere){
+                if (player.sneak < minSneak){
+                    hasTie = NO;
+                    minSneak = player.sneak;
+                    target = player.currentLocation;
+                    tieLocation = nil;
+                }
+                else if (player.sneak == minSneak){
+                    hasTie = YES;
+                    tieLocation = player.currentLocation;
+                }
+            }
+        }
+        
+        if (tieLocation){
+            // ask first player which person to go to
+            return nil;
+        }
+        else {
+            return target;
+        }
+    }
+    else {
+        return nil;
+    }
 }
 -(void)moveUnique {
     // pass, implement in subclasses
@@ -152,7 +240,7 @@
 @end
 
 @implementation ChthonianMonster
--(void)move {
+-(void)moveUnique {
     // roll die, on 4-6, all players lose 1 STA
 }
 @end
