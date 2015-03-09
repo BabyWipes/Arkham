@@ -18,6 +18,12 @@
 		BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */; };
 		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
 		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
+		BE0F7DFB1AAE2E3400C337F1 /* PESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF21AAE2E3400C337F1 /* PESGraph.m */; };
+		BE0F7DFC1AAE2E3400C337F1 /* PESGraphEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF41AAE2E3400C337F1 /* PESGraphEdge.m */; };
+		BE0F7DFD1AAE2E3400C337F1 /* PESGraphNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF61AAE2E3400C337F1 /* PESGraphNode.m */; };
+		BE0F7DFE1AAE2E3400C337F1 /* PESGraphRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF81AAE2E3400C337F1 /* PESGraphRoute.m */; };
+		BE0F7DFF1AAE2E3400C337F1 /* PESGraphRouteStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DFA1AAE2E3400C337F1 /* PESGraphRouteStep.m */; };
+		BE0F7E021AAE2E8F00C337F1 /* PESImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7E011AAE2E8F00C337F1 /* PESImp.m */; };
 		BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
 		BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */; };
 		BE3D4F651AA1224B0073EDEE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F641AA1224B0073EDEE /* Card.m */; };
@@ -31,6 +37,7 @@
 		BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0531AA8B74C00ADFC88 /* Mythos.m */; };
 		BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0571AA8BB6600ADFC88 /* Movable.m */; };
 		BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D05A1AA9148500ADFC88 /* Die.m */; };
+		BEF0D05E1AAA404D00ADFC88 /* ShortestPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D05D1AAA404D00ADFC88 /* ShortestPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +72,19 @@
 		BE085F461A9BB22800FEAB0E /* GameLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLoop.m; sourceTree = "<group>"; };
 		BE085F4B1A9BBA7A00FEAB0E /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		BE0F7DF01AAE2E3400C337F1 /* PESGraph-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PESGraph-Prefix.pch"; sourceTree = "<group>"; };
+		BE0F7DF11AAE2E3400C337F1 /* PESGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraph.h; sourceTree = "<group>"; };
+		BE0F7DF21AAE2E3400C337F1 /* PESGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraph.m; sourceTree = "<group>"; };
+		BE0F7DF31AAE2E3400C337F1 /* PESGraphEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphEdge.h; sourceTree = "<group>"; };
+		BE0F7DF41AAE2E3400C337F1 /* PESGraphEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphEdge.m; sourceTree = "<group>"; };
+		BE0F7DF51AAE2E3400C337F1 /* PESGraphNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphNode.h; sourceTree = "<group>"; };
+		BE0F7DF61AAE2E3400C337F1 /* PESGraphNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphNode.m; sourceTree = "<group>"; };
+		BE0F7DF71AAE2E3400C337F1 /* PESGraphRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphRoute.h; sourceTree = "<group>"; };
+		BE0F7DF81AAE2E3400C337F1 /* PESGraphRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphRoute.m; sourceTree = "<group>"; };
+		BE0F7DF91AAE2E3400C337F1 /* PESGraphRouteStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphRouteStep.h; sourceTree = "<group>"; };
+		BE0F7DFA1AAE2E3400C337F1 /* PESGraphRouteStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphRouteStep.m; sourceTree = "<group>"; };
+		BE0F7E001AAE2E8F00C337F1 /* PESImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESImp.h; sourceTree = "<group>"; };
+		BE0F7E011AAE2E8F00C337F1 /* PESImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESImp.m; sourceTree = "<group>"; };
 		BE3D4F551A9FD4900073EDEE /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		BE3D4F561A9FD4900073EDEE /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
 		BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Deck.h"; sourceTree = "<group>"; };
@@ -91,6 +111,8 @@
 		BEF0D0571AA8BB6600ADFC88 /* Movable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movable.m; sourceTree = "<group>"; };
 		BEF0D0591AA9148500ADFC88 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
 		BEF0D05A1AA9148500ADFC88 /* Die.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Die.m; sourceTree = "<group>"; };
+		BEF0D05C1AAA404D00ADFC88 /* ShortestPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortestPath.h; sourceTree = "<group>"; };
+		BEF0D05D1AAA404D00ADFC88 /* ShortestPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortestPath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,17 +154,12 @@
 		BE085F0B1A9B9AE900FEAB0E /* ArkhamHorror */ = {
 			isa = PBXGroup;
 			children = (
-				BE085F101A9B9AEA00FEAB0E /* AppDelegate.h */,
-				BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */,
+				BE0F7DED1AAE2DE900C337F1 /* Lib */,
 				BE436DA01A9BC6F20091BBF9 /* game defaults */,
-				BE4CFD5B1A9CF96F0034581D /* Utils */,
-				BE085F341A9B9C7600FEAB0E /* models */,
-				BE085F351A9B9C7C00FEAB0E /* view controllers */,
+				BE0F7DEE1AAE2DF400C337F1 /* ArkhamHorror */,
 				BE085F191A9B9AEA00FEAB0E /* Images.xcassets */,
 				BE085F1B1A9B9AEA00FEAB0E /* LaunchScreen.xib */,
 				BE085F0C1A9B9AE900FEAB0E /* Supporting Files */,
-				BEF0D0591AA9148500ADFC88 /* Die.h */,
-				BEF0D05A1AA9148500ADFC88 /* Die.m */,
 			);
 			path = ArkhamHorror;
 			sourceTree = "<group>";
@@ -203,6 +220,44 @@
 			name = "view controllers";
 			sourceTree = "<group>";
 		};
+		BE0F7DED1AAE2DE900C337F1 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				BE0F7DEF1AAE2E3400C337F1 /* PESGraph */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		BE0F7DEE1AAE2DF400C337F1 /* ArkhamHorror */ = {
+			isa = PBXGroup;
+			children = (
+				BE085F101A9B9AEA00FEAB0E /* AppDelegate.h */,
+				BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */,
+				BE4CFD5B1A9CF96F0034581D /* Utils */,
+				BE085F341A9B9C7600FEAB0E /* models */,
+				BE085F351A9B9C7C00FEAB0E /* view controllers */,
+			);
+			name = ArkhamHorror;
+			sourceTree = "<group>";
+		};
+		BE0F7DEF1AAE2E3400C337F1 /* PESGraph */ = {
+			isa = PBXGroup;
+			children = (
+				BE0F7DF01AAE2E3400C337F1 /* PESGraph-Prefix.pch */,
+				BE0F7DF11AAE2E3400C337F1 /* PESGraph.h */,
+				BE0F7DF21AAE2E3400C337F1 /* PESGraph.m */,
+				BE0F7DF31AAE2E3400C337F1 /* PESGraphEdge.h */,
+				BE0F7DF41AAE2E3400C337F1 /* PESGraphEdge.m */,
+				BE0F7DF51AAE2E3400C337F1 /* PESGraphNode.h */,
+				BE0F7DF61AAE2E3400C337F1 /* PESGraphNode.m */,
+				BE0F7DF71AAE2E3400C337F1 /* PESGraphRoute.h */,
+				BE0F7DF81AAE2E3400C337F1 /* PESGraphRoute.m */,
+				BE0F7DF91AAE2E3400C337F1 /* PESGraphRouteStep.h */,
+				BE0F7DFA1AAE2E3400C337F1 /* PESGraphRouteStep.m */,
+			);
+			path = PESGraph;
+			sourceTree = "<group>";
+		};
 		BE3D4F581A9FD4970073EDEE /* bad guys */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +284,10 @@
 				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
 				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
 				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
+				BEF0D05C1AAA404D00ADFC88 /* ShortestPath.h */,
+				BEF0D05D1AAA404D00ADFC88 /* ShortestPath.m */,
+				BE0F7E001AAE2E8F00C337F1 /* PESImp.h */,
+				BE0F7E011AAE2E8F00C337F1 /* PESImp.m */,
 			);
 			name = "board+locations";
 			sourceTree = "<group>";
@@ -236,6 +295,8 @@
 		BE4CFD5B1A9CF96F0034581D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BEF0D0591AA9148500ADFC88 /* Die.h */,
+				BEF0D05A1AA9148500ADFC88 /* Die.m */,
 				BE4CFD5A1A9CF8900034581D /* Defines.h */,
 				BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */,
 				BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */,
@@ -364,22 +425,29 @@
 				BEA88DEA1AA50959000D9972 /* Game.m in Sources */,
 				BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */,
 				BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */,
+				BE0F7DFE1AAE2E3400C337F1 /* PESGraphRoute.m in Sources */,
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
 				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
 				BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */,
+				BE0F7DFF1AAE2E3400C337F1 /* PESGraphRouteStep.m in Sources */,
+				BE0F7DFD1AAE2E3400C337F1 /* PESGraphNode.m in Sources */,
 				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
 				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
+				BE0F7DFB1AAE2E3400C337F1 /* PESGraph.m in Sources */,
 				BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */,
+				BE0F7DFC1AAE2E3400C337F1 /* PESGraphEdge.m in Sources */,
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
 				BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */,
 				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
 				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
 				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,
+				BEF0D05E1AAA404D00ADFC88 /* ShortestPath.m in Sources */,
 				BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */,
+				BE0F7E021AAE2E8F00C337F1 /* PESImp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

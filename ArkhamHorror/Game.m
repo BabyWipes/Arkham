@@ -66,7 +66,7 @@
 
 -(void)setupMonsterCup {
     self.monsterCup = [NSMutableArray new];
-    
+    // TODO load cup with monsters
 }
 
 -(void)incrementTerror {
@@ -104,6 +104,12 @@
     }
     else {
         // arkham is overrun, you shouldn't be adding mosnters to outskirts
+    }
+}
+
+-(void)setupBoardGraph {
+    for (Neighborhood *hood in self.neighborhoods){
+        
     }
 }
 

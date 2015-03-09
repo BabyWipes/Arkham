@@ -69,6 +69,8 @@
 
 @property (nonatomic) BOOL isLodgeMember;
 
+@property (nonatomic) BOOL isLostInTimeAndSpace;
+
 @property (nonatomic) NSInteger retainers;
 
 // initialize a player with predefined properties

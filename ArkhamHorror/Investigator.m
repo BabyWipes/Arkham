@@ -134,6 +134,21 @@
     }
 }
 
+-(void)setIsLostInTimeAndSpace:(BOOL)isLostInTimeAndSpace {
+    if (_isLostInTimeAndSpace != isLostInTimeAndSpace){
+        _isLostInTimeAndSpace = isLostInTimeAndSpace;
+        if (_isLostInTimeAndSpace){
+            self.currentNeighborhood = nil;
+            self.currentLocation = nil;
+            self.isDelayed = YES;
+            [[Game currentGame].lostInTimeAndSpace addObject:self];
+        }
+        else {
+            // TODO user picks location or street to move to
+        }
+    }
+}
+
 #pragma mark - Stamina + Sanity
 
 -(void)setMaxSanity:(NSInteger)maxSanity {

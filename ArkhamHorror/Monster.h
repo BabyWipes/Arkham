@@ -66,6 +66,7 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 
 -(id)initWithProperties:(NSDictionary*)properties;
 -(void)dealHorrorDamage:(Investigator*)investigator;
+-(void)dealEvadeFailDamage:(Investigator*)investigator;
 -(void)dealCombatDamage:(Investigator*)investigator;
 -(void)move;
 @end

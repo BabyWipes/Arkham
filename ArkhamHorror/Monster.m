@@ -126,7 +126,7 @@
         // stay put
         return;
     }
-    else if (!self.inInStreet){
+    else if (!self.currentLocation.isStreet){
         self.currentLocation = self.currentNeighborhood.street;
     }
     else {
@@ -242,6 +242,10 @@
     investigator.sanity-=self.horrorDamage;
 }
 
+-(void)dealEvadeFailDamage:(Investigator *)investigator {
+    investigator.stamina-=self.combatDamage;
+}
+
 -(void)dealCombatDamage:(Investigator*)investigator {
     investigator.stamina-=self.combatDamage;
 }
@@ -262,19 +266,82 @@
 @end
 
 @implementation DimensionalShamblerMonster
+
 // on combat check fail, investigator is lost in time and space
 -(void)dealCombatDamage:(Investigator*)investigator {
-    
+    investigator.isLostInTimeAndSpace = YES;
 }
 @end
 
 @implementation ElderThingMonster
+-(void)dealEvadeFailDamage:(Investigator *)investigator {
+    investigator.stamina-=self.combatDamage;
+    // lose weapon or spell of choice
+}
+-(void)dealCombatDamage:(Investigator *)investigator {
+    investigator.stamina-=self.combatDamage;
+    // lose weapon or spell of choice
+}
 @end
 
 @implementation HaunterOfTheDarkMonster
+// if BlackestNightMythos is in play, this monster's combat rating is -5
 @end
 
 @implementation HoundOfTindalosMonster
+-(void)moveUnique {
+    
+}
+-(Location*)selectNearestLocationForHound {
+    NSMutableArray *dests = [NSMutableArray new];
+    
+    if (self.currentNeighborhood.whiteStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if (self.currentNeighborhood.blackStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if (self.currentNeighborhood.colorlessStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    };
+    if ([self.currentNeighborhood respondsToSelector:@selector(secondaryColorlessStreetConnection)]){
+        if ([(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street.investigatorsHere.count > 0){
+            [dests addObject:[(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street];
+        }
+    }
+    
+    if (dests.count > 1){
+        Location *target = dests[0];
+        Location *tieLocation = nil;
+        NSInteger minSneak = [(Investigator*)[(Location*)dests[0] investigatorsHere][0] sneak];
+        BOOL hasTie = NO;
+        for (Location *loc in dests){
+            for (Investigator *player in loc.investigatorsHere){
+                if (player.sneak < minSneak){
+                    hasTie = NO;
+                    minSneak = player.sneak;
+                    target = player.currentLocation;
+                    tieLocation = nil;
+                }
+                else if (player.sneak == minSneak){
+                    hasTie = YES;
+                    tieLocation = player.currentLocation;
+                }
+            }
+        }
+        
+        if (tieLocation){
+            // ask first player which person to go to
+            return nil;
+        }
+        else {
+            return target;
+        }
+    }
+    else {
+        return nil;
+    }
+}
 @end
 
 @implementation ManiacMonster

@@ -15,5 +15,4 @@
 @interface Movable : NSObject
 @property (strong, nonatomic) Neighborhood *currentNeighborhood;
 @property (strong, nonatomic) Location *currentLocation;
-@property (nonatomic, readonly) BOOL inInStreet;
 @end

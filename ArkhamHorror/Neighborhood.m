@@ -131,6 +131,33 @@
     MagickStoreLocation *magickShop = [[MagickStoreLocation alloc] init]; //spend 5, draw two spell, keep one, discard other
     uptown.locations = @[hospital,woods,magickShop];
     
+    adminBuilding.name = @"Administration Building";
+    asylum.name = @"Arkham Asylum";
+    bank.name = @"Bank of Arkham";
+    cave.name = @"Black Cave";
+    curioShop.name = @"Curiositie Shoppe";
+    genStore.name = @"General Store";
+    graveyard.name = @"Graveyard";
+    roadHouse.name = @"Hibb's Roadhouse";
+    histSociety.name = @"Historical Society";
+    independenceSq.name = @"Independence Square";
+    library.name = @"Library";
+    boardingHouse.name = @"Ma's Boarding House";
+    newspaper.name = @"Newspaper";
+    policeStation.name = @"Police Station";
+    docks.name = @"River Docks";
+    sciBuilding.name = @"Science Building";
+    lodge.name = @"Silver Twilight Lodge";
+    church.name = @"South Church";
+    hospital.name = @"St. Mary's Hospital";
+    unnamable.name = @"The Unnamable";
+    witchHouse.name = @"The Witch House";
+    trainStation.name = @"Train Station";
+    isle.name = @"Unvisited Isle";
+    diner.name = @"Velma's Diner";
+    woods.name = @"Woods";
+    magickShop.name = @"Ye Olde Magick Shoppe";
+    
     return arkham;
 }
 
@@ -172,6 +199,12 @@
     }
 }
 
+-(void)setName:(NSString *)name {
+    if (_name != name){
+        _name = name;
+        self.street.name = _name;
+    }
+}
 #pragma mark - Description
 -(NSString*)description {
     return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];

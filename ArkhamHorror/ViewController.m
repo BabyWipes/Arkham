@@ -12,13 +12,16 @@
 #import "JSTest.h"
 #import "Game.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) NSArray *cards;
 
 @property (weak, nonatomic) IBOutlet UITextView *textBox;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
+
 @end
+
+CGFloat redness = 0;
 
 @implementation ViewController
 
@@ -38,12 +41,14 @@
     [self loadNewGame];
     //[self loadDefaultGame];
     //[JSTest testJS];
+    
+    self.inputField.delegate = self;
+    
 }
 
 -(void)loadNewGame {
     Game *game = [Game currentGame];
 }
-
 
 -(void)loadDefaultGame {
     NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
@@ -67,10 +72,15 @@
     [super didReceiveMemoryWarning];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - IO
 
 -(void)appendToTextBox:(NSString*)message {
-    self.textBox.text = [NSString stringWithFormat:@"%@\n%@",self.textBox.text,message];
+    self.textBox.text = [NSString stringWithFormat:@"%@%@",self.textBox.text,message];
 }
 
 #pragma mark - Cocoa

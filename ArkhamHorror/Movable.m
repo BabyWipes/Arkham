@@ -25,7 +25,4 @@
     }
 }
 
--(BOOL)inInStreet {
-    return (self.currentNeighborhood.street == self.currentLocation);
-}
 @end

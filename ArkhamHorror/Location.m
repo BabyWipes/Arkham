@@ -8,6 +8,8 @@
 
 #import "Location.h"
 
+
+
 @implementation Location
 +(instancetype)street {
     Location *street = [[Location alloc] init];
@@ -15,9 +17,16 @@
     street.isStreet = YES;
     return street;
 }
+
++(NSInteger)distance:(Location*)A b:(Location*)b {
+    
+    return 0;
+}
+
 -(instancetype)init {
     self = [super init];
     if (self){
+        self.name = @"Location";
         self.isStreet = NO;
         self.isStable = YES;
         self.investigatorsHere = [NSMutableArray new];
