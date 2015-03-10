@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Game;
-
 #import <Foundation/Foundation.h>
 #import "NSMutableArray+Deck.h"
 #import "Investigator.h"
@@ -62,6 +60,7 @@
 
 -(Location*)locationNamed:(NSString*)name;
 -(NSArray*)routeFrom:(Location*)a to:(Location*)b;
+-(void)logGameInfo;
 
 -(void)runPhase; // execute a step in the game loop, called by uiDelegate once it's dispatched + resolved all of it's events
 

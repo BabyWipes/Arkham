@@ -10,24 +10,31 @@
 #import "ArkhamHorrorUIAPI.h"
 #import "Game.h"
 @interface ArkhamHorrorCLI () <ArkhamHorrorUIAPI>
-@property (strong, nonatomic) Game *game;
 @end
 
 @implementation ArkhamHorrorCLI
 
 +(int)run {
-    //start up state machine
     BOOL gameOver = NO;
     int exitCode = 0;
     Game *game = [Game initializeWithSettings:@{}]; // init singleton
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     game.uiDelegate = cli;
-    NSLog(@"finished startup");
     while (!gameOver) {
-        [game runPhase]; // sends out
-        [cli processEventsQueue];
+        [game runPhase]; // game sends out event requests
+        [cli processEventsQueue]; // game dispatches and resolves events
     }
     return exitCode;
+}
+
+-(BOOL)getBool {
+    NSString *rawBool = [self getTerminalInput:@"Enter Bool:"];
+    return ([[rawBool lowercaseString] isEqualToString:@"yes"] || [[rawBool lowercaseString] isEqualToString:@"y"]);
+}
+
+-(int)getInt {
+    NSString *rawInt = [self getTerminalInput:@"Enter Int:"];
+    return [rawInt intValue];
 }
 
 -(NSString*)getTerminalInput:(NSString*)prompt {
@@ -52,8 +59,15 @@
     [self println:[self getTerminalInput:@"Prompt:"]];
 }
 
--(void)enqueueEvent {
-    NSLog(@"core requested enqueueEvent");
+-(void)enqueueInvestigatorEvent:(AHInvestigatorEvent)callback {
+    int idx = 1;
+    int selection = [self getInt];
+    
+}
+
+-(void)enqueueGameEvent:(AHGameEvent)callback {
+    NSLog(@"self.game %@",[Game currentGame]);
+    callback([Game currentGame]);
 }
 
 @end

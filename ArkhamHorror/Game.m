@@ -17,14 +17,12 @@
 @implementation Game
 
 static Game *singletonInstance = nil;
-static dispatch_once_t singletonOnceToken;
-
 +(instancetype)initializeWithSettings:(NSDictionary *)gameSetupDict {
+    static dispatch_once_t singletonOnceToken;
     dispatch_once(&singletonOnceToken, ^{
         singletonInstance = [[Game alloc] initWithSettings:gameSetupDict];
     });
     return singletonInstance;
-    
 }
 
 +(instancetype)currentGame {
@@ -39,14 +37,17 @@ static dispatch_once_t singletonOnceToken;
 
 #pragma mark - UI API comm
 
--(void)enqueueEvent { // call this to tell the UI to enqueue a user interaction or an animation event
+-(void)enqueueGameEvent:(AHGameEvent)event { // call this to tell the UI to enqueue a user interaction or an animation event
     if (self.uiDelegate){
-        [self.uiDelegate enqueueEvent];
+        [self.uiDelegate enqueueGameEvent:event];
     }
 }
 
 -(void)runPhase {
-    // proceed in game loop
+    [self enqueueGameEvent:^(Game *game){
+        NSLog(@"callback for user interaction event");
+        [game logGameInfo];
+    }];
 }
 
 #pragma mark - init
@@ -56,10 +57,6 @@ static dispatch_once_t singletonOnceToken;
     if (self){
         self.neighborhoods = [Neighborhood arkhamBoard];
         self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
-        [PathFinder graph:self.pathFindingGraph
-                routeFrom:[self.neighborhoods[0] street]
-                       to:[self.neighborhoods[1] street]];
-        
         
         [self setupDecks];
         [self setupMonsterCup];
@@ -86,9 +83,20 @@ static dispatch_once_t singletonOnceToken;
         else if (self.investigators.count < 5) { self.maxGatesOpen = 7; }
         else if (self.investigators.count < 7) { self.maxGatesOpen = 6; }
         else  {self.maxGatesOpen = 5;}
-
     }
     return self;
+}
+
+#pragma mark - logging
+
+-(void)logGameInfo {
+    NSLog(@"ARKHAM HORROR");
+    NSLog(@"Ancient One:");
+    NSLog(@"---> %@",self.ancientOne.name);
+    NSLog(@"Investigators:");
+    for (Investigator *player in self.investigators){
+        NSLog(@"---> %@",player.name);
+    }
 }
 
 #pragma mark - setup
