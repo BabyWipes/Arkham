@@ -14,6 +14,7 @@
 #import "AncientOne.h"
 #import "Ally.h"
 #import "Mythos.h"
+#import "ArkhamHorrorUIAPI.h"
 
 @interface Game : NSObject
 @property (strong, nonatomic) NSArray *neighborhoods;
@@ -54,10 +55,15 @@
 @property (strong, nonatomic) NSArray *currentMythosWhiteDimensions;
 @property (strong, nonatomic) NSArray *currentMythosBlackDimensions;
 
-+(instancetype)currentGame; // singleton for everyone to access
--(instancetype)initArkhamHorror;
+@property (weak, nonatomic) id<ArkhamHorrorUIAPI> uiDelegate;
+
++(instancetype)initializeWithSettings:(NSDictionary*)gameSetupDict;
++(instancetype)currentGame; // singleton for everyone to access, you must initialize with settings
+
 -(Location*)locationNamed:(NSString*)name;
 -(NSArray*)routeFrom:(Location*)a to:(Location*)b;
+
+-(void)runPhase; // execute a step in the game loop, called by uiDelegate once it's dispatched + resolved all of it's events
 
 // select ancient one
 // setup decks

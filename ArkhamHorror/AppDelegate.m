@@ -15,6 +15,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
+    NSDictionary* gameSettings =  [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    if (!gameSettings) {
+        NSLog(@"Game Defaults couldn't be found!");
+    }
+    // initialize Game singleton ith gameSettings
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     ViewController *viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = viewController;

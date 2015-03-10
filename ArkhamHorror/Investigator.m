@@ -18,8 +18,33 @@
 
 @implementation Investigator
 
+#pragma mark - Class methods
+
+// an overpowered investigator for testing
++(instancetype)testingInvestigator {
+    Investigator *merman = [[Investigator alloc] init];
+    merman.name = @"Mike Cornell";
+    merman.occupation = @"Merman";
+    merman.focus = 1;
+    merman.money = 10;
+    merman.clues = 5;
+    merman.maxSanity = 10;
+    merman.maxStamina = 10;
+    merman.sanity = merman.maxSanity;
+    merman.stamina = merman.maxStamina;
+    merman.minFight = 5;
+    merman.minLore = 5;
+    merman.minLuck = 5;
+    merman.minSneak = 5;
+    merman.minSpeed = 5;
+    merman.minWill = 5;
+    merman.startingItems = @[@1,@2];
+    return merman;
+}
+
 #pragma mark - Init
--(instancetype)initWithProperties:(NSDictionary*)properties{
+
+-(instancetype)init {
     self = [super init];
     if (self){
         self.commonItems = [NSMutableArray new];
@@ -27,7 +52,16 @@
         self.skills = [NSMutableArray new];
         self.spells = [NSMutableArray new];
         self.allies = [NSMutableArray new];
-
+        
+        self.speedSneakSlider = 0;
+        self.fightWillSlider = 0;
+        self.loreLuckSlider = 0;
+    }
+    return self;
+}
+-(instancetype)initWithProperties:(NSDictionary*)properties{
+    self = [self init];
+    if (self){
         self.name = properties[@"name"];
         self.occupation = properties[@"occupation"];
         
@@ -47,9 +81,11 @@
         self.minLore = [properties[@"min_lore"] integerValue];
         self.minLuck = [properties[@"min_luck"] integerValue];
         
-        self.speedSneakSlider = 0;
-        self.fightWillSlider = 0;
-        self.loreLuckSlider = 0;
+        self.startingItems = properties[@"starting_items"];
+        self.startingRandomCommons = [properties[@"starting_random_commons"] unsignedIntegerValue];
+        self.startingRandomUniques = [properties[@"starting_random_uniques"] unsignedIntegerValue];
+        self.startingRandomSpells = [properties[@"starting_random_spells"] unsignedIntegerValue];
+        self.startingRandomSkills = [properties[@"starting_random_skills"] unsignedIntegerValue];
 
     }
     

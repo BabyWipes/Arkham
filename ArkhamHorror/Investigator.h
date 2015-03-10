@@ -73,9 +73,16 @@
 
 @property (nonatomic) NSInteger retainers;
 
-// initialize a player with predefined properties
--(instancetype)initWithProperties:(NSDictionary*)properties;
+@property (nonatomic) NSArray *startingItems;
+@property (nonatomic) NSUInteger startingRandomCommons;
+@property (nonatomic) NSUInteger startingRandomUniques;
+@property (nonatomic) NSUInteger startingRandomSpells;
+@property (nonatomic) NSUInteger startingRandomSkills;
 
+// initialize an overpowered dev player
++(instancetype)testingInvestigator;
+
+-(instancetype)initWithProperties:(NSDictionary*)properties;
 -(NSString*)skillsString;
 
 

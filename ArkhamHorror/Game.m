@@ -10,40 +10,55 @@
 #import "Neighborhood.h"
 #import "Movable.h"
 #import "PathFinder.h"
-
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
 @end
 
 @implementation Game
 
-+(instancetype)currentGame {
-    static Game *instance = nil;
-    static dispatch_once_t singletonOnceToken;
+static Game *singletonInstance = nil;
+static dispatch_once_t singletonOnceToken;
+
++(instancetype)initializeWithSettings:(NSDictionary *)gameSetupDict {
     dispatch_once(&singletonOnceToken, ^{
-        instance = [[Game alloc] initArkhamHorror];
+        singletonInstance = [[Game alloc] initWithSettings:gameSetupDict];
     });
-    return instance;
+    return singletonInstance;
+    
 }
 
-#pragma mark - setup
++(instancetype)currentGame {
+    if (singletonInstance){
+        return singletonInstance;
+    }
+    else {
+        NSLog(@"Game is un-initialized!");
+    }
+    return nil;
+}
 
--(instancetype)initArkhamHorror {
+#pragma mark - UI API comm
+
+-(void)enqueueEvent { // call this to tell the UI to enqueue a user interaction or an animation event
+    if (self.uiDelegate){
+        [self.uiDelegate enqueueEvent];
+    }
+}
+
+-(void)runPhase {
+    // proceed in game loop
+}
+
+#pragma mark - init
+
+-(instancetype)initWithSettings:(NSDictionary*)settings {
     self = [super init];
     if (self){
-        
-        NSString* path = [[NSBundle mainBundle] pathForResource:@"GameDefaults" ofType:@"plist"];
-        NSDictionary* gameDefaults =  [NSDictionary dictionaryWithContentsOfFile:path];
-        
-        if (!gameDefaults) {
-            NSLog(@"Game Defaults couldn't be found!");
-        }
-        
         self.neighborhoods = [Neighborhood arkhamBoard];
         self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
         [PathFinder graph:self.pathFindingGraph
-            routeFrom:[self.neighborhoods[0] street]
-                   to:[self.neighborhoods[1] street]];
+                routeFrom:[self.neighborhoods[0] street]
+                       to:[self.neighborhoods[1] street]];
         
         
         [self setupDecks];
@@ -53,10 +68,16 @@
         self.gateSealCost = 5;
         self.gateDifficultyModifier = 0;
         
-        
-        NSArray *investigators = gameDefaults[@"Investigators"];
         self.investigators = [NSMutableArray new];
-        [self setupPlayer:investigators[0]];
+        
+        NSArray *investigators = settings[@"Investigators"];
+        if (investigators){ // load from plist
+            Investigator *player = [[Investigator alloc] initWithProperties:investigators[0]];
+            [self setupPlayer:player];
+        }
+        else {
+            [self setupPlayer:[Investigator testingInvestigator]];
+        }
         
         self.maxMonstersInOutskirts = 8 - self.investigators.count;
         self.maxMonstersInArkham = self.investigators.count + 3;
@@ -65,34 +86,12 @@
         else if (self.investigators.count < 5) { self.maxGatesOpen = 7; }
         else if (self.investigators.count < 7) { self.maxGatesOpen = 6; }
         else  {self.maxGatesOpen = 5;}
+
     }
     return self;
 }
 
--(NSArray*)routeFrom:(Location*)a to:(Location*)b {
-    return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
-}
--(Location*)locationNamed:(NSString*)name {
-    for (Neighborhood *hood in self.neighborhoods){
-        if ([hood.street.name isEqualToString:name]){
-            return hood.street;
-        }
-        for (Location *loc in hood.locations){
-            if ([loc.name isEqualToString:name]){
-                return loc;
-            }
-        }
-    }
-    return nil;
-}
-
--(void)movable:(Movable*)movable followPath:(NSArray*)path {
-    for (Location *loc in path){
-        movable.currentLocation = loc;
-        NSLog(@"current pos %@",loc);
-        // TODO enqueue animation
-    }
-}
+#pragma mark - setup
 
 -(void)setupDecks {
     self.commonsDeck = [NSMutableArray new];
@@ -107,6 +106,28 @@
     self.monsterCup = [NSMutableArray new];
     // TODO load cup with monsters
 }
+
+-(void)setupPlayer:(Investigator*)investigator {
+    
+    for (NSNumber *itemID in investigator.startingItems){ // array of itemIDs (NSUIntegers), draw these specific items from deck
+        // add to respective array
+        NSLog(@"search for itemID %@",itemID);
+    }
+    // draw this many cards from the decks
+    NSUInteger randomCommons = investigator.startingRandomCommons;
+    NSUInteger randomUniques = investigator.startingRandomUniques;
+    NSUInteger randomSpells = investigator.startingRandomSpells;
+    NSUInteger randomSkills = investigator.startingRandomSkills;
+    
+    [self draw:randomCommons player:investigator keep:randomCommons deck:self.commonsDeck];
+    [self draw:randomUniques player:investigator keep:randomUniques deck:self.uniquesDeck];
+    [self draw:randomSpells player:investigator keep:randomSpells deck:self.spellsDeck];
+    [self draw:randomSkills player:investigator keep:randomSkills deck:self.skillsDeck];
+    
+    [self.investigators addObject:investigator];
+}
+
+#pragma mark - actions
 
 -(void)incrementTerror {
     self.terrorLevel++;
@@ -146,29 +167,31 @@
     }
 }
 
--(void)setupPlayer:(NSDictionary*)playerDict {
-    Investigator *investigator = [[Investigator alloc] initWithProperties:playerDict];
-    
-    NSArray *startingFixedItems = playerDict[@"fixed_items"]; // array of itemIDs (NSUIntegers), draw these specific items from deck
-    for (NSNumber *itemID in startingFixedItems){
-        // add to respective array
-        NSLog(@"search for itemID %@",itemID);
-    }
-    // draw this many cards from the decks
-    NSInteger randomCommons = [playerDict[@"random_commons"] integerValue];
-    NSInteger randomUniques = [playerDict[@"random_uniques"] integerValue];
-    NSInteger randomSkills = [playerDict[@"random_skills"] integerValue];
-    NSInteger randomSpells = [playerDict[@"random_spells"] integerValue];
-    
-    [self draw:randomCommons player:investigator keep:randomCommons deck:self.commonsDeck];
-    [self draw:randomUniques player:investigator keep:randomUniques deck:self.uniquesDeck];
-    [self draw:randomSpells player:investigator keep:randomSpells deck:self.spellsDeck];
-    [self draw:randomSkills player:investigator keep:randomSkills deck:self.skillsDeck];
-    
-    [self.investigators addObject:investigator];
+-(NSArray*)routeFrom:(Location*)a to:(Location*)b {
+    return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
 }
 
-#pragma mark - actions
+-(Location*)locationNamed:(NSString*)name {
+    for (Neighborhood *hood in self.neighborhoods){
+        if ([hood.street.name isEqualToString:name]){
+            return hood.street;
+        }
+        for (Location *loc in hood.locations){
+            if ([loc.name isEqualToString:name]){
+                return loc;
+            }
+        }
+    }
+    return nil;
+}
+
+-(void)movable:(Movable*)movable followPath:(NSArray*)path {
+    for (Location *loc in path){
+        movable.currentLocation = loc;
+        NSLog(@"current pos %@",loc);
+        // TODO enqueue animation
+    }
+}
 
 -(void)adjustSkills:(Investigator*)player unlimited:(BOOL)unlimited{
     int adjustsLeft = (int)player.focus;

@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "Investigator.h"
-#import "SkillCheck.h"
 #import "JSTest.h"
 #import "Game.h"
 
@@ -83,14 +82,5 @@ CGFloat redness = 0;
     self.textBox.text = [NSString stringWithFormat:@"%@%@",self.textBox.text,message];
 }
 
-#pragma mark - Cocoa
--(NSString*)getTerminalInput:(NSString*)prompt {
-    NSLog(@"%@",prompt);
-    NSFileHandle *input = [NSFileHandle fileHandleWithStandardInput];
-    NSData *inputData = [input availableData];
-    NSString *inputString = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
-    inputString = [inputString stringByTrimmingCharactersInSet: [NSCharacterSet newlineCharacterSet]];
-    return inputString;
-}
 
 @end
