@@ -138,7 +138,6 @@
     if (_isLostInTimeAndSpace != isLostInTimeAndSpace){
         _isLostInTimeAndSpace = isLostInTimeAndSpace;
         if (_isLostInTimeAndSpace){
-            self.currentNeighborhood = nil;
             self.currentLocation = nil;
             self.isDelayed = YES;
             [[Game currentGame].lostInTimeAndSpace addObject:self];

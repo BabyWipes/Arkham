@@ -132,15 +132,13 @@
     else {
         for (Dimension *dimension in [Game currentGame].currentMythosWhiteDimensions) {
             if ([dimension equalsDimension:self.dimension]) {
-                self.currentNeighborhood = self.currentNeighborhood.whiteStreetConnection;
-                self.currentLocation = self.currentNeighborhood.street;
+                self.currentLocation = self.currentNeighborhood.whiteStreetConnection.street;
                 return;
             }
         }
         for (Dimension *dimension in [Game currentGame].currentMythosBlackDimensions) {
             if ([dimension equalsDimension:self.dimension]) {
-                self.currentNeighborhood = self.currentNeighborhood.blackStreetConnection;
-                self.currentLocation = self.currentNeighborhood.street;
+                self.currentLocation = self.currentNeighborhood.blackStreetConnection.street;
                 return;
             }
         }
@@ -153,32 +151,30 @@
             [[Game currentGame].sky removeObject:self];
             self.isInSky = NO;
             self.currentLocation = dest;
-            self.currentNeighborhood = self.currentLocation.neighborhood;
         }
         else {
             // no one to attack, stay in the sky
+            return;
         }
     }
     else {
         if (self.currentLocation.investigatorsHere.count > 0){
             // stay put
+            return;
         }
         // at a location, if theres someone in the st, move there
         else if (!self.currentLocation.isStreet && self.currentNeighborhood.street.investigatorsHere.count > 0){
             self.currentLocation = self.currentNeighborhood.street;
         }
         else if (self.currentLocation.isStreet){
-            
             Location *dest = [self selectNearestLocationForFlyers];
             if (dest){
                 self.currentLocation = dest;
-                self.currentNeighborhood = self.currentLocation.neighborhood;
             }
             else {
                 // to the sky!
                 self.isInSky = YES;
                 self.currentLocation = nil;
-                self.currentNeighborhood = nil;
                 [[Game currentGame].sky addObject:self];
             }
         }
@@ -290,55 +286,67 @@
 
 @implementation HoundOfTindalosMonster
 -(void)moveUnique {
+    Location *dest = [self selectNearestLocationForHound];
+    self.currentLocation = dest;
     
 }
 -(Location*)selectNearestLocationForHound {
-    NSMutableArray *dests = [NSMutableArray new];
     
-    if (self.currentNeighborhood.whiteStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
-    };
-    if (self.currentNeighborhood.blackStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
-    };
-    if (self.currentNeighborhood.colorlessStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
-    };
-    if ([self.currentNeighborhood respondsToSelector:@selector(secondaryColorlessStreetConnection)]){
-        if ([(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street.investigatorsHere.count > 0){
-            [dests addObject:[(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street];
+    NSLog(@"the hound of tindalos is tracking it's prey...");
+    NSMutableArray *shortestPaths = [NSMutableArray new];
+    for (Investigator *investigator in [Game currentGame].investigators) { //TODO handle investigators who are lost in time and space / other world
+        NSLog(@"path finding investigator %@",investigator.name);
+        NSArray *route = [[Game currentGame] routeFrom:self.currentLocation to:investigator.currentLocation];
+        if (shortestPaths.count == 0 || route.count == [(NSArray*)shortestPaths[0] count]) { // unset, or found a path tied for shortest
+            [shortestPaths addObject:route];
+        }
+        else if (route.count < [(NSArray*)shortestPaths[0] count]){ // found a shorter path
+            [shortestPaths removeAllObjects];
+            [shortestPaths addObject:route];
         }
     }
     
-    if (dests.count > 1){
-        Location *target = dests[0];
-        Location *tieLocation = nil;
-        NSInteger minSneak = [(Investigator*)[(Location*)dests[0] investigatorsHere][0] sneak];
-        BOOL hasTie = NO;
-        for (Location *loc in dests){
-            for (Investigator *player in loc.investigatorsHere){
-                if (player.sneak < minSneak){
-                    hasTie = NO;
-                    minSneak = player.sneak;
-                    target = player.currentLocation;
-                    tieLocation = nil;
+    if (shortestPaths.count == 1){ // go to nearest investigator
+        return [(NSArray*)shortestPaths[0] objectAtIndex:0];
+    }
+    else if (shortestPaths.count > 1){ // theres a tie, pick investigator with lowest sneak
+        NSLog(@"got a tie amongst dist's");
+        NSMutableArray *lowestSneaks = [NSMutableArray new];
+        NSMutableArray *lowestSneaksLocs = [NSMutableArray new];
+        
+        for (NSArray *path in shortestPaths){
+            NSLog(@"comparing paths");
+            Location *playerLoc = [path lastObject];
+            NSArray *playersHere = playerLoc.investigatorsHere;
+            for (Investigator *player in playersHere){
+                NSLog(@"checking sneak of %@",player.name);
+                if (lowestSneaks.count == 0 || player.sneak == [(Investigator*)lowestSneaks[0] sneak]) { // unset, or found sneak tied for last
+                    [lowestSneaks addObject:player];
+                    [lowestSneaksLocs addObject:path[0]];
                 }
-                else if (player.sneak == minSneak){
-                    hasTie = YES;
-                    tieLocation = player.currentLocation;
+                else if (player.sneak < [(Investigator*)lowestSneaks[0] sneak]){ // found a lesser sneak
+                    [lowestSneaks removeAllObjects];
+                    [lowestSneaksLocs removeAllObjects];
+                    [lowestSneaks addObject:player];
+                    [lowestSneaksLocs addObject:path[0]];
                 }
             }
         }
-        
-        if (tieLocation){
-            // ask first player which person to go to
+        if (lowestSneaksLocs.count == 1){
+            NSLog(@"got loc with lowest sneak");
+            return [(NSArray*)lowestSneaksLocs[0] objectAtIndex:0];
+        }
+        else if (lowestSneaksLocs.count > 1){ // TODO if tie amongst lowest sneak, first player picks target
+            NSLog(@"got many loc's with lowest sneak");
             return nil;
         }
         else {
-            return target;
+            NSLog(@"Error:WTF, tied player dists returned 0 sneaks?"); // shouldn't ever happen
+            return nil;
         }
     }
     else {
+        NSLog(@"Error, hound found no-one to go to!"); // maybe everyone is lost in time and space / in other world at the same time
         return nil;
     }
 }

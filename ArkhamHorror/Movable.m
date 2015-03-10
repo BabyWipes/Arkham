@@ -14,7 +14,6 @@
 
 -(void)setCurrentLocation:(Location *)currentLocation {
     if (_currentLocation != currentLocation) {
-        // current neighborhood = new locations neighborhood
         _currentLocation = currentLocation;
         if ([self isKindOfClass:[Investigator class]]){
             [_currentLocation.investigatorsHere addObject:self];
@@ -23,6 +22,9 @@
             [_currentLocation.monstersHere addObject:self];
         }
     }
+}
+-(Neighborhood*)currentNeighborhood {
+    return self.currentLocation.neighborhood;
 }
 
 @end

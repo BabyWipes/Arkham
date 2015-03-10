@@ -199,10 +199,19 @@
     }
 }
 
+-(void)setStreet:(Location *)street {
+    if (_street != street){
+        _street = street;
+        _street.neighborhood = self;
+    }
+}
+
 -(void)setName:(NSString *)name {
     if (_name != name){
         _name = name;
-        self.street.name = _name;
+        if (self.street){
+            self.street.name = _name;
+        }
     }
 }
 #pragma mark - Description

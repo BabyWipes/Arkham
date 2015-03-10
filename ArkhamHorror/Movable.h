@@ -13,6 +13,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Movable : NSObject
-@property (strong, nonatomic) Neighborhood *currentNeighborhood;
+@property (nonatomic, readonly) Neighborhood *currentNeighborhood;
 @property (strong, nonatomic) Location *currentLocation;
 @end

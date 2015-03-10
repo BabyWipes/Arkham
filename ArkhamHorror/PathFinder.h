@@ -1,5 +1,5 @@
 //
-//  PESImp.h
+//  PathFinder.h
 //  ArkhamHorror
 //
 //  Created by Michael Cornell on 3/9/15.
@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "PESGraph.h"
+#import "Location.h"
 
-@interface PESImp : NSObject
-+(void)testGraph;
+@interface PathFinder : NSObject
 +(PESGraph*)setupBoardGraph:(NSArray*)neighborhoods;
++(NSArray*)graph:(PESGraph*)graph routeFrom:(Location*)a to:(Location*)b;
+
 @end

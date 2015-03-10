@@ -56,6 +56,8 @@
 
 +(instancetype)currentGame; // singleton for everyone to access
 -(instancetype)initArkhamHorror;
+-(Location*)locationNamed:(NSString*)name;
+-(NSArray*)routeFrom:(Location*)a to:(Location*)b;
 
 // select ancient one
 // setup decks

@@ -8,6 +8,12 @@
 
 #import "Game.h"
 #import "Neighborhood.h"
+#import "Movable.h"
+#import "PathFinder.h"
+
+@interface Game ()
+@property (strong, nonatomic) PESGraph *pathFindingGraph;
+@end
 
 @implementation Game
 
@@ -34,13 +40,13 @@
         }
         
         self.neighborhoods = [Neighborhood arkhamBoard];
-        self.commonsDeck = [NSMutableArray new];
-        self.uniquesDeck = [NSMutableArray new];
-        self.spellsDeck = [NSMutableArray new];
-        self.skillsDeck = [NSMutableArray new];
-        self.alliesDeck = [NSMutableArray new];
-        self.mythosDeck = [NSMutableArray new];
+        self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
+        [PathFinder graph:self.pathFindingGraph
+            routeFrom:[self.neighborhoods[0] street]
+                   to:[self.neighborhoods[1] street]];
         
+        
+        [self setupDecks];
         [self setupMonsterCup];
         self.outskirts = [NSMutableArray new];
         
@@ -61,7 +67,40 @@
         else  {self.maxGatesOpen = 5;}
     }
     return self;
-    
+}
+
+-(NSArray*)routeFrom:(Location*)a to:(Location*)b {
+    return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
+}
+-(Location*)locationNamed:(NSString*)name {
+    for (Neighborhood *hood in self.neighborhoods){
+        if ([hood.street.name isEqualToString:name]){
+            return hood.street;
+        }
+        for (Location *loc in hood.locations){
+            if ([loc.name isEqualToString:name]){
+                return loc;
+            }
+        }
+    }
+    return nil;
+}
+
+-(void)movable:(Movable*)movable followPath:(NSArray*)path {
+    for (Location *loc in path){
+        movable.currentLocation = loc;
+        NSLog(@"current pos %@",loc);
+        // TODO enqueue animation
+    }
+}
+
+-(void)setupDecks {
+    self.commonsDeck = [NSMutableArray new];
+    self.uniquesDeck = [NSMutableArray new];
+    self.spellsDeck = [NSMutableArray new];
+    self.skillsDeck = [NSMutableArray new];
+    self.alliesDeck = [NSMutableArray new];
+    self.mythosDeck = [NSMutableArray new];
 }
 
 -(void)setupMonsterCup {
@@ -76,14 +115,14 @@
     Ally *ally = (Ally*)[self.alliesDeck drawOne];
     [self.removedFromGameDeck addObject:ally];
     
-    if (self.terrorLevel == 3){
-        // close gen store
+    if (self.terrorLevel == 3){ // close gen store
+        [(GeneralStoreLocation*)[self locationNamed:@"General Store"] setIsClosed:YES];
     }
-    if (self.terrorLevel == 6){
-        // close unique store
+    if (self.terrorLevel == 6){ // close unique store
+        [(GeneralStoreLocation*)[self locationNamed:@"Curiositie Shoppe"] setIsClosed:YES];
     }
-    if (self.terrorLevel == 9){
-        // close spell store
+    if (self.terrorLevel == 9){ // close spell store
+        [(GeneralStoreLocation*)[self locationNamed:@"Ye Olde Magick Shoppe"] setIsClosed:YES];
     }
     if (self.terrorLevel == 10){ // overrun!
         self.arkhamIsOverrun = YES;
@@ -104,12 +143,6 @@
     }
     else {
         // arkham is overrun, you shouldn't be adding mosnters to outskirts
-    }
-}
-
--(void)setupBoardGraph {
-    for (Neighborhood *hood in self.neighborhoods){
-        
     }
 }
 

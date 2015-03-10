@@ -8,36 +8,13 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "PESImp.h"
-#import "Game.h"
-#import "PESGraphNode.h"
-#import "Neighborhood.h"
-#import "PESGraphRoute.h"
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [PESImp testGraph];
-    PESGraph *graph = [PESImp setupBoardGraph:[Game currentGame].neighborhoods];
-    
-    for (Neighborhood *hood in [Game currentGame].neighborhoods){
-        PESGraphNode *streetNode = graph.nodes[hood.name];
-        NSLog(@"street %@",streetNode.identifier);
-        for (PESGraphNode *node in [[graph neighborsOfNode:streetNode] allObjects]){
-            NSLog(@"--- neighbor: %@",node.identifier);
-        }
-    }
-    
-    PESGraphRoute *route = [graph shortestRouteFromNode:graph.nodes[@"Woods"] toNode:graph.nodes[@"Independence Square"]];
-    NSLog(@"route %@",route);
-    NSLog(@"route len %f",route.length);
-
-
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     ViewController *viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = viewController;

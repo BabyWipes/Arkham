@@ -42,19 +42,24 @@
 @end
 
 #pragma mark - Shops
-@interface GeneralStoreLocation : Location
+
+// spend money, get card of type
+@interface GeneralStoreLocation : Location // commons
+@property (nonatomic) BOOL isClosed;
 -(void)shop:(Investigator*)player;
 @end
 
-@interface CurioStoreLocation : Location
+@interface CurioStoreLocation : Location // uniques
+@property (nonatomic) BOOL isClosed;
 -(void)shop:(Investigator*)player;
 @end
 
-@interface MagickStoreLocation : Location
+@interface MagickStoreLocation : Location // spells
+@property (nonatomic) BOOL isClosed;
 -(void)shop:(Investigator*)player;
 @end
 
-@interface AdminBuildingLocation : Location
+@interface AdminBuildingLocation : Location // skills
 -(void)shop:(Investigator*)player;
 @end
 
