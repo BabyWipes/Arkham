@@ -28,7 +28,6 @@
 		BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */; };
 		BE3D4F651AA1224B0073EDEE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F641AA1224B0073EDEE /* Card.m */; };
 		BE436DA21A9BC72B0091BBF9 /* GameDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */; };
-		BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */; };
 		BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD4E1A9C5A8D0034581D /* Item.m */; };
 		BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD511A9CD46A0034581D /* JSTest.m */; };
 		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
@@ -91,8 +90,6 @@
 		BE3D4F631AA1224B0073EDEE /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		BE3D4F641AA1224B0073EDEE /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		BE436DA11A9BC72B0091BBF9 /* GameDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameDefaults.plist; sourceTree = "<group>"; };
-		BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCheck.h; sourceTree = "<group>"; };
-		BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCheck.m; sourceTree = "<group>"; };
 		BE4CFD4D1A9C5A8D0034581D /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		BE4CFD4E1A9C5A8D0034581D /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		BE4CFD501A9CD46A0034581D /* JSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTest.h; sourceTree = "<group>"; };
@@ -187,9 +184,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BE085F341A9B9C7600FEAB0E /* models */ = {
+		BE085F341A9B9C7600FEAB0E /* core */ = {
 			isa = PBXGroup;
 			children = (
+				BE0F7E061AAF4CB100C337F1 /* categories */,
+				BE4CFD5B1A9CF96F0034581D /* Utils */,
+				BEF0D0561AA8BB6600ADFC88 /* Movable.h */,
+				BEF0D0571AA8BB6600ADFC88 /* Movable.m */,
 				BE085F391A9B9C9D00FEAB0E /* Investigator.h */,
 				BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */,
 				BE3D4F581A9FD4970073EDEE /* bad guys */,
@@ -197,14 +198,10 @@
 				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
 				BEF0D0511AA794FE00ADFC88 /* cards */,
 				BE4CFD591A9CF3840034581D /* board+locations */,
-				BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */,
-				BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */,
 				BEA88DE81AA50959000D9972 /* Game.h */,
 				BEA88DE91AA50959000D9972 /* Game.m */,
-				BEF0D0561AA8BB6600ADFC88 /* Movable.h */,
-				BEF0D0571AA8BB6600ADFC88 /* Movable.m */,
 			);
-			name = models;
+			name = core;
 			sourceTree = "<group>";
 		};
 		BE085F351A9B9C7C00FEAB0E /* view controllers */ = {
@@ -230,8 +227,7 @@
 			children = (
 				BE085F101A9B9AEA00FEAB0E /* AppDelegate.h */,
 				BE085F111A9B9AEA00FEAB0E /* AppDelegate.m */,
-				BE4CFD5B1A9CF96F0034581D /* Utils */,
-				BE085F341A9B9C7600FEAB0E /* models */,
+				BE085F341A9B9C7600FEAB0E /* core */,
 				BE085F351A9B9C7C00FEAB0E /* view controllers */,
 			);
 			name = ArkhamHorror;
@@ -253,6 +249,15 @@
 				BE0F7DFA1AAE2E3400C337F1 /* PESGraphRouteStep.m */,
 			);
 			path = PESGraph;
+			sourceTree = "<group>";
+		};
+		BE0F7E061AAF4CB100C337F1 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */,
+				BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */,
+			);
+			name = categories;
 			sourceTree = "<group>";
 		};
 		BE3D4F581A9FD4970073EDEE /* bad guys */ = {
@@ -281,8 +286,6 @@
 				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
 				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
 				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
-				BE0F7E001AAE2E8F00C337F1 /* PathFinder.h */,
-				BE0F7E011AAE2E8F00C337F1 /* PathFinder.m */,
 			);
 			name = "board+locations";
 			sourceTree = "<group>";
@@ -293,10 +296,10 @@
 				BEF0D0591AA9148500ADFC88 /* Die.h */,
 				BEF0D05A1AA9148500ADFC88 /* Die.m */,
 				BE4CFD5A1A9CF8900034581D /* Defines.h */,
-				BE436DA31A9BD2B50091BBF9 /* SkillCheck.h */,
-				BE436DA41A9BD2B50091BBF9 /* SkillCheck.m */,
 				BE4CFD501A9CD46A0034581D /* JSTest.h */,
 				BE4CFD511A9CD46A0034581D /* JSTest.m */,
+				BE0F7E001AAE2E8F00C337F1 /* PathFinder.h */,
+				BE0F7E011AAE2E8F00C337F1 /* PathFinder.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -429,7 +432,6 @@
 				BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */,
 				BE0F7DFF1AAE2E3400C337F1 /* PESGraphRouteStep.m in Sources */,
 				BE0F7DFD1AAE2E3400C337F1 /* PESGraphNode.m in Sources */,
-				BE436DA51A9BD2B50091BBF9 /* SkillCheck.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
 				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
 				BE0F7DFB1AAE2E3400C337F1 /* PESGraph.m in Sources */,
