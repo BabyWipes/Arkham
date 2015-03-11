@@ -19,13 +19,10 @@
 +(int)run {
     BOOL gameOver = NO;
     int exitCode = 0;
-    Game *game = [Game initializeWithSettings:@{}]; // init singleton
+    
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
-    cli.eventsQueue = [[NSOperationQueue alloc] init];
-    cli.eventsQueue.name = @"com.sleepygarden.ArkhamHorror.cliEvents";
-    [cli.eventsQueue setQualityOfService:NSQualityOfServiceUserInteractive];
-    cli.eventsQueue.maxConcurrentOperationCount = 1;
-    cli.eventsQueue.suspended = YES;
+    cli.eventsQueue = [NSMutableArray new];
+    Game *game = [Game initializeWithSettings:@{}]; // init singleton
     game.uiDelegate = cli;
     while (!gameOver) {
         [game runPhase]; // game sends out event requests
@@ -65,32 +62,29 @@
 #pragma mark - ArkhamHorror UI API
 
 -(void)processEventsQueue {
-    [self println:[self getTerminalInput:@"Hit Enter to continue..."]];
-    
-    self.eventsQueue.suspended = NO;
-    [self.eventsQueue waitUntilAllOperationsAreFinished]; // blocks current thread until
-    self.eventsQueue.suspended = YES;
+    [self processNextEvent]; // recursively resolves each event in order
+    [self getTerminalInput:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
     
 }
 
--(void)enqueueSelectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback {
-    NSLog(@"select %lu items among %@",select,selections);
-    NSArray *selectedItems = @[];
-    callback(selectedItems);
+-(void)processNextEvent {
+    if (self.eventsQueue.count > 0){
+        void (^enqueuedBlock)(void) = [self.eventsQueue firstObject];
+        [self.eventsQueue removeObject:enqueuedBlock];
+        enqueuedBlock();
+    }
 }
 
 -(void)enqueueDieRollEvent:(AHRollEvent)callback {
-    NSUInteger opCount = self.eventsQueue.operationCount;
-    NSLog(@"enqueueing %lu, current thread %@",opCount,[NSThread currentThread]);
-
-    [self.eventsQueue addOperationWithBlock:^{
-        // background work
-        NSLog(@"dequeueing %lu, current thread %@", opCount, [NSThread currentThread]);
-
+    void (^dieRollBlock)(void) = ^{
         NSUInteger roll = [Die d6];
         callback(roll);
-    }];
-    
+        [self processNextEvent];
+    };
+    [self.eventsQueue addObject:dieRollBlock];
+}
+
+-(void)enqueueSelectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback {
     
 }
 

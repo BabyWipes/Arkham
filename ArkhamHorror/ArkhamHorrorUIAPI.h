@@ -13,7 +13,7 @@ typedef void(^AHRollEvent)(NSUInteger roll);
 typedef void(^AHSelectEvent)(NSArray* output);
 
 @protocol ArkhamHorrorUIAPI <NSObject>
-@property (strong, nonatomic) NSOperationQueue *eventsQueue;
+@property (strong, nonatomic) NSMutableArray *eventsQueue;
 -(void)enqueueSelectionEvent:(NSArray*)selections select:(NSUInteger)select callback:(AHSelectEvent)callback;
 -(void)enqueueDieRollEvent:(AHRollEvent)callback;
 
