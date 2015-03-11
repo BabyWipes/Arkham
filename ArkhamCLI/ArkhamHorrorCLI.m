@@ -85,7 +85,7 @@
 }
 
 -(void)enqueueSelectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback {
-    
+    // select <select> amount of items from <selections>, return that subset to <callback>
 }
 
 @end
