@@ -9,23 +9,14 @@
 #ifndef ArkhamHorror_ArkhamHorrorUIAPI_h
 #define ArkhamHorror_ArkhamHorrorUIAPI_h
 
-@class Game;
-@class Card;
-@class Investigator;
-@class Monster;
-
-typedef void(^AHGameEvent)(Game *game);
-typedef void(^AHInvestigatorEvent)(Investigator *investigator);
-typedef void(^AHMonsterEvent)(Monster *monster);
-typedef void(^AHCardEvent)(Card *card);
-typedef void(^AHSelectEvent)(id selection);
+typedef void(^AHRollEvent)(NSUInteger roll);
+typedef void(^AHSelectEvent)(NSArray* output);
 
 @protocol ArkhamHorrorUIAPI <NSObject>
--(void)enqueueGameEvent:(AHGameEvent)callback;
+@property (strong, nonatomic) NSOperationQueue *eventsQueue;
 -(void)enqueueSelectionEvent:(NSArray*)selections select:(NSUInteger)select callback:(AHSelectEvent)callback;
--(void)enqueueInvestigatorEvent:(AHInvestigatorEvent)callback;
--(void)enqueueMonsterEvent:(AHMonsterEvent)callback;
--(void)enqueueCardEvent:(AHCardEvent)callback;
+-(void)enqueueDieRollEvent:(AHRollEvent)callback;
+
 @end
 
 

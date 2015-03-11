@@ -781,6 +781,7 @@
 				BE0F7E281AAF6EAD00C337F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

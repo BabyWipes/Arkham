@@ -37,16 +37,12 @@ static Game *singletonInstance = nil;
 
 #pragma mark - UI API comm
 
--(void)enqueueGameEvent:(AHGameEvent)event { // call this to tell the UI to enqueue a user interaction or an animation event
-    if (self.uiDelegate){
-        [self.uiDelegate enqueueGameEvent:event];
-    }
-}
-
 -(void)runPhase {
-    [self enqueueGameEvent:^(Game *game){
-        NSLog(@"callback for user interaction event");
-        [game logGameInfo];
+    [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+        NSLog(@"op 1 callback");
+    }];
+    [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+        NSLog(@"op 2 callback");
     }];
 }
 
