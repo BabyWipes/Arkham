@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ArkhamHorrorCLI.h"
+
+#import "Monster.h"
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         return [ArkhamHorrorCLI run];

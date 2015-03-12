@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger, CardType) {
     CardTypeArkhamEncounter,
     CardTypeOtherWorldEncounter,
     CardTypeMythos
-    
 };
 
 // All items drawable from a Deck must extend from the Card base class

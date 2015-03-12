@@ -10,6 +10,8 @@
 #import "Neighborhood.h"
 #import "Movable.h"
 #import "PathFinder.h"
+#import "ItemSetup.h"
+
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
 @end
@@ -98,7 +100,7 @@ static Game *singletonInstance = nil;
 #pragma mark - setup
 
 -(void)setupDecks {
-    self.commonsDeck = [NSMutableArray new];
+    self.commonsDeck = [ItemSetup arkhamHorrorCommons];
     self.uniquesDeck = [NSMutableArray new];
     self.spellsDeck = [NSMutableArray new];
     self.skillsDeck = [NSMutableArray new];

@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Card.h"
+#import "Defines.h"
 
 typedef NS_ENUM(NSUInteger, ItemClassification){
     ItemClassificationNone = 0,
@@ -18,43 +19,71 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
     ItemClassificationTome
 };
 
+extern NSUInteger const kItemInfiniteUses;
+
 @interface Item : Card
 
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;
 @property (nonatomic) BOOL isExhausted;
-@property (nonatomic) BOOL shouldDiscard;
+@property (nonatomic) NSInteger usesBeforeDiscard;
 @property (nonatomic) ItemClassification itemClass;
-
 @property (strong, nonatomic) NSArray *eventFlags; // things a player holding this item needs to pay attention to
-
 -(instancetype)initWithProperties:(NSDictionary*)properties;
 
 @end
 
+@interface WeaponItem : Item
+@property (nonatomic) NSUInteger combatBonus;
+@end
 
+@interface TomeItem : Item
+@property (nonatomic) NSInteger sanityCost;
+@property (nonatomic) NSInteger moveCost;
+@property (nonatomic) NSInteger loreDifficulty;
+@property (nonatomic) NSInteger clueReward;
+@property (nonatomic) NSInteger spellReward;
+@property (nonatomic) NSInteger skillReward;
+@end
 
+// mitigates or heals a cost
+@interface HealingItem : Item
+@property (nonatomic) NSInteger sanityGain;
+@property (nonatomic) NSInteger staminaGain;
+@property (nonatomic) NSInteger clueGain;
+@end
+
+@interface MovementItem : Item
+@property (nonatomic) NSInteger movementBonus;
+@property (nonatomic) BOOL usableInOtherWorld;
+@end
+
+// TODO a weapon could really be considered a Fight SkillBonusItem, revise?
+@interface SkillBonusItem : Item
+@property (nonatomic) NSInteger skillBonus;
+@property (nonatomic) SkillCheckType skillType;
+@end
 
 /*
  COMMONS
  Item                   Type        Price   Hands   Count
  --------------------------------------------------------
  Knife                  P. weapon	$2      1       2 // +1 combat checks
- Bullwhip               P. weapon	$2      1       2 // +1 Combat check, exhaust to reroll 1 die after making a combat check
+ Bullwhip               P. weapon	$2      1       2 // +1 combat check, exhaust to reroll 1 die after making a combat check
  Cavalry Saber          P. weapon	$3      1       2 // +2 combat check
- .18 Derringer          P. weapon	$3      1       2 // +2 Combat check, cannot be lost or stolen unless you allow it
- Axe                    P. weapon	$3      1       2 // +2 Combat check (+3 instead if your other hand is empty)
- .38 Revolver           P. weapon	$4      1       2 // +3 Combat check
- Cross                  M. weapon	$3      1       2 // +3 Combat check if Opponent is Undead, +1 Horror check
+ .18 Derringer          P. weapon	$3      1       2 // +2 combat check, cannot be lost or stolen unless you allow it
+ Axe                    P. weapon	$3      1       2 // +2 combat check (+3 instead if your other hand is empty)
+ .38 Revolver           P. weapon	$4      1       2 // +3 combat check
+ Cross                  M. weapon	$3      1       2 // +3 combat check if Opponent is Undead, +1 Horror check
  .45 Automatic          P. weapon	$5      1       2 // +4 combat check
  Shotgun                P. weapon	$6      2       2 // +4 combat checks, if in hands & during combat, rolled 6's count as two successes
  Rifle                  P. weapon   $6      2       2 // +5 combat check
  Tommy Gun              P. weapon	$7      2       2 // +6 combat checks
- Dynamite               P. weapon	$4      2       2 // discard, +8 combat checks
+ Dynamite               P. weapon	$4      2       2 // discard, +8 combat check
  Food                               $1      0       2 // discard, reduce stamina loss by 1
  Whiskey                            $1      0       2 // discard, reduce sanity loss by 1
- Dark Cloak                         $2      0       2 // 1+ evade checks
+ Dark Cloak                         $2      0       2 // +1 evade checks
  Lantern                            $3      0       2 // +1 luck checks
  Lucky Cigarette Case               $1      0       2 // discard, reroll skill check
  Research Materials                 $1      0       2 // discard, avoid spending 1 clue token

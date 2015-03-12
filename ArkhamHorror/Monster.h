@@ -34,13 +34,16 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 
 @interface Dimension : NSObject
 @property (nonatomic) MonsterDimensionSymbol value;
++(instancetype)ofType:(MonsterDimensionSymbol)symbol;
+-(instancetype)initWithType:(MonsterDimensionSymbol)type;
 -(BOOL)equalsDimension:(Dimension*)other;
 @end
 
-@interface Monster : Movable
+@interface Monster : Movable <NSCopying>
 @property (strong, nonatomic) NSString *name;
 
 @property (nonatomic) NSInteger toughness;
+@property (nonatomic) NSInteger awareness;
 @property (nonatomic) NSInteger combatRating;
 @property (nonatomic) NSInteger horrorRating;
 @property (nonatomic) NSInteger combatDamage;

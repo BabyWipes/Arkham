@@ -13,7 +13,8 @@
 #import "Die.h"
 
 @implementation Dimension
-+(instancetype)type:(MonsterDimensionSymbol)type{
+
++(instancetype)ofType:(MonsterDimensionSymbol)type{
     return [[Dimension alloc] initWithType:type];
 }
 -(instancetype)initWithType:(MonsterDimensionSymbol)type {
@@ -30,11 +31,44 @@
 @end
 
 @implementation Monster
+
+-(id)copyWithZone:(NSZone *)zone {
+    Monster *copy = [[Monster alloc] init];
+    copy.name = [self.name copy];
+    copy.toughness = self.toughness;
+    copy.awareness = self.awareness;
+    copy.horrorRating = self.horrorRating;
+
+    copy.horrorDamage = self.horrorDamage;
+    copy.combatRating = self.combatRating;
+    copy.combatDamage = self.combatDamage;
+    
+    copy.isEndless = self.isEndless;
+    copy.isInSky = self.isInSky;
+    copy.isMaskMonster = self.isMaskMonster;
+    copy.isUndead = self.isUndead;
+    copy.canAmbush = self.canAmbush;
+
+    copy.physicallyResistant = self.physicallyResistant;
+    copy.physicallyImmune = self.physicallyImmune;
+    copy.magicallyResistant = self.magicallyResistant;
+    copy.magicallyImmune = self.magicallyImmune;
+
+    copy.nightmarishRating = self.nightmarishRating;
+    copy.overwhelmingRating = self.overwhelmingRating;
+
+    copy.movementType = self.movementType;
+    copy.dimension = [Dimension ofType:self.dimension.value];
+
+    return copy;
+}
+
 -(id)initWithProperties:(NSDictionary *)properties {
     self = [super init];
     if (self){
         self.name = properties[@"name"];
         self.toughness = [properties[@"toughness"] integerValue];
+        self.awareness = [properties[@"awareness"] integerValue];
         self.horrorRating = [properties[@"horror_rating"] integerValue];
         self.horrorDamage = [properties[@"horror_damage"] integerValue];
         self.combatRating = [properties[@"combat_rating"] integerValue];
@@ -73,31 +107,31 @@
         
         NSString *dimensionString = properties[@"dimension"];
         if ([dimensionString isEqualToString:@"Triangle"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolTriangle];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolTriangle];
         }
         else if ([dimensionString isEqualToString:@"Square"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolSquare];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
         }
         else if ([dimensionString isEqualToString:@"Diamond"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolDiamond];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolDiamond];
         }
         else if ([dimensionString isEqualToString:@"Hexagon"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolHexagon];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
         }
         else if ([dimensionString isEqualToString:@"Slash"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolSlash];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
         }
         else if ([dimensionString isEqualToString:@"Plus"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolPlus];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolPlus];
         }
         else if ([dimensionString isEqualToString:@"Star"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolStar];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolStar];
         }
         else if ([dimensionString isEqualToString:@"Crescent"]){
-            self.dimension = [Dimension type:MonsterDimensionSymbolCrescent];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
         }
         else {
-            self.dimension = [Dimension type:MonsterDimensionSymbolCircle];
+            self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
         }
     }
     return self;
@@ -245,6 +279,12 @@
 -(void)dealCombatDamage:(Investigator*)investigator {
     investigator.stamina-=self.combatDamage;
 }
+
+#pragma mark - Logging
+
+-(NSString*)description {
+    return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];
+}
 @end
 
 @implementation ChthonianMonster
@@ -281,7 +321,7 @@
 @end
 
 @implementation HaunterOfTheDarkMonster
-// if BlackestNightMythos is in play, this monster's combat rating is -5
+// if Blackest Night Mythos is in play, this monster's combat rating is -5
 @end
 
 @implementation HoundOfTindalosMonster
@@ -291,6 +331,7 @@
     
 }
 -(Location*)selectNearestLocationForHound {
+    // TODO if all investigators are in expansion game area (Dunwich, etc), Hound goes in shortest path to train station
     
     NSLog(@"the hound of tindalos is tracking it's prey...");
     NSMutableArray *shortestPaths = [NSMutableArray new];
@@ -353,22 +394,38 @@
 @end
 
 @implementation ManiacMonster
+// Maniac - if terror >= 6, maniac's combat rating = -2, combat damage is 3, is Endless
+
 @end
 
 @implementation MiGoMonster
+// Mi-Go - if pass combat check against mi-go, remove from game and draw 1 unique
+
 @end
 
 @implementation NightgauntMonster
+// if fail combat or evade check, go through nearest gate. if tie, choose among tied gates. if in other world, return to arkham (counts as explored).
+// if no gates open, combat ends with no other effects
+-(void)dealEvadeFailDamage:(Investigator *)investigator {
+    // investigator goes through nearest gate
+}
+-(void)dealCombatDamage:(Investigator *)investigator {
+    [self dealEvadeFailDamage:investigator]; // same as evade fail
+}
 @end
 
 @implementation TheBlackManMonster
+// before making horror check, make Luck(-1) check. if pass, +2 clues, else player is devoured. either way, return black man to cup.
 @end
 
 @implementation TheBloatedWomanMonster
+// Before making Horror check, make Will(-2) check. if fail, automatically fail the Horror check and the Combat check.
 @end
 
 @implementation TheDarkPharoahMonster
+// Use Lore instead of Fight in combat
 @end
 
 @implementation WarlockMonster
+// if you pass a combat check, gain 2 clue tokens and remove warlock from game
 @end

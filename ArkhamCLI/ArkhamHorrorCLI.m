@@ -34,8 +34,8 @@
 #pragma mark - Console I/O
 
 -(BOOL)getBool {
-    NSString *rawBool = [self getTerminalInput:@"Enter Bool:"];
-    return ([[rawBool lowercaseString] isEqualToString:@"yes"] || [[rawBool lowercaseString] isEqualToString:@"y"]);
+    NSString *rawBool = [[self getTerminalInput:@"Enter Bool:"] lowercaseString];
+    return ([rawBool isEqualToString:@"yes"] || [rawBool isEqualToString:@"y"]);
 }
 
 -(int)getInt {
