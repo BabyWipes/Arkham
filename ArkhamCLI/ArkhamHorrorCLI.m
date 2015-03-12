@@ -10,19 +10,20 @@
 #import "ArkhamHorrorUIAPI.h"
 #import "Game.h"
 #import "Die.h"
-
+#import "SettingsManager.h"
 @interface ArkhamHorrorCLI () <ArkhamHorrorUIAPI>
 @end
 
 @implementation ArkhamHorrorCLI
 @synthesize eventsQueue;
+
 +(int)run {
     BOOL gameOver = NO;
     int exitCode = 0;
     
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
-    Game *game = [Game initializeWithSettings:@{}]; // init singleton
+    Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton
     game.uiDelegate = cli;
     while (!gameOver) {
         [game runPhase]; // game sends out event requests

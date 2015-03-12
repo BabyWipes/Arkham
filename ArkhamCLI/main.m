@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ArkhamHorrorCLI.h"
 
-#import "Monster.h"
+#import "SettingsManager.h"
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         return [ArkhamHorrorCLI run];
