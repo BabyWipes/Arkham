@@ -156,7 +156,7 @@
     monster.combatRating = -1;
     monster.combatDamage = 3;
     monster.nightmarishRating = 1;
-    monster.physicallyResistant = YES;
+    monster.physicalResistance = MonsterDamageImmunityResist;
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:[monster copy]];
     [arkhamHorrorMonsters addObject:[monster copy]];

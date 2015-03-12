@@ -49,10 +49,8 @@
     copy.isUndead = self.isUndead;
     copy.canAmbush = self.canAmbush;
 
-    copy.physicallyResistant = self.physicallyResistant;
-    copy.physicallyImmune = self.physicallyImmune;
-    copy.magicallyResistant = self.magicallyResistant;
-    copy.magicallyImmune = self.magicallyImmune;
+    copy.physicalResistance = self.physicalResistance;
+    copy.magicalResistance = self.magicalResistance;
 
     copy.nightmarishRating = self.nightmarishRating;
     copy.overwhelmingRating = self.overwhelmingRating;
@@ -79,10 +77,30 @@
         self.isMaskMonster = [properties[@"is_mask"] boolValue];
         self.isUndead = [properties[@"is_undead"] boolValue];
         
-        self.physicallyResistant = [properties[@"physically_resistant"] boolValue];
-        self.magicallyResistant = [properties[@"magically_resistant"] boolValue];
-        self.physicallyImmune = [properties[@"physically_immune"] boolValue];
-        self.magicallyImmune = [properties[@"magically_immune"] boolValue];
+        NSUInteger pResist = [properties[@"p_resist"] unsignedIntegerValue];
+        NSUInteger mResist = [properties[@"m_resist"] unsignedIntegerValue];
+        switch (pResist) {
+            case MonsterDamageImmunityImmune:
+                self.physicalResistance = MonsterDamageImmunityImmune;
+                break;
+            case MonsterDamageImmunityResist:
+                self.physicalResistance = MonsterDamageImmunityResist;
+                break;
+            default:
+                self.physicalResistance = MonsterDamageImmunityNone;
+                break;
+        }
+        switch (mResist) {
+            case MonsterDamageImmunityImmune:
+                self.magicalResistance = MonsterDamageImmunityImmune;
+                break;
+            case MonsterDamageImmunityResist:
+                self.magicalResistance = MonsterDamageImmunityResist;
+                break;
+            default:
+                self.magicalResistance = MonsterDamageImmunityNone;
+                break;
+        }
         
         self.nightmarishRating = [properties[@"nightmarish"] integerValue];
         self.overwhelmingRating = [properties[@"overwhelming"] integerValue];

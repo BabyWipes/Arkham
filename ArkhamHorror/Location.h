@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Location;
-
 #import <Foundation/Foundation.h>
 #import "Investigator.h"
+#import "Neighborhood.h"
 
 // base class, locations with no special encounters are this
 @interface Location : NSObject

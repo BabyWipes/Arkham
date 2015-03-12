@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class JSObj;
-
 #import "JSTest.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+
+@class JSObj;
 
 @protocol NativeObjectExport <JSExport>
 @property (strong, nonatomic) NSString *name;

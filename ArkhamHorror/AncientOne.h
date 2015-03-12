@@ -6,12 +6,8 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class AncientOne;
-
 #import <Foundation/Foundation.h>
-#import "Monster.h"
-#import "Investigator.h"
-
+#import "Defines.h"
 
 @interface AncientOne : NSObject
 @property (strong, nonatomic) NSString *name;
@@ -19,10 +15,8 @@
 @property (nonatomic) NSInteger doomCounter;
 @property (nonatomic) NSInteger maxDoom;
 @property (nonatomic) NSInteger attackDifficultyModifier;
-@property (nonatomic) BOOL isPhysicallyResistant;
-@property (nonatomic) BOOL isMagicallyResistant;
-@property (nonatomic) BOOL isPhysicallyImmune;
-@property (nonatomic) BOOL isMagicallyImmune;
+@property (nonatomic) MonsterDamageImmunity physicalResistance;
+@property (nonatomic) MonsterDamageImmunity magicalResistance;
 
 -(void)applySetupEffect;
 -(void)buffWorshippers;

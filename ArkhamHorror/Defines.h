@@ -22,4 +22,49 @@ typedef NS_ENUM(NSUInteger, SkillCheckType) {
     SkillCheckTypeSpell   // == lore check, some items only affect this
 };
 
+typedef NS_ENUM(NSUInteger, MonsterMovementType){
+    MonsterMovementTypeNormal = 0,
+    MonsterMovementTypeStationary,
+    MonsterMovementTypeFast,
+    MonsterMovementTypeFlying,
+    MonsterMovementTypeUnique
+};
+
+typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
+    MonsterDimensionSymbolCircle = 0,
+    MonsterDimensionSymbolCrescent,
+    MonsterDimensionSymbolTriangle,
+    MonsterDimensionSymbolHexagon,
+    MonsterDimensionSymbolSquare,
+    MonsterDimensionSymbolDiamond,
+    MonsterDimensionSymbolStar,
+    MonsterDimensionSymbolSlash,
+    MonsterDimensionSymbolPlus,
+};
+
+typedef NS_ENUM(NSUInteger, MonsterDamageImmunity){
+    MonsterDamageImmunityNone = 0,
+    MonsterDamageImmunityResist = 1,
+    MonsterDamageImmunityImmune = 2,
+};
+
+typedef NS_ENUM(NSUInteger, CardType) {
+    CardTypeCommonItem,
+    CardTypeUniqueItem,
+    CardTypeSpell,
+    CardTypeSkill,
+    CardTypeAlly,
+    CardTypeArkhamEncounter,
+    CardTypeOtherWorldEncounter,
+    CardTypeMythos
+};
+
+typedef NS_ENUM(NSUInteger, ItemClassification){
+    ItemClassificationNone = 0,
+    ItemClassificationPhysicalWeapon,
+    ItemClassificationMagicalWeapon,
+    ItemClassificationTome
+};
+
+
 #endif

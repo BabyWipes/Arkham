@@ -149,6 +149,7 @@
 		BE7570E41AB22E49004B3998 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		BE7570E51AB22E49004B3998 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		BE7570E81AB2321D004B3998 /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Default.json; sourceTree = "<group>"; };
+		BE7570EA1AB23358004B3998 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
@@ -379,6 +380,7 @@
 				BE0F7E451AAF724300C337F1 /* ArkhamHorrorUIAPI.h */,
 				BE7570E41AB22E49004B3998 /* SettingsManager.h */,
 				BE7570E51AB22E49004B3998 /* SettingsManager.m */,
+				BE7570EA1AB23358004B3998 /* Macros.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";

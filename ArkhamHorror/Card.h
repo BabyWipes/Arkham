@@ -6,21 +6,8 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Card;
-
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSUInteger, CardType) {
-    CardTypeCommonItem,
-    CardTypeUniqueItem,
-    CardTypeSpell,
-    CardTypeSkill,
-    CardTypeAlly,
-    CardTypeArkhamEncounter,
-    CardTypeOtherWorldEncounter,
-    CardTypeMythos
-};
-
+#import "Defines.h"
 // All items drawable from a Deck must extend from the Card base class
 @interface Card : NSObject
 @property (nonatomic) CardType cardType;

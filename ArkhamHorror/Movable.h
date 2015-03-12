@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Movable;
 @class Location;
 @class Neighborhood;
 

@@ -7,9 +7,9 @@
 //
 
 @class Neighborhood;
+@class Location;
 
 #import <Foundation/Foundation.h>
-#import "Location.h"
 
 @interface Neighborhood : NSObject
 @property (strong, nonatomic) NSString *name;

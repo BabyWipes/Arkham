@@ -6,11 +6,7 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Investigator;
-
 #import <Foundation/Foundation.h>
-#import "NSMutableArray+Deck.h"
-#import "Game.h"
 #import "Movable.h"
 
 @interface Investigator : Movable

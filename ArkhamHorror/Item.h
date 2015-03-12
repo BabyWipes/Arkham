@@ -12,13 +12,6 @@
 #import "Card.h"
 #import "Defines.h"
 
-typedef NS_ENUM(NSUInteger, ItemClassification){
-    ItemClassificationNone = 0,
-    ItemClassificationPhysicalWeapon,
-    ItemClassificationMagicalWeapon,
-    ItemClassificationTome
-};
-
 extern NSUInteger const kItemInfiniteUses;
 
 @interface Item : Card <NSCopying>

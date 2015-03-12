@@ -16,6 +16,8 @@
 #import "Neighborhood.h"
 #import "Location.h"
 
+#import "Game.h"
+
 @implementation PathFinder
 
 +(PESGraph*)setupBoardGraph:(NSArray*)neighborhoods {

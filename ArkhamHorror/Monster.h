@@ -6,31 +6,10 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-@class Monster;
-
 #import <Foundation/Foundation.h>
 #import "Movable.h"
 #import "Investigator.h"
-
-typedef NS_ENUM(NSUInteger, MonsterMovementType){
-    MonsterMovementTypeNormal = 0,
-    MonsterMovementTypeStationary,
-    MonsterMovementTypeFast,
-    MonsterMovementTypeFlying,
-    MonsterMovementTypeUnique
-};
-
-typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
-    MonsterDimensionSymbolCircle,
-    MonsterDimensionSymbolCrescent,
-    MonsterDimensionSymbolTriangle,
-    MonsterDimensionSymbolHexagon,
-    MonsterDimensionSymbolSquare,
-    MonsterDimensionSymbolDiamond,
-    MonsterDimensionSymbolStar,
-    MonsterDimensionSymbolSlash,
-    MonsterDimensionSymbolPlus,
-};
+#import "Defines.h"
 
 @interface Dimension : NSObject
 @property (nonatomic) MonsterDimensionSymbol value;
@@ -59,7 +38,9 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
 
 @property (nonatomic) BOOL isInSky;
 
-@property (nonatomic) BOOL physicallyResistant;
+@property (nonatomic) MonsterDamageImmunity physicalResistance;
+@property (nonatomic) MonsterDamageImmunity magicalResistance;
+
 @property (nonatomic) BOOL magicallyResistant;
 @property (nonatomic) BOOL physicallyImmune;
 @property (nonatomic) BOOL magicallyImmune;

@@ -7,6 +7,8 @@
 //
 
 #import "AncientOne.h"
+#import "Monster.h"
+#import "Game.h"
 
 #pragma mark - Prototype
 
@@ -19,11 +21,8 @@
         self.maxDoom = 15;
         self.doomCounter = 0;
         self.attackDifficultyModifier = 1;
-        
-        self.isPhysicallyImmune = NO;
-        self.isPhysicallyResistant = NO;
-        self.isMagicallyImmune = NO;
-        self.isMagicallyResistant = NO;
+        self.physicalResistance = MonsterDamageImmunityNone;
+        self.magicalResistance = MonsterDamageImmunityNone;
     }
     return self;
 }
@@ -67,6 +66,16 @@
 }
 -(void)attack {
     // lose game
+}
+
+-(NSDictionary*)export {
+    NSDictionary *exportDict = @{@"name":self.name,
+                                 @"combat_rating":@(self.combatRating),
+                                 @"max_doom":@(self.maxDoom),
+                                 @"attack_difficulty":@(self.attackDifficultyModifier),
+                                 @"p_resist":@(self.physicalResistance),
+                                 @"m_resist":@(self.magicalResistance)};
+    return exportDict;
 }
 @end
 
@@ -128,7 +137,7 @@
         self.combatRating = 0;// on awaken == game's terror level
         self.maxDoom = 13;
         self.doomCounter = 0;
-        self.isPhysicallyResistant = YES;
+        self.physicalResistance = MonsterDamageImmunityResist;
     }
     return self;
 }
@@ -185,7 +194,7 @@
 }
 -(void)awaken{
     // foreach player, foreach item, roll, if fail, discard item
- 
+    
 }
 -(void)attack{
     for (Investigator *player in [Game currentGame].investigators){
@@ -211,7 +220,8 @@
         self.combatRating = -4;
         self.maxDoom = 11;
         self.doomCounter = 0;
-        self.isMagicallyResistant = YES;
+        self.magicalResistance = MonsterDamageImmunityResist;
+
     }
     return self;
 }
@@ -245,7 +255,7 @@
         self.combatRating = -5;
         self.maxDoom = 12;
         self.doomCounter = 0;
-        self.isPhysicallyImmune = YES;
+        self.physicalResistance = MonsterDamageImmunityImmune;
     }
     return self;
 }
@@ -311,7 +321,7 @@
         self.combatRating = -5;
         self.maxDoom = 12;
         self.doomCounter = 0;
-        self.isMagicallyImmune = YES;
+        self.magicalResistance = MonsterDamageImmunityImmune;
     }
     return self;
 }

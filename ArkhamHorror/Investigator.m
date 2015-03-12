@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
+#import "NSMutableArray+Deck.h"
 #import "Investigator.h"
+#import "Game.h"
 
 @interface Investigator ()
 @property (nonatomic) NSInteger speedSneakSlider;

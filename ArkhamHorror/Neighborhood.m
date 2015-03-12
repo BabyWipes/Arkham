@@ -7,6 +7,7 @@
 //
 
 #import "Neighborhood.h"
+#import "Location.h"
 
 @implementation Neighborhood
 
