@@ -15,6 +15,17 @@ NSUInteger const kItemInfiniteUses = 0;
 
 #pragma mark - instance methods
 
+-(id)copyWithZone:(NSZone *)zone {
+    Item *copy = [[Item alloc] init];
+    copy.name = [self.name copy];
+    copy.price = self.price;
+    copy.hands = self.hands;
+    copy.usesBeforeDiscard = self.usesBeforeDiscard;
+    copy.itemClass = self.itemClass;
+    copy.cardType = self.cardType;
+    return copy;
+}
+
 -(instancetype)init {
     self = [super init];
     if (self){

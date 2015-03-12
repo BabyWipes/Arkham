@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
 
 extern NSUInteger const kItemInfiniteUses;
 
-@interface Item : Card
+@interface Item : Card <NSCopying>
 
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger hands;
