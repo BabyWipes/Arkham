@@ -53,8 +53,6 @@ static Game *singletonInstance = nil;
 -(instancetype)initWithSettings:(NSDictionary*)settings {
     self = [super init];
     if (self){
-        self.neighborhoods = [Neighborhood arkhamBoard];
-        self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
         
         [self setupDecks];
         [self setupMonsterCup];
@@ -106,6 +104,25 @@ static Game *singletonInstance = nil;
     self.skillsDeck = [NSMutableArray new];
     self.alliesDeck = [NSMutableArray new];
     self.mythosDeck = [NSMutableArray new];
+}
+
+-(void)setupBoard {
+    self.neighborhoods = [Neighborhood arkhamBoard];
+    // wire up neighborhoods
+    for (Neighborhood *hoodA in self.neighborhoods){
+        for (Neighborhood *hoodB in self.neighborhoods){
+            if (hoodA != hoodB){
+                if ([hoodA.whiteStreetConnectionName isEqualToString:hoodB.name]){
+                    hoodA.whiteStreetConnection = hoodB;
+                }
+                if ([hoodA.colorlessStreetConnectionName isEqualToString:hoodB.name]){
+                    hoodA.colorlessStreetConnection = hoodB;
+                }
+            }
+        }
+    }
+    self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
+
 }
 
 -(void)setupMonsterCup {

@@ -60,6 +60,15 @@ NSUInteger const kItemInfiniteUses = 0;
     }
     return self;
 }
+
+-(NSDictionary*)exportJSON {
+    NSDictionary *exportDict = @{@"name":self.name,
+                                 @"hands":@(self.hands),
+                                 @"uses_before_discard":@(self.usesBeforeDiscard),
+                                 @"item_class":@(self.itemClass),
+                                 @"card_type":@(self.cardType)};
+    return exportDict;
+}
 @end
 
 #pragma mark - subclasses

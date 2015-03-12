@@ -13,7 +13,6 @@
 // base class, locations with no special encounters are this
 @interface Location : NSObject
 @property (strong, nonatomic) NSString *name;
-@property (nonatomic) NSUInteger locationID;
 @property (nonatomic) BOOL isStable;
 @property (nonatomic) BOOL isStreet;
 @property (strong, nonatomic) NSMutableArray *investigatorsHere;
@@ -21,6 +20,8 @@
 @property (weak, nonatomic) Neighborhood *neighborhood;
 
 -(instancetype)initWithStability:(BOOL)isStable;
+-(instancetype)initWithProperties:(NSDictionary*)properties;
+-(NSDictionary*)exportJSON;
 +(instancetype)street;
 @end
 

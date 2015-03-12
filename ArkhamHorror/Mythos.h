@@ -12,14 +12,6 @@
 #import "Card.h"
 #import "Monster.h"
 
-typedef NS_ENUM(NSUInteger, MythosType) {
-    MythosTypeEnvironmentMystic,
-    MythosTypeEnvironmentUrban,
-    MythosTypeEnvironmentWeather,
-    MythosTypeRumor,
-    MythosTypeHeadline,
-};
-
 @interface Mythos : Card
 @property (strong, nonatomic) NSArray *whiteDimensons;
 @property (strong, nonatomic) NSArray *blackDimensions;

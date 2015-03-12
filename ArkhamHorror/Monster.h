@@ -36,14 +36,8 @@
 @property (nonatomic) BOOL isUndead;
 @property (nonatomic) BOOL isMaskMonster;
 
-@property (nonatomic) BOOL isInSky;
-
 @property (nonatomic) MonsterDamageImmunity physicalResistance;
 @property (nonatomic) MonsterDamageImmunity magicalResistance;
-
-@property (nonatomic) BOOL magicallyResistant;
-@property (nonatomic) BOOL physicallyImmune;
-@property (nonatomic) BOOL magicallyImmune;
 
 @property (nonatomic) NSInteger nightmarishRating;
 @property (nonatomic) NSInteger overwhelmingRating;
@@ -53,6 +47,8 @@
 -(void)dealEvadeFailDamage:(Investigator*)investigator;
 -(void)dealCombatDamage:(Investigator*)investigator;
 -(void)move;
+
+-(NSDictionary*)exportJSON;
 @end
 
 @interface ChthonianMonster : Monster

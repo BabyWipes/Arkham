@@ -44,7 +44,6 @@
     copy.combatDamage = self.combatDamage;
     
     copy.isEndless = self.isEndless;
-    copy.isInSky = self.isInSky;
     copy.isMaskMonster = self.isMaskMonster;
     copy.isUndead = self.isUndead;
     copy.canAmbush = self.canAmbush;
@@ -59,6 +58,27 @@
     copy.dimension = [Dimension ofType:self.dimension.value];
 
     return copy;
+}
+
+-(NSDictionary*)exportJSON {
+    NSDictionary *exportDict = @{@"name":self.name,
+                                 @"toughness":@(self.toughness),
+                                 @"awareness":@(self.awareness),
+                                 @"horror_rating":@(self.horrorRating),
+                                 @"horror_damage":@(self.horrorDamage),
+                                 @"combat_rating":@(self.combatRating),
+                                 @"combat_damage":@(self.combatDamage),
+                                 @"p_resist":@(self.physicalResistance),
+                                 @"m_resist":@(self.magicalResistance),
+                                 @"move_type":@(self.movementType),
+                                 @"dimension":@(self.dimension.value),
+                                 @"ambush":@(self.canAmbush),
+                                 @"undead":@(self.isUndead),
+                                 @"mask":@(self.isMaskMonster),
+                                 @"endless":@(self.isEndless),
+                                 @"nightmarish":@(self.nightmarishRating),
+                                 @"overwhelming":@(self.overwhelmingRating)};
+    return exportDict;
 }
 
 -(id)initWithProperties:(NSDictionary *)properties {
@@ -77,80 +97,15 @@
         self.isMaskMonster = [properties[@"is_mask"] boolValue];
         self.isUndead = [properties[@"is_undead"] boolValue];
         
-        NSUInteger pResist = [properties[@"p_resist"] unsignedIntegerValue];
-        NSUInteger mResist = [properties[@"m_resist"] unsignedIntegerValue];
-        switch (pResist) {
-            case MonsterDamageImmunityImmune:
-                self.physicalResistance = MonsterDamageImmunityImmune;
-                break;
-            case MonsterDamageImmunityResist:
-                self.physicalResistance = MonsterDamageImmunityResist;
-                break;
-            default:
-                self.physicalResistance = MonsterDamageImmunityNone;
-                break;
-        }
-        switch (mResist) {
-            case MonsterDamageImmunityImmune:
-                self.magicalResistance = MonsterDamageImmunityImmune;
-                break;
-            case MonsterDamageImmunityResist:
-                self.magicalResistance = MonsterDamageImmunityResist;
-                break;
-            default:
-                self.magicalResistance = MonsterDamageImmunityNone;
-                break;
-        }
+        self.physicalResistance = [properties[@"p_resist"] unsignedIntegerValue];
+        self.magicalResistance = [properties[@"m_resist"] unsignedIntegerValue];
         
+        self.movementType = [properties[@"movement"] unsignedIntegerValue];
+        self.dimension = [Dimension ofType:[properties[@"dimension"] unsignedIntegerValue]];
+
         self.nightmarishRating = [properties[@"nightmarish"] integerValue];
         self.overwhelmingRating = [properties[@"overwhelming"] integerValue];
         
-        
-        NSString *movementString = properties[@"movement"];
-        if ([movementString isEqualToString:@"Flying"]){
-            self.movementType = MonsterMovementTypeFlying;
-        }
-        else if ([movementString isEqualToString:@"Fast"]){
-            self.movementType = MonsterMovementTypeFast;
-        }
-        else if ([movementString isEqualToString:@"Stationary"]){
-            self.movementType = MonsterMovementTypeStationary;
-        }
-        else if ([movementString isEqualToString:@"Unique"]){
-            self.movementType = MonsterMovementTypeUnique;
-        }
-        else {
-            self.movementType = MonsterMovementTypeNormal;
-        }
-        
-        NSString *dimensionString = properties[@"dimension"];
-        if ([dimensionString isEqualToString:@"Triangle"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolTriangle];
-        }
-        else if ([dimensionString isEqualToString:@"Square"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
-        }
-        else if ([dimensionString isEqualToString:@"Diamond"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolDiamond];
-        }
-        else if ([dimensionString isEqualToString:@"Hexagon"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
-        }
-        else if ([dimensionString isEqualToString:@"Slash"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
-        }
-        else if ([dimensionString isEqualToString:@"Plus"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolPlus];
-        }
-        else if ([dimensionString isEqualToString:@"Star"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolStar];
-        }
-        else if ([dimensionString isEqualToString:@"Crescent"]){
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
-        }
-        else {
-            self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
-        }
     }
     return self;
 }
@@ -197,11 +152,10 @@
     }
 }
 -(void)moveFlying {
-    if (self.isInSky){
+    if ([[Game currentGame].sky containsObject:self]){ // is in sky
         Location *dest = [self selectNearestLocationForFlyers];
         if (dest){ // swoop!
             [[Game currentGame].sky removeObject:self];
-            self.isInSky = NO;
             self.currentLocation = dest;
         }
         else {
@@ -225,7 +179,6 @@
             }
             else {
                 // to the sky!
-                self.isInSky = YES;
                 self.currentLocation = nil;
                 [[Game currentGame].sky addObject:self];
             }
@@ -245,10 +198,8 @@
     if (self.currentNeighborhood.colorlessStreetConnection.street.investigatorsHere.count > 0){
         [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
     };
-    if ([self.currentNeighborhood respondsToSelector:@selector(secondaryColorlessStreetConnection)]){
-        if ([(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street.investigatorsHere.count > 0){
-            [dests addObject:[(MerchantDistrictNeighborhood*)self.currentNeighborhood secondaryColorlessStreetConnection].street];
-        }
+    if (self.currentNeighborhood.secondaryColorlessStreetConnection.street.investigatorsHere.count > 0){
+        [dests addObject:[self.currentNeighborhood secondaryColorlessStreetConnection].street];
     }
     
     if (dests.count > 1){

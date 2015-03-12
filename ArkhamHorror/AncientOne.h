@@ -22,6 +22,8 @@
 -(void)buffWorshippers;
 -(void)awaken;
 -(void)attack;
+-(instancetype)initWithProperties:(NSDictionary*)properties;
+-(NSDictionary*)exportJSON;
 
 @end
 

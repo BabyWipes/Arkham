@@ -17,39 +17,30 @@
     
     Neighborhood *downtown = [[Neighborhood alloc] init];
     downtown.name = @"Downtown";
-    downtown.neighborhoodID = 0;
     
     Neighborhood *easttown = [[Neighborhood alloc] init];
     easttown.name = @"Easttown";
-    easttown.neighborhoodID = 1;
     
     Neighborhood *frenchHill = [[Neighborhood alloc] init];
     frenchHill.name = @"French Hill";
-    frenchHill.neighborhoodID = 2;
     
     Neighborhood *merchantDistrict = [[Neighborhood alloc] init];
     merchantDistrict.name = @"Merchant District";
-    merchantDistrict.neighborhoodID = 3;
     
     Neighborhood *miskatonicUniversity = [[Neighborhood alloc] init];
     miskatonicUniversity.name = @"Miskatonic University";
-    miskatonicUniversity.neighborhoodID = 4;
     
     Neighborhood *northside = [[Neighborhood alloc] init];
     northside.name = @"Northside";
-    northside.neighborhoodID = 5;
     
     Neighborhood *rivertown = [[Neighborhood alloc] init];
     rivertown.name = @"Rivertown";
-    rivertown.neighborhoodID = 6;
     
     Neighborhood *southside = [[Neighborhood alloc] init];
     southside.name = @"Southside";
-    southside.neighborhoodID = 7;
     
     Neighborhood *uptown = [[Neighborhood alloc] init];
     uptown.name = @"Uptown";
-    uptown.neighborhoodID = 8;
     
     NSArray *arkham = @[downtown,
                         easttown,
@@ -168,10 +159,32 @@
     self = [super init];
     if (self){
         self.street = [Location street];
+        self.encounterDeck = [NSMutableArray new];
+        self.hasSecondaryColorlessStreet = NO;
     }
     return self;
 }
 
+-(instancetype)initWithProperties:(NSDictionary*)properties {
+    self = [self init];
+    if (self){
+        self.name = properties[@"name"];
+        NSMutableArray *locations = [NSMutableArray new];
+        for (NSDictionary *locDict in properties[@"locations"]){
+            Location *loc = [[Location alloc] initWithProperties:locDict];
+            [locations addObject:loc];
+        }
+        self.locations = [NSArray arrayWithArray:locations];
+        self.hasSecondaryColorlessStreet = [properties[@"second_colorless_st"] boolValue];
+        self.whiteStreetConnectionName = properties[@"white_st"];
+        self.colorlessStreetConnectionName = properties[@"colorless_st"];
+    }
+    return self;
+}
+
+-(NSDictionary*)exportJSON {
+    return nil; //TODO
+}
 -(void)setWhiteStreetConnection:(Neighborhood *)whiteStreetConnection {
     if (_whiteStreetConnection != whiteStreetConnection){
         _whiteStreetConnection = whiteStreetConnection;
@@ -186,8 +199,14 @@
 }
 -(void)setColorlessStreetConnection:(Neighborhood *)colorlessStreetConnection {
     if (_colorlessStreetConnection != colorlessStreetConnection){
-        _colorlessStreetConnection = colorlessStreetConnection;
-        colorlessStreetConnection.colorlessStreetConnection = self;
+        if (self.hasSecondaryColorlessStreet && self.colorlessStreetConnection != nil){
+            self.secondaryColorlessStreetConnection = colorlessStreetConnection;
+            colorlessStreetConnection.colorlessStreetConnection = self;
+        }
+        else {
+            _colorlessStreetConnection = colorlessStreetConnection;
+            colorlessStreetConnection.colorlessStreetConnection = self;
+        }
     }
 }
 
@@ -221,16 +240,3 @@
 }
 @end
 
-@implementation MerchantDistrictNeighborhood
-
--(void)setColorlessStreetConnection:(Neighborhood *)colorlessStreetConnection {
-    if (self.colorlessStreetConnection != nil){
-        self.secondaryColorlessStreetConnection = colorlessStreetConnection;
-        colorlessStreetConnection.colorlessStreetConnection = self;
-    }
-    else {
-        [super setColorlessStreetConnection:colorlessStreetConnection];
-    }
-}
-
-@end

@@ -11,16 +11,12 @@
 
 
 @implementation Location
+
 +(instancetype)street {
     Location *street = [[Location alloc] init];
     street.name = @"Street";
     street.isStreet = YES;
     return street;
-}
-
-+(NSInteger)distance:(Location*)A b:(Location*)b {
-    
-    return 0;
 }
 
 -(instancetype)init {
@@ -41,6 +37,19 @@
         self.isStable = isStable;
     }
     return self;
+}
+-(instancetype)initWithProperties:(NSDictionary *)properties {
+    self = [self init];
+    if (self){
+        self.name = properties[@"name"];
+        self.isStable = [properties[@"stable"] boolValue];
+    }
+    return self;
+}
+-(NSDictionary*)exportJSON {
+    NSDictionary *exportDict = @{@"name":self.name,
+                                 @"stable":@(self.isStable)};
+    return exportDict;
 }
 @end
 

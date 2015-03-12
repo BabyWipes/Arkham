@@ -31,8 +31,7 @@
 @property (strong, nonatomic) NSMutableArray *sky;
 @property (strong, nonatomic) NSMutableArray *lostInTimeAndSpace;
 
-@property (strong, nonatomic) NSMutableArray *removedFromGameDeck;
-
+@property (strong, nonatomic) NSMutableArray *removedFromGameDeck; // expansion pack items may access 'removed from the game' items
 @property (nonatomic) BOOL ignoresWeatherMythos;
 
 @property (nonatomic) NSInteger terrorLevel;

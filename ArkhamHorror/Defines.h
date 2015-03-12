@@ -66,5 +66,12 @@ typedef NS_ENUM(NSUInteger, ItemClassification){
     ItemClassificationTome
 };
 
+typedef NS_ENUM(NSUInteger, MythosType) {
+    MythosTypeEnvironmentMystic,
+    MythosTypeEnvironmentUrban,
+    MythosTypeEnvironmentWeather,
+    MythosTypeRumor,
+    MythosTypeHeadline,
+};
 
 #endif
