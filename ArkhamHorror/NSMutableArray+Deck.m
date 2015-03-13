@@ -20,6 +20,20 @@
     return card;
 }
 
+-(Card*)cardNamed:(NSString*)name {
+    Card *targetCard;
+    for (Card *card in self){
+        if ([card.name isEqualToString:name]){
+            targetCard = card;
+            break;
+        }
+    }
+    if (targetCard){
+        [self removeObject:targetCard];
+    }
+    return targetCard;
+}
+
 -(void)discard:(Card *)card {
     [self addObject:card];
 }

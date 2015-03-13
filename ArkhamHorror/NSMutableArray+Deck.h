@@ -12,7 +12,7 @@
 
 @interface NSMutableArray (Deck)
 
-// returns <keepCount> Card of type <deck.cardType> from a selection of <drawCount> cards
+// returns one Card
 -(Card*)drawOne;
 
 // puts a Card of type <type> to the bottom of the deck
@@ -20,5 +20,9 @@
 
 // shuffles deck, only used if a card instructs you to do so, or after an enounter draw if it's a location deck (multicard draws shuffle after all cards drawn)
 -(void)shuffle;
+
+// searches deck for card, returns nil if not found
+-(Card*)cardNamed:(NSString*)name;
+
 
 @end

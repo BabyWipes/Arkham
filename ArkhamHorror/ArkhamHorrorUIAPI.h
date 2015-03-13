@@ -10,7 +10,7 @@
 #define ArkhamHorror_ArkhamHorrorUIAPI_h
 
 typedef void(^AHRollEvent)(NSUInteger roll);
-typedef void(^AHSelectEvent)(NSArray* output);
+typedef void(^AHSelectEvent)(NSArray* selected, NSArray *rejected);
 
 @protocol ArkhamHorrorUIAPI <NSObject>
 @property (strong, nonatomic) NSMutableArray *eventsQueue;

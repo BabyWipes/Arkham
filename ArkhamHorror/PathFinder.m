@@ -53,8 +53,8 @@
             [graph addBiDirectionalEdge:[PESGraphEdge edgeWithName:edgeName andWeight:@1] fromNode:hoodNode toNode:adjecentNode];
         }
         
-        if ([hood isKindOfClass:[MerchantDistrictNeighborhood class]] && [(MerchantDistrictNeighborhood*)hood secondaryColorlessStreetConnection]){
-            adjecent = [(MerchantDistrictNeighborhood*)hood secondaryColorlessStreetConnection].street;
+        if (hood.hasSecondaryColorlessStreet && hood.secondaryColorlessStreetConnection){
+            adjecent = hood.secondaryColorlessStreetConnection.street;
             adjecentNode = hoodNodes[adjecent.name];
             
             edgeName = [NSString stringWithFormat:@"%@ <-> %@",hood.name,adjecent.name];

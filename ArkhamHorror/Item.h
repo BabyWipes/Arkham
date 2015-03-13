@@ -16,7 +16,6 @@ extern NSUInteger const kItemInfiniteUses;
 
 @interface Item : Card <NSCopying>
 
-@property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;
 @property (nonatomic) BOOL isExhausted;

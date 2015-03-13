@@ -11,6 +11,7 @@
 #import "Movable.h"
 #import "PathFinder.h"
 #import "ItemSetup.h"
+#import "Monster.h"
 
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
@@ -135,6 +136,38 @@ static Game *singletonInstance = nil;
     for (NSString *itemName in investigator.startingItems){
         // add to respective array
         NSLog(@"search for itemID %@",itemName);
+        Card *card = [self.commonsDeck cardNamed:itemName];
+        if (card) {
+            [investigator.commonItems addObject:card];
+        }
+        else {
+            card = [self.uniquesDeck cardNamed:itemName];
+        }
+        if (card) {
+            [investigator.uniqueItems addObject:card];
+        }
+        else {
+            card = [self.spellsDeck cardNamed:itemName];
+        }
+        if (card) {
+            [investigator.spells addObject:card];
+        }
+        else {
+            card = [self.skillsDeck cardNamed:itemName];
+        }
+        if (card) {
+            [investigator.skills addObject:card];
+        }
+        else {
+            card = [self.alliesDeck cardNamed:itemName];
+        }
+        if (card) {
+            [investigator.allies addObject:card];
+        }
+        else {
+            NSLog(@"Starting item: %@ coudln't be found.",itemName);
+
+        }
     }
     // draw this many cards from the decks
     NSUInteger randomCommons = investigator.startingRandomCommons;
@@ -234,9 +267,17 @@ static Game *singletonInstance = nil;
         [drawnCards addObject:[deck drawOne]];
     }
     
-    // review drawn cards in drawCards, select and place into own hand
-    // [deck discard:card] on each card which isn't kept
-    
+    if (drawnCards.count > keepCount){ // you can only keep some of them
+        [self.uiDelegate enqueueSelectionEvent:drawnCards select:keepCount callback:^(NSArray *selected, NSArray *rejected) {
+            [player.commonItems addObjectsFromArray:selected];
+            for (Card *card in rejected){
+                [self.commonsDeck discard:card];
+            }
+        }];
+    }
+    else {
+        [player.commonItems addObjectsFromArray:drawnCards];
+    }    
 }
 
 @end

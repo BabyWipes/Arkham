@@ -12,5 +12,4 @@
 #import "Card.h"
 
 @interface Ally : Card
-@property (strong, nonatomic) NSString *name;
 @end

@@ -11,4 +11,5 @@
 // All items drawable from a Deck must extend from the Card base class
 @interface Card : NSObject
 @property (nonatomic) CardType cardType;
+@property (strong, nonatomic) NSString *name;
 @end
