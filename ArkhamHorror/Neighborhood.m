@@ -175,7 +175,10 @@
             [locations addObject:loc];
         }
         self.locations = [NSArray arrayWithArray:locations];
-        self.hasSecondaryColorlessStreet = [properties[@"second_colorless_st"] boolValue];
+        self.hasSecondaryColorlessStreet = [properties[@"has_second_colorless_st"] boolValue];
+        if (self.hasSecondaryColorlessStreet){
+            self.secondaryColorlessStreetConnectionName = properties[@"second_colorless_st"];
+        }
         self.whiteStreetConnectionName = properties[@"white_st"];
         self.colorlessStreetConnectionName = properties[@"colorless_st"];
     }
@@ -183,7 +186,19 @@
 }
 
 -(NSDictionary*)exportJSON {
-    return nil; //TODO
+    NSMutableDictionary *exportJSON = [@{@"name":self.name,
+                                         @"has_second_colorless_st":@(self.hasSecondaryColorlessStreet),
+                                         @"white_st":self.whiteStreetConnectionName,
+                                         @"colorless_st":self.colorlessStreetConnectionName}mutableCopy];
+    if (self.hasSecondaryColorlessStreet){
+        exportJSON[@"second_colorless_st"] = self.secondaryColorlessStreetConnectionName;
+    }
+    NSMutableArray *locsJSON = [NSMutableArray new];
+    for (Location *loc in self.locations){
+        [locsJSON addObject:[loc exportJSON]];
+    }
+    exportJSON[@"locations"] = locsJSON;
+    return [NSDictionary dictionaryWithDictionary:exportJSON];
 }
 -(void)setWhiteStreetConnection:(Neighborhood *)whiteStreetConnection {
     if (_whiteStreetConnection != whiteStreetConnection){

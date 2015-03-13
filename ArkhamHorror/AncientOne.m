@@ -9,6 +9,7 @@
 #import "AncientOne.h"
 #import "Monster.h"
 #import "Game.h"
+#import "MonsterSetup.h"
 
 #pragma mark - Prototype
 
@@ -78,7 +79,7 @@
 
 -(void)buffWorshippers {
     for (Monster *monster in [Game currentGame].monsterCup){
-        if ([monster isKindOfClass:[Monster class]]){ // TODO maniac
+        if ([monster.name isEqualToString:@"Maniac"]){
             monster.toughness+=1;
         }
     }
@@ -114,7 +115,7 @@
 }
 -(void)buffWorshippers {
     for (Monster *monster in [Game currentGame].monsterCup){
-        if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
+        if ([monster.name isEqualToString:@"Cultist"]){
             monster.horrorRating = -2;
             monster.horrorDamage = 2;
         }
@@ -162,7 +163,7 @@
 }
 -(void)buffWorshippers {
     for (Monster *monster in [Game currentGame].monsterCup){
-        if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
+        if ([monster.name isEqualToString:@"Cultist"]){
             monster.movementType = MonsterMovementTypeFlying;
             monster.combatRating = -2;
         }
@@ -200,7 +201,7 @@
 }
 -(void)buffWorshippers {
     for (Monster *monster in [Game currentGame].monsterCup){
-        if ([monster isKindOfClass:[Monster class]]){ // TODO cultist
+        if ([monster.name isEqualToString:@"Cultist"]){
             monster.toughness+=2;
         }
     }
@@ -240,9 +241,8 @@
 }
 
 -(void)applySetupEffect{
-    //TODO add the 5 mask mosnters
-    Monster *maskMonster = [[Monster alloc] init];
-    [[Game currentGame].monsterCup addObject:maskMonster];
+    // add the 5 mask mosnters    ;
+    [[Game currentGame].monsterCup addObjectsFromArray:[MonsterSetup arkhamHorrorMaskMonsters]];
 }
 
 -(void)attack{

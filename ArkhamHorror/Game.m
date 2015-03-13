@@ -132,9 +132,9 @@ static Game *singletonInstance = nil;
 
 -(void)setupPlayer:(Investigator*)investigator {
     
-    for (NSNumber *itemID in investigator.startingItems){ // array of itemIDs (NSUIntegers), draw these specific items from deck
+    for (NSString *itemName in investigator.startingItems){
         // add to respective array
-        NSLog(@"search for itemID %@",itemID);
+        NSLog(@"search for itemID %@",itemName);
     }
     // draw this many cards from the decks
     NSUInteger randomCommons = investigator.startingRandomCommons;
