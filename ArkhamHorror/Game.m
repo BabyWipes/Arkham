@@ -185,6 +185,12 @@ static Game *singletonInstance = nil;
 
 #pragma mark - actions
 
+-(void)arrestInvestigator:(Investigator*)investigator {
+    investigator.currentLocation = [self locationNamed:@"Police Station"];
+    investigator.isDelayed = YES;
+    investigator.money = floor(investigator.money/2);
+}
+
 -(void)incrementTerror {
     self.terrorLevel++;
     // remove random ally from deck
