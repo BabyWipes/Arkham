@@ -83,9 +83,6 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 @synthesize eventsQueue;
 
 +(int)run {
-    BOOL gameOver = NO;
-    int exitCode = 0;
-    
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
     Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton

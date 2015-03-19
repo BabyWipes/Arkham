@@ -18,6 +18,10 @@
 @property (nonatomic) int blessingValue;
 @end
 
+int const kBlessed = 2;
+int const kCursed = 0;
+int const kBlessingNeutral = 1;
+
 @implementation Investigator
 
 #pragma mark - Class methods
@@ -26,7 +30,7 @@
 +(instancetype)testingInvestigator {
     Investigator *merman = [[Investigator alloc] init];
     merman.name = @"Mike Cornell";
-    merman.occupation = @"Merman";
+    merman.occupation = @"the Merman";
     merman.focus = 1;
     merman.money = 10;
     merman.clues = 5;
@@ -154,36 +158,35 @@
 }
 -(void)setIsBlessed:(BOOL)isBlessed {
     if (isBlessed){
-        self.blessingValue++;
+        if (self.isCursed){
+            self.blessingValue = kBlessingNeutral;
+        }
+        else {
+            self.blessingValue = kBlessed;
+        }
     }
-    else if (self.isBlessed) {
-        self.blessingValue--;
+    else {
+        if (self.isBlessed) {
+            self.blessingValue = kBlessingNeutral;
+        }
     }
-    
-    if (self.blessingValue > 2) {
-        self.blessingValue = 2;
-    }
-    if (self.blessingValue < 0){
-        self.blessingValue = 0;
-    }
-    
 }
 -(BOOL)isCursed {
-    return (self.blessingValue == 0);
+    return (self.blessingValue == kCursed);
 }
 -(void)setIsCursed:(BOOL)isCursed {
     if (isCursed){
-        self.blessingValue--;
+        if (self.isBlessed){
+            self.blessingValue = kBlessingNeutral;
+        }
+        else {
+            self.blessingValue = kCursed;
+        }
     }
-    else if (self.isCursed){
-        self.blessingValue++;
-    }
-    
-    if (self.blessingValue > 2) {
-        self.blessingValue = 2;
-    }
-    if (self.blessingValue < 0){
-        self.blessingValue = 0;
+    else {
+        if (self.isCursed) {
+            self.blessingValue = kBlessingNeutral;
+        }
     }
 }
 
