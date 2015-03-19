@@ -15,6 +15,11 @@
 #import "ArkhamHorrorUIAPI.h"
 
 @interface Game : NSObject
+
+@property (nonatomic) GamePhase currentPhase;
+@property (nonatomic) ExitCode exitCode;
+@property (nonatomic) BOOL gameOver;
+
 @property (strong, nonatomic) NSArray *neighborhoods;
 @property (strong, nonatomic) AncientOne *ancientOne;
 
@@ -25,13 +30,16 @@
 @property (strong, nonatomic) NSMutableArray *alliesDeck;
 @property (strong, nonatomic) NSMutableArray *mythosDeck;
 
+@property (nonatomic) NSUInteger firstPlayer; // index of First Player for round
+@property (nonatomic) NSUInteger currentPlayer; // index of player currently taking turn
+
 @property (strong, nonatomic) NSMutableArray *investigators;
 @property (strong, nonatomic) NSMutableArray *monsterCup;
 @property (strong, nonatomic) NSMutableArray *outskirts;
 @property (strong, nonatomic) NSMutableArray *sky;
 @property (strong, nonatomic) NSMutableArray *lostInTimeAndSpace;
 
-@property (strong, nonatomic) NSMutableArray *removedFromGameDeck; // expansion pack items may access 'removed from the game' items
+@property (strong, nonatomic) NSMutableArray *removedFromGameDeck; // expansion pack items may access 'removed from the game' items, so keep a ref
 @property (nonatomic) BOOL ignoresWeatherMythos;
 
 @property (nonatomic) NSInteger terrorLevel;

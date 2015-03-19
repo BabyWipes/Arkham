@@ -12,6 +12,7 @@
 #import "PathFinder.h"
 #import "ItemSetup.h"
 #import "Monster.h"
+#import "Macros.h"
 
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
@@ -42,11 +43,27 @@ static Game *singletonInstance = nil;
 
 -(void)runPhase {
     [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-        NSLog(@"op 1 callback");
-    }];
+        //NSLog(@"op 1 callback");
+    } push:NO];
     [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-        NSLog(@"op 2 callback");
-    }];
+        // NSLog(@"op 2 callback");
+    } push:NO];
+    [self upkeep];
+    
+    switch (self.currentPhase) {
+        case GamePhaseUpkeepRefresh: {
+            break;
+        }
+        case GamePhaseUpkeepAction: {
+            break;
+        }
+        case GamePhaseUpkeepFocus: {
+            break;
+        }
+        default:
+            logError(@"Found unknown game state");
+            break;
+    }
 }
 
 #pragma mark - init
@@ -55,6 +72,10 @@ static Game *singletonInstance = nil;
     self = [super init];
     if (self){
         
+        self.exitCode = ExitCodeNormal;
+        self.gameOver = NO;
+        
+        [self setupBoard];
         [self setupDecks];
         [self setupMonsterCup];
         self.outskirts = [NSMutableArray new];
@@ -123,7 +144,7 @@ static Game *singletonInstance = nil;
         }
     }
     self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
-
+    
 }
 
 -(void)setupMonsterCup {
@@ -166,7 +187,7 @@ static Game *singletonInstance = nil;
         }
         else {
             NSLog(@"Starting item: %@ coudln't be found.",itemName);
-
+            
         }
     }
     // draw this many cards from the decks
@@ -183,7 +204,137 @@ static Game *singletonInstance = nil;
     [self.investigators addObject:investigator];
 }
 
+#pragma mark - game phases
+
+-(void)advanceGamePhase {
+    self.currentPhase++;
+    if (self.currentPhase > GamePhaseTurnOver){
+        self.currentPhase = GamePhaseUpkeepRefresh;
+    }
+}
+
+-(void)upkeepRefresh { // all investigators items, spells, etc refresh
+    
+}
+
+// player must roll for blessings/curses/retainers, pay bank loans, and deal with any card effects which occur during upkeep.
+// investigator abilities that affect upkeep occur now
+// players may complete these in any order (IE completing a retainer roll to gain it's profit before paying off a bank loan)
+// bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
+-(void)upkeepAction {
+    
+}
+
+// players adjust skills based on focus
+-(void)upkeepFocus {
+    
+}
+-(void)movementArkham {
+    
+}
+-(void)movementOtherWorld {
+    
+}
+-(void)movementDelayed {
+    
+}
+-(void)encounterArkhamNoGate {
+    
+}
+-(void)encounterArkhamGate {
+    
+}
+-(void)mythosGatesSpawn {
+    
+}
+-(void)mythosPlaceClues {
+    
+}
+-(void)mythosMoveMonsters {
+    
+}
+-(void)mythosEffect {
+    
+}
+
+-(void)turnOver {
+    self.firstPlayer++;
+    if (self.firstPlayer == self.investigators.count){
+        self.firstPlayer = 0;
+    }
+    [self advanceGamePhase];
+}
+
+-(void)upkeep {
+    Investigator *currentPlayer = self.investigators[self.currentPlayer];
+    if (currentPlayer.isBlessed){
+        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            if (roll < 5){ // lost blessing
+                currentPlayer.isBlessed = NO;
+            }
+        } push:NO];
+    }
+    
+    // CURSES
+    if (currentPlayer.isCursed){ // cursed
+        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            if (roll < 5 || YES){
+                // lost curse
+            }
+        } push:NO];
+    }
+    
+    // BANK LOAN
+    if (currentPlayer.hasBankLoan){
+        // offer chance to pay $10 to remove bank loan
+        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            if (roll < 4){
+                // pay $1 or discard all items + can no longer get bank loan
+            }
+        } push:NO];
+    }
+    
+    // RETAINERS
+    if (currentPlayer.retainers > 0){
+        for (int idx = 0; idx < currentPlayer.retainers; idx++){
+            // gain $2
+            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+                if (roll == 1){ // lose the retainer
+                    if (currentPlayer.retainers > 0){
+                        currentPlayer.retainers--;
+                    }
+                }
+            } push:NO];
+        }
+    }
+    
+    
+    // check against players items which require upkeep
+    [self advanceGamePhase];
+}
+
 #pragma mark - actions
+
+
+-(void)drawHeadline:(Mythos*)headline {
+    self.currentMythosHeadline = headline;
+    self.currentMythosWhiteDimensions = headline.whiteDimensons;
+    self.currentMythosBlackDimensions = headline.blackDimensions;
+    
+    Location *gateLoc = [self locationNamed:headline.gateLocation];
+    Location *clueLoc = [self locationNamed:headline.clueLocation];
+    
+    [self openGate:gateLoc];
+    [self placeClue:clueLoc];
+    
+    // do headline action
+}
+-(void)openGate:(Location*)gateLocation {
+    
+}
+-(void)placeClue:(Location*)clueLocation {
+    
+}
 
 -(void)arrestInvestigator:(Investigator*)investigator {
     investigator.currentLocation = [self locationNamed:@"Police Station"];
@@ -279,11 +430,11 @@ static Game *singletonInstance = nil;
             for (Card *card in rejected){
                 [self.commonsDeck discard:card];
             }
-        }];
+        } push:NO];
     }
     else {
         [player.commonItems addObjectsFromArray:drawnCards];
-    }    
+    }
 }
 
 @end

@@ -7,29 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Defines.h"
 
-typedef NS_ENUM(NSUInteger, GamePhase){
-    GamePhaseUpkeepRefresh,
-    GamePhaseUpkeepAction,
-    GamePhaseUpkeepFocus,
-    
-    GamePhaseMovementArkham,
-    GamePhaseMovementOtherWorld,
-    GamePhaseMovementDelayed,
-    
-    GamePhaseEncounterArkhamNoGate,
-    GamePhaseEncounterArkhamGate,
-
-    GamePhaseEncounterOtherWorld,
-    
-    GamePhaseMythosGatesSpawn,
-    GamePhaseMythosPlaceClues,
-    GamePhaseMythosMoveMonsters,
-    GamePhaseMythosEffect,
-    
-    GamePhasePlayerOnePass
-    
-};
 @interface GameLoop : NSObject
 @property (nonatomic) GamePhase currentPhase;
 @property (strong, nonatomic) NSMutableArray *phaseEvents;

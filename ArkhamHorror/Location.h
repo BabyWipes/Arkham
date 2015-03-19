@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *investigatorsHere;
 @property (strong, nonatomic) NSMutableArray *monstersHere;
 @property (weak, nonatomic) Neighborhood *neighborhood;
+@property (nonatomic) NSInteger cluesHere;
 
 -(instancetype)initWithStability:(BOOL)isStable;
 -(instancetype)initWithProperties:(NSDictionary*)properties;

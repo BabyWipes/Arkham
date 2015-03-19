@@ -10,13 +10,7 @@
 #import "Movable.h"
 #import "Investigator.h"
 #import "Defines.h"
-
-@interface Dimension : NSObject
-@property (nonatomic) MonsterDimensionSymbol value;
-+(instancetype)ofType:(MonsterDimensionSymbol)symbol;
--(instancetype)initWithType:(MonsterDimensionSymbol)type;
--(BOOL)equalsDimension:(Dimension*)other;
-@end
+#import "Dimension.h"
 
 @interface Monster : Movable <NSCopying>
 @property (strong, nonatomic) NSString *name;

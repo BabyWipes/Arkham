@@ -61,6 +61,8 @@
 		BE7570E71AB22E49004B3998 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7570E51AB22E49004B3998 /* SettingsManager.m */; };
 		BE7570E91AB2321D004B3998 /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = BE7570E81AB2321D004B3998 /* Default.json */; };
 		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
+		BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
+		BEEF09031AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
 		BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0531AA8B74C00ADFC88 /* Mythos.m */; };
 		BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0571AA8BB6600ADFC88 /* Movable.m */; };
@@ -152,6 +154,8 @@
 		BE7570EA1AB23358004B3998 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		BEEF09001AB74C3D00155C45 /* Dimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dimension.h; sourceTree = "<group>"; };
+		BEEF09011AB74C3D00155C45 /* Dimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dimension.m; sourceTree = "<group>"; };
 		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
 		BEF0D04F1AA794E700ADFC88 /* Ally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ally.m; sourceTree = "<group>"; };
 		BEF0D0521AA8B74C00ADFC88 /* Mythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mythos.h; sourceTree = "<group>"; };
@@ -261,7 +265,7 @@
 				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
 				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
 				BEF0D0511AA794FE00ADFC88 /* cards */,
-				BE4CFD591A9CF3840034581D /* board+locations */,
+				BE4CFD591A9CF3840034581D /* locations */,
 				BEA88DE81AA50959000D9972 /* Game.h */,
 				BEA88DE91AA50959000D9972 /* Game.m */,
 			);
@@ -344,6 +348,8 @@
 				BE3D4F561A9FD4900073EDEE /* Monster.m */,
 				BE7570E01AB1EED0004B3998 /* MonsterSetup.h */,
 				BE7570E11AB1EED0004B3998 /* MonsterSetup.m */,
+				BEEF09001AB74C3D00155C45 /* Dimension.h */,
+				BEEF09011AB74C3D00155C45 /* Dimension.m */,
 			);
 			name = "bad guys";
 			sourceTree = "<group>";
@@ -356,7 +362,7 @@
 			name = "Game Defaults";
 			sourceTree = "<group>";
 		};
-		BE4CFD591A9CF3840034581D /* board+locations */ = {
+		BE4CFD591A9CF3840034581D /* locations */ = {
 			isa = PBXGroup;
 			children = (
 				BE085F4B1A9BBA7A00FEAB0E /* Location.h */,
@@ -364,7 +370,7 @@
 				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
 				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
 			);
-			name = "board+locations";
+			name = locations;
 			sourceTree = "<group>";
 		};
 		BE4CFD5B1A9CF96F0034581D /* Utils */ = {
@@ -532,6 +538,7 @@
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
 				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
+				BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */,
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE7570E21AB1EED0004B3998 /* MonsterSetup.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
@@ -591,6 +598,7 @@
 				BE7570E71AB22E49004B3998 /* SettingsManager.m in Sources */,
 				BE0F7E311AAF6FB100C337F1 /* PESGraph.m in Sources */,
 				BE0F7E2F1AAF6FA400C337F1 /* JSTest.m in Sources */,
+				BEEF09031AB74C3D00155C45 /* Dimension.m in Sources */,
 				BE0F7E3D1AAF6FE700C337F1 /* Ally.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -50,7 +50,7 @@
 @property (nonatomic) NSMutableArray *spells;
 @property (nonatomic) NSMutableArray *allies;
 
-@property (nonatomic) NSInteger *monsterTrophies;
+@property (nonatomic) NSMutableArray *monsterTrophies;
 @property (nonatomic) NSInteger *gateTrophies;
 
 @property (nonatomic) BOOL isBlessed;
@@ -58,6 +58,7 @@
 
 @property (nonatomic) BOOL isDelayed;
 
+// exploit note - if all players but one get a bank loan, then give all the money/items to the non-loaned player, then default on loans, they get away with it
 @property (nonatomic) BOOL hasBankLoan;
 @property (nonatomic) BOOL failedBankLoan;
 

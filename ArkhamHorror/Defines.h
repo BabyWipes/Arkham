@@ -74,4 +74,39 @@ typedef NS_ENUM(NSUInteger, MythosType) {
     MythosTypeHeadline,
 };
 
+#pragma mark - Game Phases
+
+typedef NS_ENUM(NSUInteger, GamePhase){
+    GamePhaseUpkeepRefresh = 0,
+    GamePhaseUpkeepAction,
+    GamePhaseUpkeepFocus,
+    
+    GamePhaseMovementArkham,
+    GamePhaseMovementOtherWorld,
+    GamePhaseMovementDelayed,
+    
+    GamePhaseEncounterArkhamNoGate,
+    GamePhaseEncounterArkhamGate,
+    
+    GamePhaseEncounterOtherWorld,
+    
+    GamePhaseMythosGatesSpawn,
+    GamePhaseMythosPlaceClues,
+    GamePhaseMythosMoveMonsters,
+    GamePhaseMythosEffect,
+    
+    GamePhasePlayerOnePass,
+    
+    GamePhaseTurnOver
+};
+
+#pragma mark - Exit Codes
+
+typedef NS_ENUM(NSUInteger, ExitCode){
+    ExitCodeNormal = 0,
+    ExitCodeUnknown = 1,
+    ExitCodeAbort = 2
+};
+
+
 #endif

@@ -12,24 +12,6 @@
 #import "Neighborhood.h"
 #import "Die.h"
 
-@implementation Dimension
-
-+(instancetype)ofType:(MonsterDimensionSymbol)type{
-    return [[Dimension alloc] initWithType:type];
-}
--(instancetype)initWithType:(MonsterDimensionSymbol)type {
-    self = [super init];
-    if (self){
-        self.value = type;
-    }
-    return self;
-}
--(BOOL)equalsDimension:(Dimension*)other{
-    return (self.value == other.value);
-}
-
-@end
-
 @implementation Monster
 
 -(id)copyWithZone:(NSZone *)zone {
@@ -290,6 +272,7 @@
 @end
 
 @implementation HaunterOfTheDarkMonster
+
 // if Blackest Night Mythos is in play, this monster's combat rating is -5
 @end
 

@@ -55,9 +55,12 @@
         self.spells = [NSMutableArray new];
         self.allies = [NSMutableArray new];
         
+        self.monsterTrophies = [NSMutableArray new];
+        
         self.speedSneakSlider = 0;
         self.fightWillSlider = 0;
         self.loreLuckSlider = 0;
+        self.blessingValue = 1;
     }
     return self;
 }
@@ -88,19 +91,9 @@
         self.startingRandomUniques = [properties[@"starting_random_uniques"] unsignedIntegerValue];
         self.startingRandomSpells = [properties[@"starting_random_spells"] unsignedIntegerValue];
         self.startingRandomSkills = [properties[@"starting_random_skills"] unsignedIntegerValue];
-
     }
     
     return self;
-}
-
-#pragma mark - Upkeep
-
--(void)upkeep {
-        // if blessed or cursed, roll to see if lost
-        // if bank loan, pay up or pay out
-        // if retainers, gain money, then roll to keep
-        // check items with upkeep
 }
 
 #pragma mark - Skills
@@ -155,20 +148,42 @@
 
 #pragma mark - Blessings and Curses
 
+// if a player becomes blessed while cursed, the two negate each other, and vice versa
 -(BOOL)isBlessed {
     return (self.blessingValue == 2);
 }
 -(void)setIsBlessed:(BOOL)isBlessed {
-    if (self.blessingValue < 2){
+    if (isBlessed){
         self.blessingValue++;
     }
+    else if (self.isBlessed) {
+        self.blessingValue--;
+    }
+    
+    if (self.blessingValue > 2) {
+        self.blessingValue = 2;
+    }
+    if (self.blessingValue < 0){
+        self.blessingValue = 0;
+    }
+    
 }
 -(BOOL)isCursed {
     return (self.blessingValue == 0);
 }
 -(void)setIsCursed:(BOOL)isCursed {
-    if (self.blessingValue > 0){
+    if (isCursed){
         self.blessingValue--;
+    }
+    else if (self.isCursed){
+        self.blessingValue++;
+    }
+    
+    if (self.blessingValue > 2) {
+        self.blessingValue = 2;
+    }
+    if (self.blessingValue < 0){
+        self.blessingValue = 0;
     }
 }
 
