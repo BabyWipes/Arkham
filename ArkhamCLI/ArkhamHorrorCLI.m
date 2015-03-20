@@ -104,19 +104,19 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     return game.exitCode;
 }
 
-#pragma mark - Console I/O
+#pragma mark - Console input
 
--(BOOL)getBool {
-    NSString *rawBool = [[self getTerminalInput:@"Enter Bool:"] lowercaseString];
+-(BOOL)getBool:(NSString*)prompt {
+    NSString *rawBool = [[self getString:prompt] lowercaseString];
     return ([rawBool isEqualToString:@"yes"] || [rawBool isEqualToString:@"y"]);
 }
 
--(int)getInt {
-    NSString *rawInt = [self getTerminalInput:@"Enter Int:"];
+-(int)getInt:(NSString*)prompt {
+    NSString *rawInt = [self getString:prompt];
     return [rawInt intValue];
 }
 
--(NSString*)getTerminalInput:(NSString*)prompt {
+-(NSString*)getString:(NSString*)prompt {
     [self print:prompt];
     NSFileHandle *input = [NSFileHandle fileHandleWithStandardInput];
     NSData *inputData = [input availableData];
@@ -313,15 +313,12 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 -(void)processEventsQueue {
     [self processNextEvent]; // recursively resolves each event in order
-    [self printMap];
-    [self printInvestigator:self.currentGame.investigators[0]];
-    [self getTerminalInput:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
+    [self getString:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
     [self println:@""];
-    
 }
 
 -(void)processNextEvent {
-    if (self.currentGame.gameOver){
+    if (!self.currentGame.gameOver){
         if (self.eventsQueue.count > 0){
             void (^enqueuedBlock)(void) = [self.eventsQueue firstObject];
             [self.eventsQueue removeObject:enqueuedBlock];
@@ -331,6 +328,22 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     else {
         [self println:@"Game Over."];
     }
+}
+
+-(void)enqueueAncientOneSetup:(AHAncientOneSelectEvent)callback {
+    void (^ancientOneSetupBlock)(void) = ^{
+        [self println:@"AncientOne setup requested, returning Azathoth"];
+        callback(@"Azathoth");
+    };
+    [self.eventsQueue addObject:ancientOneSetupBlock];
+}
+-(void)enqueuePlayerSetup:(AHPlayerSelectEvent)callback {
+    void (^playerSetupBlock)(void) = ^{
+        [self println:@"Player setup requested, returning Mike"];
+        BOOL donePicking = [self getBool:@"Done adding players? "];
+        callback(@"Mike",donePicking);
+    };
+    [self.eventsQueue addObject:playerSetupBlock];
 }
 
 -(void)enqueueQuitEvent:(AHQuitEvent)callback push:(BOOL)pushToFront {

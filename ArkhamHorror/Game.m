@@ -44,25 +44,82 @@ static Game *singletonInstance = nil;
 #pragma mark - UI API comm
 
 -(void)runPhase {
-    [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-        //NSLog(@"op 1 callback");
-    } push:NO];
-    [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-        // NSLog(@"op 2 callback");
-    } push:NO];
-    
+    NSLog(@"run phase");
     switch (self.currentPhase) {
+        case GamePhaseSetupAncientOne: {
+            [self pickAncientOne];
+            break;
+        }
+        case GamePhaseSetupInvestigators: {
+            [self pickInvestigator];
+            break;
+        }
         case GamePhaseUpkeepRefresh: {
+            [self upkeepRefresh];
             break;
         }
         case GamePhaseUpkeepAction: {
+            [self upkeepAction];
             break;
         }
         case GamePhaseUpkeepFocus: {
+            [self upkeepFocus];
+            break;
+        }
+        case GamePhaseMovementArkham: {
+            [self movementArkham];
+            break;
+        }
+        case GamePhaseMovementOtherWorld: {
+            [self movementOtherWorld];
+            break;
+        }
+        case GamePhaseMovementDelayed: {
+            [self movementDelayed];
+            break;
+        }
+        case GamePhaseEncounterArkhamGate: {
+            [self encounterArkhamGate];
+            break;
+        }
+        case GamePhaseEncounterArkhamNoGate: {
+            [self encounterArkhamNoGate];
+            break;
+        }
+        case GamePhaseEncounterOtherWorld: {
+            [self encounterOtherWorld];
+            break;
+        }
+        case GamePhaseMythosGatesSpawn: {
+            [self mythosGatesSpawn];
+            break;
+        }
+        case GamePhaseMythosPlaceClues: {
+            [self mythosPlaceClues];
+            break;
+        }
+        case GamePhaseMythosMoveMonsters: {
+            [self mythosMoveMonsters];
+            break;
+        }
+        case GamePhaseMythosEffect: {
+            [self mythosEffect];
+            break;
+        }
+        case GamePhaseTurnOver: {
+            [self turnOver];
+            break;
+        }
+        case GamePhaseNone: {
+            logError(@"GamePhaseNone triggered");
+            // investigate failure condition
+            self.gameOver = YES;
             break;
         }
         default:
             logError(@"Found unknown game state");
+            self.exitCode = ExitCodeUnknownGamePhase;
+            self.gameOver = YES;
             break;
     }
 }
@@ -74,7 +131,7 @@ static Game *singletonInstance = nil;
     if (self){
         
         self.exitCode = ExitCodeNormal;
-        self.currentPhase = GamePhaseSetup;
+        self.currentPhase = GamePhaseSetupAncientOne;
         self.gameOver = NO;
         
         [self setupBoard];
@@ -87,15 +144,6 @@ static Game *singletonInstance = nil;
         self.gateDifficultyModifier = 0;
         
         self.investigators = [NSMutableArray new];
-        
-        NSArray *investigators = settings[@"Investigators"];
-        if (investigators){ // load from plist
-            Investigator *player = [[Investigator alloc] initWithProperties:investigators[0]];
-            [self setupPlayer:player];
-        }
-        else {
-            [self setupPlayer:[Investigator testingInvestigator]];
-        }
         
         self.maxMonstersInOutskirts = 8 - self.investigators.count;
         self.maxMonstersInArkham = self.investigators.count + 3;
@@ -144,6 +192,34 @@ static Game *singletonInstance = nil;
     self.skillsDeck = [NSMutableArray new];
     self.alliesDeck = [NSMutableArray new];
     self.mythosDeck = [NSMutableArray new];
+}
+
+#pragma mark - player interactive setup
+
+-(void)pickAncientOne {
+    // pop dialog listing available ancient ones
+    // palyer picks ancient one
+    [self.uiDelegate enqueueAncientOneSetup:^(NSString *selected) {
+        if ([selected isEqualToString:@"Azathoth"]){
+            self.ancientOne = [[AncientOneAzathoth alloc] init];
+        }
+        [self.ancientOne applySetupEffect];
+        [self advanceGamePhase];
+    }];
+}
+
+-(void)pickInvestigator {
+    // pop dialog listing availible investigators
+    // player picks investgator
+    [self.uiDelegate enqueuePlayerSetup:^(NSString *selected, BOOL done) {
+        if ([selected isEqualToString:@"Mike"]){
+            [self setupPlayer:[Investigator testingInvestigator]];
+        }
+
+        if (done){
+            [self advanceGamePhase];
+        }
+    }];    
 }
 
 -(void)setupPlayer:(Investigator*)investigator {
@@ -198,23 +274,6 @@ static Game *singletonInstance = nil;
     [self.investigators addObject:investigator];
 }
 
-
-#pragma mark - player interactive setup
-
--(void)pickAncientOne {
-    // pop dialog listing available ancient ones
-    // palyer picks ancient one
-    self.ancientOne = [[AncientOneAzathoth alloc] init];
-    [self.ancientOne applySetupEffect];
-}
-
--(void)pickInvestigator {
-    // pop dialog listing availible investigators
-    // player picks investgator
-    [self setupPlayer:[Investigator testingInvestigator]];
-    
-}
-
 #pragma mark - game phases
 
 -(void)advanceGamePhase {
@@ -252,7 +311,7 @@ static Game *singletonInstance = nil;
 // bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
 -(void)upkeepAction {
     
-
+    
     Investigator *currentPlayer = self.investigators[self.currentPlayerIndex];
     
     // TODO - a player may resolve these events in any order
@@ -325,34 +384,37 @@ static Game *singletonInstance = nil;
 
 // players adjust skills based on focus
 -(void)upkeepFocus {
-    
+    [self advanceGamePhase];
 }
 -(void)movementArkham {
-    
+    [self advanceGamePhase];
 }
 -(void)movementOtherWorld {
-    
+    [self advanceGamePhase];
 }
 -(void)movementDelayed {
-    
+    [self advanceGamePhase];
 }
 -(void)encounterArkhamNoGate {
-    
+    [self advanceGamePhase];
 }
 -(void)encounterArkhamGate {
-    
+    [self advanceGamePhase];
+}
+-(void)encounterOtherWorld {
+    [self advanceGamePhase];
 }
 -(void)mythosGatesSpawn {
-    
+    [self advanceGamePhase];
 }
 -(void)mythosPlaceClues {
-    
+    [self advanceGamePhase];
 }
 -(void)mythosMoveMonsters {
-    
+    [self advanceGamePhase];
 }
 -(void)mythosEffect {
-    
+    [self advanceGamePhase];
 }
 
 -(void)turnOver {
