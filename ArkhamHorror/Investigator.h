@@ -56,6 +56,12 @@
 @property (nonatomic) BOOL isBlessed;
 @property (nonatomic) BOOL isCursed;
 
+// you can skip rolling for a bank loan, blessing, curses, and retainers the first upkeep after you get it, setup included
+@property (nonatomic) BOOL bankLoanSkipRolling;
+@property (nonatomic) BOOL blessedSkipRolling;
+@property (nonatomic) BOOL cursedSkipRolling;
+@property (nonatomic) NSInteger retainersSkipRolling; // you can skip rolling for a retainer the first upkeep after you get it, setup included
+
 @property (nonatomic) BOOL isDelayed;
 
 // exploit note - if all players but one get a bank loan, then give all the money/items to the non-loaned player, then default on loans, they get away with it
@@ -81,9 +87,6 @@
 
 -(instancetype)initWithProperties:(NSDictionary*)properties;
 -(NSString*)skillsString;
-
-
-
 
 /*
  

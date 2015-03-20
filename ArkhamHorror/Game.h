@@ -30,8 +30,8 @@
 @property (strong, nonatomic) NSMutableArray *alliesDeck;
 @property (strong, nonatomic) NSMutableArray *mythosDeck;
 
-@property (nonatomic) NSUInteger firstPlayer; // index of First Player for round
-@property (nonatomic) NSUInteger currentPlayer; // index of player currently taking turn
+@property (nonatomic) NSUInteger firstPlayerIndex; // index of First Player for round
+@property (nonatomic) NSUInteger currentPlayerIndex; // index of player currently taking turn
 
 @property (strong, nonatomic) NSMutableArray *investigators;
 @property (strong, nonatomic) NSMutableArray *monsterCup;

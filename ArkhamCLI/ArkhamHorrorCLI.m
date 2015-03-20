@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     cli.background = CodeBGBlack;
     cli.printsColors = NO;
     
-#ifndef DEBUG
+#ifndef DEBUG // xcode terminal doesn't print colors
     cli.printsColors = YES;
 #endif
     

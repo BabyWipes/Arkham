@@ -154,20 +154,23 @@ int const kBlessingNeutral = 1;
 
 // if a player becomes blessed while cursed, the two negate each other, and vice versa
 -(BOOL)isBlessed {
-    return (self.blessingValue == 2);
+    return (self.blessingValue == kBlessed);
 }
 -(void)setIsBlessed:(BOOL)isBlessed {
     if (isBlessed){
         if (self.isCursed){
             self.blessingValue = kBlessingNeutral;
+            self.blessedSkipRolling = NO;
         }
         else {
             self.blessingValue = kBlessed;
+            self.blessedSkipRolling = YES;
         }
     }
     else {
         if (self.isBlessed) {
             self.blessingValue = kBlessingNeutral;
+            self.blessedSkipRolling = NO;
         }
     }
 }
@@ -178,17 +181,22 @@ int const kBlessingNeutral = 1;
     if (isCursed){
         if (self.isBlessed){
             self.blessingValue = kBlessingNeutral;
+            self.cursedSkipRolling = NO;
         }
         else {
             self.blessingValue = kCursed;
+            self.cursedSkipRolling = YES;
         }
     }
     else {
         if (self.isCursed) {
             self.blessingValue = kBlessingNeutral;
+            self.cursedSkipRolling = NO;
         }
     }
 }
+
+#pragma mark - Lost in time and space
 
 -(void)setIsLostInTimeAndSpace:(BOOL)isLostInTimeAndSpace {
     if (_isLostInTimeAndSpace != isLostInTimeAndSpace){

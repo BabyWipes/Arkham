@@ -77,6 +77,7 @@ typedef NS_ENUM(NSUInteger, MythosType) {
 #pragma mark - Game Phases
 
 typedef NS_ENUM(NSUInteger, GamePhase){
+    
     GamePhaseUpkeepRefresh = 0,
     GamePhaseUpkeepAction,
     GamePhaseUpkeepFocus,
@@ -95,9 +96,9 @@ typedef NS_ENUM(NSUInteger, GamePhase){
     GamePhaseMythosMoveMonsters,
     GamePhaseMythosEffect,
     
-    GamePhasePlayerOnePass,
+    GamePhaseTurnOver,
     
-    GamePhaseTurnOver
+    GamePhaseSetup // one time phase where players pick investigators, ancient one
 };
 
 #pragma mark - Exit Codes

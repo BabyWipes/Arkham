@@ -10,9 +10,11 @@
 #import "Neighborhood.h"
 #import "Movable.h"
 #import "PathFinder.h"
-#import "ItemSetup.h"
 #import "Monster.h"
 #import "Macros.h"
+
+#import "MonsterSetup.h"
+#import "ItemSetup.h"
 
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
@@ -48,7 +50,6 @@ static Game *singletonInstance = nil;
     [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
         // NSLog(@"op 2 callback");
     } push:NO];
-    [self upkeep];
     
     switch (self.currentPhase) {
         case GamePhaseUpkeepRefresh: {
@@ -73,11 +74,13 @@ static Game *singletonInstance = nil;
     if (self){
         
         self.exitCode = ExitCodeNormal;
+        self.currentPhase = GamePhaseSetup;
         self.gameOver = NO;
         
         [self setupBoard];
         [self setupDecks];
-        [self setupMonsterCup];
+        self.monsterCup = [MonsterSetup arkhamHorrorMonsters];
+        
         self.outskirts = [NSMutableArray new];
         
         self.gateSealCost = 5;
@@ -97,10 +100,7 @@ static Game *singletonInstance = nil;
         self.maxMonstersInOutskirts = 8 - self.investigators.count;
         self.maxMonstersInArkham = self.investigators.count + 3;
         
-        if (self.investigators.count < 3) { self.maxGatesOpen = 8; } // if this many gates open at the same time, ancient one awakens
-        else if (self.investigators.count < 5) { self.maxGatesOpen = 7; }
-        else if (self.investigators.count < 7) { self.maxGatesOpen = 6; }
-        else  {self.maxGatesOpen = 5;}
+        self.maxGatesOpen = 9 - floor(self.investigators.count/2); // if this many gates open at the same time, ancient one awakens
     }
     return self;
 }
@@ -119,15 +119,6 @@ static Game *singletonInstance = nil;
 
 #pragma mark - setup
 
--(void)setupDecks {
-    self.commonsDeck = [ItemSetup arkhamHorrorCommons];
-    self.uniquesDeck = [NSMutableArray new];
-    self.spellsDeck = [NSMutableArray new];
-    self.skillsDeck = [NSMutableArray new];
-    self.alliesDeck = [NSMutableArray new];
-    self.mythosDeck = [NSMutableArray new];
-}
-
 -(void)setupBoard {
     self.neighborhoods = [Neighborhood arkhamBoard];
     // wire up neighborhoods
@@ -144,12 +135,15 @@ static Game *singletonInstance = nil;
         }
     }
     self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
-    
 }
 
--(void)setupMonsterCup {
-    self.monsterCup = [NSMutableArray new];
-    // TODO load cup with monsters
+-(void)setupDecks {
+    self.commonsDeck = [ItemSetup arkhamHorrorCommons];
+    self.uniquesDeck = [NSMutableArray new];
+    self.spellsDeck = [NSMutableArray new];
+    self.skillsDeck = [NSMutableArray new];
+    self.alliesDeck = [NSMutableArray new];
+    self.mythosDeck = [NSMutableArray new];
 }
 
 -(void)setupPlayer:(Investigator*)investigator {
@@ -204,6 +198,23 @@ static Game *singletonInstance = nil;
     [self.investigators addObject:investigator];
 }
 
+
+#pragma mark - player interactive setup
+
+-(void)pickAncientOne {
+    // pop dialog listing available ancient ones
+    // palyer picks ancient one
+    self.ancientOne = [[AncientOneAzathoth alloc] init];
+    [self.ancientOne applySetupEffect];
+}
+
+-(void)pickInvestigator {
+    // pop dialog listing availible investigators
+    // player picks investgator
+    [self setupPlayer:[Investigator testingInvestigator]];
+    
+}
+
 #pragma mark - game phases
 
 -(void)advanceGamePhase {
@@ -213,8 +224,26 @@ static Game *singletonInstance = nil;
     }
 }
 
+-(void)advanceCurrentPlayer {
+    self.currentPlayerIndex++;
+    if (self.currentPlayerIndex == self.investigators.count){
+        self.currentPlayerIndex = 0;
+    }
+}
+
 -(void)upkeepRefresh { // all investigators items, spells, etc refresh
-    
+    for (Investigator *investigator in self.investigators){
+        for (Item *item in investigator.commonItems){
+            item.isExhausted = NO;
+        }
+        for (Item *item in investigator.uniqueItems){
+            item.isExhausted = NO;
+        }
+        for (Item *item in investigator.spells){
+            item.isExhausted = NO;
+        }
+    }
+    [self advanceGamePhase];
 }
 
 // player must roll for blessings/curses/retainers, pay bank loans, and deal with any card effects which occur during upkeep.
@@ -223,6 +252,75 @@ static Game *singletonInstance = nil;
 // bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
 -(void)upkeepAction {
     
+
+    Investigator *currentPlayer = self.investigators[self.currentPlayerIndex];
+    
+    // TODO - a player may resolve these events in any order
+    
+    if (currentPlayer.isBlessed){
+        if (currentPlayer.blessedSkipRolling){
+            currentPlayer.blessedSkipRolling = NO;
+        }
+        else {
+            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+                if (roll == 1){ // lost blessing
+                    currentPlayer.isBlessed = NO;
+                }
+            } push:NO];
+        }
+    }
+    
+    // CURSES
+    if (currentPlayer.isCursed){
+        if (currentPlayer.cursedSkipRolling){
+            currentPlayer.cursedSkipRolling = NO;
+        }
+        else {
+            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+                if (roll == 1){ // lost curse
+                    currentPlayer.isCursed = NO;
+                }
+            } push:NO];
+        }
+    }
+    
+    // BANK LOAN
+    if (currentPlayer.hasBankLoan){
+        if (currentPlayer.bankLoanSkipRolling){
+            currentPlayer.bankLoanSkipRolling = NO;
+        }
+        else {
+            // offer chance to pay $10 to remove bank loan
+            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+                if (roll < 4){
+                    // pay $1 or discard all items + can no longer get bank loan
+                }
+            } push:NO];
+        }
+    }
+    
+    // RETAINERS
+    if (currentPlayer.retainers > 0){
+        // gain $2
+        for (int idx = 0; idx < currentPlayer.retainers-currentPlayer.retainersSkipRolling; idx++){
+            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+                if (roll == 1){ // lose the retainer
+                    if (currentPlayer.retainers > 0){
+                        currentPlayer.retainers--;
+                    }
+                }
+            } push:NO];
+        }
+    }
+    
+    // ITEMS
+    // items with upkeep functions happen now
+    
+    [self advanceCurrentPlayer];
+    if (self.currentPlayerIndex == self.firstPlayerIndex){
+        // everyone has gone
+        [self advanceGamePhase];
+    }
 }
 
 // players adjust skills based on focus
@@ -258,58 +356,10 @@ static Game *singletonInstance = nil;
 }
 
 -(void)turnOver {
-    self.firstPlayer++;
-    if (self.firstPlayer == self.investigators.count){
-        self.firstPlayer = 0;
+    self.firstPlayerIndex++;
+    if (self.firstPlayerIndex == self.investigators.count){
+        self.firstPlayerIndex = 0;
     }
-    [self advanceGamePhase];
-}
-
--(void)upkeep {
-    Investigator *currentPlayer = self.investigators[self.currentPlayer];
-    if (currentPlayer.isBlessed){
-        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-            if (roll < 5){ // lost blessing
-                currentPlayer.isBlessed = NO;
-            }
-        } push:NO];
-    }
-    
-    // CURSES
-    if (currentPlayer.isCursed){ // cursed
-        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-            if (roll < 5 || YES){
-                // lost curse
-            }
-        } push:NO];
-    }
-    
-    // BANK LOAN
-    if (currentPlayer.hasBankLoan){
-        // offer chance to pay $10 to remove bank loan
-        [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-            if (roll < 4){
-                // pay $1 or discard all items + can no longer get bank loan
-            }
-        } push:NO];
-    }
-    
-    // RETAINERS
-    if (currentPlayer.retainers > 0){
-        for (int idx = 0; idx < currentPlayer.retainers; idx++){
-            // gain $2
-            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
-                if (roll == 1){ // lose the retainer
-                    if (currentPlayer.retainers > 0){
-                        currentPlayer.retainers--;
-                    }
-                }
-            } push:NO];
-        }
-    }
-    
-    
-    // check against players items which require upkeep
     [self advanceGamePhase];
 }
 
