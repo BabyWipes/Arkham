@@ -15,6 +15,7 @@
 #import "Location.h"
 #import "Monster.h"
 #import "Item.h"
+#import "Macros.h"
 
 char const kEscapeChar = '\033';
 
@@ -83,6 +84,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 @synthesize eventsQueue;
 
 +(int)run {
+    logDebug(@"Hello %@",self);
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
     Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton
@@ -332,6 +334,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 -(void)enqueueAncientOneSetup:(AHAncientOneSelectEvent)callback {
     void (^ancientOneSetupBlock)(void) = ^{
+        // TODO may be random or selected
         [self println:@"AncientOne setup requested, returning Azathoth"];
         callback(@"Azathoth");
     };
@@ -369,6 +372,23 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     }
     else {
         [self.eventsQueue addObject:dieRollBlock];
+    }
+}
+
+-(void)enqueueSkillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback push:(BOOL)pushToFront {
+    void (^skillCheckBlock)(void) = ^{
+        NSMutableArray *rolls = [NSMutableArray new];
+        for (int idx = 0; idx < dieToRoll; idx++){
+            [rolls addObject:@([Die d6])];
+        }
+        callback(rolls);
+        [self processNextEvent];
+    };
+    if (pushToFront){
+        [self.eventsQueue insertObject:skillCheckBlock atIndex:0];
+    }
+    else {
+        [self.eventsQueue addObject:skillCheckBlock];
     }
 }
 

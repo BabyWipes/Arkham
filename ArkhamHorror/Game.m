@@ -44,7 +44,6 @@ static Game *singletonInstance = nil;
 #pragma mark - UI API comm
 
 -(void)runPhase {
-    NSLog(@"run phase");
     switch (self.currentPhase) {
         case GamePhaseSetupAncientOne: {
             [self pickAncientOne];
@@ -183,6 +182,14 @@ static Game *singletonInstance = nil;
         }
     }
     self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
+    
+    for (Neighborhood *hood in self.neighborhoods){
+        for (Location *loc in hood.locations){
+            if (!loc.isStable){
+                [self placeClue:loc];
+            }
+        }
+    }
 }
 
 -(void)setupDecks {
@@ -215,11 +222,11 @@ static Game *singletonInstance = nil;
         if ([selected isEqualToString:@"Mike"]){
             [self setupPlayer:[Investigator testingInvestigator]];
         }
-
+        
         if (done){
             [self advanceGamePhase];
         }
-    }];    
+    }];
 }
 
 -(void)setupPlayer:(Investigator*)investigator {
@@ -266,10 +273,10 @@ static Game *singletonInstance = nil;
     NSUInteger randomSpells = investigator.startingRandomSpells;
     NSUInteger randomSkills = investigator.startingRandomSkills;
     
-    [self draw:randomCommons player:investigator keep:randomCommons deck:self.commonsDeck];
-    [self draw:randomUniques player:investigator keep:randomUniques deck:self.uniquesDeck];
-    [self draw:randomSpells player:investigator keep:randomSpells deck:self.spellsDeck];
-    [self draw:randomSkills player:investigator keep:randomSkills deck:self.skillsDeck];
+    [self investigator:investigator selectCards:randomCommons fromCards:[self.commonsDeck draw:randomCommons]];
+    [self investigator:investigator selectCards:randomUniques fromCards:[self.uniquesDeck draw:randomUniques]];
+    [self investigator:investigator selectCards:randomSpells fromCards:[self.spellsDeck draw:randomSpells]];
+    [self investigator:investigator selectCards:randomSkills fromCards:[self.skillsDeck draw:randomSkills]];
     
     [self.investigators addObject:investigator];
 }
@@ -310,8 +317,6 @@ static Game *singletonInstance = nil;
 // players may complete these in any order (IE completing a retainer roll to gain it's profit before paying off a bank loan)
 // bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
 -(void)upkeepAction {
-    
-    
     Investigator *currentPlayer = self.investigators[self.currentPlayerIndex];
     
     // TODO - a player may resolve these events in any order
@@ -437,21 +442,20 @@ static Game *singletonInstance = nil;
     Location *clueLoc = [self locationNamed:headline.clueLocation];
     
     [self openGate:gateLoc];
+    
+    // if no gate at clueLoc, if no investigators there
     [self placeClue:clueLoc];
+    // else if 1 investigator there, they immediately pick it up
+    // else first player decides who gets clue
     
     // do headline action
 }
 -(void)openGate:(Location*)gateLocation {
     
 }
--(void)placeClue:(Location*)clueLocation {
-    
-}
 
--(void)arrestInvestigator:(Investigator*)investigator {
-    investigator.currentLocation = [self locationNamed:@"Police Station"];
-    investigator.isDelayed = YES;
-    investigator.money = floor(investigator.money/2);
+-(void)placeClue:(Location*)clueLocation {
+    clueLocation.cluesHere++;
 }
 
 -(void)incrementTerror {
@@ -492,6 +496,8 @@ static Game *singletonInstance = nil;
     }
 }
 
+#pragma mark - Game Utils
+
 -(NSArray*)routeFrom:(Location*)a to:(Location*)b {
     return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
 }
@@ -518,34 +524,88 @@ static Game *singletonInstance = nil;
     }
 }
 
--(void)adjustSkills:(Investigator*)player unlimited:(BOOL)unlimited{
-    int adjustsLeft = (int)player.focus;
-    adjustsLeft = 0;
-    
-}
+#pragma mark Investigator Actions
 
-
--(void)draw:(NSInteger)drawCount player:(Investigator*)player keep:(NSInteger)keepCount deck:(NSMutableArray*)deck{
-    if (keepCount > drawCount){
+-(void)investigator:(Investigator*)investigator selectCards:(NSInteger)selectCount fromCards:(NSArray*)cards {
+    if (selectCount > cards.count){
         NSLog(@"You can't keep more cards than you draw! dummy");
         return;
     }
-    
-    NSMutableArray *drawnCards = [NSMutableArray new];
-    for (int idx = 0; idx < drawCount; idx++){
-        [drawnCards addObject:[deck drawOne]];
+    if (selectCount == cards.count){
+        // player takes all cards by default
+        [investigator.commonItems addObjectsFromArray:cards];
     }
-    
-    if (drawnCards.count > keepCount){ // you can only keep some of them
-        [self.uiDelegate enqueueSelectionEvent:drawnCards select:keepCount callback:^(NSArray *selected, NSArray *rejected) {
-            [player.commonItems addObjectsFromArray:selected];
+    else {
+        [self.uiDelegate enqueueSelectionEvent:cards select:selectCount callback:^(NSArray *selected, NSArray *rejected) {
+            [investigator.commonItems addObjectsFromArray:selected];
             for (Card *card in rejected){
                 [self.commonsDeck discard:card];
             }
         } push:NO];
     }
+}
+
+-(void)investigator:(Investigator*)investigator getMoney:(NSInteger)amount {
+    investigator.money += amount;
+}
+
+// if unstated, difficulty is presumed to be 1
+-(void)investigator:(Investigator*)investigator rollSkillCheck:(SkillCheckType)skillType checkModifier:(NSInteger)modifier difficulty:(NSInteger)difficulty {
+    NSInteger baseModifier = 0;
+    switch (skillType) {
+        case SkillCheckTypeSpeed: {
+            baseModifier = investigator.speed;
+            break;
+        }
+        case SkillCheckTypeSneak:
+        case SkillCheckTypeEvade: {
+            baseModifier = investigator.sneak;
+            break;
+        }
+        case SkillCheckTypeFight:
+        case SkillCheckTypeCombat: {
+            baseModifier = investigator.fight;
+            break;
+        }
+        case SkillCheckTypeWill:
+        case SkillCheckTypeHorror: {
+            baseModifier = investigator.will;
+            break;
+        }
+        case SkillCheckTypeLore:
+        case SkillCheckTypeSpell: {
+            baseModifier = investigator.lore;
+            break;
+        }
+        case SkillCheckTypeLuck: {
+            baseModifier = investigator.luck;
+            break;
+        }
+        default: {
+            logError(@"Tried to roll unknown skill check type");
+            break;
+        }
+    }
+    NSInteger dieToRoll = baseModifier + modifier;
+    if (dieToRoll <= 0){
+        // auto fail
+    }
     else {
-        [player.commonItems addObjectsFromArray:drawnCards];
+        // roll that many die
+        // if # successes >= difficulty, passed
+    }
+}
+
+-(void)arrestInvestigator:(Investigator*)investigator {
+    investigator.currentLocation = [self locationNamed:@"Police Station"];
+    investigator.isDelayed = YES;
+    investigator.money = floor(investigator.money/2);
+}
+
+-(void)giveBankLoanToInvestigator:(Investigator*)investigator {
+    if (!investigator.hasBankLoan && !investigator.failedBankLoan){
+        investigator.hasBankLoan = YES;
+        [self investigator:investigator getMoney:10];
     }
 }
 

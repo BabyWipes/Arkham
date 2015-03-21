@@ -9,6 +9,8 @@
 #ifndef ArkhamHorror_Defines_h
 #define ArkhamHorror_Defines_h
 
+#pragma mark - Skill Check Types
+
 typedef NS_ENUM(NSUInteger, SkillCheckType) {
     SkillCheckTypeSpeed,
     SkillCheckTypeSneak,
@@ -22,6 +24,8 @@ typedef NS_ENUM(NSUInteger, SkillCheckType) {
     SkillCheckTypeSpell   // == lore check, some items only affect this
 };
 
+#pragma mark - Monster movement types
+
 typedef NS_ENUM(NSUInteger, MonsterMovementType){
     MonsterMovementTypeNormal = 0,
     MonsterMovementTypeStationary,
@@ -29,6 +33,8 @@ typedef NS_ENUM(NSUInteger, MonsterMovementType){
     MonsterMovementTypeFlying,
     MonsterMovementTypeUnique
 };
+
+#pragma mark - monster dimensions
 
 typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
     MonsterDimensionSymbolCircle = 0,

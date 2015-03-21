@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Card.h"
+#import "GameEventDelegate.h"
 
-@interface Mythos : Card
+@interface Mythos : Card <GameEventDelegate>
 @property (strong, nonatomic) NSArray *whiteDimensons;
 @property (strong, nonatomic) NSArray *blackDimensions;
 @property (strong, nonatomic) NSString *gateLocation;
@@ -32,7 +33,7 @@
  Rumor
     A Rumor Mythos card has an ongoing effect (similar to an Environment card), a Pass condition and result, 
     and a Fail condition and result (which is usually highly detrimental.)  Each turn the Rumor card continues in effect, its ongoing effect applies. 
-    If the Pass condition is ever met, usually requiring some action by the investigators, the result specified takes place and the rumor is discarded. 
+    If the Pass condition is ever met, usually requiring some action by the investigators, the result specified takes place and the rumor is discarded.
     If the Fail condition is ever met, the result specified takes place and the rumor is discarded. While the Rumor card is in play, a second 
     Rumor card can not enter play. If another Rumor card is drawn and resolved, all its other effects take place during the Mythos 
     phase (gate, monster, clue, monster movement) but the second card's Rumor text itself is ignored.

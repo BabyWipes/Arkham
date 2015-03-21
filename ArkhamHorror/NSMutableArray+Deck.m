@@ -20,6 +20,14 @@
     return card;
 }
 
+-(NSArray*)draw:(NSUInteger)count {
+    NSMutableArray *cards = [NSMutableArray new];
+    for (int idx = 0; idx < count; idx++){
+        [cards addObject:[self drawOne]];
+    }
+    return [NSArray arrayWithArray:cards];
+}
+
 -(Card*)cardNamed:(NSString*)name {
     Card *targetCard;
     for (Card *card in self){

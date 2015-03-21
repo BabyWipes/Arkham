@@ -1,18 +1,20 @@
 //
-//  GameLoop.h
+//  GameEventDelegate.h
 //  ArkhamHorror
 //
-//  Created by Michael Cornell on 2/23/15.
+//  Created by Michael Cornell on 3/21/15.
 //  Copyright (c) 2015 Sleepy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "Defines.h"
+#ifndef ArkhamHorror_GameEventDelegate_h
+#define ArkhamHorror_GameEventDelegate_h
 
-@interface GameLoop : NSObject
-@property (nonatomic) GamePhase currentPhase;
-@property (strong, nonatomic) NSMutableArray *phaseEvents;
-@end
+@class Game;
+@class Monster;
+
+@protocol GameEventDelegate <NSObject>
+
+-(void)game:(Game*)game willMakeSkillCheck:(SkillCheckType)skillCheck;
 
 /*
  
@@ -159,6 +161,6 @@
  willDrawOtherWorldEncounter
  didDrawOtherWorldEncounter
  
- 
- 
- */
+*/
+@end
+#endif

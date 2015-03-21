@@ -10,6 +10,7 @@
 #define ArkhamHorror_ArkhamHorrorUIAPI_h
 
 typedef void(^AHRollEvent)(NSUInteger roll);
+typedef void(^AHSkillCheckEvent)(NSArray *rolls);
 typedef void(^AHSelectEvent)(NSArray* selected, NSArray *rejected);
 typedef void(^AHQuitEvent)(void);
 
@@ -26,6 +27,7 @@ typedef void(^AHPlayerSelectEvent)(NSString *selected, BOOL done);
 -(void)enqueueQuitEvent:(AHQuitEvent)callback push:(BOOL)pushToFront;
 -(void)enqueueSelectionEvent:(NSArray*)selections select:(NSUInteger)select callback:(AHSelectEvent)callback push:(BOOL)pushToFront;
 -(void)enqueueDieRollEvent:(AHRollEvent)callback push:(BOOL)pushToFront;
+-(void)enqueueSkillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback push:(BOOL)pushToFront;
 
 @end
 

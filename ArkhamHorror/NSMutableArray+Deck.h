@@ -12,8 +12,8 @@
 
 @interface NSMutableArray (Deck)
 
-// returns one Card
 -(Card*)drawOne;
+-(NSArray*)draw:(NSUInteger)count;
 
 // puts a Card of type <type> to the bottom of the deck
 -(void)discard:(Card*)card;
@@ -23,6 +23,5 @@
 
 // searches deck for card, returns nil if not found
 -(Card*)cardNamed:(NSString*)name;
-
 
 @end

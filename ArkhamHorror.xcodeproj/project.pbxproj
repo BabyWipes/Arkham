@@ -16,7 +16,6 @@
 		BE085F331A9B9B0000FEAB0E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE085F321A9B9B0000FEAB0E /* ViewController.xib */; };
 		BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */; };
 		BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */; };
-		BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
 		BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F4C1A9BBA7A00FEAB0E /* Location.m */; };
 		BE0F7DFB1AAE2E3400C337F1 /* PESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF21AAE2E3400C337F1 /* PESGraph.m */; };
 		BE0F7DFC1AAE2E3400C337F1 /* PESGraphEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF41AAE2E3400C337F1 /* PESGraphEdge.m */; };
@@ -39,7 +38,6 @@
 		BE0F7E371AAF6FD100C337F1 /* Investigator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */; };
 		BE0F7E381AAF6FD600C337F1 /* AncientOne.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */; };
 		BE0F7E391AAF6FD900C337F1 /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
-		BE0F7E3A1AAF6FDC00C337F1 /* GameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = BE085F461A9BB22800FEAB0E /* GameLoop.m */; };
 		BE0F7E3B1AAF6FE100C337F1 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F641AA1224B0073EDEE /* Card.m */; };
 		BE0F7E3C1AAF6FE300C337F1 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD4E1A9C5A8D0034581D /* Item.m */; };
 		BE0F7E3D1AAF6FE700C337F1 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
@@ -109,8 +107,6 @@
 		BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Investigator.m; sourceTree = "<group>"; };
 		BE085F3C1A9B9E8600FEAB0E /* AncientOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AncientOne.h; sourceTree = "<group>"; };
 		BE085F3D1A9B9E8600FEAB0E /* AncientOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AncientOne.m; sourceTree = "<group>"; };
-		BE085F451A9BB22800FEAB0E /* GameLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLoop.h; sourceTree = "<group>"; };
-		BE085F461A9BB22800FEAB0E /* GameLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLoop.m; sourceTree = "<group>"; };
 		BE085F4B1A9BBA7A00FEAB0E /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		BE085F4C1A9BBA7A00FEAB0E /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		BE0F7DF01AAE2E3400C337F1 /* PESGraph-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PESGraph-Prefix.pch"; sourceTree = "<group>"; };
@@ -144,6 +140,7 @@
 		BE4CFD561A9CF37B0034581D /* Neighborhood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neighborhood.h; sourceTree = "<group>"; };
 		BE4CFD571A9CF37B0034581D /* Neighborhood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Neighborhood.m; sourceTree = "<group>"; };
 		BE4CFD5A1A9CF8900034581D /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		BE624F211ABDDC670006C638 /* GameEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEventDelegate.h; sourceTree = "<group>"; };
 		BE7570DC1AB1CB69004B3998 /* ItemSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemSetup.h; sourceTree = "<group>"; };
 		BE7570DD1AB1CB69004B3998 /* ItemSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSetup.m; sourceTree = "<group>"; };
 		BE7570E01AB1EED0004B3998 /* MonsterSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonsterSetup.h; sourceTree = "<group>"; };
@@ -262,8 +259,6 @@
 				BE085F391A9B9C9D00FEAB0E /* Investigator.h */,
 				BE085F3A1A9B9C9D00FEAB0E /* Investigator.m */,
 				BE3D4F581A9FD4970073EDEE /* bad guys */,
-				BE085F451A9BB22800FEAB0E /* GameLoop.h */,
-				BE085F461A9BB22800FEAB0E /* GameLoop.m */,
 				BEF0D0511AA794FE00ADFC88 /* cards */,
 				BE4CFD591A9CF3840034581D /* locations */,
 				BEA88DE81AA50959000D9972 /* Game.h */,
@@ -387,6 +382,7 @@
 				BE7570E41AB22E49004B3998 /* SettingsManager.h */,
 				BE7570E51AB22E49004B3998 /* SettingsManager.m */,
 				BE7570EA1AB23358004B3998 /* Macros.h */,
+				BE624F211ABDDC670006C638 /* GameEventDelegate.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -536,7 +532,6 @@
 				BE4CFD4F1A9C5A8D0034581D /* Item.m in Sources */,
 				BE0F7DFE1AAE2E3400C337F1 /* PESGraphRoute.m in Sources */,
 				BE085F3B1A9B9C9D00FEAB0E /* Investigator.m in Sources */,
-				BE085F471A9BB22800FEAB0E /* GameLoop.m in Sources */,
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
 				BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */,
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
@@ -589,7 +584,6 @@
 				BE0F7E251AAF6EAD00C337F1 /* main.m in Sources */,
 				BE0F7E361AAF6FCD00C337F1 /* Movable.m in Sources */,
 				BE7570DF1AB1CB69004B3998 /* ItemSetup.m in Sources */,
-				BE0F7E3A1AAF6FDC00C337F1 /* GameLoop.m in Sources */,
 				BE0F7E2E1AAF6FA000C337F1 /* Die.m in Sources */,
 				BE0F7E2D1AAF6F9D00C337F1 /* NSMutableArray+Deck.m in Sources */,
 				BE0F7E301AAF6FA700C337F1 /* PathFinder.m in Sources */,
