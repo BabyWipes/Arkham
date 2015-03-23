@@ -378,11 +378,11 @@
 				BE4CFD511A9CD46A0034581D /* JSTest.m */,
 				BE0F7E001AAE2E8F00C337F1 /* PathFinder.h */,
 				BE0F7E011AAE2E8F00C337F1 /* PathFinder.m */,
-				BE0F7E451AAF724300C337F1 /* ArkhamHorrorUIAPI.h */,
 				BE7570E41AB22E49004B3998 /* SettingsManager.h */,
 				BE7570E51AB22E49004B3998 /* SettingsManager.m */,
 				BE7570EA1AB23358004B3998 /* Macros.h */,
 				BE624F211ABDDC670006C638 /* GameEventDelegate.h */,
+				BE0F7E451AAF724300C337F1 /* ArkhamHorrorUIAPI.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";

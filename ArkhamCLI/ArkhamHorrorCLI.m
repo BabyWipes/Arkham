@@ -311,7 +311,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 }
 
 
-#pragma mark - ArkhamHorror UI API
+#pragma mark - Events Queue
 
 -(void)processEventsQueue {
     [self processNextEvent]; // recursively resolves each event in order
@@ -322,15 +322,26 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)processNextEvent {
     if (!self.currentGame.gameOver){
         if (self.eventsQueue.count > 0){
-            void (^enqueuedBlock)(void) = [self.eventsQueue firstObject];
-            [self.eventsQueue removeObject:enqueuedBlock];
-            enqueuedBlock();
+            AHEvent event = [self.eventsQueue firstObject];
+            [self.eventsQueue removeObject:event];
+            event();
         }
     }
     else {
         [self println:@"Game Over."];
     }
 }
+
+-(void)enqueueEvent:(AHEvent)event {
+    [self.eventsQueue addObject:eventsQueue];
+}
+
+-(void)pushEvent:(AHEvent)event {
+    [self.eventsQueue insertObject:event atIndex:0];
+}
+
+#pragma mark - ArkhamHorror UI API
+
 
 -(void)enqueueAncientOneSetup:(AHAncientOneSelectEvent)callback {
     void (^ancientOneSetupBlock)(void) = ^{
@@ -349,7 +360,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     [self.eventsQueue addObject:playerSetupBlock];
 }
 
--(void)enqueueQuitEvent:(AHQuitEvent)callback push:(BOOL)pushToFront {
+-(void)enqueueQuitEvent:(AHEvent)callback push:(BOOL)pushToFront {
     void (^quitBlock)(void) = ^{
         [self println:@"Quiting"];
     };
@@ -362,21 +373,21 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 }
 
 -(void)enqueueDieRollEvent:(AHRollEvent)callback push:(BOOL)pushToFront{
-    void (^dieRollBlock)(void) = ^{
+    AHBlock(dieRollBlock) = ^{
         NSUInteger roll = [Die d6];
         callback(roll);
         [self processNextEvent];
     };
     if (pushToFront){
-        [self.eventsQueue insertObject:dieRollBlock atIndex:0];
+        [self pushEvent:dieRollBlock];
     }
     else {
-        [self.eventsQueue addObject:dieRollBlock];
+        [self enqueueEvent:dieRollBlock];
     }
 }
 
 -(void)enqueueSkillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback push:(BOOL)pushToFront {
-    void (^skillCheckBlock)(void) = ^{
+    AHBlock(skillCheckBlock) = ^{
         NSMutableArray *rolls = [NSMutableArray new];
         for (int idx = 0; idx < dieToRoll; idx++){
             [rolls addObject:@([Die d6])];
@@ -385,15 +396,28 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
         [self processNextEvent];
     };
     if (pushToFront){
-        [self.eventsQueue insertObject:skillCheckBlock atIndex:0];
+        [self pushEvent:skillCheckBlock];
     }
     else {
-        [self.eventsQueue addObject:skillCheckBlock];
+        [self enqueueEvent:skillCheckBlock];
     }
 }
 
 -(void)enqueueSelectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback push:(BOOL)pushToFront{
-    // select <select> amount of items from <selections>, return that subset to <callback>
+    AHBlock(selectionBlock) = ^{
+        NSLog(@"faking selection event...");
+        callback(@[],@[]);
+    };
+    [self enqueueEvent:selectionBlock];
+}
+
+-(void)enqueueFocusEvent:(AHSkillsFocusEvent)callback {
+    AHBlock(focusBlock) = ^{
+        NSLog(@"Fake focusing skills...");
+        callback();
+    };
+    [self enqueueEvent:focusBlock];
+    
 }
 
 @end

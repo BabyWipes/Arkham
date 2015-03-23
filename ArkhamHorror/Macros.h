@@ -22,4 +22,7 @@
 #   define logVerbose(...)
 #endif
 
+// a block which takes (void) and returns (void)
+#define AHBlock(_blockName) void (^_blockName)(void)
+
 #endif

@@ -321,6 +321,7 @@ static Game *singletonInstance = nil;
     
     // TODO - a player may resolve these events in any order
     
+    // BLESSED
     if (currentPlayer.isBlessed){
         if (currentPlayer.blessedSkipRolling){
             currentPlayer.blessedSkipRolling = NO;
@@ -380,7 +381,9 @@ static Game *singletonInstance = nil;
     // ITEMS
     // items with upkeep functions happen now
     
+    // if all actions resolved then
     [self advanceCurrentPlayer];
+    
     if (self.currentPlayerIndex == self.firstPlayerIndex){
         // everyone has gone
         [self advanceGamePhase];
@@ -389,7 +392,10 @@ static Game *singletonInstance = nil;
 
 // players adjust skills based on focus
 -(void)upkeepFocus {
-    [self advanceGamePhase];
+    [self.uiDelegate enqueueFocusEvent:^{
+        NSLog(@"Did Focus!");
+        [self advanceGamePhase];
+    }];
 }
 -(void)movementArkham {
     [self advanceGamePhase];

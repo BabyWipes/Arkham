@@ -27,6 +27,7 @@
 
 
 @implementation JSObj
+
 @synthesize name;
 @synthesize stuff;
 @synthesize val;
@@ -71,9 +72,13 @@
     JSObj *dummy = [JSObj dummyWithChild];
     
     JSContext *js = [[JSContext alloc] initWithVirtualMachine:[[JSVirtualMachine alloc] init]];
+    
     js[@"aNumber"] = @5;
+    
     NSLog(@"js val %@",js[@"aNumber"]);
+    
     js[@"ObjCObject"] = dummy;
+    
     NSLog(@"ObjCObject? %@",[js evaluateScript:@"ObjCObject.name"]);
     NSLog(@"ObjCObject? %@",[js evaluateScript:@"ObjCObject.stuff"]);
     
@@ -92,11 +97,8 @@
     NSLog(@"ObjCObject? %@",[js evaluateScript:@"ObjCObject.child.name"]);
     NSLog(@"ObjCObject? %@",[js evaluateScript:@"ObjCObject.child.stuff"]);
     NSLog(@"ObjCObject? %@",[js evaluateScript:@"ObjCObject.child.child"]); // undefined instead of nil
+    
     [dummy logSelf];
-
-
-
-
 
 }
 
