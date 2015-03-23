@@ -12,6 +12,7 @@
 #import "PathFinder.h"
 #import "Monster.h"
 #import "Macros.h"
+#import "Skill.h"
 
 #import "MonsterSetup.h"
 #import "ItemSetup.h"
@@ -134,7 +135,7 @@ static Game *singletonInstance = nil;
         self.gameOver = NO;
         
         [self setupBoard];
-        [self setupDecks];
+        [self setupDecks:settings];
         self.monsterCup = [MonsterSetup arkhamHorrorMonsters];
         
         self.outskirts = [NSMutableArray new];
@@ -192,13 +193,26 @@ static Game *singletonInstance = nil;
     }
 }
 
--(void)setupDecks {
+-(void)setupDecks:(NSDictionary*)settings {
     self.commonsDeck = [ItemSetup arkhamHorrorCommons];
     self.uniquesDeck = [NSMutableArray new];
     self.spellsDeck = [NSMutableArray new];
-    self.skillsDeck = [NSMutableArray new];
     self.alliesDeck = [NSMutableArray new];
     self.mythosDeck = [NSMutableArray new];
+    [self setupSkillsDeck:settings];
+}
+
+-(void)setupSkillsDeck:(NSDictionary*)settings {
+    self.skillsDeck = [NSMutableArray new];
+    NSArray *skillsArr = settings[@"Skills"];
+    for (NSDictionary *skillSetupDict in skillsArr){
+        NSUInteger count = [skillSetupDict[@"count"] unsignedIntegerValue];
+        NSDictionary *skillProperties = skillSetupDict[@"skill_dict"];
+        for (int idx = 0; idx < count; idx++) {
+            Skill *skill = [[Skill alloc] initWithProperties:skillProperties];
+            [self.skillsDeck addObject:skill];
+        }
+    }
 }
 
 #pragma mark - player interactive setup
@@ -300,13 +314,13 @@ static Game *singletonInstance = nil;
 -(void)upkeepRefresh { // all investigators items, spells, etc refresh
     for (Investigator *investigator in self.investigators){
         for (Item *item in investigator.commonItems){
-            item.isExhausted = NO;
+            item.exhausted = NO;
         }
         for (Item *item in investigator.uniqueItems){
-            item.isExhausted = NO;
+            item.exhausted = NO;
         }
         for (Item *item in investigator.spells){
-            item.isExhausted = NO;
+            item.exhausted = NO;
         }
     }
     [self advanceGamePhase];
@@ -438,6 +452,13 @@ static Game *singletonInstance = nil;
 
 #pragma mark - actions
 
+-(void)spendClueTokenOnSkillCheck {
+    
+    // you may spend clue tokens on a 1 to 1 basis to get an extra die before or after a skill check
+    // it does not change the check modifier, it only adds a die, so even a player who would normally auto-fail a check by having < 1 dice may attempt it
+    // They may spend clue tokens before rolling any dice, after rolling some dice, or all dice
+}
+
 
 -(void)drawHeadline:(Mythos*)headline {
     self.currentMythosHeadline = headline;
@@ -531,6 +552,23 @@ static Game *singletonInstance = nil;
 }
 
 #pragma mark Investigator Actions
+
+-(void)knockOutInvestigator:(Investigator*)investigator {
+    // discard floor(1/2) items, spells count
+    // discard floor(1/2) clue tokens
+    // discard all retainers
+    // stamina = 1
+    // location = Hospital
+}
+
+-(void)driveInvestigatorInsane:(Investigator*)investigator {
+    // discard floor(1/2) items, spells count
+    // discard floor(1/2) clue tokens
+    // discard all retainers
+    // sanity = 1
+    // location = Asylum
+    
+}
 
 -(void)investigator:(Investigator*)investigator selectCards:(NSInteger)selectCount fromCards:(NSArray*)cards {
     if (selectCount > cards.count){

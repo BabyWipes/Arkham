@@ -11,59 +11,29 @@
 
 @class Game;
 @class Monster;
+@class Investigator;
+@class Ally;
+
+@protocol SkillCheckEventDelegate <NSObject>
+
+-(BOOL)game:(Game*)game shouldMakeSkillCheck:(SkillCheckType)skillCheck investigator:(Investigator*)investigator;
+-(void)game:(Game*)game willMakeSkillCheck:(SkillCheckType)skillCheck investigator:(Investigator*)investigator;
+-(void)game:(Game*)game didMakeSkillCheck:(SkillCheckType)skillCheck investigator:(Investigator*)investigator;
+-(NSInteger)game:(Game*)game skillCheckModifier:(SkillCheckType)skillCheck investigator:(Investigator*)investigator;
+-(NSInteger)skillCheck:(SkillCheckType)skillCheck bonusDieForClueFromInvestigator:(Investigator*)investigator;
+
+@end
+
+@protocol AllyEventDelegate <NSObject>
+
+-(void)ally:(Ally*)ally wasGivenToInvestigator:(Investigator*)investigator;
+-(void)ally:(Ally*)ally wasTakenFromInvestigator:(Investigator*)investigator;
+
+@end
 
 @protocol GameEventDelegate <NSObject>
 
--(void)game:(Game*)game willMakeSkillCheck:(SkillCheckType)skillCheck;
-
 /*
- 
- //// SkillChecks
- 
- willMakeSkillCheck
- shouldPassSkillCheck // skip skill check with auto success
- didMakeSkillCheck:(BOOL)passFail // all
- 
- willMakeSpeedCheck
- shouldPassSpeedCheck
- didMakeSpeedCheck:(BOOL)passFail
- 
- willMakeSneakCheck
- shouldPassSneakCheck
- didMakeSneakCheck:(BOOL)passFail
- 
- willMakeEvadeCheck
- shouldPassEvadeCheck
- didMakeEvadeCheck:(BOOL)passFail // will make sneak check
- 
- willMakeFightCheck
- shouldPassFightCheck
- didMakeFightCheck:(BOOL)passFail
- 
- willMakeWillCheck
- shouldPassWillCheck
- didMakeWillCheck:(BOOL)passFail
- 
- willMakeCombatCheck
- shouldPassCombatCheck
- didMakeCombatCheck:(BOOL)passFail // special fight check
- 
- willMakeHorrorCheck
- shouldPassHorrorCheck
- didMakeHorrorCheck:(BOOL)passFail // special will check
- 
- willMakeLoreCheck
- shouldPassLoreCheck
- didMakeLoreCheck:(BOOL)passFail
- 
- willMakeLuckCheck
- shouldPassLuckCheck
- didMakeLuckCheck:(BOOL)passFail
- 
- willMakeSpellCheck
- shouldPassSpellCheck
- didMakeSpellCheck:(BOOL)passFail // special lore check
- 
  
  ///// Damage
  

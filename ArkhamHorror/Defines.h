@@ -9,9 +9,17 @@
 #ifndef ArkhamHorror_Defines_h
 #define ArkhamHorror_Defines_h
 
+
+@protocol JSONObject <NSObject>
+-(instancetype)initWithProperties:(NSDictionary*)properties;
+-(NSDictionary*)exportJSON;
+
+@end
+
 #pragma mark - Skill Check Types
 
 typedef NS_ENUM(NSUInteger, SkillCheckType) {
+    SkillCheckTypeNone = 0, // default
     SkillCheckTypeSpeed,
     SkillCheckTypeSneak,
     SkillCheckTypeEvade,  // == sneak check, some items only affect this

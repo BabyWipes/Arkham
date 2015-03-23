@@ -10,7 +10,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Card.h"
-#import "Defines.h"
 
 extern NSUInteger const kItemInfiniteUses;
 
@@ -18,8 +17,8 @@ extern NSUInteger const kItemInfiniteUses;
 
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;
-@property (nonatomic) BOOL isExhausted;
 @property (nonatomic) NSInteger usesBeforeDiscard;
+@property (nonatomic) BOOL exhausted;
 @property (nonatomic) ItemClassification itemClass;
 @property (strong, nonatomic) NSArray *eventFlags; //TODO things a player holding this item needs to pay attention to
 -(instancetype)initWithProperties:(NSDictionary*)properties;
@@ -58,6 +57,13 @@ extern NSUInteger const kItemInfiniteUses;
 @end
 
 /*
+ Deputy's Revolver + Patrol Wagon count as "Items" but are neither common nor unique, and are gained in a location encounter
+ There is only 1 of each, so if they're gained they must then be traded
+ 
+ Deputy's Revolver - P. weapon, 1 hand, +3 combat checks, can't be lost/stolen unless you allow it, can't be sold, can be traded
+ Patrol Wagon - instead of moving, move directly to any street location, skipping all monsters in route (but not destination)
+              - after combat or returning from other world, roll, if == 1, return card to box
+ 
  COMMONS
  Item                   Type        Price   Hands   Count
  --------------------------------------------------------
@@ -107,9 +113,9 @@ extern NSUInteger const kItemInfiniteUses;
  Pallid Mask                         $4	  1 // +2 evade check
  Ruby of R'lyeh                      $8	  1 // +3 move
  Flute of the Outer Gods             $8	  1 // discard, -3 San -3 Sta, before combat check: if pass a horror check, defeat all monsters in your area.
- can't be used vs ancient one
+                                                can't be used vs ancient one
  Warding Statue                      $6	  1 // discard, after failing Combat check, reduce the monster's combat damage to 0 Stamina.
- OR discard, cancel Ancient One's entire attack for 1 turn
+                                                OR discard, cancel Ancient One's entire attack for 1 turn
  
  UNIQUE WEAPONS (still unique items, but has hands cost)
  Item                   Type        Hands   Price   Count
@@ -140,20 +146,6 @@ extern NSUInteger const kItemInfiniteUses;
  (not Magical Immunity) until end of combat. (only special abilities marked in bold can be
  chosen to be ignored, i.e. not special combat abilities like the Nightgaunt has.)
  
- 
- ///
- SKILLS             Effect
- -------------------------
- Bravery            exhaust, re-roll horror check
- Expert Occultist   exhaust, re-roll spell check
- Marksman           exhaust, re-roll combat check
- Stealth            exhaust, re-roll evade check
- Fight              +1 fight, when you spend a clue to add fight, add an extra die
- Lore               +1 lore, when you spend a clue to add lore, add an extra die
- Luck               +1 luck, when you spend a clue to add luck, add an extra die
- Sneak              +1 sneak, when you spend a clue to add sneak, add an extra die
- Speed              +1 speed, when you spend a clue to add speed, add an extra die
- Will               +1 will, when you spend a clue to add will, add an extra die
- 
+
  
  */

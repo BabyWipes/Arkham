@@ -10,7 +10,7 @@
 #import "Card.h"
 #import "GameEventDelegate.h"
 
-@interface Mythos : Card <GameEventDelegate>
+@interface Mythos : Card
 @property (strong, nonatomic) NSArray *whiteDimensons;
 @property (strong, nonatomic) NSArray *blackDimensions;
 @property (strong, nonatomic) NSString *gateLocation;

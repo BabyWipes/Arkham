@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "Defines.h"
+#import "GameEventDelegate.h"
+
 // All items drawable from a Deck must extend from the Card base class
-@interface Card : NSObject
+@interface Card : NSObject <JSONObject>
 @property (nonatomic) CardType cardType;
 @property (strong, nonatomic) NSString *name;
 @end

@@ -80,11 +80,13 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 @end
 
+#import "SkillSetup.h"
+#import "Skill.h"
+
 @implementation ArkhamHorrorCLI
 @synthesize eventsQueue;
 
 +(int)run {
-    logDebug(@"Hello %@",self);
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
     Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton
@@ -316,7 +318,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)processEventsQueue {
     [self processNextEvent]; // recursively resolves each event in order
     [self getString:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
-    [self println:@""];
+    [self println:[self stringf:@"%@",self.currentGame.skillsDeck]];
 }
 
 -(void)processNextEvent {
@@ -417,6 +419,9 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
         callback();
     };
     [self enqueueEvent:focusBlock];
+}
+
+-(void)priority:(BOOL)cutsLine addEvent:(AHEvent)callback {
     
 }
 

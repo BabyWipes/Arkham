@@ -33,7 +33,7 @@ typedef void(^AHEvent)(void);
 
 -(void)enqueueFocusEvent:(AHSkillsFocusEvent)callback;
 
--(void)priority:(BOOL)cutsLine doEvent:(AHEvent)callback;
+-(void)priority:(BOOL)cutsLine addEvent:(AHEvent)callback;
 
 @end
 
