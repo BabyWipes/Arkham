@@ -49,6 +49,8 @@
 		BE1A72C31AC091D500789DF0 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72C11AC091D500789DF0 /* Skill.m */; };
 		BE1A72C61AC0A2BB00789DF0 /* SkillSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72C51AC0A2BB00789DF0 /* SkillSetup.m */; };
 		BE1A72C71AC0A2BB00789DF0 /* SkillSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72C51AC0A2BB00789DF0 /* SkillSetup.m */; };
+		BE1A72CA1AC0BA8300789DF0 /* AllySetup.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72C91AC0BA8300789DF0 /* AllySetup.m */; };
+		BE1A72CB1AC0BA8300789DF0 /* AllySetup.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A72C91AC0BA8300789DF0 /* AllySetup.m */; };
 		BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F561A9FD4900073EDEE /* Monster.m */; };
 		BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */; };
 		BE3D4F651AA1224B0073EDEE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F641AA1224B0073EDEE /* Card.m */; };
@@ -135,6 +137,8 @@
 		BE1A72C11AC091D500789DF0 /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
 		BE1A72C41AC0A2BB00789DF0 /* SkillSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillSetup.h; sourceTree = "<group>"; };
 		BE1A72C51AC0A2BB00789DF0 /* SkillSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSetup.m; sourceTree = "<group>"; };
+		BE1A72C81AC0BA8300789DF0 /* AllySetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllySetup.h; sourceTree = "<group>"; };
+		BE1A72C91AC0BA8300789DF0 /* AllySetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllySetup.m; sourceTree = "<group>"; };
 		BE3D4F551A9FD4900073EDEE /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		BE3D4F561A9FD4900073EDEE /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
 		BE3D4F601AA1219C0073EDEE /* NSMutableArray+Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Deck.h"; sourceTree = "<group>"; };
@@ -412,6 +416,8 @@
 				BE1A72C11AC091D500789DF0 /* Skill.m */,
 				BE1A72C41AC0A2BB00789DF0 /* SkillSetup.h */,
 				BE1A72C51AC0A2BB00789DF0 /* SkillSetup.m */,
+				BE1A72C81AC0BA8300789DF0 /* AllySetup.h */,
+				BE1A72C91AC0BA8300789DF0 /* AllySetup.m */,
 			);
 			name = cards;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 				BE0F7DFF1AAE2E3400C337F1 /* PESGraphRouteStep.m in Sources */,
 				BE0F7DFD1AAE2E3400C337F1 /* PESGraphNode.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
+				BE1A72CA1AC0BA8300789DF0 /* AllySetup.m in Sources */,
 				BE3D4F621AA1219C0073EDEE /* NSMutableArray+Deck.m in Sources */,
 				BE0F7DFB1AAE2E3400C337F1 /* PESGraph.m in Sources */,
 				BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */,
@@ -587,6 +594,7 @@
 				BE0F7E321AAF6FB400C337F1 /* PESGraphEdge.m in Sources */,
 				BE0F7E331AAF6FB700C337F1 /* PESGraphNode.m in Sources */,
 				BE0F7E2B1AAF6F6700C337F1 /* ArkhamHorrorCLI.m in Sources */,
+				BE1A72CB1AC0BA8300789DF0 /* AllySetup.m in Sources */,
 				BE0F7E341AAF6FBA00C337F1 /* PESGraphRoute.m in Sources */,
 				BE0F7E411AAF6FF500C337F1 /* Game.m in Sources */,
 				BE0F7E3B1AAF6FE100C337F1 /* Card.m in Sources */,

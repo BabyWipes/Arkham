@@ -11,13 +11,6 @@
 #import "Game.h"
 
 @interface Ally ()
-@property (nonatomic) SkillCheckType skillAffected;
-@property (nonatomic) NSInteger skillBonus;
-@property (nonatomic) SkillCheckType secondSkillAffected;
-@property (nonatomic) NSInteger secondSkillBonus;
-
-@property (nonatomic) NSInteger maxStaminaBonus;
-@property (nonatomic) NSInteger maxSanityBonus;
 @end
 
 @implementation Ally
@@ -34,6 +27,18 @@
         
         self.discardToHealSanity = NO;
         self.discardToHealStamina = NO;
+        
+        self.givesClueReward = NO;
+        self.givesCommonItemReward = NO;
+        self.givesSpellReward = NO;
+        self.givesUniqueItemReward = NO;
+        
+        self.ignoresNightmarish = NO;
+        self.ignoresOverwhelming = NO;
+        self.ignoresEndless = NO;
+        
+        self.ignoresPhysicalResist = NO;
+        self.ignoresMagicalResist = NO;
     }
     return self;
 }
@@ -52,6 +57,18 @@
         self.discardToHealSanity = [properties[@"heals_san"] boolValue];
         self.discardToHealStamina = [properties[@"heals_sta"] boolValue];
         
+        self.givesClueReward = [properties[@"clue_reward"] boolValue];
+        self.givesCommonItemReward = [properties[@"common_reward"] boolValue];
+        self.givesSpellReward = [properties[@"spell_reward"] boolValue];
+        self.givesUniqueItemReward = [properties[@"unique_reward"] boolValue];
+        
+        self.ignoresNightmarish = [properties[@"ignore_nightmarish"] boolValue];
+        self.ignoresOverwhelming = [properties[@"ignore_overwhelming"] boolValue];
+        self.ignoresEndless = [properties[@"ignore_endless"] boolValue];
+        
+        self.ignoresPhysicalResist = [properties[@"ignore_p_resist"] boolValue];
+        self.ignoresMagicalResist = [properties[@"ignore_m_resist"] boolValue];
+        
     }
     return self;
 }
@@ -64,11 +81,34 @@
              @"max_san_bonus":@(self.maxSanityBonus),
              @"max_sta_bonus":@(self.maxStaminaBonus),
              @"heals_san":@(self.discardToHealSanity),
-             @"heals_sta":@(self.discardToHealStamina)};
+             @"heals_sta":@(self.discardToHealStamina),
+             @"clue_reward":@(self.givesClueReward),
+             @"common_reward":@(self.givesCommonItemReward),
+             @"spell_reward":@(self.givesSpellReward),
+             @"unique_reward":@(self.givesUniqueItemReward),
+             @"ignore_nightmarish":@(self.ignoresNightmarish),
+             @"ignore_overwhelming":@(self.ignoresOverwhelming),
+             @"ignore_endless":@(self.ignoresEndless),
+             @"ignore_p_resist":@(self.ignoresPhysicalResist),
+             @"ignore_m_resist":@(self.ignoresMagicalResist)};
 }
 
 
 -(void)ally:(Ally*)ally wasGivenToInvestigator:(Investigator*)investigator {
+    
+    if (self.givesClueReward){
+        investigator.clues += 2;
+    }
+    
+    if (self.givesCommonItemReward){
+        // draw 1 common
+    }
+    if (self.givesSpellReward){
+        // draw 1 spell
+    }
+    if (self.givesUniqueItemReward){
+        // draw 1 unique
+    }    
     
     investigator.maxSanity += ally.maxSanityBonus;
     investigator.maxStamina += ally.maxStaminaBonus;
@@ -201,4 +241,5 @@
         }
     }
 }
+
 @end

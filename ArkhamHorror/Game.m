@@ -200,6 +200,7 @@ static Game *singletonInstance = nil;
     self.alliesDeck = [NSMutableArray new];
     self.mythosDeck = [NSMutableArray new];
     [self setupSkillsDeck:settings];
+    [self setupAlliesDeck:settings];
 }
 
 -(void)setupSkillsDeck:(NSDictionary*)settings {
@@ -212,6 +213,15 @@ static Game *singletonInstance = nil;
             Skill *skill = [[Skill alloc] initWithProperties:skillProperties];
             [self.skillsDeck addObject:skill];
         }
+    }
+}
+
+-(void)setupAlliesDeck:(NSDictionary*)settings {
+    self.alliesDeck = [NSMutableArray new];
+    NSArray *alliesArr = settings[@"Allies"];
+    for (NSDictionary *allyDict in alliesArr){
+        Ally *ally = [[Ally alloc] initWithProperties:allyDict];
+        [self.alliesDeck addObject:ally];
     }
 }
 

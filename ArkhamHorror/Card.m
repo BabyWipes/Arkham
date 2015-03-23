@@ -26,4 +26,7 @@
 -(NSDictionary*)exportJSON {
     return @{@"name":self.name};
 }
+-(NSString*)description {
+    return [NSString stringWithFormat:@"%@:%@",[super description],self.name];
+}
 @end

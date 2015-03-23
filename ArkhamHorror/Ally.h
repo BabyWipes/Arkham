@@ -12,8 +12,30 @@
 
 @interface Ally : Card <AllyEventDelegate>
 
+@property (nonatomic) SkillCheckType skillAffected;
+@property (nonatomic) NSInteger skillBonus;
+@property (nonatomic) SkillCheckType secondSkillAffected;
+@property (nonatomic) NSInteger secondSkillBonus;
+
+@property (nonatomic) NSInteger maxStaminaBonus;
+@property (nonatomic) NSInteger maxSanityBonus;
+
 @property (nonatomic) BOOL discardToHealStamina;
 @property (nonatomic) BOOL discardToHealSanity;
+
+@property (nonatomic) BOOL ignoresNightmarish;
+@property (nonatomic) BOOL ignoresOverwhelming;
+@property (nonatomic) BOOL ignoresEndless;
+
+@property (nonatomic) BOOL ignoresPhysicalResist;
+@property (nonatomic) BOOL ignoresMagicalResist;
+
+@property (nonatomic) BOOL givesClueReward;
+@property (nonatomic) BOOL givesCommonItemReward;
+@property (nonatomic) BOOL givesUniqueItemReward;
+@property (nonatomic) BOOL givesSpellReward;
+
+
 
 /*
  
