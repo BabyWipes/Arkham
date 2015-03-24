@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 @end
 
-#import "SkillSetup.h"
+#import "SetupUtils.h"
 #import "Skill.h"
 
 @implementation ArkhamHorrorCLI
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     cli.foreground = CodeFGWhite;
     cli.background = CodeBGBlack;
     cli.printsColors = NO;
-
+    
 #ifndef DEBUG // xcode terminal doesn't print colors
     cli.printsColors = YES;
 #endif
@@ -318,12 +318,12 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)processEventsQueue {
     [self processNextEvent]; // recursively resolves each event in order
     [self getString:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
-    [self println:[self stringf:@"%@",self.currentGame.skillsDeck]];
 }
 
 -(void)processNextEvent {
     if (!self.currentGame.gameOver){
         if (self.eventsQueue.count > 0){
+            NSLog(@"got an event to do!");
             AHEvent event = [self.eventsQueue firstObject];
             [self.eventsQueue removeObject:event];
             event();
@@ -335,7 +335,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 }
 
 -(void)enqueueEvent:(AHEvent)event {
-    [self.eventsQueue addObject:eventsQueue];
+    [self.eventsQueue addObject:event];
 }
 
 -(void)pushEvent:(AHEvent)event {
@@ -417,6 +417,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     AHBlock(focusBlock) = ^{
         NSLog(@"Fake focusing skills...");
         callback();
+        [self processNextEvent];
     };
     [self enqueueEvent:focusBlock];
 }

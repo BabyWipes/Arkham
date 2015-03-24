@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "Card.h"
 
 @interface Ally : Card <AllyEventDelegate>
@@ -34,7 +33,6 @@
 @property (nonatomic) BOOL givesCommonItemReward;
 @property (nonatomic) BOOL givesUniqueItemReward;
 @property (nonatomic) BOOL givesSpellReward;
-
 
 
 /*

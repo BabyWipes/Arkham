@@ -9,7 +9,7 @@
 #import "AncientOne.h"
 #import "Monster.h"
 #import "Game.h"
-#import "MonsterSetup.h"
+#import "SetupUtils.h"
 
 #pragma mark - Prototype
 
@@ -221,7 +221,7 @@
 
 -(void)applySetupEffect{
     // add the 5 mask mosnters    ;
-    [[Game currentGame].monsterCup addObjectsFromArray:[MonsterSetup arkhamHorrorMaskMonsters]];
+    [[Game currentGame].monsterCup addObjectsFromArray:[SetupUtils arkhamHorrorMaskMonsters]];
 }
 
 -(void)attack{

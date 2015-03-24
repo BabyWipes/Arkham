@@ -16,7 +16,7 @@ NSString * const kClassKey = @"_ah_class_";
 
 +(instancetype)generate:(NSDictionary *)properties {
     Class class = NSClassFromString(properties[kClassKey]);
-    [class class];
+    [class class]; // load class into runtime if needed
     id instance = [[class alloc] initWithProperties:properties];
     return instance;
 }
@@ -46,7 +46,7 @@ NSString * const kClassKey = @"_ah_class_";
     NSMutableDictionary *json = [NSMutableDictionary new];
     for (NSString *propertyName in [self propertyNames]) {
         id value = [self valueForKey:propertyName];
-        if ([[value class] isSubclassOfClass:[JSONObject class]]){
+        if ([value isKindOfClass:[JSONObject class]] && [value respondsToSelector:@selector(json)]){ // child is an instance of JSONObject
             json[propertyName] = [value json];
         }
         else if (value != nil) {
@@ -91,7 +91,12 @@ NSString * const kClassKey = @"_ah_class_";
     for (unsigned idx = 0; idx < count; idx++) {
         objc_property_t property = properties[idx];
         NSString *name = [NSString stringWithUTF8String:property_getName(property)];
-        [propertyList addObject:name];
+        if (![name isEqualToString:@"description"] &&
+            ![name isEqualToString:@"debugDescription"] &&
+            ![name isEqualToString:@"superclass"] &&
+            ![name isEqualToString:@"hash"]){
+            [propertyList addObject:name];
+        }
     }
     
     free(properties);

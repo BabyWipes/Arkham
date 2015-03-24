@@ -13,11 +13,9 @@
 #import "Monster.h"
 #import "Macros.h"
 #import "Skill.h"
+#import "Item.h"
 
-#import "MonsterSetup.h"
-#import "ItemSetup.h"
-
-#import "JSONObject.h"
+#import "SetupUtils.h"
 
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
@@ -30,14 +28,6 @@ static Game *singletonInstance = nil;
     static dispatch_once_t singletonOnceToken;
     dispatch_once(&singletonOnceToken, ^{
         singletonInstance = [[Game alloc] initWithSettings:gameSetupDict];
-        
-        JSONObject *obj = [[JSONObject alloc] init];
-               NSDictionary *json = obj.json;
-        
-        NSLog(@"JSON %@",json);
-        
-        id newObj = [JSONObject generate:json];
-        
     });
     return singletonInstance;
 }
@@ -145,7 +135,7 @@ static Game *singletonInstance = nil;
         
         [self setupBoard];
         [self setupDecks:settings];
-        self.monsterCup = [MonsterSetup arkhamHorrorMonsters];
+        self.monsterCup = [SetupUtils arkhamHorrorMonsters];
         
         self.outskirts = [NSMutableArray new];
         
@@ -203,7 +193,7 @@ static Game *singletonInstance = nil;
 }
 
 -(void)setupDecks:(NSDictionary*)settings {
-    self.commonsDeck = [ItemSetup arkhamHorrorCommons];
+    self.commonsDeck = [SetupUtils arkhamHorrorCommons];
     self.uniquesDeck = [NSMutableArray new];
     self.spellsDeck = [NSMutableArray new];
     self.alliesDeck = [NSMutableArray new];
@@ -217,7 +207,7 @@ static Game *singletonInstance = nil;
     NSArray *skillsArr = settings[@"Skills"];
     for (NSDictionary *skillSetupDict in skillsArr){
         NSUInteger count = [skillSetupDict[@"count"] unsignedIntegerValue];
-        NSDictionary *skillProperties = skillSetupDict[@"skill_dict"];
+        NSDictionary *skillProperties = skillSetupDict[@"setup_dict"];
         for (int idx = 0; idx < count; idx++) {
             Skill *skill = [[Skill alloc] initWithProperties:skillProperties];
             [self.skillsDeck addObject:skill];
@@ -331,6 +321,8 @@ static Game *singletonInstance = nil;
 }
 
 -(void)upkeepRefresh { // all investigators items, spells, etc refresh
+    NSLog(@"phase: upkeep refresh");
+
     for (Investigator *investigator in self.investigators){
         for (Item *item in investigator.commonItems){
             item.exhausted = NO;
@@ -350,6 +342,8 @@ static Game *singletonInstance = nil;
 // players may complete these in any order (IE completing a retainer roll to gain it's profit before paying off a bank loan)
 // bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
 -(void)upkeepAction {
+    NSLog(@"phase: upkeep action");
+
     Investigator *currentPlayer = self.investigators[self.currentPlayerIndex];
     
     // TODO - a player may resolve these events in any order
@@ -425,43 +419,65 @@ static Game *singletonInstance = nil;
 
 // players adjust skills based on focus
 -(void)upkeepFocus {
+    NSLog(@"phase: upkeep focus");
     [self.uiDelegate enqueueFocusEvent:^{
         NSLog(@"Did Focus!");
         [self advanceGamePhase];
     }];
 }
 -(void)movementArkham {
+    NSLog(@"phase: move arkham");
+
     [self advanceGamePhase];
 }
 -(void)movementOtherWorld {
+    NSLog(@"phase: move other world");
+
     [self advanceGamePhase];
 }
 -(void)movementDelayed {
+    NSLog(@"phase: move delayed");
+
     [self advanceGamePhase];
 }
 -(void)encounterArkhamNoGate {
+    NSLog(@"phase: arkham no gate");
+
     [self advanceGamePhase];
 }
 -(void)encounterArkhamGate {
+    NSLog(@"phase: arkham gate");
+
     [self advanceGamePhase];
 }
 -(void)encounterOtherWorld {
+    NSLog(@"phase: encounter other world");
+
     [self advanceGamePhase];
 }
 -(void)mythosGatesSpawn {
+    NSLog(@"phase: gates spawn");
+
     [self advanceGamePhase];
 }
 -(void)mythosPlaceClues {
+    NSLog(@"phase: mythos place clues");
+
     [self advanceGamePhase];
 }
 -(void)mythosMoveMonsters {
+    NSLog(@"phase: mythos move monsters");
+
     [self advanceGamePhase];
 }
 -(void)mythosEffect {
+    NSLog(@"phase: mythos effect");
+
     [self advanceGamePhase];
 }
 
 -(void)turnOver {
+    NSLog(@"phase: turn over");
     self.firstPlayerIndex++;
     if (self.firstPlayerIndex == self.investigators.count){
         self.firstPlayerIndex = 0;
