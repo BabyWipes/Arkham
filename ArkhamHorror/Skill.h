@@ -9,7 +9,7 @@
 #import "Card.h"
 #import "Defines.h"
 
-@interface Skill : Card <NSCopying, JSONObject>
+@interface Skill : Card <NSCopying>
 @property (nonatomic) SkillCheckType skillAffected;
 @property (nonatomic) BOOL allowsReroll; // if yes, reroll skill check
 @property (nonatomic) NSInteger dieBonus;

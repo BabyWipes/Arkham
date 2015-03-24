@@ -9,13 +9,6 @@
 #ifndef ArkhamHorror_Defines_h
 #define ArkhamHorror_Defines_h
 
-
-@protocol JSONObject <NSObject>
--(instancetype)initWithProperties:(NSDictionary*)properties;
--(NSDictionary*)exportJSON;
-
-@end
-
 #pragma mark - Skill Check Types
 
 typedef NS_ENUM(NSUInteger, SkillCheckType) {
@@ -55,6 +48,8 @@ typedef NS_ENUM(NSUInteger, MonsterDimensionSymbol){
     MonsterDimensionSymbolSlash,
     MonsterDimensionSymbolPlus,
 };
+
+#pragma mark - Monster damage resistance
 
 typedef NS_ENUM(NSUInteger, MonsterDamageImmunity){
     MonsterDamageImmunityNone = 0,

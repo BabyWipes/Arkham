@@ -21,16 +21,7 @@
     }
     return self;
 }
--(instancetype)initWithProperties:(NSDictionary*)properties {
-    self = [self init];
-    if (self){
-        self.name = properties[@"name"];
-        self.skillAffected = [properties[@"skill_check_type"] unsignedIntegerValue];
-        self.skillBonus = [properties[@"skill_bonus"] integerValue];
-        self.dieBonus = [properties[@"die_bonus"] integerValue];
-    }
-    return self;
-}
+
 -(NSDictionary*)exportJSON {
     return @{@"name":self.name,
              @"skill_check_type":@(self.skillAffected),

@@ -17,25 +17,13 @@
 -(instancetype)init {
     self = [super init];
     if (self){
-        self.name = @"Prototype";
+        self.name = @"Prototype Ancient One";
         self.combatRating = 0;
         self.maxDoom = 15;
         self.doomCounter = 0;
         self.attackDifficultyModifier = 1;
         self.physicalResistance = MonsterDamageImmunityNone;
         self.magicalResistance = MonsterDamageImmunityNone;
-    }
-    return self;
-}
--(instancetype)initWithProperties:(NSDictionary*)properties {
-    self = [super init];
-    if (self){
-        self.name = properties[@"name"];
-        self.combatRating = [properties[@"combat_rating"] integerValue];
-        self.maxDoom = [properties[@"max_doom"] integerValue];
-        self.attackDifficultyModifier = [properties[@"attack_difficulty"] integerValue];
-        self.physicalResistance = [properties[@"p_resist"] unsignedIntegerValue];
-        self.magicalResistance = [properties[@"m_resist"] unsignedIntegerValue];
     }
     return self;
 }
@@ -52,15 +40,6 @@
     //pass
 }
 
--(NSDictionary*)exportJSON {
-    NSDictionary *exportDict = @{@"name":self.name,
-                                 @"combat_rating":@(self.combatRating),
-                                 @"max_doom":@(self.maxDoom),
-                                 @"attack_difficulty":@(self.attackDifficultyModifier),
-                                 @"p_resist":@(self.physicalResistance),
-                                 @"m_resist":@(self.magicalResistance)};
-    return exportDict;
-}
 @end
 
 #pragma mark - Azathoth

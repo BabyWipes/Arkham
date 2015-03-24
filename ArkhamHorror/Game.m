@@ -17,6 +17,8 @@
 #import "MonsterSetup.h"
 #import "ItemSetup.h"
 
+#import "JSONObject.h"
+
 @interface Game ()
 @property (strong, nonatomic) PESGraph *pathFindingGraph;
 @end
@@ -28,6 +30,14 @@ static Game *singletonInstance = nil;
     static dispatch_once_t singletonOnceToken;
     dispatch_once(&singletonOnceToken, ^{
         singletonInstance = [[Game alloc] initWithSettings:gameSetupDict];
+        
+        JSONObject *obj = [[JSONObject alloc] init];
+               NSDictionary *json = obj.json;
+        
+        NSLog(@"JSON %@",json);
+        
+        id newObj = [JSONObject generate:json];
+        
     });
     return singletonInstance;
 }
@@ -37,7 +47,7 @@ static Game *singletonInstance = nil;
         return singletonInstance;
     }
     else {
-        NSLog(@"Game is un-initialized!");
+        logError(@"Game is un-initialized!");
     }
     return nil;
 }
@@ -129,7 +139,6 @@ static Game *singletonInstance = nil;
 -(instancetype)initWithSettings:(NSDictionary*)settings {
     self = [super init];
     if (self){
-        
         self.exitCode = ExitCodeNormal;
         self.currentPhase = GamePhaseSetupAncientOne;
         self.gameOver = NO;

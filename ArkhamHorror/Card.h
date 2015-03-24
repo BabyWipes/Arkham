@@ -10,9 +10,10 @@
 
 #import "Defines.h"
 #import "GameEventDelegate.h"
+#import "JSONObject.h"
 
 // All items drawable from a Deck must extend from the Card base class
-@interface Card : NSObject <JSONObject>
+@interface Card : JSONObject
 @property (nonatomic) CardType cardType;
 @property (strong, nonatomic) NSString *name;
 @end

@@ -10,8 +10,9 @@
 @class Neighborhood;
 
 #import <Foundation/Foundation.h>
+#import "JSONObject.h"
 
-@interface Movable : NSObject
+@interface Movable : JSONObject
 @property (nonatomic, readonly) Neighborhood *currentNeighborhood;
 @property (strong, nonatomic) Location *currentLocation;
 @end

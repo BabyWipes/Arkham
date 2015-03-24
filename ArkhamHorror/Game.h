@@ -13,6 +13,7 @@
 #import "Ally.h"
 #import "Mythos.h"
 #import "ArkhamHorrorUIAPI.h"
+#import "Macros.h"
 
 @interface Game : NSObject
 

@@ -16,16 +16,7 @@
     }
     return self;
 }
--(id)initWithProperties:(NSDictionary *)properties {
-    self = [self init];
-    if (self){
-        self.name = properties[@"name"];
-    }
-    return self;
-}
--(NSDictionary*)exportJSON {
-    return @{@"name":self.name};
-}
+
 -(NSString*)description {
     return [NSString stringWithFormat:@"%@:%@",[super description],self.name];
 }

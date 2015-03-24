@@ -235,7 +235,7 @@ int const kBlessingNeutral = 1;
 
 #pragma mark - Description
 -(NSString*)description {
-    return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];
+    return [NSString stringWithFormat:@"%@:%@",[super description],self.name];
 }
 -(NSString*)skillsString {
     return [NSString stringWithFormat:@"%@: Sp:%li, Sn:%li, Fi:%li, Wi:%li, Lo:%li, Lu:%li",

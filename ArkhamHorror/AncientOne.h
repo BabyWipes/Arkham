@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Defines.h"
-
-@interface AncientOne : NSObject
+#import "JSONObject.h"
+@interface AncientOne : JSONObject
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger combatRating;
 @property (nonatomic) NSInteger doomCounter;
@@ -22,8 +22,6 @@
 -(void)buffWorshippers;
 -(void)awaken;
 -(void)attack;
--(instancetype)initWithProperties:(NSDictionary*)properties;
--(NSDictionary*)exportJSON;
 
 @end
 

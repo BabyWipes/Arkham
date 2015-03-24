@@ -36,13 +36,11 @@
 @property (nonatomic) NSInteger nightmarishRating;
 @property (nonatomic) NSInteger overwhelmingRating;
 
--(id)initWithProperties:(NSDictionary*)properties;
 -(void)dealHorrorDamage:(Investigator*)investigator;
 -(void)dealEvadeFailDamage:(Investigator*)investigator;
 -(void)dealCombatDamage:(Investigator*)investigator;
 -(void)move;
 
--(NSDictionary*)exportJSON;
 @end
 
 @interface ChthonianMonster : Monster

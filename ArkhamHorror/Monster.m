@@ -14,6 +14,8 @@
 
 @implementation Monster
 
+#pragma mark - NSCopying
+
 -(id)copyWithZone:(NSZone *)zone {
     Monster *copy = [[Monster alloc] init];
     copy.name = [self.name copy];
@@ -42,6 +44,8 @@
     return copy;
 }
 
+#pragma mark - JSONObject
+
 -(NSDictionary*)exportJSON {
     NSDictionary *exportDict = @{@"name":self.name,
                                  @"toughness":@(self.toughness),
@@ -64,7 +68,7 @@
 }
 
 -(id)initWithProperties:(NSDictionary *)properties {
-    self = [super init];
+    self = [self init];
     if (self){
         self.name = properties[@"name"];
         self.toughness = [properties[@"toughness"] integerValue];
@@ -84,13 +88,30 @@
         
         self.movementType = [properties[@"movement"] unsignedIntegerValue];
         self.dimension = [Dimension ofType:[properties[@"dimension"] unsignedIntegerValue]];
-
+        
         self.nightmarishRating = [properties[@"nightmarish"] integerValue];
         self.overwhelmingRating = [properties[@"overwhelming"] integerValue];
         
     }
     return self;
 }
+
+#pragma mark - init
+
+-(id)init {
+    self = [super init];
+    if (self){
+        self.name = @"Monster Prototype";
+        self.toughness = 1;
+        self.awareness = 0;
+        self.movementType = MonsterMovementTypeNormal;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
+    }
+    return self;
+}
+
+#pragma mark - movement
+
 -(void)move {
     if (self.movementType == MonsterMovementTypeNormal){
         [self moveNormally];
@@ -234,9 +255,11 @@
 #pragma mark - Logging
 
 -(NSString*)description {
-    return [NSString stringWithFormat:@"%@(%@)",[super description],self.name];
+    return [NSString stringWithFormat:@"%@:%@",[super description],self.name];
 }
 @end
+
+#pragma mark - unique monsters
 
 @implementation ChthonianMonster
 -(void)moveUnique {
