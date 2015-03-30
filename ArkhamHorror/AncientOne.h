@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Defines.h"
-#import "JSONObject.h"
-@interface AncientOne : JSONObject
+#import "MFJSONObject.h"
+#import "Game.h"
+
+@interface AncientOne : MFJSONObject
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger combatRating;
 @property (nonatomic) NSInteger doomCounter;
@@ -18,10 +20,10 @@
 @property (nonatomic) MonsterDamageImmunity physicalResistance;
 @property (nonatomic) MonsterDamageImmunity magicalResistance;
 
--(void)applySetupEffect;
--(void)buffWorshippers;
--(void)awaken;
--(void)attack;
+-(void)applySetupEffect:(Game*)game;
+-(void)buffWorshippers:(Game*)game;
+-(void)awaken:(Game*)game;
+-(void)attack:(Game*)game;
 
 @end
 

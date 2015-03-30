@@ -9,34 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Card.h"
 
-@interface Ally : Card <AllyEventDelegate>
-
-@property (nonatomic) SkillCheckType skillAffected;
-@property (nonatomic) NSInteger skillBonus;
-@property (nonatomic) SkillCheckType secondSkillAffected;
-@property (nonatomic) NSInteger secondSkillBonus;
-
-@property (nonatomic) NSInteger maxStaminaBonus;
-@property (nonatomic) NSInteger maxSanityBonus;
-
-@property (nonatomic) BOOL discardToHealStamina;
-@property (nonatomic) BOOL discardToHealSanity;
-
-@property (nonatomic) BOOL ignoresNightmarish;
-@property (nonatomic) BOOL ignoresOverwhelming;
-@property (nonatomic) BOOL ignoresEndless;
-
-@property (nonatomic) BOOL ignoresPhysicalResist;
-@property (nonatomic) BOOL ignoresMagicalResist;
-
-@property (nonatomic) BOOL givesClueReward;
-@property (nonatomic) BOOL givesCommonItemReward;
-@property (nonatomic) BOOL givesUniqueItemReward;
-@property (nonatomic) BOOL givesSpellReward;
-
-
 /*
- 
  ALLIES
  Name                   Ability
  ------------------------------
@@ -51,6 +24,43 @@
  Sir William Brinton    +1 max STA, discard to full restore STA
  Thomas F. Malone       +1 Fight, +1 Lore, on gain: +1 spell
  Tom "Mountain" Murphy  +2 Fight, you take no damage from Overwhelming
- 
  */
+
+@interface Ally : Card <CardEventDelegate>
+-(void)wasGivenToInvestigator:(Investigator*)investigator;
+-(BOOL)canBeDiscarded;
+-(void)wasTakenFromInvestigator:(Investigator*)investigator;
+@end
+
+@interface AllyAnnaKaslow : Ally
+@end
+
+@interface AllyDuke : Ally
+@end
+
+@interface AllyEricColt : Ally
+@end
+
+@interface AllyJohnLegrasse : Ally
+@end
+
+@interface AllyProfessorArmitage : Ally
+@end
+
+@interface AllyRichardUptonPickman : Ally
+@end
+
+@interface AllyRubyStandish : Ally
+@end
+
+@interface AllyRyanDean : Ally
+@end
+
+@interface AllySirWilliamBrinton : Ally
+@end
+
+@interface AllyThomasFMalone : Ally
+@end
+
+@interface AllyTomMountainMurphy : Ally
 @end

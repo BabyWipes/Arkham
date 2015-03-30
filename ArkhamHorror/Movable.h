@@ -10,9 +10,9 @@
 @class Neighborhood;
 
 #import <Foundation/Foundation.h>
-#import "JSONObject.h"
+#import "MFJSONObject.h"
 
-@interface Movable : JSONObject
-@property (nonatomic, readonly) Neighborhood *currentNeighborhood;
-@property (strong, nonatomic) Location *currentLocation;
+@interface Movable : MFJSONObject
+@property (weak, nonatomic) Neighborhood *currentNeighborhood;
+@property (weak, nonatomic) Location *currentLocation;
 @end

@@ -27,16 +27,16 @@
     }
     return self;
 }
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     //pass
 }
--(void)buffWorshippers{
+-(void)buffWorshippers:(Game*)game{
     //pass
 }
--(void)awaken{
+-(void)awaken:(Game*)game{
     //pass
 }
--(void)attack{
+-(void)attack:(Game*)game{
     //pass
 }
 
@@ -56,17 +56,14 @@
     return self;
 }
 
--(void)buffWorshippers {
+-(void)buffWorshippers:(Game*)game {
     for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster.name isEqualToString:@"Maniac"]){
             monster.toughness+=1;
         }
     }
 }
--(void)awaken {
-    // lose game
-}
--(void)attack {
+-(void)awaken:(Game*)game {
     // lose game
 }
 
@@ -85,14 +82,14 @@
     }
     return self;
 }
--(void)applySetupEffect {
+-(void)applySetupEffect:(Game*)game {
     // all players max SAN -1, max STA -1
     for (Investigator *investigator in [Game currentGame].investigators){
         investigator.maxSanity--;
         investigator.maxStamina--;
     }
 }
--(void)buffWorshippers {
+-(void)buffWorshippers:(Game*)game {
     for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster.name isEqualToString:@"Cultist"]){
             monster.horrorRating = -2;
@@ -101,7 +98,7 @@
     }
 }
 
--(void)attack {
+-(void)attack:(Game*)game {
     for (Investigator *player in [Game currentGame].investigators){
         // prompt, pick lose 1 max SAN or 1 max STA
         
@@ -134,13 +131,13 @@
     }
     return self;
 }
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game {
     [Game currentGame].gateSealCost = 8;
 }
--(void)awaken {
+-(void)awaken:(Game*)game {
     self.combatRating = [Game currentGame].terrorLevel * -1;
 }
--(void)buffWorshippers {
+-(void)buffWorshippers:(Game*)game {
     for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster.name isEqualToString:@"Cultist"]){
             monster.movementType = MonsterMovementTypeFlying;
@@ -148,7 +145,7 @@
         }
     }
 }
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt luck check of self.attackDifficultyModifer
         // on fail, lose 2 SAN
@@ -174,22 +171,22 @@
     }
     return self;
 }
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     [Game currentGame].ignoresWeatherMythos = YES;
     // tell game to inflict 1 sta of damage to every player in street at end of mythos phase
 }
--(void)buffWorshippers {
+-(void)buffWorshippers:(Game*)game {
     for (Monster *monster in [Game currentGame].monsterCup){
         if ([monster.name isEqualToString:@"Cultist"]){
             monster.toughness+=2;
         }
     }
 }
--(void)awaken{
+-(void)awaken:(Game*)game{
     // foreach player, foreach item, roll, if fail, discard item
     
 }
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt fight check of self.attackDifficultyModifer
         // on fail, lose 2 STA
@@ -219,12 +216,12 @@
     return self;
 }
 
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     // add the 5 mask mosnters    ;
     [[Game currentGame].monsterCup addObjectsFromArray:[SetupUtils arkhamHorrorMaskMonsters]];
 }
 
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt lore check of self.attackDifficultyModifer
         // on fail, lose 1 clue
@@ -252,13 +249,13 @@
     return self;
 }
 
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     for (Monster *monster in [Game currentGame].monsterCup){
         monster.toughness++;
     }
 }
 
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt sneak check of self.attackDifficultyModifer
         // on fail, lose 1 monsterTrophy
@@ -285,11 +282,11 @@
     return self;
 }
 
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     // gain 1 doom token when investigator is lost in time and space
 }
 
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt speed check of self.attackDifficultyModifer
         // on fail lose 1 SAN + 1 STA
@@ -318,13 +315,13 @@
     return self;
 }
 
--(void)applySetupEffect{
+-(void)applySetupEffect:(Game*)game{
     [Game currentGame].gateDifficultyModifier++;
     
     //TODO if player is lost in time+space they are instead devoured
 }
 
--(void)attack{
+-(void)attack:(Game*)game{
     for (Investigator *player in [Game currentGame].investigators){
         // prompt will check of self.attackDifficultyModifer
         // on fail, lose 1 gate trophy

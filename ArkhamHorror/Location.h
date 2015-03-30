@@ -11,18 +11,17 @@
 #import "Neighborhood.h"
 
 // base class, locations with no special encounters are this
-@interface Location : NSObject
+@interface Location : MFJSONObject
+
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) BOOL isStable;
 @property (nonatomic) BOOL isStreet;
 @property (strong, nonatomic) NSMutableArray *investigatorsHere;
 @property (strong, nonatomic) NSMutableArray *monstersHere;
-@property (weak, nonatomic) Neighborhood *neighborhood;
 @property (nonatomic) NSInteger cluesHere;
 
 -(instancetype)initWithStability:(BOOL)isStable;
--(instancetype)initWithProperties:(NSDictionary*)properties;
--(NSDictionary*)exportJSON;
+
 +(instancetype)street;
 @end
 

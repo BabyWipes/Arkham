@@ -11,9 +11,6 @@
 
 @interface Skill : Card <NSCopying>
 @property (nonatomic) SkillCheckType skillAffected;
-@property (nonatomic) BOOL allowsReroll; // if yes, reroll skill check
-@property (nonatomic) NSInteger dieBonus;
-@property (nonatomic) NSInteger skillBonus;
 /*
 ///
 SKILLS - 2 of each in deck
@@ -31,4 +28,10 @@ Speed              +1 speed, when you spend a clue to add speed, add an extra di
 Will               +1 will, when you spend a clue to add will, add an extra die
 */
 
+@end
+
+@interface RerollSkill : Skill
+@end
+
+@interface BoostSkill : Skill
 @end

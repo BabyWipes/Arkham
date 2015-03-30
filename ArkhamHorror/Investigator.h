@@ -10,6 +10,7 @@
 #import "Movable.h"
 
 @interface Investigator : Movable
+
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *occupation;
 @property (strong, nonatomic) NSString *home;
@@ -44,17 +45,19 @@
 -(void)shiftLoreUp;
 -(void)shiftLuckUp;
 
-@property (nonatomic) NSMutableArray *commonItems;
-@property (nonatomic) NSMutableArray *uniqueItems;
-@property (nonatomic) NSMutableArray *skills;
-@property (nonatomic) NSMutableArray *spells;
-@property (nonatomic) NSMutableArray *allies;
+@property (strong, nonatomic) NSMutableArray *commonItems;
+@property (strong, nonatomic) NSMutableArray *uniqueItems;
+@property (strong, nonatomic) NSMutableArray *skills;
+@property (strong, nonatomic) NSMutableArray *spells;
+@property (strong, nonatomic) NSMutableArray *allies;
 
-@property (nonatomic) NSMutableArray *monsterTrophies;
+@property (strong, nonatomic) NSMutableArray *monsterTrophies;
 @property (nonatomic) NSInteger *gateTrophies;
 
-@property (nonatomic) BOOL isBlessed;
-@property (nonatomic) BOOL isCursed;
+-(BOOL)blessed;
+-(void)setBlessed:(BOOL)blessed;
+-(BOOL)cursed;
+-(void)setCursed:(BOOL)cursed;
 
 // you can skip rolling for a bank loan, blessing, curses, and retainers the first upkeep after you get it, setup included
 @property (nonatomic) BOOL bankLoanSkipRolling;
@@ -81,6 +84,13 @@
 @property (nonatomic) NSUInteger startingRandomUniques;
 @property (nonatomic) NSUInteger startingRandomSpells;
 @property (nonatomic) NSUInteger startingRandomSkills;
+
+// ally effects
+@property (nonatomic) BOOL ignoresPhysicalResistance;
+@property (nonatomic) BOOL ignoresMagicalResistance;
+@property (nonatomic) BOOL ignoresNightmarish;
+@property (nonatomic) BOOL ignoresOverwhelming;
+@property (nonatomic) BOOL ignoresEndless;
 
 // initialize an overpowered dev player
 +(instancetype)testingInvestigator;

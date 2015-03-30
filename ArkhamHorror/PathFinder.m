@@ -24,9 +24,9 @@
     PESGraph *graph = [[PESGraph alloc] init];
     NSMutableDictionary *hoodNodes = [NSMutableDictionary new];
 
-    // make a node for each street
+    // make a node for each street, hood streets share the same name as their hood
     for (Neighborhood *hood in neighborhoods){
-        hoodNodes[hood.street.name] = [PESGraphNode nodeWithIdentifier:hood.street.name];
+        hoodNodes[hood.name] = [PESGraphNode nodeWithIdentifier:hood.name];
     }
     
     PESGraphNode *hoodNode;
@@ -37,25 +37,22 @@
     // connect streets
     for (Neighborhood *hood in neighborhoods){
         hoodNode = hoodNodes[hood.street.name];
-        if (hood.blackStreetConnection){
-            adjecent = hood.blackStreetConnection.street; // bidirection, the other direction is a white connection
-            adjecentNode = hoodNodes[adjecent.name];
+        if (hood.blackStreetConnection){ // bidirection, the other direction is a white connection
+            adjecentNode = hoodNodes[hood.blackStreetConnection];
             
             edgeName = [NSString stringWithFormat:@"%@ <-> %@",hood.name,adjecent.name];
             [graph addBiDirectionalEdge:[PESGraphEdge edgeWithName:edgeName andWeight:@1] fromNode:hoodNode toNode:adjecentNode];
         }
         
         if (hood.colorlessStreetConnection){
-            adjecent = hood.colorlessStreetConnection.street;
-            adjecentNode = hoodNodes[adjecent.name];
+            adjecentNode = hoodNodes[hood.colorlessStreetConnection];
             
             edgeName = [NSString stringWithFormat:@"%@ <-> %@",hood.name,adjecent.name];
             [graph addBiDirectionalEdge:[PESGraphEdge edgeWithName:edgeName andWeight:@1] fromNode:hoodNode toNode:adjecentNode];
         }
         
-        if (hood.hasSecondaryColorlessStreet && hood.secondaryColorlessStreetConnection){
-            adjecent = hood.secondaryColorlessStreetConnection.street;
-            adjecentNode = hoodNodes[adjecent.name];
+        if (hood.secondaryColorlessStreetConnection){
+            adjecentNode = hoodNodes[hood.secondaryColorlessStreetConnection];
             
             edgeName = [NSString stringWithFormat:@"%@ <-> %@",hood.name,adjecent.name];
             [graph addBiDirectionalEdge:[PESGraphEdge edgeWithName:edgeName andWeight:@1] fromNode:hoodNode toNode:adjecentNode];

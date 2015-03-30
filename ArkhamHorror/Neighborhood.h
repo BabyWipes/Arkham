@@ -10,25 +10,22 @@
 @class Location;
 
 #import <Foundation/Foundation.h>
+#import "MFJSONObject.h"
 
-@interface Neighborhood : NSObject
+@interface Neighborhood : MFJSONObject
+
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *encounterDeck;
 @property (strong, nonatomic) NSArray *locations;
 @property (strong, nonatomic) Location *street;
-@property (nonatomic) BOOL hasSecondaryColorlessStreet;
 
-@property (strong, nonatomic) Neighborhood *whiteStreetConnection;
-@property (strong, nonatomic) Neighborhood *blackStreetConnection;
-@property (strong, nonatomic) Neighborhood *colorlessStreetConnection;
-@property (strong, nonatomic) Neighborhood *secondaryColorlessStreetConnection;
+@property (strong, nonatomic) NSString *whiteStreetConnection;
+@property (strong, nonatomic) NSString *blackStreetConnection;
+@property (strong, nonatomic) NSString *colorlessStreetConnection;
+@property (strong, nonatomic) NSString *secondaryColorlessStreetConnection;
 
-@property (strong, nonatomic) NSString *whiteStreetConnectionName;
-@property (strong, nonatomic) NSString *blackStreetConnectionName;
-@property (strong, nonatomic) NSString *colorlessStreetConnectionName;
-@property (strong, nonatomic) NSString *secondaryColorlessStreetConnectionName;
+-(void)setWhiteStreetConnectingNeighborhood:(Neighborhood*)connectingHood;
+-(void)setBlackStreetConnectingNeighborhood:(Neighborhood*)connectingHood;
+-(void)setColorlessConnectingNeighborhood:(Neighborhood*)connectingHood;
 
-+(NSArray*)arkhamBoard;
--(instancetype)initWithProperties:(NSDictionary*)properties;
--(NSDictionary*)exportJSON;
 @end

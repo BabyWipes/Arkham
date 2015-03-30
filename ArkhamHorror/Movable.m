@@ -12,6 +12,11 @@
 
 @implementation Movable
 
++(NSArray*)ignoredProperties {
+    return @[@"currentLocation",
+             @"currentNeighborhood"];
+}
+
 -(void)setCurrentLocation:(Location *)currentLocation {
     if (_currentLocation != currentLocation) {
         _currentLocation = currentLocation;
@@ -22,9 +27,6 @@
             [_currentLocation.monstersHere addObject:self];
         }
     }
-}
--(Neighborhood*)currentNeighborhood {
-    return self.currentLocation.neighborhood;
 }
 
 @end

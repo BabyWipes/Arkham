@@ -11,10 +11,217 @@
 #import "Skill.h"
 #import "Monster.h"
 #import "Ally.h"
+#import "SettingsManager.h"
+#import "Neighborhood.h"
+#import "Location.h"
+#import "AncientOne.h"
 
 @implementation SetupUtils
 
++(void)resetArkhamHorrorSettings {
+    NSMutableDictionary *json = [[SettingsManager arkhamHorrorDefaults] mutableCopy];
+    NSMutableArray *jsonItems = [NSMutableArray new];
+    for (Skill *skill in [self arkhamHorrorSkills]){
+        [jsonItems addObject:@{@"count":@2,
+                               @"setup_dict":skill.json}];
+    }
+    json[@"Skills"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
+    for (Ally *ally in [self arkhamHorrorAllies]){
+        [jsonItems addObject:ally.json];
+    }
+    json[@"Allies"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
+    for (AncientOne *goo in [self arkhamHorrorAncientOnes]){
+        [jsonItems addObject:goo.json];
+    }
+    json[@"AncientOnes"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
+    for (Neighborhood *hood in [self arkhamBoard]){
+        [jsonItems addObject:hood.json];
+    }
+    json[@"Neighborhoods"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
+    [SettingsManager writeSettings:json named:nil];
+    
+}
 
++(NSArray*)arkhamHorrorAncientOnes {
+    NSMutableArray *goos = [NSMutableArray new];
+    AncientOne *goo;
+    
+    goo = [[AncientOneAzathoth alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneCthulhu alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneHastur alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneIthaqua alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneNyarlathotep alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneShubNiggurath alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneYig alloc] init];
+    [goos addObject:goo];
+    
+    goo = [[AncientOneYogSothoth alloc] init];
+    [goos addObject:goo];
+    
+    return goos;
+}
+
++(NSArray*)arkhamBoard {
+    
+    Neighborhood *downtown = [[Neighborhood alloc] init];
+    downtown.name = @"Downtown";
+    
+    Neighborhood *easttown = [[Neighborhood alloc] init];
+    easttown.name = @"Easttown";
+    
+    Neighborhood *frenchHill = [[Neighborhood alloc] init];
+    frenchHill.name = @"French Hill";
+    
+    Neighborhood *merchantDistrict = [[Neighborhood alloc] init];
+    merchantDistrict.name = @"Merchant District";
+    
+    Neighborhood *miskatonicUniversity = [[Neighborhood alloc] init];
+    miskatonicUniversity.name = @"Miskatonic University";
+    
+    Neighborhood *northside = [[Neighborhood alloc] init];
+    northside.name = @"Northside";
+    
+    Neighborhood *rivertown = [[Neighborhood alloc] init];
+    rivertown.name = @"Rivertown";
+    
+    Neighborhood *southside = [[Neighborhood alloc] init];
+    southside.name = @"Southside";
+    
+    Neighborhood *uptown = [[Neighborhood alloc] init];
+    uptown.name = @"Uptown";
+    
+    NSArray *arkham = @[downtown,
+                        easttown,
+                        frenchHill,
+                        merchantDistrict,
+                        miskatonicUniversity,
+                        northside,
+                        rivertown,
+                        southside,
+                        uptown];
+    
+    [downtown setWhiteStreetConnectingNeighborhood:easttown];
+    [downtown setBlackStreetConnectingNeighborhood:northside];
+    [downtown setColorlessConnectingNeighborhood:merchantDistrict];
+    
+    [easttown setWhiteStreetConnectingNeighborhood:rivertown];
+    
+    [frenchHill setWhiteStreetConnectingNeighborhood:southside];
+    [frenchHill setBlackStreetConnectingNeighborhood:rivertown];
+    [frenchHill setColorlessConnectingNeighborhood:miskatonicUniversity];
+
+    [merchantDistrict setWhiteStreetConnectingNeighborhood:northside];
+    [merchantDistrict setBlackStreetConnectingNeighborhood:miskatonicUniversity];
+    merchantDistrict.secondaryColorlessStreetConnection = rivertown.name;
+    
+    [miskatonicUniversity setBlackStreetConnectingNeighborhood:uptown];
+    
+    [southside setWhiteStreetConnectingNeighborhood:uptown];
+    
+    
+    //// downtown
+    BankLocation *bank = [[BankLocation alloc] init]; // get bank loan if has none
+    HealerLocation *asylum = [[HealerLocation alloc] initWithHealsSanity:YES]; // 1 free sanity or pay 2 max sanity
+    Location *independenceSq = [[Location alloc] initWithStability:NO];
+    downtown.locations = @[bank,asylum,independenceSq];
+    
+    //// easttown
+    Location *roadHouse = [[Location alloc] initWithStability:NO];
+    PoliceStationLocation *policeStation = [[PoliceStationLocation alloc] init]; // spend 10 monster trophy, 2 gate trophy or 5 monster + 1 gate to become deputy
+    Location *diner = [[Location alloc] init];
+    easttown.locations = @[roadHouse,policeStation,diner];
+    
+    
+    //// french hill
+    LodgeLocation *lodge = [[LodgeLocation alloc] initWithStability:NO]; // if has membership can choose encounter from inner sanctum
+    Location *witchHouse = [[Location alloc] initWithStability:NO];
+    frenchHill.locations = @[lodge,witchHouse];
+    
+    //// merchant
+    DocksLocation *docks = [[DocksLocation alloc] init]; // 5 monster trophy or 1 gate to gain 5 money
+    Location *unnamable = [[Location alloc] initWithStability:NO];
+    Location *isle = [[Location alloc] initWithStability:NO];
+    merchantDistrict.locations = @[docks,unnamable,isle];
+    
+    //// university
+    AdminBuildingLocation *adminBuilding = [[AdminBuildingLocation alloc] init]; // spend 8, draw two skill, keep one
+    Location *library = [[Location alloc] init];
+    ScienceBuildingLocation *sciBuilding = [[ScienceBuildingLocation alloc] initWithStability:NO]; // 5 monster trophy or 1 gate to gain 2 clues
+    miskatonicUniversity.locations = @[adminBuilding,library,sciBuilding];
+    
+    //// northside
+    CurioStoreLocation *curioShop = [[CurioStoreLocation alloc] init]; // draw 3 unique, buy one at cost, discard others
+    Location *newspaper = [[Location alloc] init];
+    Location *trainStation = [[Location alloc] init];
+    northside.locations = @[curioShop,newspaper,trainStation];
+    
+    //// rivertown
+    Location *cave = [[Location alloc] initWithStability:NO];
+    GeneralStoreLocation *genStore = [[GeneralStoreLocation alloc] init]; // draw 3 common, buy one at cost, discard others
+    Location *graveyard = [[Location alloc] initWithStability:NO];
+    rivertown.locations = @[cave,genStore,graveyard];
+    
+    //// southside
+    Location *histSociety = [[Location alloc] initWithStability:NO];
+    BoardingHouseLocation *boardingHouse = [[BoardingHouseLocation alloc] init]; // spend 10 monster trophy, 2 gate trophy or 5 monster and 1 gate to get ally
+    ChurchLocation *church = [[ChurchLocation alloc] init]; // 5 monster trophy or 1 gate to gain blessed (choose target)
+    southside.locations = @[histSociety,boardingHouse,church];
+    
+    //// uptown
+    HealerLocation *hospital = [[HealerLocation alloc] initWithHealsSanity:NO]; // 1 free stamina or spend 2 get max stamina
+    Location *woods = [[Location alloc] initWithStability:NO];
+    MagickStoreLocation *magickShop = [[MagickStoreLocation alloc] init]; //spend 5, draw two spell, keep one, discard other
+    uptown.locations = @[hospital,woods,magickShop];
+    
+    adminBuilding.name = @"Administration Building";
+    asylum.name = @"Arkham Asylum";
+    bank.name = @"Bank of Arkham";
+    cave.name = @"Black Cave";
+    curioShop.name = @"Curiositie Shoppe";
+    genStore.name = @"General Store";
+    graveyard.name = @"Graveyard";
+    roadHouse.name = @"Hibb's Roadhouse";
+    histSociety.name = @"Historical Society";
+    independenceSq.name = @"Independence Square";
+    library.name = @"Library";
+    boardingHouse.name = @"Ma's Boarding House";
+    newspaper.name = @"Newspaper";
+    policeStation.name = @"Police Station";
+    docks.name = @"River Docks";
+    sciBuilding.name = @"Science Building";
+    lodge.name = @"Silver Twilight Lodge";
+    church.name = @"South Church";
+    hospital.name = @"St. Mary's Hospital";
+    unnamable.name = @"The Unnamable";
+    witchHouse.name = @"The Witch House";
+    trainStation.name = @"Train Station";
+    isle.name = @"Unvisited Isle";
+    diner.name = @"Velma's Diner";
+    woods.name = @"Woods";
+    magickShop.name = @"Ye Olde Magick Shoppe";
+    
+    return arkham;
+}
 
 +(NSMutableArray*)arkhamHorrorMonsters {
     
@@ -196,85 +403,37 @@
     
     Ally *ally;
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Anna Kaslow";
-    ally.skillAffected = SkillCheckTypeLuck;
-    ally.skillBonus = 2;
-    ally.givesClueReward = YES;
+    ally = [[AllyAnnaKaslow alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Duke";
-    ally.maxSanityBonus = 1;
-    ally.discardToHealSanity = YES;
+    ally = [[AllyDuke alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Eric Colt";
-    ally.skillAffected = SkillCheckTypeSpeed;
-    ally.skillBonus = 2;
-    ally.ignoresNightmarish = YES;
+    ally = [[AllyEricColt alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"John Legrasse";
-    ally.skillAffected = SkillCheckTypeWill;
-    ally.skillBonus = 2;
-    ally.ignoresEndless = YES;
+    ally = [[AllyJohnLegrasse alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Professor Armitage";
-    ally.skillAffected = SkillCheckTypeLore;
-    ally.skillBonus = 2;
-    ally.ignoresMagicalResist = YES;
+    ally = [[AllyProfessorArmitage alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Richard Upton Pickman";
-    ally.skillAffected = SkillCheckTypeLuck;
-    ally.skillBonus = 1;
-    ally.secondSkillAffected = SkillCheckTypeSpeed;
-    ally.secondSkillBonus = 1;
-    ally.ignoresPhysicalResist = YES;
+    ally = [[AllyRichardUptonPickman alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Ruby Standish";
-    ally.skillAffected = SkillCheckTypeSneak;
-    ally.skillBonus = 2;
-    ally.givesUniqueItemReward = YES;
+    ally = [[AllyRubyStandish alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Ryan Dean";
-    ally.skillAffected = SkillCheckTypeWill;
-    ally.skillBonus = 1;
-    ally.secondSkillAffected = SkillCheckTypeSneak;
-    ally.secondSkillBonus = 1;
-    ally.givesCommonItemReward = YES;
+    ally = [[AllyRyanDean alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Sir William Brinton";
-    ally.maxStaminaBonus = 1;
-    ally.discardToHealStamina = YES;
+    ally = [[AllySirWilliamBrinton alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Eric Colt";
-    ally.skillAffected = SkillCheckTypeFight;
-    ally.skillBonus = 1;
-    ally.secondSkillAffected = SkillCheckTypeLore;
-    ally.secondSkillBonus = 1;
-    ally.givesSpellReward = YES;
+    ally = [[AllyThomasFMalone alloc] init];
     [allies addObject:ally];
     
-    ally = [[Ally alloc] init];
-    ally.name = @"Tom \"Mountain\" Murphy";
-    ally.skillAffected = SkillCheckTypeFight;
-    ally.skillBonus = 2;
-    ally.ignoresOverwhelming = YES;
+    ally = [[AllyTomMountainMurphy alloc] init];
     [allies addObject:ally];
     
     return allies;
@@ -298,76 +457,54 @@
     
     Skill *skill;
     
-    skill = [[Skill alloc] init];
+    skill = [[RerollSkill alloc] init];
     skill.name = @"Bravery";
     skill.skillAffected = SkillCheckTypeHorror;
-    skill.allowsReroll = YES;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[RerollSkill alloc] init];
     skill.name = @"Expert Occultist";
     skill.skillAffected = SkillCheckTypeSpell;
-    skill.allowsReroll = YES;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[RerollSkill alloc] init];
     skill.name = @"Marksman";
     skill.skillAffected = SkillCheckTypeCombat;
-    skill.allowsReroll = YES;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[RerollSkill alloc] init];
     skill.name = @"Stealth";
     skill.skillAffected = SkillCheckTypeEvade;
-    skill.allowsReroll = YES;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Speed";
     skill.skillAffected = SkillCheckTypeSpeed;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Sneak";
     skill.skillAffected = SkillCheckTypeSneak;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Fight";
     skill.skillAffected = SkillCheckTypeFight;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Will";
     skill.skillAffected = SkillCheckTypeWill;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Lore";
     skill.skillAffected = SkillCheckTypeLore;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
-    skill = [[Skill alloc] init];
+    skill = [[BoostSkill alloc] init];
     skill.name = @"Luck";
     skill.skillAffected = SkillCheckTypeLuck;
-    skill.allowsReroll = NO;
-    skill.skillBonus = 1;
-    skill.dieBonus = 1;
     [skills addObject:skill];
     
     return skills;

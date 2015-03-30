@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "NSMutableArray+Deck.h"
 #import "Investigator.h"
-#import "AncientOne.h"
 #import "Ally.h"
 #import "Mythos.h"
 #import "ArkhamHorrorUIAPI.h"
 #import "Macros.h"
+
+@class AncientOne;
 
 @interface Game : NSObject
 
@@ -72,6 +73,9 @@
 
 -(void)runPhase; // execute a step in the game loop, called by uiDelegate once it's dispatched + resolved all of it's events
 
+
+#pragma mark - Gmae Utils
+-(Neighborhood*)neighborhoodOfLocation:(Location*)location;
 // select ancient one
 // setup decks
     // load decks

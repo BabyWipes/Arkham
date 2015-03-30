@@ -18,11 +18,40 @@
 @property (nonatomic) int blessingValue;
 @end
 
-int const kBlessed = 2;
-int const kCursed = 0;
-int const kBlessingNeutral = 1;
+typedef NS_ENUM(NSUInteger, BlessingState) {
+    kBlessingNeutral = 0,
+    kBlessed = 1,
+    kCursed = 2
+};
 
 @implementation Investigator
+
+#pragma mark - MFJSONObject
+
++(NSArray*)ignoredProperties {
+    return @[@"monsterTrophies",
+             @"gateTrophies",
+             @"bankLoanSkipRolling",
+             @"cursedSkipRolling",
+             @"blessedSkipRolling",
+             @"retainersSkipRolling",
+             @"isDelayed",
+             @"hasBankLoan",
+             @"failedBankLoan",
+             @"isDeputy",
+             @"isLodgeMember",
+             @"isLostInTimeAndSpace",
+             @"commonItems",
+             @"uniqueItems",
+             @"skills",
+             @"spells",
+             @"allies",
+             @"speedSneakSlider",
+             @"fightWillSlider",
+             @"loreLuckSlider",
+             @"blessingValue"];
+}
+
 
 #pragma mark - Class methods
 
@@ -153,12 +182,12 @@ int const kBlessingNeutral = 1;
 #pragma mark - Blessings and Curses
 
 // if a player becomes blessed while cursed, the two negate each other, and vice versa
--(BOOL)isBlessed {
+-(BOOL)blessed {
     return (self.blessingValue == kBlessed);
 }
--(void)setIsBlessed:(BOOL)isBlessed {
+-(void)setBlessed:(BOOL)isBlessed {
     if (isBlessed){
-        if (self.isCursed){
+        if (self.cursed){
             self.blessingValue = kBlessingNeutral;
             self.blessedSkipRolling = NO;
         }
@@ -168,18 +197,18 @@ int const kBlessingNeutral = 1;
         }
     }
     else {
-        if (self.isBlessed) {
+        if (self.blessed) {
             self.blessingValue = kBlessingNeutral;
             self.blessedSkipRolling = NO;
         }
     }
 }
--(BOOL)isCursed {
+-(BOOL)cursed {
     return (self.blessingValue == kCursed);
 }
--(void)setIsCursed:(BOOL)isCursed {
+-(void)setCursed:(BOOL)isCursed {
     if (isCursed){
-        if (self.isBlessed){
+        if (self.blessed){
             self.blessingValue = kBlessingNeutral;
             self.cursedSkipRolling = NO;
         }
@@ -189,7 +218,7 @@ int const kBlessingNeutral = 1;
         }
     }
     else {
-        if (self.isCursed) {
+        if (self.cursed) {
             self.blessingValue = kBlessingNeutral;
             self.cursedSkipRolling = NO;
         }

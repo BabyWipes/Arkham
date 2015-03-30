@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface SetupUtils : NSObject
++(void)resetArkhamHorrorSettings;
 +(NSMutableArray*)arkhamHorrorCommons;
 +(NSMutableArray*)arkhamHorrorSkills;
 +(NSMutableArray*)arkhamHorrorAllies;
 +(NSMutableArray*)arkhamHorrorMonsters;
 +(NSArray*)arkhamHorrorMaskMonsters;
++(NSArray*)arkhamBoard;
 @end

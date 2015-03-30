@@ -24,14 +24,20 @@
 
 @end
 
-@protocol AllyEventDelegate <NSObject>
+@protocol CardEventDelegate <NSObject>
 
--(void)ally:(Ally*)ally wasGivenToInvestigator:(Investigator*)investigator;
--(void)ally:(Ally*)ally wasTakenFromInvestigator:(Investigator*)investigator;
+-(BOOL)canBeDiscarded;
+
+-(BOOL)shouldBeExhausted;
+-(void)wasExhausted;
+
+-(void)wasGivenToInvestigator:(Investigator*)investigator;
+-(void)wasTakenFromInvestigator:(Investigator*)investigator;
 
 @end
 
 @protocol GameEventDelegate <NSObject>
+
 
 /*
  

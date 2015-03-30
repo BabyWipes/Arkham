@@ -14,7 +14,7 @@
 #import "Macros.h"
 #import "Skill.h"
 #import "Item.h"
-
+#import "AncientOne.h"
 #import "SetupUtils.h"
 
 @interface Game ()
@@ -167,20 +167,9 @@ static Game *singletonInstance = nil;
 #pragma mark - setup
 
 -(void)setupBoard {
-    self.neighborhoods = [Neighborhood arkhamBoard];
+    self.neighborhoods = [SetupUtils arkhamBoard];
+    
     // wire up neighborhoods
-    for (Neighborhood *hoodA in self.neighborhoods){
-        for (Neighborhood *hoodB in self.neighborhoods){
-            if (hoodA != hoodB){
-                if ([hoodA.whiteStreetConnectionName isEqualToString:hoodB.name]){
-                    hoodA.whiteStreetConnection = hoodB;
-                }
-                if ([hoodA.colorlessStreetConnectionName isEqualToString:hoodB.name]){
-                    hoodA.colorlessStreetConnection = hoodB;
-                }
-            }
-        }
-    }
     self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
     
     for (Neighborhood *hood in self.neighborhoods){
@@ -209,7 +198,7 @@ static Game *singletonInstance = nil;
         NSUInteger count = [skillSetupDict[@"count"] unsignedIntegerValue];
         NSDictionary *skillProperties = skillSetupDict[@"setup_dict"];
         for (int idx = 0; idx < count; idx++) {
-            Skill *skill = [[Skill alloc] initWithProperties:skillProperties];
+            Skill *skill = [Skill generate:skillProperties];
             [self.skillsDeck addObject:skill];
         }
     }
@@ -219,7 +208,7 @@ static Game *singletonInstance = nil;
     self.alliesDeck = [NSMutableArray new];
     NSArray *alliesArr = settings[@"Allies"];
     for (NSDictionary *allyDict in alliesArr){
-        Ally *ally = [[Ally alloc] initWithProperties:allyDict];
+        Ally *ally = [Ally generate:allyDict];
         [self.alliesDeck addObject:ally];
     }
 }
@@ -233,7 +222,7 @@ static Game *singletonInstance = nil;
         if ([selected isEqualToString:@"Azathoth"]){
             self.ancientOne = [[AncientOneAzathoth alloc] init];
         }
-        [self.ancientOne applySetupEffect];
+        [self.ancientOne applySetupEffect:self];
         [self advanceGamePhase];
     }];
 }
@@ -349,28 +338,28 @@ static Game *singletonInstance = nil;
     // TODO - a player may resolve these events in any order
     
     // BLESSED
-    if (currentPlayer.isBlessed){
+    if (currentPlayer.blessed){
         if (currentPlayer.blessedSkipRolling){
             currentPlayer.blessedSkipRolling = NO;
         }
         else {
             [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
                 if (roll == 1){ // lost blessing
-                    currentPlayer.isBlessed = NO;
+                    currentPlayer.blessed = NO;
                 }
             } push:NO];
         }
     }
     
     // CURSES
-    if (currentPlayer.isCursed){
+    if (currentPlayer.cursed){
         if (currentPlayer.cursedSkipRolling){
             currentPlayer.cursedSkipRolling = NO;
         }
         else {
             [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
                 if (roll == 1){ // lost curse
-                    currentPlayer.isCursed = NO;
+                    currentPlayer.cursed = NO;
                 }
             } push:NO];
         }
@@ -573,6 +562,15 @@ static Game *singletonInstance = nil;
             if ([loc.name isEqualToString:name]){
                 return loc;
             }
+        }
+    }
+    return nil;
+}
+
+-(Neighborhood*)neighborhoodOfLocation:(Location*)location {
+    for (Neighborhood *hood in self.neighborhoods){
+        if ([hood.locations containsObject:location]){
+            return hood;
         }
     }
     return nil;

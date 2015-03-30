@@ -81,12 +81,12 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 @end
 
 #import "SetupUtils.h"
-#import "Skill.h"
 
 @implementation ArkhamHorrorCLI
 @synthesize eventsQueue;
 
 +(int)run {
+    [SetupUtils resetArkhamHorrorSettings];
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
     Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton

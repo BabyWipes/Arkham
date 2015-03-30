@@ -21,8 +21,6 @@ extern NSUInteger const kItemInfiniteUses;
 @property (nonatomic) BOOL exhausted;
 @property (nonatomic) ItemClassification itemClass;
 @property (strong, nonatomic) NSArray *eventFlags; //TODO things a player holding this item needs to pay attention to
--(instancetype)initWithProperties:(NSDictionary*)properties;
--(NSDictionary*)exportJSON;
 @end
 
 @interface WeaponItem : Item

@@ -8,9 +8,17 @@
 
 #import "Location.h"
 
-
-
 @implementation Location
+
+#pragma mark - MFJSONObject
+
++(NSArray*)ignoredProperties {
+    return @[@"investigatorsHere",
+             @"monstersHere",
+             @"cluesHere"];
+}
+
+#pragma mark - Location
 
 +(instancetype)street {
     Location *street = [[Location alloc] init];
@@ -19,7 +27,7 @@
     return street;
 }
 
--(instancetype)init {
+-(id)init {
     self = [super init];
     if (self){
         self.name = @"Location";
@@ -31,25 +39,12 @@
     return self;
 }
 
--(instancetype)initWithStability:(BOOL)isStable{
+-(id)initWithStability:(BOOL)isStable{
     self = [self init];
     if (self){
         self.isStable = isStable;
     }
     return self;
-}
--(instancetype)initWithProperties:(NSDictionary *)properties {
-    self = [self init];
-    if (self){
-        self.name = properties[@"name"];
-        self.isStable = [properties[@"stable"] boolValue];
-    }
-    return self;
-}
--(NSDictionary*)exportJSON {
-    NSDictionary *exportDict = @{@"name":self.name,
-                                 @"stable":@(self.isStable)};
-    return exportDict;
 }
 @end
 
@@ -160,12 +155,12 @@
 
 -(void)tradeGateTrophies:(Investigator *)player {
     // spend 1 gate trophy
-    player.isBlessed = YES;
+    player.blessed = YES;
 }
 
 -(void)tradeMonsterTrophies:(Investigator *)player {
     // spend 5 toughness worth of monster trophies
-    player.isBlessed = YES;
+    player.blessed = YES;
 }
 
 @end
