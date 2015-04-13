@@ -22,6 +22,4 @@
 #   define logVerbose(...)
 #endif
 
-#define AHBlock(_blockName) void (^_blockName)(void)
-#define ClassString(_type) NSStringFromClass([_type class])
 #endif

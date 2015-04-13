@@ -218,19 +218,19 @@ static Game *singletonInstance = nil;
 -(void)pickAncientOne {
     // pop dialog listing available ancient ones
     // palyer picks ancient one
-    [self.uiDelegate enqueueAncientOneSetup:^(NSString *selected) {
+    [self.uiDelegate enqueue(ancientOneSetup:^(NSString *selected) {
         if ([selected isEqualToString:@"Azathoth"]){
             self.ancientOne = [[AncientOneAzathoth alloc] init];
         }
         [self.ancientOne applySetupEffect:self];
         [self advanceGamePhase];
-    }];
+    })];
 }
 
 -(void)pickInvestigator {
     // pop dialog listing availible investigators
     // player picks investgator
-    [self.uiDelegate enqueuePlayerSetup:^(NSString *selected, BOOL done) {
+    [self.uiDelegate enqueue(playerSetupEvent:^(NSString *selected, BOOL done) {
         if ([selected isEqualToString:@"Mike"]){
             [self setupPlayer:[Investigator testingInvestigator]];
         }
@@ -238,7 +238,7 @@ static Game *singletonInstance = nil;
         if (done){
             [self advanceGamePhase];
         }
-    }];
+    })];
 }
 
 -(void)setupPlayer:(Investigator*)investigator {
@@ -343,11 +343,11 @@ static Game *singletonInstance = nil;
             currentPlayer.blessedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
                 if (roll == 1){ // lost blessing
                     currentPlayer.blessed = NO;
                 }
-            } push:NO];
+            })];
         }
     }
     
@@ -357,11 +357,11 @@ static Game *singletonInstance = nil;
             currentPlayer.cursedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
                 if (roll == 1){ // lost curse
                     currentPlayer.cursed = NO;
                 }
-            } push:NO];
+            })];
         }
     }
     
@@ -372,11 +372,11 @@ static Game *singletonInstance = nil;
         }
         else {
             // offer chance to pay $10 to remove bank loan
-            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
                 if (roll < 4){
                     // pay $1 or discard all items + can no longer get bank loan
                 }
-            } push:NO];
+            })];
         }
     }
     
@@ -384,13 +384,13 @@ static Game *singletonInstance = nil;
     if (currentPlayer.retainers > 0){
         // gain $2
         for (int idx = 0; idx < currentPlayer.retainers-currentPlayer.retainersSkipRolling; idx++){
-            [self.uiDelegate enqueueDieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
                 if (roll == 1){ // lose the retainer
                     if (currentPlayer.retainers > 0){
                         currentPlayer.retainers--;
                     }
                 }
-            } push:NO];
+            })];
         }
     }
     
@@ -409,7 +409,7 @@ static Game *singletonInstance = nil;
 // players adjust skills based on focus
 -(void)upkeepFocus {
     NSLog(@"phase: upkeep focus");
-    [self.uiDelegate enqueueFocusEvent:^{
+    [self.uiDelegate priority:YES focusEvent:^{
         NSLog(@"Did Focus!");
         [self advanceGamePhase];
     }];
@@ -613,12 +613,12 @@ static Game *singletonInstance = nil;
         [investigator.commonItems addObjectsFromArray:cards];
     }
     else {
-        [self.uiDelegate enqueueSelectionEvent:cards select:selectCount callback:^(NSArray *selected, NSArray *rejected) {
+        [self.uiDelegate enqueue(selectionEvent:cards select:selectCount callback:^(NSArray *selected, NSArray *rejected) {
             [investigator.commonItems addObjectsFromArray:selected];
             for (Card *card in rejected){
                 [self.commonsDeck discard:card];
             }
-        } push:NO];
+        })];
     }
 }
 

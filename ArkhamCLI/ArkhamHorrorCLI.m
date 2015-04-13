@@ -17,6 +17,20 @@
 #import "Item.h"
 #import "Macros.h"
 
+#define AHScheduleBlock(_priority,_block) \
+    do { \
+        void (^_macroBlockName)(void) = ^{ \
+            _block(); \
+            [self processNextEvent]; \
+            if (_priority){ \
+                [self pushEvent:_macroBlockName]; \
+            } \
+            else { \
+                [self enqueueEvent:_macroBlockName]; \
+            } \
+        }; \
+    } while(0)
+
 char const kEscapeChar = '\033';
 
 typedef NS_ENUM(NSUInteger, ColorPrintingMode){
@@ -25,11 +39,9 @@ typedef NS_ENUM(NSUInteger, ColorPrintingMode){
     CodeDim =2,
     CodeUnderline = 3,
     CodeReverseColors = 7,
-    
 };
 
 typedef NS_ENUM(NSUInteger, ColorPrintingForeground){
-    
     CodeFGBlack = 30,
     CodeFGRed = 31,
     CodeFGGreen = 32,
@@ -47,7 +59,6 @@ typedef NS_ENUM(NSUInteger, ColorPrintingForeground){
     CodeFGLightMagenta = 95,
     CodeFGLightCyan = 96,
     CodeFGLightWhite = 97,
-    
 };
 
 typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
@@ -86,7 +97,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 @synthesize eventsQueue;
 
 +(int)run {
-    [SetupUtils resetArkhamHorrorSettings];
+    [SetupUtils resetArkhamHorrorSettings]; //DEVMODE
     ArkhamHorrorCLI *cli = [[ArkhamHorrorCLI alloc] init];
     cli.eventsQueue = [NSMutableArray new];
     Game *game = [Game initializeWithSettings:[SettingsManager arkhamHorrorDefaults]]; // init singleton
@@ -375,55 +386,55 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 }
 
 -(void)enqueueDieRollEvent:(AHRollEvent)callback push:(BOOL)pushToFront{
-    AHBlock(dieRollBlock) = ^{
-        NSUInteger roll = [Die d6];
-        callback(roll);
-        [self processNextEvent];
-    };
-    if (pushToFront){
-        [self pushEvent:dieRollBlock];
-    }
-    else {
-        [self enqueueEvent:dieRollBlock];
-    }
+    //    AHBlock(dieRollBlock) = ^{
+    //        NSUInteger roll = [Die d6];
+    //        callback(roll);
+    //        [self processNextEvent];
+    //    };
+    //    if (pushToFront){
+    //        [self pushEvent:dieRollBlock];
+    //    }
+    //    else {
+    //        [self enqueueEvent:dieRollBlock];
+    //    }
 }
 
--(void)enqueueSkillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback push:(BOOL)pushToFront {
-    AHBlock(skillCheckBlock) = ^{
+-(void)priority:(BOOL)cutsLine eventP:(void*)callback {
+    
+}
+
+-(void)priority:(BOOL)cutsLine ancientOneSetup:(AHAncientOneSelectEvent)callback{
+    
+}
+-(void)priority:(BOOL)cutsLine dieRollEvent:(AHRollEvent)callback {
+    
+}
+-(void)priority:(BOOL)cutsLine event:(AHEvent)callback {
+    
+}
+-(void)priority:(BOOL)cutsLine focusEvent:(AHEvent)callback {
+    
+}
+-(void)priority:(BOOL)cutsLine playerSetupEvent:(AHPlayerSelectEvent)callback {
+    
+}
+-(void)priority:(BOOL)cutsLine randomEvent:(NSInteger)max callback:(AHRandomEvent)callback {
+    
+}
+-(void)priority:(BOOL)cutsLine selectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback {
+    AHScheduleBlock(cutsLine,^{
+        NSLog(@"faking selection event...");
+        callback(@[],@[]);
+    });
+}
+-(void)priority:(BOOL)cutsLine skillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback {
+    AHScheduleBlock(cutsLine, ^{
         NSMutableArray *rolls = [NSMutableArray new];
         for (int idx = 0; idx < dieToRoll; idx++){
             [rolls addObject:@([Die d6])];
         }
         callback(rolls);
-        [self processNextEvent];
-    };
-    if (pushToFront){
-        [self pushEvent:skillCheckBlock];
-    }
-    else {
-        [self enqueueEvent:skillCheckBlock];
-    }
-}
-
--(void)enqueueSelectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback push:(BOOL)pushToFront{
-    AHBlock(selectionBlock) = ^{
-        NSLog(@"faking selection event...");
-        callback(@[],@[]);
-    };
-    [self enqueueEvent:selectionBlock];
-}
-
--(void)enqueueFocusEvent:(AHSkillsFocusEvent)callback {
-    AHBlock(focusBlock) = ^{
-        NSLog(@"Fake focusing skills...");
-        callback();
-        [self processNextEvent];
-    };
-    [self enqueueEvent:focusBlock];
-}
-
--(void)priority:(BOOL)cutsLine addEvent:(AHEvent)callback {
-    
+    });
 }
 
 @end
