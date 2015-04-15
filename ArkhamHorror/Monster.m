@@ -10,91 +10,8 @@
 #import "Game.h"
 #import "Location.h"
 #import "Neighborhood.h"
-#import "Die.h"
 
 @implementation Monster
-
-#pragma mark - NSCopying
-
--(id)copyWithZone:(NSZone *)zone {
-    Monster *copy = [[Monster alloc] init];
-    copy.name = [self.name copy];
-    copy.toughness = self.toughness;
-    copy.awareness = self.awareness;
-    copy.horrorRating = self.horrorRating;
-
-    copy.horrorDamage = self.horrorDamage;
-    copy.combatRating = self.combatRating;
-    copy.combatDamage = self.combatDamage;
-    
-    copy.isEndless = self.isEndless;
-    copy.isMaskMonster = self.isMaskMonster;
-    copy.isUndead = self.isUndead;
-    copy.canAmbush = self.canAmbush;
-
-    copy.physicalResistance = self.physicalResistance;
-    copy.magicalResistance = self.magicalResistance;
-
-    copy.nightmarishRating = self.nightmarishRating;
-    copy.overwhelmingRating = self.overwhelmingRating;
-
-    copy.movementType = self.movementType;
-    copy.dimension = [Dimension ofType:self.dimension.value];
-
-    return copy;
-}
-
-#pragma mark - JSONObject
-
--(NSDictionary*)exportJSON {
-    NSDictionary *exportDict = @{@"name":self.name,
-                                 @"toughness":@(self.toughness),
-                                 @"awareness":@(self.awareness),
-                                 @"horror_rating":@(self.horrorRating),
-                                 @"horror_damage":@(self.horrorDamage),
-                                 @"combat_rating":@(self.combatRating),
-                                 @"combat_damage":@(self.combatDamage),
-                                 @"p_resist":@(self.physicalResistance),
-                                 @"m_resist":@(self.magicalResistance),
-                                 @"move_type":@(self.movementType),
-                                 @"dimension":@(self.dimension.value),
-                                 @"ambush":@(self.canAmbush),
-                                 @"undead":@(self.isUndead),
-                                 @"mask":@(self.isMaskMonster),
-                                 @"endless":@(self.isEndless),
-                                 @"nightmarish":@(self.nightmarishRating),
-                                 @"overwhelming":@(self.overwhelmingRating)};
-    return exportDict;
-}
-
--(id)initWithProperties:(NSDictionary *)properties {
-    self = [self init];
-    if (self){
-        self.name = properties[@"name"];
-        self.toughness = [properties[@"toughness"] integerValue];
-        self.awareness = [properties[@"awareness"] integerValue];
-        self.horrorRating = [properties[@"horror_rating"] integerValue];
-        self.horrorDamage = [properties[@"horror_damage"] integerValue];
-        self.combatRating = [properties[@"combat_rating"] integerValue];
-        self.combatDamage = [properties[@"combat_damage"] integerValue];
-        
-        self.isEndless = [properties[@"is_endless"] boolValue];
-        self.canAmbush = [properties[@"can_ambush"] boolValue];
-        self.isMaskMonster = [properties[@"is_mask"] boolValue];
-        self.isUndead = [properties[@"is_undead"] boolValue];
-        
-        self.physicalResistance = [properties[@"p_resist"] unsignedIntegerValue];
-        self.magicalResistance = [properties[@"m_resist"] unsignedIntegerValue];
-        
-        self.movementType = [properties[@"movement"] unsignedIntegerValue];
-        self.dimension = [Dimension ofType:[properties[@"dimension"] unsignedIntegerValue]];
-        
-        self.nightmarishRating = [properties[@"nightmarish"] integerValue];
-        self.overwhelmingRating = [properties[@"overwhelming"] integerValue];
-        
-    }
-    return self;
-}
 
 #pragma mark - init
 
@@ -121,8 +38,8 @@
     }
     else if (self.movementType == MonsterMovementTypeFast){
         // move normally twice
-        [self move];
-        [self move];
+        [self moveNormally];
+        [self moveNormally];
     }
     else if (self.movementType == MonsterMovementTypeUnique) {
         [self moveUnique];
@@ -141,19 +58,20 @@
     }
     else {
         for (Dimension *dimension in [Game currentGame].currentMythosWhiteDimensions) {
-            if ([dimension equalsDimension:self.dimension]) {
-                self.currentLocation = self.currentNeighborhood.whiteStreetConnection.street;
+            if ([dimension isEqual:self.dimension]) {
+                self.currentLocation = [[Game currentGame] locationNamed:self.currentNeighborhood.whiteStreetConnection];
                 return;
             }
         }
         for (Dimension *dimension in [Game currentGame].currentMythosBlackDimensions) {
-            if ([dimension equalsDimension:self.dimension]) {
-                self.currentLocation = self.currentNeighborhood.blackStreetConnection.street;
+            if ([dimension isEqual:self.dimension]) {
+                self.currentLocation = [[Game currentGame] locationNamed:self.currentNeighborhood.blackStreetConnection];
                 return;
             }
         }
     }
 }
+
 -(void)moveFlying {
     if ([[Game currentGame].sky containsObject:self]){ // is in sky
         Location *dest = [self selectNearestLocationForFlyers];
@@ -192,51 +110,52 @@
 -(Location*)selectNearestLocationForFlyers {
     NSMutableArray *dests = [NSMutableArray new];
     
-    if (self.currentNeighborhood.whiteStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    Location *whiteStreet = [[Game currentGame] locationNamed:self.currentNeighborhood.whiteStreetConnection];
+    Location *blackStreet = [[Game currentGame] locationNamed:self.currentNeighborhood.blackStreetConnection];
+    Location *colorlessStreet = [[Game currentGame] locationNamed:self.currentNeighborhood.colorlessStreetConnection];
+    Location *secondaryColorlessStreet = [[Game currentGame] locationNamed:self.currentNeighborhood.secondaryColorlessStreetConnection];
+
+    if (whiteStreet && whiteStreet.investigatorsHere.count > 0){
+        [dests addObject:whiteStreet];
     };
-    if (self.currentNeighborhood.blackStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    if (blackStreet && blackStreet.investigatorsHere.count > 0){
+        [dests addObject:blackStreet];
     };
-    if (self.currentNeighborhood.colorlessStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:self.currentNeighborhood.whiteStreetConnection.street];
+    if (colorlessStreet && colorlessStreet.investigatorsHere.count > 0){
+        [dests addObject:colorlessStreet];
     };
-    if (self.currentNeighborhood.secondaryColorlessStreetConnection.street.investigatorsHere.count > 0){
-        [dests addObject:[self.currentNeighborhood secondaryColorlessStreetConnection].street];
+    if (secondaryColorlessStreet && secondaryColorlessStreet.investigatorsHere.count > 0){
+        [dests addObject:secondaryColorlessStreet];
     }
     
-    if (dests.count > 1){
-        Location *target = dests[0];
-        Location *tieLocation = nil;
-        NSInteger minSneak = [(Investigator*)[(Location*)dests[0] investigatorsHere][0] sneak];
-        BOOL hasTie = NO;
-        for (Location *loc in dests){
-            for (Investigator *player in loc.investigatorsHere){
-                if (player.sneak < minSneak){
-                    hasTie = NO;
-                    minSneak = player.sneak;
-                    target = player.currentLocation;
-                    tieLocation = nil;
-                }
-                else if (player.sneak == minSneak){
-                    hasTie = YES;
-                    tieLocation = player.currentLocation;
-                }
-            }
-        }
+    NSInteger lowestSneakSoFar = INT32_MAX;
+    NSMutableArray *lowestSneaksLocs = [NSMutableArray new];
+    for (Location *playerLoc in dests){
+        NSInteger lowestSneakHere = [playerLoc lowestSneakHere];
         
-        if (tieLocation){
-            // ask first player which person to go to
-            return nil;
+        if (lowestSneakHere < lowestSneakSoFar){
+            [lowestSneaksLocs removeAllObjects];
         }
-        else {
-            return target;
+        if (lowestSneakHere <= lowestSneakSoFar){
+            [lowestSneaksLocs addObject:playerLoc];
+            lowestSneakSoFar = lowestSneakHere;
         }
     }
+    
+    if (lowestSneaksLocs.count == 1){
+        NSLog(@"got loc with lowest sneak");
+        return lowestSneaksLocs[0];
+    }
+    else if (lowestSneaksLocs.count > 1){ // TODO if tie amongst lowest sneak, first player picks target
+        NSLog(@"got many loc's with lowest sneak");
+        return nil;
+    }
     else {
+        NSLog(@"Error:WTF, tied player dists returned 0 sneaks?"); // shouldn't ever happen
         return nil;
     }
 }
+
 -(void)moveUnique {
     // pass, implement in subclasses
 }
@@ -262,9 +181,24 @@
 #pragma mark - unique monsters
 
 @implementation ChthonianMonster
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Chthonian";
+        self.movementType = MonsterMovementTypeUnique;
+        self.toughness = 3;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolTriangle];
+        self.awareness = 1;
+        self.horrorRating = -2;
+        self.horrorDamage = 2;
+        self.combatRating = -3;
+        self.combatDamage = 3;
+    }
+    return self;
+}
 -(void)moveUnique {
     // roll die, on 4-6, all players lose 1 STA
-    if ([Die d6] >= 4){
+    if (arc4random_uniform(6) + 1 >= 4){
         for (Investigator *player in [Game currentGame].investigators){
             player.stamina--;
             if (player.stamina == 0){
@@ -276,6 +210,21 @@
 @end
 
 @implementation DimensionalShamblerMonster
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Dimensional Shambler";
+        self.movementType = MonsterMovementTypeFast;
+        self.toughness = 1;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
+        self.awareness = -3;
+        self.horrorRating = -2;
+        self.horrorDamage = 1;
+        self.combatRating = -2;
+        self.combatDamage = 0;
+    }
+    return self;
+}
 
 // on combat check fail, investigator is lost in time and space
 -(void)dealCombatDamage:(Investigator*)investigator {
@@ -284,6 +233,21 @@
 @end
 
 @implementation ElderThingMonster
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Elder Thing";
+        self.movementType = MonsterMovementTypeNormal;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolDiamond];
+        self.awareness = -2;
+        self.horrorRating = -3;
+        self.horrorDamage = 2;
+        self.combatRating = 0;
+        self.combatDamage = 1;
+    }
+    return self;
+}
 -(void)dealEvadeFailDamage:(Investigator *)investigator {
     investigator.stamina-=self.combatDamage;
     // lose weapon or spell of choice
@@ -295,62 +259,92 @@
 @end
 
 @implementation HaunterOfTheDarkMonster
-
 // if Blackest Night Mythos is in play, this monster's combat rating is -5
+
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Haunter of the Dark";
+        self.movementType = MonsterMovementTypeFlying;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
+        self.awareness = -3;
+        self.horrorRating = -2;
+        self.horrorDamage = 2;
+        self.combatRating = -2;
+        self.combatDamage = 2;
+    }
+    return self;
+}
 @end
 
 @implementation HoundOfTindalosMonster
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Hound of Tindalos";
+        self.movementType = MonsterMovementTypeUnique;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
+        self.awareness = -1;
+        self.horrorRating = -2;
+        self.horrorDamage = 4;
+        self.combatRating = -1;
+        self.combatDamage = 3;
+    }
+    return self;
+}
 -(void)moveUnique {
     Location *dest = [self selectNearestLocationForHound];
     self.currentLocation = dest;
-    
 }
 -(Location*)selectNearestLocationForHound {
     // TODO if all investigators are in expansion game area (Dunwich, etc), Hound goes in shortest path to train station
     
     NSLog(@"the hound of tindalos is tracking it's prey...");
-    NSMutableArray *shortestPaths = [NSMutableArray new];
+    NSMutableArray *shortestPathDests = [NSMutableArray new];
+    NSMutableDictionary *pathFirstSteps = [NSMutableDictionary new];
+    NSInteger shortestPath = INT32_MAX;
+    
     for (Investigator *investigator in [Game currentGame].investigators) { //TODO handle investigators who are lost in time and space / other world
         NSLog(@"path finding investigator %@",investigator.name);
         NSArray *route = [[Game currentGame] routeFrom:self.currentLocation to:investigator.currentLocation];
-        if (shortestPaths.count == 0 || route.count == [(NSArray*)shortestPaths[0] count]) { // unset, or found a path tied for shortest
-            [shortestPaths addObject:route];
+        Location *start = [route firstObject];
+        Location *end = [route lastObject];
+        if (route.count < shortestPath){
+            [shortestPathDests removeAllObjects];
+            [pathFirstSteps removeAllObjects];
         }
-        else if (route.count < [(NSArray*)shortestPaths[0] count]){ // found a shorter path
-            [shortestPaths removeAllObjects];
-            [shortestPaths addObject:route];
+        if (route.count <= shortestPath){
+            [shortestPathDests addObject:end];
+            pathFirstSteps[end.name] = start;
+            shortestPath = route.count;
         }
     }
     
-    if (shortestPaths.count == 1){ // go to nearest investigator
-        return [(NSArray*)shortestPaths[0] objectAtIndex:0];
+    if (shortestPathDests.count == 1){ // go to nearest investigator
+        Location *end = shortestPathDests[0];
+        return pathFirstSteps[end.name];
     }
-    else if (shortestPaths.count > 1){ // theres a tie, pick investigator with lowest sneak
+    else if (shortestPathDests.count > 1){ // theres a tie, pick investigator with lowest sneak
         NSLog(@"got a tie amongst dist's");
-        NSMutableArray *lowestSneaks = [NSMutableArray new];
+        NSInteger lowestSneakSoFar = INT32_MAX;
         NSMutableArray *lowestSneaksLocs = [NSMutableArray new];
-        
-        for (NSArray *path in shortestPaths){
-            NSLog(@"comparing paths");
-            Location *playerLoc = [path lastObject];
-            NSArray *playersHere = playerLoc.investigatorsHere;
-            for (Investigator *player in playersHere){
-                NSLog(@"checking sneak of %@",player.name);
-                if (lowestSneaks.count == 0 || player.sneak == [(Investigator*)lowestSneaks[0] sneak]) { // unset, or found sneak tied for last
-                    [lowestSneaks addObject:player];
-                    [lowestSneaksLocs addObject:path[0]];
-                }
-                else if (player.sneak < [(Investigator*)lowestSneaks[0] sneak]){ // found a lesser sneak
-                    [lowestSneaks removeAllObjects];
-                    [lowestSneaksLocs removeAllObjects];
-                    [lowestSneaks addObject:player];
-                    [lowestSneaksLocs addObject:path[0]];
-                }
+        for (Location *playerLoc in shortestPathDests){
+            NSInteger lowestSneakHere = [playerLoc lowestSneakHere];
+            
+            if (lowestSneakHere < lowestSneakSoFar){
+                [lowestSneaksLocs removeAllObjects];
+            }
+            if (lowestSneakHere <= lowestSneakSoFar){
+                [lowestSneaksLocs addObject:playerLoc];
+                lowestSneakSoFar = lowestSneakHere;
             }
         }
+        
         if (lowestSneaksLocs.count == 1){
-            NSLog(@"got loc with lowest sneak");
-            return [(NSArray*)lowestSneaksLocs[0] objectAtIndex:0];
+            Location *end = lowestSneaksLocs[0];
+            return pathFirstSteps[end.name];
         }
         else if (lowestSneaksLocs.count > 1){ // TODO if tie amongst lowest sneak, first player picks target
             NSLog(@"got many loc's with lowest sneak");
@@ -370,17 +364,64 @@
 
 @implementation ManiacMonster
 // Maniac - if terror >= 6, maniac's combat rating = -2, combat damage is 3, is Endless
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Maniac";
+        self.movementType = MonsterMovementTypeNormal;
+        self.toughness = 1;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+        self.awareness = -1;
+        self.horrorRating = 0;
+        self.horrorDamage = 0;
+        self.combatRating = -1;
+        self.combatDamage = 1;
+    }
+    return self;
+}
 
 @end
 
 @implementation MiGoMonster
 // Mi-Go - if pass combat check against mi-go, remove from game and draw 1 unique
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Mi-Go";
+        self.movementType = MonsterMovementTypeFlying;
+        self.toughness = 1;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
+        self.awareness = -2;
+        self.horrorRating = -1;
+        self.horrorDamage = 2;
+        self.combatRating = 0;
+        self.combatDamage = 1;
+    }
+    return self;
+}
 
 @end
 
 @implementation NightgauntMonster
 // if fail combat or evade check, go through nearest gate. if tie, choose among tied gates. if in other world, return to arkham (counts as explored).
 // if no gates open, combat ends with no other effects
+
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Nightgaunt";
+        self.movementType = MonsterMovementTypeFlying;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
+        self.awareness = -2;
+        self.horrorRating = -1;
+        self.horrorDamage = 1;
+        self.combatRating = -2;
+        self.combatDamage = 0;
+    }
+    return self;
+}
+
 -(void)dealEvadeFailDamage:(Investigator *)investigator {
     // investigator goes through nearest gate
 }
@@ -391,16 +432,76 @@
 
 @implementation TheBlackManMonster
 // before making horror check, make Luck(-1) check. if pass, +2 clues, else player is devoured. either way, return black man to cup.
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"The Black Man";
+        self.movementType = MonsterMovementTypeNormal;
+        self.toughness = 1;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+        self.awareness = -3;
+        self.horrorRating = 0;
+        self.horrorDamage = 0;
+        self.combatRating = 0;
+        self.combatDamage = 0;
+    }
+    return self;
+}
 @end
 
 @implementation TheBloatedWomanMonster
 // Before making Horror check, make Will(-2) check. if fail, automatically fail the Horror check and the Combat check.
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"The Bloated Woman";
+        self.movementType = MonsterMovementTypeNormal;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
+        self.awareness = -1;
+        self.horrorRating = -1;
+        self.horrorDamage = 2;
+        self.combatRating = -2;
+        self.combatDamage = 2;
+    }
+    return self;
+}
 @end
 
 @implementation TheDarkPharoahMonster
 // Use Lore instead of Fight in combat
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"The Dark Pharoah";
+        self.movementType = MonsterMovementTypeNormal;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
+        self.awareness = -1;
+        self.horrorRating = -1;
+        self.horrorDamage = 1;
+        self.combatRating = -3;
+        self.combatDamage = 3;
+    }
+    return self;
+}
 @end
 
 @implementation WarlockMonster
 // if you pass a combat check, gain 2 clue tokens and remove warlock from game
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.name = @"Warlock";
+        self.movementType = MonsterMovementTypeStationary;
+        self.toughness = 2;
+        self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
+        self.awareness = -2;
+        self.horrorRating = -1;
+        self.horrorDamage = 1;
+        self.combatRating = -3;
+        self.combatDamage = 1;
+    }
+    return self;
+}
 @end

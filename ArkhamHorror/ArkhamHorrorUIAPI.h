@@ -29,9 +29,8 @@ typedef void(^AHEvent)(void);
 -(void)priority:(BOOL)cutsLine playerSetupEvent:(AHPlayerSelectEvent)callback;
 -(void)priority:(BOOL)cutsLine selectionEvent:(NSArray*)selections select:(NSUInteger)select callback:(AHSelectEvent)callback;
 -(void)priority:(BOOL)cutsLine focusEvent:(AHEvent)callback;
--(void)priority:(BOOL)cutsLine dieRollEvent:(AHRollEvent)callback;
+-(void)priority:(BOOL)cutsLine dieRoll:(AHRollEvent)callback;
 -(void)priority:(BOOL)cutsLine skillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback;
--(void)priority:(BOOL)cutsLine randomEvent:(NSInteger)max callback:(AHRandomEvent)callback;
 -(void)priority:(BOOL)cutsLine event:(AHEvent)callback;
 
 @end

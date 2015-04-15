@@ -9,7 +9,7 @@
 #import "Card.h"
 #import "Defines.h"
 
-@interface Skill : Card <NSCopying>
+@interface Skill : Card 
 @property (nonatomic) SkillCheckType skillAffected;
 /*
 ///

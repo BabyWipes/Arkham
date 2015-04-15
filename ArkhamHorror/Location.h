@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *monstersHere;
 @property (nonatomic) NSInteger cluesHere;
 
+-(NSInteger)lowestSneakHere;
 -(instancetype)initWithStability:(BOOL)isStable;
 
 +(instancetype)street;

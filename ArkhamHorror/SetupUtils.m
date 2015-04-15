@@ -18,9 +18,12 @@
 
 @implementation SetupUtils
 
+#pragma mark - Reset
 +(void)resetArkhamHorrorSettings {
     NSMutableDictionary *json = [[SettingsManager arkhamHorrorDefaults] mutableCopy];
     NSMutableArray *jsonItems = [NSMutableArray new];
+    NSMutableArray *dupesList = [NSMutableArray new];
+    
     for (Skill *skill in [self arkhamHorrorSkills]){
         [jsonItems addObject:@{@"count":@2,
                                @"setup_dict":skill.json}];
@@ -46,9 +49,33 @@
     json[@"Neighborhoods"] = [jsonItems copy];
     [jsonItems removeAllObjects];
     
-    [SettingsManager writeSettings:json named:nil];
+    NSCountedSet *countedMonsters = [[NSCountedSet alloc] initWithArray:[self arkhamHorrorMonsters]];
+    for (Monster *monster in countedMonsters){
+        [jsonItems addObject:@{@"count":@([countedMonsters countForObject:monster]),
+                               @"setup_dict":monster.json}];
+        
+    }
+    json[@"Monsters"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    [dupesList removeAllObjects];
     
+    for (Monster *monster in [self arkhamHorrorMaskMonsters]){
+        [jsonItems addObject:monster.json];
+    }
+    json[@"MaskMonsters"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
+    for (Item *item in [self arkhamHorrorCommons]){
+        [jsonItems addObject:@{@"count":@2,
+                               @"setup_dict":item.json}];
+    }
+    json[@"Items"] = @{@"Commons":[jsonItems copy]};
+    [jsonItems removeAllObjects];
+    
+    [SettingsManager writeSettings:json named:nil];
 }
+
+#pragma mark - Ancient Ones
 
 +(NSArray*)arkhamHorrorAncientOnes {
     NSMutableArray *goos = [NSMutableArray new];
@@ -80,6 +107,8 @@
     
     return goos;
 }
+
+#pragma mark - Neighborhoods and Locations
 
 +(NSArray*)arkhamBoard {
     
@@ -129,7 +158,7 @@
     [frenchHill setWhiteStreetConnectingNeighborhood:southside];
     [frenchHill setBlackStreetConnectingNeighborhood:rivertown];
     [frenchHill setColorlessConnectingNeighborhood:miskatonicUniversity];
-
+    
     [merchantDistrict setWhiteStreetConnectingNeighborhood:northside];
     [merchantDistrict setBlackStreetConnectingNeighborhood:miskatonicUniversity];
     merchantDistrict.secondaryColorlessStreetConnection = rivertown.name;
@@ -223,6 +252,8 @@
     return arkham;
 }
 
+#pragma mark - monsters
+
 +(NSMutableArray*)arkhamHorrorMonsters {
     
     /*
@@ -288,45 +319,45 @@
      
      */
     
+    // Uniques!
     NSMutableArray *arkhamHorrorMonsters = [NSMutableArray new];
     Monster *monster;
     
-#pragma mark - unique monsters
     monster = [[ChthonianMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[DimensionalShamblerMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[ElderThingMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[HoundOfTindalosMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[ManiacMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[MiGoMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[NightgauntMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[WarlockMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
     
-#pragma mark - monsters
+    // Normal Monsters!
     monster = [[Monster alloc] init];
     monster.name = @"Byakhee";
     monster.movementType = MonsterMovementTypeFlying;
@@ -338,8 +369,8 @@
     monster.combatRating = 0;
     monster.combatDamage = 2;
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[Monster alloc] init];
     monster.name = @"Cultist";
@@ -352,11 +383,11 @@
     monster.combatRating = 1; // positive combat rating
     monster.combatDamage = 1;
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
     
     monster = [[Monster alloc] init];
     monster.name = @"Dark Young";
@@ -371,12 +402,13 @@
     monster.nightmarishRating = 1;
     monster.physicalResistance = MonsterDamageImmunityResist;
     [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:[monster copy]];
-    [arkhamHorrorMonsters addObject:[monster copy]];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
     
     return arkhamHorrorMonsters;
 }
 +(NSArray*)arkhamHorrorMaskMonsters {
+    
     Monster *godOfTheBloodyTounge = [[Monster alloc] init];
     godOfTheBloodyTounge.name = @"God of the Bloody Tounge";
     godOfTheBloodyTounge.movementType = MonsterMovementTypeNormal;
@@ -395,7 +427,11 @@
     TheBlackManMonster *theBlackMan = [[TheBlackManMonster alloc] init];
     TheBloatedWomanMonster *theBloatedWoman = [[TheBloatedWomanMonster alloc] init];
     TheDarkPharoahMonster *theDarkPharoh = [[TheDarkPharoahMonster alloc] init];
-    return @[godOfTheBloodyTounge,haunterOfTheDark,theBlackMan,theBloatedWoman,theDarkPharoh];
+    return @[godOfTheBloodyTounge,
+             haunterOfTheDark,
+             theBlackMan,
+             theBloatedWoman,
+             theDarkPharoh];
 }
 
 +(NSMutableArray*)arkhamHorrorAllies {
@@ -525,7 +561,6 @@
     item.price = 2;
     item.hands = 1;
     [commons addObject:item]; // count = 2
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -535,7 +570,6 @@
     [(WeaponItem*)item setCombatBonus:1];
     item.price = 2;
     item.hands = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
@@ -547,7 +581,6 @@
     item.price = 3;
     item.hands = 1;
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -557,7 +590,6 @@
     [(WeaponItem*)item setCombatBonus:2];
     item.price = 3;
     item.hands = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
@@ -569,7 +601,6 @@
     item.price = 3;
     item.hands = 1;
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -579,7 +610,6 @@
     [(WeaponItem*)item setCombatBonus:3];
     item.price = 4;
     item.hands = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
@@ -591,7 +621,6 @@
     item.price = 3;
     item.hands = 1;
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -601,7 +630,6 @@
     [(WeaponItem*)item setCombatBonus:4];
     item.price = 5;
     item.hands = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
@@ -613,7 +641,6 @@
     item.price = 6;
     item.hands = 2;
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -623,7 +650,6 @@
     [(WeaponItem*)item setCombatBonus:5];
     item.price = 6;
     item.hands = 2;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
@@ -635,7 +661,6 @@
     item.price = 7;
     item.hands = 2;
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -645,7 +670,6 @@
     [(WeaponItem*)item setCombatBonus:8];
     item.price = 4;
     item.hands = 2;
-    [commons addObject:item];
     [commons addObject:item];
     
     /*
@@ -668,7 +692,6 @@
     [(TomeItem*)item setSanityCost:0];
     [(TomeItem*)item setLoreDifficulty:-1];
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[TomeItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -682,7 +705,6 @@
     [(TomeItem*)item setMoveCost:-1];
     [(TomeItem*)item setSanityCost:0];
     [(TomeItem*)item setLoreDifficulty:-1];
-    [commons addObject:item];
     [commons addObject:item];
     
     /*
@@ -705,7 +727,6 @@
     item.price = 1;
     [(HealingItem*)item setStaminaGain:1];
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[HealingItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -713,7 +734,6 @@
     item.name = @"Whiskey"; // discard, reduce sanity loss by 1
     [(HealingItem*)item setSanityGain:1];
     item.price = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[SkillBonusItem alloc] init];
@@ -724,7 +744,6 @@
     [(SkillBonusItem*)item setSkillBonus:1];
     [(SkillBonusItem*)item setSkillType:SkillCheckTypeEvade];
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[SkillBonusItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -734,14 +753,12 @@
     [(SkillBonusItem*)item setSkillBonus:1];
     [(SkillBonusItem*)item setSkillType:SkillCheckTypeLuck];
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[Item alloc] init];
     item.cardType = CardTypeCommonItem;
     item.usesBeforeDiscard = 1;
     item.name = @"Lucky Cigarette Case"; // discard, reroll skill check
     item.price = 1;
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[HealingItem alloc] init];
@@ -750,7 +767,6 @@
     item.name = @"Research Materials"; // discard, avoid spending 1 clue token
     item.price = 1;
     [(HealingItem*)item setClueGain:1];
-    [commons addObject:item];
     [commons addObject:item];
     
     item = [[MovementItem alloc] init];
@@ -761,7 +777,6 @@
     [(MovementItem*)item setMovementBonus:1];
     [(MovementItem*)item setUsableInOtherWorld:NO];
     [commons addObject:item];
-    [commons addObject:item];
     
     item = [[MovementItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -771,8 +786,8 @@
     [(MovementItem*)item setMovementBonus:2];
     [(MovementItem*)item setUsableInOtherWorld:NO];
     [commons addObject:item];
-    [commons addObject:item];
     
+    [commons addObjectsFromArray:commons];
     return commons;
 }
 

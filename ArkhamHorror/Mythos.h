@@ -18,25 +18,28 @@
 @property (nonatomic) MythosType mythosType;
 @end
 
+@interface TheStoryContinuesMythos : Mythos
+@end
+
 /*
  
  Environment
-    Only 1 Environment may be in play at once. The effects of Environment cards stay in play until another Environment is drawn, regardless of subtype.
-    If a new Environment card is drawn and resolved, all its effects take place during the Mythos phase (gate, monster, clue, monster movement) and upon resolving
-    the new card's text, the old Environment is discarded.
+ Only 1 Environment may be in play at once. The effects of Environment cards stay in play until another Environment is drawn, regardless of subtype.
+ If a new Environment card is drawn and resolved, all its effects take place during the Mythos phase (gate, monster, clue, monster movement) and upon resolving
+ the new card's text, the old Environment is discarded.
  
  Headline
-    A Headline Mythos card, the most common type, gives a one-time effect, which may be beneficial, harmful, or neutral. 
-    Carry out the instructions on the card under the flavor text. 
-    Once this is done and the rest of the Mythos Phase is complete, discard the card to the bottom of the Mythos deck unless it directs you otherwise.
+ A Headline Mythos card, the most common type, gives a one-time effect, which may be beneficial, harmful, or neutral.
+ Carry out the instructions on the card under the flavor text.
+ Once this is done and the rest of the Mythos Phase is complete, discard the card to the bottom of the Mythos deck unless it directs you otherwise.
  
  Rumor
-    A Rumor Mythos card has an ongoing effect (similar to an Environment card), a Pass condition and result, 
-    and a Fail condition and result (which is usually highly detrimental.)  Each turn the Rumor card continues in effect, its ongoing effect applies. 
-    If the Pass condition is ever met, usually requiring some action by the investigators, the result specified takes place and the rumor is discarded.
-    If the Fail condition is ever met, the result specified takes place and the rumor is discarded. While the Rumor card is in play, a second 
-    Rumor card can not enter play. If another Rumor card is drawn and resolved, all its other effects take place during the Mythos 
-    phase (gate, monster, clue, monster movement) but the second card's Rumor text itself is ignored.
+ A Rumor Mythos card has an ongoing effect (similar to an Environment card), a Pass condition and result,
+ and a Fail condition and result (which is usually highly detrimental.)  Each turn the Rumor card continues in effect, its ongoing effect applies.
+ If the Pass condition is ever met, usually requiring some action by the investigators, the result specified takes place and the rumor is discarded.
+ If the Fail condition is ever met, the result specified takes place and the rumor is discarded. While the Rumor card is in play, a second
+ Rumor card can not enter play. If another Rumor card is drawn and resolved, all its other effects take place during the Mythos
+ phase (gate, monster, clue, monster movement) but the second card's Rumor text itself is ignored.
  
  
  Dimension Key
@@ -52,20 +55,12 @@
  H = Hexagon
  
  
- SPECIAL
- Name                   Effect
- -----------------------------
- The Story Continues…   Reshuffle Mythos deck, including this card, draw another mythos
- 
- 
- 
-
  ENVIRONMENTS, URBAN
  Name                                   Gate location           Clue Location       WhiteDim    BlackDim
  -------------------------------------------------------------------------------------------------------
  Alien Technology                       Unvisited Isle          Science Building    <>,[]       O
  Curfew Enforced                        Unvisited Isle          Science Building    +           C
- Darke's Carnival Arrives               The Unnamable           Woods               <>,[]       O
+ Drake's Carnival Arrives               The Unnamable           Woods               <>,[]       O
  Egyptian Exhibit Visits Miskatonic U.	The Witch House         Black Cave          +           C
  Estate Sale                            The Witch House         Black Cave          <>,[]       O
  Happy Days are Here Again              Woods                   Historical Society  <>,[],^     O
@@ -125,7 +120,7 @@
  The Man in Black           The Witch House         Black Cave          +           C
  Things of Darkness         Silver Twilight Lodge   Graveyard           [],<>       O
  
-
+ 
  ENVIRONMENT, MYSTIC EFFECTS
  Name                       Effect
  -----------------------------------------
@@ -142,10 +137,65 @@
  The Man in Black           If end movement in FrenchHill st. may roll die = to SAN. foreach fail, the -1 SAN. If 0 SAN, devoured. Else, +1 Clue, +1 Spell
  Things of Darkness         Ghoul, FormlessSpawn, Shoggoth, FlyingPolyp +1 toughness
  
+ */
 
- 
- 
- 
+#pragma mark - Urban Environments
+@interface AlienTechnologyMythos : Mythos
+@end
+@interface CurfewEnforcedMythos : Mythos
+@end
+@interface DrakesCarnivalMythos : Mythos
+@end
+@interface EgyptianExhibitMythos : Mythos
+@end
+@interface EstateSaleMythos : Mythos
+@end
+@interface HappyDaysMythos : Mythos
+@end
+@interface TheFestivalMythos : Mythos
+@end
+
+#pragma mark - Weather Environments
+
+@interface EvilFogMythos : Mythos
+@end
+@interface HeatWaveMythos : Mythos
+@end
+@interface IcyConditionsMythos : Mythos
+@end
+@interface RainingCatsAndDogsMythos : Mythos
+@end
+@interface SunnyAndClearMythos : Mythos
+@end
+
+#pragma mark - Mystic environments
+
+@interface StrangePlaugeMythos : Mythos
+@end
+@interface BlackestNightMythos : Mythos
+@end
+@interface BloodMagicMythos : Mythos
+@end
+@interface DreamsOfSunkenCityMythos : Mythos
+@end
+@interface NodensFavorMythos : Mythos
+@end
+@interface PlanetaryAlignmentMythos : Mythos
+@end
+@interface RlyehRisingMythos : Mythos
+@end
+@interface SolarEclipseMythos : Mythos
+@end
+@interface ChillOfTheGraveMythos : Mythos
+@end
+@interface ManInBlackMythos : Mythos
+@end
+@interface ThingsOfDarknessMythos : Mythos
+@end
+
+#pragma mark - Headlines
+
+/*
  
  HEADLINES
  Name                                   Gate Location           Clue Location           WhiteDim    BlackDim
@@ -186,7 +236,7 @@
  Terror at the Train Station!           The Witch House         Black Cave              C           +
  Vigilante Guards the Night!            The Unnamable           Woods                   O           [],<>
  Witch Burning Anniversary!             Unvisited Isle          Science Building        C           +
-
+ 
  
  EFFECTS, HEADLINES
  Name                                   Effect
@@ -227,11 +277,102 @@
  Terror at the Train Station!           2 monsters appear in Northside Street
  Vigilante Guards the Night!            All monsters in downtown neighborhood return to cup
  Witch Burning Anniversary!             2 Monsters appear in Rivertown Street
- 
- 
- 
- 
- 
+ */
+
+@interface AllQuietMythos : Mythos
+@end
+@interface BigStormMythos : Mythos
+@end
+@interface BizarreDreamsMythos : Mythos
+@end
+@interface BlueFluMythos : Mythos
+@end
+@interface CampusSecurityIncreasedMythos : Mythos
+@end
+@interface ReclaimsSouthsideMythos : Mythos
+@end
+@interface BlackoutsMythos : Mythos
+@end
+@interface FamilyFoundButcheredMythos : Mythos
+@end
+@interface FedsRaidArkhamMythos : Mythos
+@end
+@interface FourthIfJulyParadeMythos : Mythos
+@end
+@interface CleanUpEasttownMythos : Mythos
+@end
+@interface GhostShipDocksMythos : Mythos
+@end
+@interface GoatLikeCreatureInWoodsMythos : Mythos
+@end
+@interface HorrorAtGroundbreakingMythos : Mythos
+@end
+@interface IllWindMythos : Mythos
+@end
+@interface LodgeMemberQuestionedMythos : Mythos
+@end
+@interface LodgeMembersWatchNightMythos : Mythos
+@end
+@interface ManhuntInArkhamMythos : Mythos
+@end
+@interface MerchantsMarchMythos : Mythos
+@end
+@interface ArcticExpeditionReturnsMythos : Mythos
+@end
+@interface MissingPeopleReturnMythos : Mythos
+@end
+@interface PicnickersPanicMythos : Mythos
+@end
+@interface PolicePatrolNorthsideMythos : Mythos
+@end
+@interface SecurityInUptownMythos : Mythos
+@end
+@interface RivertownTakesStreetsMythos : Mythos
+@end
+@interface DimensionalRiftMythos : Mythos
+@end
+@interface GangTurnsToPoliceMythos : Mythos
+@end
+@interface SlumMurdersContinueMythos : Mythos
+@end
+@interface SouthsideStranglerSuspectedMythos : Mythos
+@end
+@interface StrangeLightsOnCampusMythos : Mythos
+@end
+@interface StrangePowerFluxMythos : Mythos
+@end
+@interface StrangeTremorsCeaseMythos : Mythos
+@end
+@interface TemperenceFeverMythos : Mythos
+@end
+@interface TerrorAtTrainStationMythos : Mythos
+@end
+@interface VigilanteGuardsNightMythos : Mythos
+@end
+@interface WitchBurningAnniversaryMythos : Mythos
+@end
+
+#pragma mark - Rumors
+
+@interface RumorMythos : Mythos
+-(void)ongoingEffect;
+-(BOOL)didPass;
+-(BOOL)didFail;
+@end
+
+@interface DisturbingTheDeadMythos : RumorMythos
+@end
+@interface GoodWorkUndoneMythos : RumorMythos
+@end
+@interface GreatRitualMythos : RumorMythos
+@end
+@interface SouthsideStranglerStrikesMythos : RumorMythos
+@end
+@interface StarsAreRightMythos : RumorMythos
+@end
+@interface TerribleExperimentMythos : RumorMythos
+@end
+/*
  RUMORS
  Name                               Gate Location
  ------------------------------------------------

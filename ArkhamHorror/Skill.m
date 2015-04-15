@@ -18,14 +18,6 @@
     }
     return self;
 }
-
--(id)copyWithZone:(NSZone *)zone {
-    Skill *copy = [[Skill alloc] init];
-    copy.name = self.name;
-    copy.skillAffected = self.skillAffected;
-    return copy;
-}
-
 @end
 
 @implementation RerollSkill

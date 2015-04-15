@@ -46,6 +46,17 @@
     }
     return self;
 }
+
+-(NSInteger)lowestSneakHere {
+    NSInteger lowestSneak = INT32_MAX;
+    for (Investigator *player in self.investigatorsHere){
+        if (player.sneak < lowestSneak){
+            lowestSneak = player.sneak;
+        }
+    }
+    return lowestSneak;
+}
+
 @end
 
 @implementation GeneralStoreLocation

@@ -12,7 +12,7 @@
 #import "Defines.h"
 #import "Dimension.h"
 
-@interface Monster : Movable <NSCopying>
+@interface Monster : Movable
 @property (strong, nonatomic) NSString *name;
 
 @property (nonatomic) NSInteger toughness;

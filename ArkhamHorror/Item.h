@@ -13,7 +13,7 @@
 
 extern NSUInteger const kItemInfiniteUses;
 
-@interface Item : Card <NSCopying>
+@interface Item : Card
 
 @property (nonatomic) NSInteger hands;
 @property (nonatomic) NSInteger price;

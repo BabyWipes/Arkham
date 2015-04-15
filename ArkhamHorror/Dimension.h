@@ -7,15 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MFJSONObject.h"
 #import "Defines.h"
 
-@interface Dimension : NSObject
+@interface Dimension : MFJSONObject
 @property (nonatomic) MonsterDimensionSymbol value;
+
 +(instancetype)ofType:(MonsterDimensionSymbol)symbol;
 
-+(NSArray*)exportJSON:(NSArray*)dimensions;
-+(NSArray*)importJSON:(NSArray*)rawDimensions;
-
--(instancetype)initWithType:(MonsterDimensionSymbol)type;
--(BOOL)equalsDimension:(Dimension*)other;
 @end

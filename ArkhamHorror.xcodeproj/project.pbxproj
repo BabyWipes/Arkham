@@ -26,7 +26,6 @@
 		BE0F7E251AAF6EAD00C337F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7E241AAF6EAD00C337F1 /* main.m */; };
 		BE0F7E2B1AAF6F6700C337F1 /* ArkhamHorrorCLI.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7E2A1AAF6F6700C337F1 /* ArkhamHorrorCLI.m */; };
 		BE0F7E2D1AAF6F9D00C337F1 /* NSMutableArray+Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4F611AA1219C0073EDEE /* NSMutableArray+Deck.m */; };
-		BE0F7E2E1AAF6FA000C337F1 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D05A1AA9148500ADFC88 /* Die.m */; };
 		BE0F7E2F1AAF6FA400C337F1 /* JSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD511A9CD46A0034581D /* JSTest.m */; };
 		BE0F7E301AAF6FA700C337F1 /* PathFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7E011AAE2E8F00C337F1 /* PathFinder.m */; };
 		BE0F7E311AAF6FB100C337F1 /* PESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0F7DF21AAE2E3400C337F1 /* PESGraph.m */; };
@@ -66,7 +65,6 @@
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
 		BEF0D0541AA8B74C00ADFC88 /* Mythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0531AA8B74C00ADFC88 /* Mythos.m */; };
 		BEF0D0581AA8BB6600ADFC88 /* Movable.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D0571AA8BB6600ADFC88 /* Movable.m */; };
-		BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D05A1AA9148500ADFC88 /* Die.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,8 +161,6 @@
 		BEF0D0531AA8B74C00ADFC88 /* Mythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mythos.m; sourceTree = "<group>"; };
 		BEF0D0561AA8BB6600ADFC88 /* Movable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movable.h; sourceTree = "<group>"; };
 		BEF0D0571AA8BB6600ADFC88 /* Movable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movable.m; sourceTree = "<group>"; };
-		BEF0D0591AA9148500ADFC88 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
-		BEF0D05A1AA9148500ADFC88 /* Die.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Die.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,8 +373,6 @@
 				BE241B7D1AC45DB9009C63B6 /* MFJSONObject.m */,
 				BE1A72D51AC1CADB00789DF0 /* SetupUtils.h */,
 				BE1A72D61AC1CADB00789DF0 /* SetupUtils.m */,
-				BEF0D0591AA9148500ADFC88 /* Die.h */,
-				BEF0D05A1AA9148500ADFC88 /* Die.m */,
 				BE4CFD5A1A9CF8900034581D /* Defines.h */,
 				BE4CFD501A9CD46A0034581D /* JSTest.h */,
 				BE4CFD511A9CD46A0034581D /* JSTest.m */,
@@ -545,7 +539,6 @@
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE1A72C21AC091D500789DF0 /* Skill.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
-				BEF0D05B1AA9148500ADFC88 /* Die.m in Sources */,
 				BE0F7DFF1AAE2E3400C337F1 /* PESGraphRouteStep.m in Sources */,
 				BE0F7DFD1AAE2E3400C337F1 /* PESGraphNode.m in Sources */,
 				BE085F151A9B9AEA00FEAB0E /* ViewController.m in Sources */,
@@ -591,7 +584,6 @@
 				BE0F7E391AAF6FD900C337F1 /* Monster.m in Sources */,
 				BE0F7E251AAF6EAD00C337F1 /* main.m in Sources */,
 				BE0F7E361AAF6FCD00C337F1 /* Movable.m in Sources */,
-				BE0F7E2E1AAF6FA000C337F1 /* Die.m in Sources */,
 				BE0F7E2D1AAF6F9D00C337F1 /* NSMutableArray+Deck.m in Sources */,
 				BE1A72D81AC1CADB00789DF0 /* SetupUtils.m in Sources */,
 				BE0F7E301AAF6FA700C337F1 /* PathFinder.m in Sources */,

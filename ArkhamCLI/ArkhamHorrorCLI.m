@@ -9,7 +9,6 @@
 #import "ArkhamHorrorCLI.h"
 #import "ArkhamHorrorUIAPI.h"
 #import "Game.h"
-#import "Die.h"
 #import "SettingsManager.h"
 #import "Neighborhood.h"
 #import "Location.h"
@@ -17,19 +16,7 @@
 #import "Item.h"
 #import "Macros.h"
 
-#define AHScheduleBlock(_priority,_block) \
-    do { \
-        void (^_macroBlockName)(void) = ^{ \
-            _block(); \
-            [self processNextEvent]; \
-            if (_priority){ \
-                [self pushEvent:_macroBlockName]; \
-            } \
-            else { \
-                [self enqueueEvent:_macroBlockName]; \
-            } \
-        }; \
-    } while(0)
+#define AHScheduleBlock(_priority,_block) [self scheduleBlock:_block priority:_priority]
 
 char const kEscapeChar = '\033';
 
@@ -326,6 +313,19 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 #pragma mark - Events Queue
 
+-(void)scheduleBlock:(AHEvent)block priority:(BOOL)cutsLine {
+    void (^scheduledBlock)(void) = ^{
+        block();
+        [self processNextEvent];
+    };
+    if (cutsLine){
+        [self.eventsQueue insertObject:scheduledBlock atIndex:0];
+    }
+    else {
+        [self.eventsQueue addObject:scheduledBlock];
+    }
+}
+
 -(void)processEventsQueue {
     [self processNextEvent]; // recursively resolves each event in order
     [self getString:@"All events processed. Hit Enter to continue..."]; // just a halt to debugging
@@ -334,7 +334,6 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)processNextEvent {
     if (!self.currentGame.gameOver){
         if (self.eventsQueue.count > 0){
-            NSLog(@"got an event to do!");
             AHEvent event = [self.eventsQueue firstObject];
             [self.eventsQueue removeObject:event];
             event();
@@ -345,81 +344,34 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     }
 }
 
--(void)enqueueEvent:(AHEvent)event {
-    [self.eventsQueue addObject:event];
-}
-
--(void)pushEvent:(AHEvent)event {
-    [self.eventsQueue insertObject:event atIndex:0];
-}
-
 #pragma mark - ArkhamHorror UI API
 
-
--(void)enqueueAncientOneSetup:(AHAncientOneSelectEvent)callback {
-    void (^ancientOneSetupBlock)(void) = ^{
+-(void)priority:(BOOL)cutsLine ancientOneSetup:(AHAncientOneSelectEvent)callback{
+    AHScheduleBlock(cutsLine, ^{
         // TODO may be random or selected
         [self println:@"AncientOne setup requested, returning Azathoth"];
         callback(@"Azathoth");
-    };
-    [self.eventsQueue addObject:ancientOneSetupBlock];
-}
--(void)enqueuePlayerSetup:(AHPlayerSelectEvent)callback {
-    void (^playerSetupBlock)(void) = ^{
-        [self println:@"Player setup requested, returning Mike"];
-        BOOL donePicking = [self getBool:@"Done adding players? "];
-        callback(@"Mike",donePicking);
-    };
-    [self.eventsQueue addObject:playerSetupBlock];
+    });
 }
 
--(void)enqueueQuitEvent:(AHEvent)callback push:(BOOL)pushToFront {
-    void (^quitBlock)(void) = ^{
-        [self println:@"Quiting"];
-    };
-    if (pushToFront){
-        [self.eventsQueue insertObject:quitBlock atIndex:0];
-    }
-    else {
-        [self.eventsQueue addObject:quitBlock];
-    }
-}
-
--(void)enqueueDieRollEvent:(AHRollEvent)callback push:(BOOL)pushToFront{
-    //    AHBlock(dieRollBlock) = ^{
-    //        NSUInteger roll = [Die d6];
-    //        callback(roll);
-    //        [self processNextEvent];
-    //    };
-    //    if (pushToFront){
-    //        [self pushEvent:dieRollBlock];
-    //    }
-    //    else {
-    //        [self enqueueEvent:dieRollBlock];
-    //    }
-}
-
--(void)priority:(BOOL)cutsLine eventP:(void*)callback {
-    
-}
-
--(void)priority:(BOOL)cutsLine ancientOneSetup:(AHAncientOneSelectEvent)callback{
-    
-}
--(void)priority:(BOOL)cutsLine dieRollEvent:(AHRollEvent)callback {
-    
-}
 -(void)priority:(BOOL)cutsLine event:(AHEvent)callback {
-    
+    AHScheduleBlock(cutsLine, callback);
 }
 -(void)priority:(BOOL)cutsLine focusEvent:(AHEvent)callback {
     
 }
 -(void)priority:(BOOL)cutsLine playerSetupEvent:(AHPlayerSelectEvent)callback {
-    
+    AHScheduleBlock(cutsLine, ^{
+        [self println:@"Player setup requested, returning Mike"];
+        BOOL donePicking = [self getBool:@"Done adding players? "];
+        callback(@"Mike",donePicking);
+    });
 }
--(void)priority:(BOOL)cutsLine randomEvent:(NSInteger)max callback:(AHRandomEvent)callback {
-    
+-(void)priority:(BOOL)cutsLine dieRoll:(NSUInteger)dieMax callback:(AHRandomEvent)callback {
+    AHScheduleBlock(cutsLine, ^{
+        NSUInteger roll = arc4random_uniform((unsigned int)dieMax)+1;
+        callback(roll);
+    });
 }
 -(void)priority:(BOOL)cutsLine selectionEvent:(NSArray *)selections select:(NSUInteger)select callback:(AHSelectEvent)callback {
     AHScheduleBlock(cutsLine,^{
@@ -431,7 +383,7 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     AHScheduleBlock(cutsLine, ^{
         NSMutableArray *rolls = [NSMutableArray new];
         for (int idx = 0; idx < dieToRoll; idx++){
-            [rolls addObject:@([Die d6])];
+            [rolls addObject:@(arc4random_uniform(6)+1)];
         }
         callback(rolls);
     });

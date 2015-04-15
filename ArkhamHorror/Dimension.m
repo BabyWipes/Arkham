@@ -10,33 +10,74 @@
 
 @implementation Dimension
 
-+(instancetype)ofType:(MonsterDimensionSymbol)type{
-    return [[Dimension alloc] initWithType:type];
-}
-+(NSArray*)exportJSON:(NSArray*)dimensions {
-    NSMutableArray *exportedDimensions = [NSMutableArray new];
-    for (Dimension *dim in dimensions){
-        [exportedDimensions addObject:@(dim.value)];
+#pragma mark - MFJSONObject
+
+-(NSString*)stringRepresentationOfObject:(id)obj {
+    if ([obj isKindOfClass:[Dimension class]]){
+        Dimension *dim = obj;
+        switch (dim.value) {
+            case MonsterDimensionSymbolCircle: return @"circle";
+            case MonsterDimensionSymbolCrescent: return @"crescent";
+            case MonsterDimensionSymbolDiamond: return @"diamond";
+            case MonsterDimensionSymbolHexagon: return @"hexagon";
+            case MonsterDimensionSymbolPlus: return @"plus";
+            case MonsterDimensionSymbolSlash: return @"slash";
+            case MonsterDimensionSymbolSquare: return @"square";
+            case MonsterDimensionSymbolStar: return @"star";
+            case MonsterDimensionSymbolTriangle: return @"triangle";
+            default: return @"undefined";
+        }
     }
-    return exportedDimensions;
-}
-+(NSArray*)importJSON:(NSArray*)rawDimensions {
-    NSMutableArray *dimensions = [NSMutableArray new];
-    for (NSNumber *dimValue in rawDimensions){
-        [dimensions addObject:[Dimension ofType:[dimValue unsignedIntegerValue]]];
+    else {
+        return [super stringRepresentationOfObject:obj];
     }
-    return dimensions;
 }
 
--(instancetype)initWithType:(MonsterDimensionSymbol)type {
-    self = [super init];
-    if (self){
-        self.value = type;
+-(id)objectFromStringRepresentation:(NSString*)stringRepresentation {
+    Dimension *dimension = [[Dimension alloc] init];
+    if ([stringRepresentation isEqualToString:@"circle"]){
+        dimension.value = MonsterDimensionSymbolCircle;
     }
-    return self;
+    else if ([stringRepresentation isEqualToString:@"crescent"]){
+        dimension.value = MonsterDimensionSymbolCrescent;
+    }
+    else if ([stringRepresentation isEqualToString:@"diamond"]){
+        dimension.value = MonsterDimensionSymbolDiamond;
+    }
+    else if ([stringRepresentation isEqualToString:@"hexagon"]){
+        dimension.value = MonsterDimensionSymbolHexagon;
+    }
+    else if ([stringRepresentation isEqualToString:@"plus"]){
+        dimension.value = MonsterDimensionSymbolPlus;
+    }
+    else if ([stringRepresentation isEqualToString:@"slash"]){
+        dimension.value = MonsterDimensionSymbolSlash;
+    }
+    else if ([stringRepresentation isEqualToString:@"square"]){
+        dimension.value = MonsterDimensionSymbolSquare;
+    }
+    else if ([stringRepresentation isEqualToString:@"star"]){
+        dimension.value = MonsterDimensionSymbolStar;
+    }
+    else if ([stringRepresentation isEqualToString:@"triangle"]){
+        dimension.value = MonsterDimensionSymbolTriangle;
+    }
+    return dimension;
 }
--(BOOL)equalsDimension:(Dimension*)other{
-    return (self.value == other.value);
+
++(instancetype)ofType:(MonsterDimensionSymbol)type{
+    Dimension *dimension = [[Dimension alloc] init];
+    dimension.value = type;
+    return dimension;
+}
+
+-(BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[Dimension class]]){
+        return self.value == [(Dimension*)object value];
+    }
+    else {
+        return [super isEqual:object];
+    }
 }
 
 @end

@@ -133,9 +133,9 @@ static Game *singletonInstance = nil;
         self.currentPhase = GamePhaseSetupAncientOne;
         self.gameOver = NO;
         
-        [self setupBoard];
+        [self setupBoard:settings];
         [self setupDecks:settings];
-        self.monsterCup = [SetupUtils arkhamHorrorMonsters];
+        [self setupMonsters:settings];
         
         self.outskirts = [NSMutableArray new];
         
@@ -166,8 +166,14 @@ static Game *singletonInstance = nil;
 
 #pragma mark - setup
 
--(void)setupBoard {
-    self.neighborhoods = [SetupUtils arkhamBoard];
+-(void)setupBoard:(NSDictionary*)settings {
+    NSArray *neighborhoodJSONArr = settings[@"Neighborhoods"];
+    NSMutableArray *hoodsAccumulator = [NSMutableArray new];
+    for (NSDictionary *hoodJSON in neighborhoodJSONArr){
+        Neighborhood *hood = [Neighborhood generate:hoodJSON];
+        [hoodsAccumulator addObject:hood];
+    }
+    self.neighborhoods = [NSArray arrayWithArray:hoodsAccumulator];
     
     // wire up neighborhoods
     self.pathFindingGraph = [PathFinder setupBoardGraph:self.neighborhoods];
@@ -182,13 +188,29 @@ static Game *singletonInstance = nil;
 }
 
 -(void)setupDecks:(NSDictionary*)settings {
-    self.commonsDeck = [SetupUtils arkhamHorrorCommons];
+    
+
+    [self setupItems:settings];
     self.uniquesDeck = [NSMutableArray new];
     self.spellsDeck = [NSMutableArray new];
     self.alliesDeck = [NSMutableArray new];
     self.mythosDeck = [NSMutableArray new];
     [self setupSkillsDeck:settings];
     [self setupAlliesDeck:settings];
+}
+
+-(void)setupItems:(NSDictionary*)settings {
+    self.commonsDeck = [NSMutableArray new];
+    NSDictionary *itemsDict = settings[@"Items"];
+    NSArray *commonsArr = itemsDict[@"Commons"];
+    for (NSDictionary *itemSetupDict in commonsArr){
+        NSUInteger count = [itemSetupDict[@"count"] unsignedIntegerValue];
+        NSDictionary *itemProperties = itemSetupDict[@"setup_dict"];
+        for (int idx = 0; idx < count; idx++) {
+            Item *item = [Item generate:itemProperties];
+            [self.commonsDeck addObject:item];
+        }
+    }
 }
 
 -(void)setupSkillsDeck:(NSDictionary*)settings {
@@ -210,6 +232,17 @@ static Game *singletonInstance = nil;
     for (NSDictionary *allyDict in alliesArr){
         Ally *ally = [Ally generate:allyDict];
         [self.alliesDeck addObject:ally];
+    }
+}
+
+-(void)setupMonsters:(NSDictionary*)settings {
+    self.monsterCup = [NSMutableArray new];
+    for (NSDictionary *monsterJSON in settings[@"Monsters"]){
+        NSUInteger count = [monsterJSON[@"count"] unsignedIntegerValue];
+        for (int idx = 0; idx < count; idx++){
+            Monster *monster = [Monster generate:monsterJSON[@"setup_dict"]];
+            [self.monsterCup addObject:monster];
+        }
     }
 }
 
@@ -343,7 +376,7 @@ static Game *singletonInstance = nil;
             currentPlayer.blessedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
                 if (roll == 1){ // lost blessing
                     currentPlayer.blessed = NO;
                 }
@@ -357,7 +390,7 @@ static Game *singletonInstance = nil;
             currentPlayer.cursedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
                 if (roll == 1){ // lost curse
                     currentPlayer.cursed = NO;
                 }
@@ -372,7 +405,7 @@ static Game *singletonInstance = nil;
         }
         else {
             // offer chance to pay $10 to remove bank loan
-            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
                 if (roll < 4){
                     // pay $1 or discard all items + can no longer get bank loan
                 }
@@ -384,7 +417,7 @@ static Game *singletonInstance = nil;
     if (currentPlayer.retainers > 0){
         // gain $2
         for (int idx = 0; idx < currentPlayer.retainers-currentPlayer.retainersSkipRolling; idx++){
-            [self.uiDelegate push(dieRollEvent:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
                 if (roll == 1){ // lose the retainer
                     if (currentPlayer.retainers > 0){
                         currentPlayer.retainers--;
@@ -555,7 +588,7 @@ static Game *singletonInstance = nil;
 
 -(Location*)locationNamed:(NSString*)name {
     for (Neighborhood *hood in self.neighborhoods){
-        if ([hood.street.name isEqualToString:name]){
+        if ([hood.name isEqualToString:name]){
             return hood.street;
         }
         for (Location *loc in hood.locations){
