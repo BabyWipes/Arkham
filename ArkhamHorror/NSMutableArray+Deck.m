@@ -42,7 +42,7 @@
     return targetCard;
 }
 
--(void)discard:(Card *)card {
+-(void)discard:(Card*)card {
     [self addObject:card];
 }
 

@@ -516,14 +516,49 @@ static Game *singletonInstance = nil;
     // They may spend clue tokens before rolling any dice, after rolling some dice, or all dice
 }
 
+-(void)drawMythos {
+    Mythos *newMythos = (Mythos*)[self.mythosDeck drawOne];
+    if (newMythos.mythosType == MythosTypeStoryContinues){
+        // discard this mythos, shuffle mythos deck, redraw mythos
+        [self.mythosDeck discard:newMythos];
+        [self.mythosDeck shuffle];
+        [self drawMythos];
+        return;
+    }
+    else if (newMythos.mythosType == MythosTypeEnvironmentMystic ||
+        newMythos.mythosType == MythosTypeEnvironmentUrban ||
+        newMythos.mythosType == MythosTypeEnvironmentWeather) {
+        // dispose of old environment mythos and unset it's effects,
+        // apply new effect
+        if (self.currentMythosEnvironment != nil){
+            [self.currentMythosEnvironment removeEnvironmentEffect:self];
+            [self.mythosDeck discard:self.currentMythosEnvironment];
+        }
+        self.currentMythosEnvironment = (EnvironmentMythos*)newMythos;
+        [self.currentMythosEnvironment applyEnvironmentEffect:self];
 
--(void)drawHeadline:(Mythos*)headline {
-    self.currentMythosHeadline = headline;
-    self.currentMythosWhiteDimensions = headline.whiteDimensons;
-    self.currentMythosBlackDimensions = headline.blackDimensions;
+    }
+    else if (newMythos.mythosType == MythosTypeHeadline) {
+        // apply it's one-off effect
+        [(HeadlineMythos*)newMythos applyHeadlineEffect:self];
+        
+    }
+    else if (newMythos.mythosType == MythosTypeRumor) {
+        if (self.currentMythosRumor == nil){
+            self.currentMythosRumor = (RumorMythos*)newMythos;
+            [self.currentMythosRumor applyRumorEffect:self];
+            // apply the mythos, apply the ongoing effect
+        }
+    }
+    else if (newMythos.mythosType == MythosTypeStoryContinues){
+        // discard this mythos, shuffle mythos deck, redraw mythos
+    }
     
-    Location *gateLoc = [self locationNamed:headline.gateLocation];
-    Location *clueLoc = [self locationNamed:headline.clueLocation];
+    self.currentMythosWhiteDimensions = newMythos.whiteDimensons;
+    self.currentMythosBlackDimensions = newMythos.blackDimensions;
+    
+    Location *gateLoc = [self locationNamed:newMythos.gateLocation];
+    Location *clueLoc = [self locationNamed:newMythos.clueLocation];
     
     [self openGate:gateLoc];
     
@@ -531,9 +566,8 @@ static Game *singletonInstance = nil;
     [self placeClue:clueLoc];
     // else if 1 investigator there, they immediately pick it up
     // else first player decides who gets clue
-    
-    // do headline action
 }
+
 -(void)openGate:(Location*)gateLocation {
     
 }

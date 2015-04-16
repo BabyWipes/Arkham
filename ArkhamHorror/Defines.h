@@ -81,6 +81,7 @@ typedef NS_ENUM(NSUInteger, MythosType) {
     MythosTypeEnvironmentWeather,
     MythosTypeRumor,
     MythosTypeHeadline,
+    MythosTypeStoryContinues
 };
 
 #pragma mark - Game Phases

@@ -423,7 +423,17 @@
     godOfTheBloodyTounge.nightmarishRating = 1;
     godOfTheBloodyTounge.overwhelmingRating = 1;
     
-    HaunterOfTheDarkMonster *haunterOfTheDark = [[HaunterOfTheDarkMonster alloc] init];
+    Monster *haunterOfTheDark = [[Monster alloc] init];
+    haunterOfTheDark.name = @"Haunter of the Dark";
+    haunterOfTheDark.movementType = MonsterMovementTypeFlying;
+    haunterOfTheDark.toughness = 2;
+    haunterOfTheDark.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
+    haunterOfTheDark.awareness = -3;
+    haunterOfTheDark.horrorRating = -2;
+    haunterOfTheDark.horrorDamage = 2;
+    haunterOfTheDark.combatRating = -2;
+    haunterOfTheDark.combatDamage = 2;
+    
     TheBlackManMonster *theBlackMan = [[TheBlackManMonster alloc] init];
     TheBloatedWomanMonster *theBloatedWoman = [[TheBloatedWomanMonster alloc] init];
     TheDarkPharoahMonster *theDarkPharoh = [[TheDarkPharoahMonster alloc] init];

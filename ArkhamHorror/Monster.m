@@ -258,26 +258,6 @@
 }
 @end
 
-@implementation HaunterOfTheDarkMonster
-// if Blackest Night Mythos is in play, this monster's combat rating is -5
-
--(id)init {
-    self = [super init];
-    if (self) {
-        self.name = @"Haunter of the Dark";
-        self.movementType = MonsterMovementTypeFlying;
-        self.toughness = 2;
-        self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
-        self.awareness = -3;
-        self.horrorRating = -2;
-        self.horrorDamage = 2;
-        self.combatRating = -2;
-        self.combatDamage = 2;
-    }
-    return self;
-}
-@end
-
 @implementation HoundOfTindalosMonster
 -(id)init {
     self = [super init];

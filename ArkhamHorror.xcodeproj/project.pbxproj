@@ -60,6 +60,12 @@
 		BE7570E71AB22E49004B3998 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7570E51AB22E49004B3998 /* SettingsManager.m */; };
 		BE7570E91AB2321D004B3998 /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = BE7570E81AB2321D004B3998 /* Default.json */; };
 		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
+		BEE5B9F41AE05B9B007D8D9E /* HeadlineMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */; };
+		BEE5B9F51AE05B9B007D8D9E /* HeadlineMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */; };
+		BEE5B9FA1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */; };
+		BEE5B9FB1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */; };
+		BEE5B9FE1AE05EAD007D8D9E /* RumorMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */; };
+		BEE5B9FF1AE05EAD007D8D9E /* RumorMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */; };
 		BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
 		BEEF09031AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
@@ -153,6 +159,12 @@
 		BE7570EA1AB23358004B3998 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		BEE5B9F21AE05B9B007D8D9E /* HeadlineMythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlineMythos.h; sourceTree = "<group>"; };
+		BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlineMythos.m; sourceTree = "<group>"; };
+		BEE5B9F81AE05E0D007D8D9E /* EnvironmentMythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentMythos.h; sourceTree = "<group>"; };
+		BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentMythos.m; sourceTree = "<group>"; };
+		BEE5B9FC1AE05EAD007D8D9E /* RumorMythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RumorMythos.h; sourceTree = "<group>"; };
+		BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RumorMythos.m; sourceTree = "<group>"; };
 		BEEF09001AB74C3D00155C45 /* Dimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dimension.h; sourceTree = "<group>"; };
 		BEEF09011AB74C3D00155C45 /* Dimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dimension.m; sourceTree = "<group>"; };
 		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
@@ -387,6 +399,21 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		BEE5B9F61AE05BA3007D8D9E /* mythos */ = {
+			isa = PBXGroup;
+			children = (
+				BEF0D0521AA8B74C00ADFC88 /* Mythos.h */,
+				BEF0D0531AA8B74C00ADFC88 /* Mythos.m */,
+				BEE5B9F21AE05B9B007D8D9E /* HeadlineMythos.h */,
+				BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */,
+				BEE5B9F81AE05E0D007D8D9E /* EnvironmentMythos.h */,
+				BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */,
+				BEE5B9FC1AE05EAD007D8D9E /* RumorMythos.h */,
+				BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */,
+			);
+			name = mythos;
+			sourceTree = "<group>";
+		};
 		BEF0D0511AA794FE00ADFC88 /* cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,10 +423,9 @@
 				BE4CFD4E1A9C5A8D0034581D /* Item.m */,
 				BEF0D04E1AA794E700ADFC88 /* Ally.h */,
 				BEF0D04F1AA794E700ADFC88 /* Ally.m */,
-				BEF0D0521AA8B74C00ADFC88 /* Mythos.h */,
-				BEF0D0531AA8B74C00ADFC88 /* Mythos.m */,
 				BE1A72C01AC091D500789DF0 /* Skill.h */,
 				BE1A72C11AC091D500789DF0 /* Skill.m */,
+				BEE5B9F61AE05BA3007D8D9E /* mythos */,
 			);
 			name = cards;
 			sourceTree = "<group>";
@@ -536,6 +562,7 @@
 				BE4CFD521A9CD46A0034581D /* JSTest.m in Sources */,
 				BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */,
 				BE1A72D71AC1CADB00789DF0 /* SetupUtils.m in Sources */,
+				BEE5B9FA1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */,
 				BE3D4F651AA1224B0073EDEE /* Card.m in Sources */,
 				BE1A72C21AC091D500789DF0 /* Skill.m in Sources */,
 				BE3D4F571A9FD4900073EDEE /* Monster.m in Sources */,
@@ -551,6 +578,8 @@
 				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
 				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
 				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,
+				BEE5B9F41AE05B9B007D8D9E /* HeadlineMythos.m in Sources */,
+				BEE5B9FE1AE05EAD007D8D9E /* RumorMythos.m in Sources */,
 				BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */,
 				BE0F7E021AAE2E8F00C337F1 /* PathFinder.m in Sources */,
 			);
@@ -575,14 +604,17 @@
 				BE241B801AC45DB9009C63B6 /* MFJSONObject.m in Sources */,
 				BE0F7E2B1AAF6F6700C337F1 /* ArkhamHorrorCLI.m in Sources */,
 				BE0F7E341AAF6FBA00C337F1 /* PESGraphRoute.m in Sources */,
+				BEE5B9FB1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */,
 				BE0F7E411AAF6FF500C337F1 /* Game.m in Sources */,
 				BE0F7E3B1AAF6FE100C337F1 /* Card.m in Sources */,
 				BE0F7E351AAF6FBC00C337F1 /* PESGraphRouteStep.m in Sources */,
+				BEE5B9FF1AE05EAD007D8D9E /* RumorMythos.m in Sources */,
 				BE1A72C31AC091D500789DF0 /* Skill.m in Sources */,
 				BE0F7E3E1AAF6FEA00C337F1 /* Mythos.m in Sources */,
 				BE0F7E371AAF6FD100C337F1 /* Investigator.m in Sources */,
 				BE0F7E391AAF6FD900C337F1 /* Monster.m in Sources */,
 				BE0F7E251AAF6EAD00C337F1 /* main.m in Sources */,
+				BEE5B9F51AE05B9B007D8D9E /* HeadlineMythos.m in Sources */,
 				BE0F7E361AAF6FCD00C337F1 /* Movable.m in Sources */,
 				BE0F7E2D1AAF6F9D00C337F1 /* NSMutableArray+Deck.m in Sources */,
 				BE1A72D81AC1CADB00789DF0 /* SetupUtils.m in Sources */,

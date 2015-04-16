@@ -52,9 +52,6 @@
 @interface ElderThingMonster : Monster
 // When you fail a Combat or Evade check, you must additionally discard 1 Weapon or Spell
 @end
-@interface HaunterOfTheDarkMonster : Monster
-// if Blackest Night Environment Mythos is in play, it's combat rating is -5
-@end
 @interface HoundOfTindalosMonster : Monster
 // move to nearest investigator in arkham, excepting plays in asylum or hospital. If tie, then tracks lowest Sneak.
 // If tie, the first player chooses. If there no players on the same board as Hound, moves through the train station to the closest investigator.
@@ -222,7 +219,6 @@ Overwhelming X: Any investigator that defeats this monster in combat still loses
  Dimensional Shambler - if you fail a combat check against this, you are lost in time and space
  Elder Thing - When you fail a Combat or Evade check, you must additionally discard 1 Weapon or Spell
  Ghost - Undead
- Haunter of the Dark - if Blackest Night Environment Mythos is in play, it's combat rating is -5
  Hound of Tindalos - hound moves to nearest investigator in arkham, excepting plays in asylum or hospital. If tie, then tracks lowest Sneak. 
         If tie, the first player chooses. If there no players on the same board as Hound, moves through the train station to the closest investigator.
  Maniac - if terror >= 6, maniac's combat rating = -2, combat damage is 3, is Endless

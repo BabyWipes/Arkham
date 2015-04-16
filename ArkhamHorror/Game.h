@@ -10,9 +10,13 @@
 #import "NSMutableArray+Deck.h"
 #import "Investigator.h"
 #import "Ally.h"
-#import "Mythos.h"
 #import "ArkhamHorrorUIAPI.h"
 #import "Macros.h"
+
+#import "Mythos.h"
+#import "HeadlineMythos.h"
+#import "EnvironmentMythos.h"
+#import "RumorMythos.h"
 
 @class AncientOne;
 
@@ -55,9 +59,8 @@
 
 @property (nonatomic) BOOL arkhamIsOverrun;
 
-@property (strong,nonatomic) Mythos *currentMythosEnvironment;
-@property (strong,nonatomic) Mythos *currentMythosRumor;
-@property (strong,nonatomic) Mythos *currentMythosHeadline;
+@property (strong,nonatomic) EnvironmentMythos *currentMythosEnvironment;
+@property (strong,nonatomic) RumorMythos *currentMythosRumor;
 
 @property (strong, nonatomic) NSArray *currentMythosWhiteDimensions;
 @property (strong, nonatomic) NSArray *currentMythosBlackDimensions;
@@ -69,10 +72,10 @@
 
 -(Location*)locationNamed:(NSString*)name;
 -(NSArray*)routeFrom:(Location*)a to:(Location*)b;
+-(void)drawMythos;
 -(void)logGameInfo;
 
 -(void)runPhase; // execute a step in the game loop, called by uiDelegate once it's dispatched + resolved all of it's events
-
 
 #pragma mark - Gmae Utils
 -(Neighborhood*)neighborhoodOfLocation:(Location*)location;
