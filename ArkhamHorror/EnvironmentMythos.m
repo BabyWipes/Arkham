@@ -15,7 +15,7 @@
     self = [super init];
     if (self){
         self.name = @"Prototype Environment Mythos";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolDiamond],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolDiamond],
                                 [Dimension ofType:MonsterDimensionSymbolSquare]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCircle]];
     }
@@ -53,7 +53,7 @@
     if (self){
         self.name = @"Curfew Enforced";
         self.mythosType = MythosTypeEnvironmentUrban;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Unvisited Isle";
         self.clueLocation = @"Science Building";
@@ -83,7 +83,7 @@
     if (self){
         self.name = @"Egyptian Exhibit Visits Miskatonic U.";
         self.mythosType = MythosTypeEnvironmentUrban;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"The Witch House";
         self.clueLocation = @"Black Cave";
@@ -113,7 +113,7 @@
     if (self){
         self.name = @"Happy Days Are Here Again";
         self.mythosType = MythosTypeEnvironmentUrban;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolDiamond],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolDiamond],
                                 [Dimension ofType:MonsterDimensionSymbolSquare],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCircle]];
@@ -131,7 +131,7 @@
     if (self){
         self.name = @"The Festival";
         self.mythosType = MythosTypeEnvironmentUrban;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Woods";
         self.clueLocation = @"Historical Society";
@@ -149,7 +149,7 @@
     if (self){
         self.name = @"An Evil Fog";
         self.mythosType = MythosTypeEnvironmentWeather;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Graveyard";
         self.clueLocation = @"Unvisited Isle";
@@ -179,7 +179,7 @@
     if (self){
         self.name = @"Icy Conditions";
         self.mythosType = MythosTypeEnvironmentWeather;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Historical Society";
         self.clueLocation = @"Silver Twilight Lodge";
@@ -195,7 +195,7 @@
     if (self){
         self.name = @"Raining Cats and Dogs";
         self.mythosType = MythosTypeEnvironmentWeather;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Hibb's Roadhouse";
         self.clueLocation = @"Independence Square";
@@ -211,7 +211,7 @@
     if (self){
         self.name = @"Sunny and Clear";
         self.mythosType = MythosTypeEnvironmentWeather;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Black Cave";
         self.clueLocation = @"Hibb's Roadhouse";
@@ -271,7 +271,7 @@
     if (self){
         self.name = @"Dreams of a Sunken City";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Independence Square";
         self.clueLocation = @"The Unnamable";
@@ -287,7 +287,7 @@
     if (self){
         self.name = @"No One Can Help You Now";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"The Unnamable";
         self.clueLocation = @"Woods";
@@ -303,7 +303,7 @@
     if (self){
         self.name = @"Noden's Favor";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
@@ -335,7 +335,7 @@
     if (self){
         self.name = @"R'lyeh Rising";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
@@ -367,7 +367,7 @@
     if (self){
         self.name = @"Chill of the Grave";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"Unvisited Isle";
         self.clueLocation = @"Science Building";
@@ -383,7 +383,7 @@
     if (self){
         self.name = @"The Man In Black";
         self.mythosType = MythosTypeEnvironmentMystic;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.gateLocation = @"The Witch House";
         self.clueLocation = @"Black Cave";

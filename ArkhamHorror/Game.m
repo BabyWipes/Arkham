@@ -554,7 +554,7 @@ static Game *singletonInstance = nil;
         // discard this mythos, shuffle mythos deck, redraw mythos
     }
     
-    self.currentMythosWhiteDimensions = newMythos.whiteDimensons;
+    self.currentMythosWhiteDimensions = newMythos.whiteDimensions;
     self.currentMythosBlackDimensions = newMythos.blackDimensions;
     
     Location *gateLoc = [self locationNamed:newMythos.gateLocation];

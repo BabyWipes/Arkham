@@ -17,7 +17,7 @@
     if (self){
         self.name = @"Prototype Headline Mythos";
         self.mythosType = MythosTypeHeadline;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCircle]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCircle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolDiamond],
                                  [Dimension ofType:MonsterDimensionSymbolSquare]];
         
@@ -38,7 +38,7 @@
     self = [super init];
     if (self){
         self.name = @"All Quiet in Arkham!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -69,7 +69,7 @@
     self = [super init];
     if (self){
         self.name = @"Bizarre Dreams Plague Citizens!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -86,7 +86,7 @@
     self = [super init];
     if (self){
         self.name = @"Blue Flu!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -116,7 +116,7 @@
     self = [super init];
     if (self){
         self.name = @"Church Group Reclaims Southside!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -134,7 +134,7 @@
     self = [super init];
     if (self){
         self.name = @"City Gripped by Blackouts!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -151,7 +151,7 @@
     self = [super init];
     if (self){
         self.name = @"Family Found Butchered!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Graveyard";
         self.clueLocation = @"Unvisited Isle";
@@ -166,7 +166,7 @@
     self = [super init];
     if (self){
         self.name = @"Feds Raid Arkham!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Black Cave";
         self.clueLocation = @"Hibb's Roadhouse";
@@ -175,13 +175,13 @@
 }
 @end
 
-@implementation FourthIfJulyParadeMythos
+@implementation FourthOfJulyParadeMythos
 -(id)init{
     // Players can't move into or out of Merchant Dist. streets until end of next turn
     self = [super init];
     if (self){
         self.name = @"Fourth of July Parade!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"The Witch House";
         self.clueLocation = @"Black Cave";
@@ -209,7 +209,7 @@
     self = [super init];
     if (self){
         self.name = @"Ghost Ship Docks by Itself!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"The Unnamable";
         self.clueLocation = @"Woods";
@@ -224,7 +224,7 @@
     self = [super init];
     if (self){
         self.name = @"Goat-like Creature Spotted in Woods!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -241,7 +241,7 @@
     self = [super init];
     if (self){
         self.name = @"Horror at Groundbreaking!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Historical Society";
         self.clueLocation = @"Silver Twilight Lodge";
@@ -256,7 +256,7 @@
     self = [super init];
     if (self){
         self.name = @"Ill Wind Grips Arkham!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -299,7 +299,7 @@
     self = [super init];
     if (self){
         self.name = @"Manhunt in Arkham!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
@@ -329,7 +329,7 @@
     self = [super init];
     if (self){
         self.name = @"Miskatonic Arctic Expedition Returns!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Hibb's Roadhouse";
         self.clueLocation = @"Independence Square";
@@ -344,7 +344,7 @@
     self = [super init];
     if (self){
         self.name = @"Missing People Return!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
@@ -361,7 +361,7 @@
     self = [super init];
     if (self){
         self.name = @"Picknikers Panic!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Unvisited Isle";
         self.clueLocation = @"Science Building";
@@ -415,7 +415,7 @@
     self = [super init];
     if (self){
         self.name = @"Scientist Warns of Dimensional Rift!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -445,7 +445,7 @@
     self = [super init];
     if (self){
         self.name = @"Slum Murders Continue!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Woods";
         self.clueLocation = @"Historical Society";
@@ -473,7 +473,7 @@
     self = [super init];
     if (self){
         self.name = @"Strange Lights on Campus!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -490,7 +490,7 @@
     self = [super init];
     if (self){
         self.name = @"Strange Power Flux Plagues City!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
@@ -507,7 +507,7 @@
     self = [super init];
     if (self){
         self.name = @"Strange Tremors Cease!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -524,7 +524,7 @@
     self = [super init];
     if (self){
         self.name = @"Temperence Fever Sweeps City";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                  [Dimension ofType:MonsterDimensionSymbolStar],
                                  [Dimension ofType:MonsterDimensionSymbolTriangle]];
@@ -541,7 +541,7 @@
     self = [super init];
     if (self){
         self.name = @"Terror at the Train Station!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"The Witch House";
         self.clueLocation = @"Black Cave";
@@ -569,7 +569,7 @@
     self = [super init];
     if (self){
         self.name = @"Witch Burning Anniversary!";
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolCrescent]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolPlus]];
         self.gateLocation = @"Unvisited Isle";
         self.clueLocation = @"Science Building";

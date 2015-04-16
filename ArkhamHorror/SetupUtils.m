@@ -16,6 +16,11 @@
 #import "Location.h"
 #import "AncientOne.h"
 
+#import "Mythos.h"
+#import "HeadlineMythos.h"
+#import "EnvironmentMythos.h"
+#import "RumorMythos.h"
+
 @implementation SetupUtils
 
 #pragma mark - Reset
@@ -72,7 +77,62 @@
     json[@"Items"] = @{@"Commons":[jsonItems copy]};
     [jsonItems removeAllObjects];
     
+    for (Mythos *mythos in [self arkhamHorrorMythosCards]){
+        [jsonItems addObject:mythos.json];
+    }
+    json[@"Mythos"] = [jsonItems copy];
+    [jsonItems removeAllObjects];
+    
     [SettingsManager writeSettings:json named:nil];
+}
+
+#pragma mark - Mythos Cards
+
++(NSArray*)arkhamHorrorMythosCards {
+    NSMutableArray *mythoi = [NSMutableArray new];
+    
+    [mythoi addObject:[[TheStoryContinuesMythos alloc] init]];
+
+    // HEADLINES
+    
+    [mythoi addObject:[[AllQuietMythos alloc] init]];
+    [mythoi addObject:[[BigStormMythos alloc] init]];
+    [mythoi addObject:[[BizarreDreamsMythos alloc] init]];
+    [mythoi addObject:[[BlueFluMythos alloc] init]];
+    [mythoi addObject:[[CampusSecurityIncreasedMythos alloc] init]];
+    [mythoi addObject:[[ReclaimsSouthsideMythos alloc] init]];
+    [mythoi addObject:[[BlackoutsMythos alloc] init]];
+    [mythoi addObject:[[FamilyFoundButcheredMythos alloc] init]];
+    [mythoi addObject:[[FedsRaidArkhamMythos alloc] init]];
+    [mythoi addObject:[[FourthOfJulyParadeMythos alloc] init]];
+    [mythoi addObject:[[CleanUpEasttownMythos alloc] init]];
+    [mythoi addObject:[[GhostShipDocksMythos alloc] init]];
+    [mythoi addObject:[[GoatLikeCreatureInWoodsMythos alloc] init]];
+    [mythoi addObject:[[HorrorAtGroundbreakingMythos alloc] init]];
+    [mythoi addObject:[[IllWindMythos alloc] init]];
+    [mythoi addObject:[[LodgeMemberQuestionedMythos alloc] init]];
+    [mythoi addObject:[[LodgeMembersWatchNightMythos alloc] init]];
+    [mythoi addObject:[[ManhuntInArkhamMythos alloc] init]];
+    [mythoi addObject:[[MerchantsMarchMythos alloc] init]];
+    [mythoi addObject:[[ArcticExpeditionReturnsMythos alloc] init]];
+    [mythoi addObject:[[MissingPeopleReturnMythos alloc] init]];
+    [mythoi addObject:[[PicnickersPanicMythos alloc] init]];
+    [mythoi addObject:[[PolicePatrolNorthsideMythos alloc] init]];
+    [mythoi addObject:[[SecurityInUptownMythos alloc] init]];
+    [mythoi addObject:[[RivertownTakesStreetsMythos alloc] init]];
+    [mythoi addObject:[[DimensionalRiftMythos alloc] init]];
+    [mythoi addObject:[[GangTurnsToPoliceMythos alloc] init]];
+    [mythoi addObject:[[SlumMurdersContinueMythos alloc] init]];
+    [mythoi addObject:[[SouthsideStranglerSuspectedMythos alloc] init]];
+    [mythoi addObject:[[StrangeLightsOnCampusMythos alloc] init]];
+    [mythoi addObject:[[StrangePowerFluxMythos alloc] init]];
+    [mythoi addObject:[[StrangeTremorsCeaseMythos alloc] init]];
+    [mythoi addObject:[[TemperenceFeverMythos alloc] init]];
+    [mythoi addObject:[[TerrorAtTrainStationMythos alloc] init]];
+    [mythoi addObject:[[VigilanteGuardsNightMythos alloc] init]];
+    [mythoi addObject:[[WitchBurningAnniversaryMythos alloc] init]];
+    
+    return mythoi;
 }
 
 #pragma mark - Ancient Ones

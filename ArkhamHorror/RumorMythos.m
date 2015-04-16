@@ -16,7 +16,7 @@
     if (self){
         self.name = @"Prototype Rumor Mythos";
         self.mythosType = MythosTypeRumor;
-        self.whiteDimensons = @[[Dimension ofType:MonsterDimensionSymbolSlash],
+        self.whiteDimensions = @[[Dimension ofType:MonsterDimensionSymbolSlash],
                                 [Dimension ofType:MonsterDimensionSymbolStar],
                                 [Dimension ofType:MonsterDimensionSymbolTriangle]];
         self.blackDimensions = @[[Dimension ofType:MonsterDimensionSymbolHexagon]];

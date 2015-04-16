@@ -11,16 +11,33 @@
 #import "Game.h"
 
 @implementation Mythos
+
+#pragma mark - MFJSONObject
+
++(NSArray*)ignoredProperties {
+    return @[@"mythosType"];
+}
 -(id)init {
     self = [super init];
     if (self){
         self.name = @"Prototype Mythos";
+        self.cardType = CardTypeMythos;
     }
     return self;
 }
 @end
 
 @implementation TheStoryContinuesMythos
+
+#pragma mark - MFJSONObject
+
++(NSArray*)ignoredProperties {
+    return @[@"blackDimensions",
+             @"whiteDimensions",
+             @"gateLocation",
+             @"clueLocation"];
+}
+
 -(id)init {
     self = [super init];
     if (self){

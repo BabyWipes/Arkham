@@ -116,7 +116,7 @@
 @end
 @interface FedsRaidArkhamMythos : HeadlineMythos
 @end
-@interface FourthIfJulyParadeMythos : HeadlineMythos
+@interface FourthOfJulyParadeMythos : HeadlineMythos
 @end
 @interface CleanUpEasttownMythos : HeadlineMythos
 @end
