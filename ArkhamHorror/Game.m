@@ -376,7 +376,7 @@ static Game *singletonInstance = nil;
             currentPlayer.blessedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:6 callback:^(NSUInteger roll) {
                 if (roll == 1){ // lost blessing
                     currentPlayer.blessed = NO;
                 }
@@ -390,7 +390,7 @@ static Game *singletonInstance = nil;
             currentPlayer.cursedSkipRolling = NO;
         }
         else {
-            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:6 callback:^(NSUInteger roll) {
                 if (roll == 1){ // lost curse
                     currentPlayer.cursed = NO;
                 }
@@ -405,7 +405,7 @@ static Game *singletonInstance = nil;
         }
         else {
             // offer chance to pay $10 to remove bank loan
-            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:6 callback:^(NSUInteger roll) {
                 if (roll < 4){
                     // pay $1 or discard all items + can no longer get bank loan
                 }
@@ -417,7 +417,7 @@ static Game *singletonInstance = nil;
     if (currentPlayer.retainers > 0){
         // gain $2
         for (int idx = 0; idx < currentPlayer.retainers-currentPlayer.retainersSkipRolling; idx++){
-            [self.uiDelegate push(dieRoll:^(NSUInteger roll) {
+            [self.uiDelegate push(dieRoll:6 callback:^(NSUInteger roll) {
                 if (roll == 1){ // lose the retainer
                     if (currentPlayer.retainers > 0){
                         currentPlayer.retainers--;
@@ -588,6 +588,7 @@ static Game *singletonInstance = nil;
     }
     if (self.terrorLevel == 6){ // close unique store
         [(GeneralStoreLocation*)[self locationNamed:@"Curiositie Shoppe"] setIsClosed:YES];
+        // buff maniac monsters, combat rating = -2, combat damage = 3, is Endless
     }
     if (self.terrorLevel == 9){ // close spell store
         [(GeneralStoreLocation*)[self locationNamed:@"Ye Olde Magick Shoppe"] setIsClosed:YES];

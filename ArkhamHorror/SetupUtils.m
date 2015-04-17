@@ -92,9 +92,8 @@
     NSMutableArray *mythoi = [NSMutableArray new];
     
     [mythoi addObject:[[TheStoryContinuesMythos alloc] init]];
-
-    // HEADLINES
     
+    // HEADLINES
     [mythoi addObject:[[AllQuietMythos alloc] init]];
     [mythoi addObject:[[BigStormMythos alloc] init]];
     [mythoi addObject:[[BizarreDreamsMythos alloc] init]];
@@ -132,6 +131,40 @@
     [mythoi addObject:[[VigilanteGuardsNightMythos alloc] init]];
     [mythoi addObject:[[WitchBurningAnniversaryMythos alloc] init]];
     
+    // ENVIRONMENTS
+    [mythoi addObject:[[AlienTechnologyMythos alloc] init]];
+    [mythoi addObject:[[CurfewEnforcedMythos alloc] init]];
+    [mythoi addObject:[[DrakesCarnivalMythos alloc] init]];
+    [mythoi addObject:[[EgyptianExhibitMythos alloc] init]];
+    [mythoi addObject:[[EstateSaleMythos alloc] init]];
+    [mythoi addObject:[[HappyDaysMythos alloc] init]];
+    [mythoi addObject:[[TheFestivalMythos alloc] init]];
+    [mythoi addObject:[[EvilFogMythos alloc] init]];
+    [mythoi addObject:[[HeatWaveMythos alloc] init]];
+    [mythoi addObject:[[IcyConditionsMythos alloc] init]];
+    [mythoi addObject:[[RainingCatsAndDogsMythos alloc] init]];
+    [mythoi addObject:[[SunnyAndClearMythos alloc] init]];
+    [mythoi addObject:[[StrangePlaugeMythos alloc] init]];
+    [mythoi addObject:[[BlackestNightMythos alloc] init]];
+    [mythoi addObject:[[BloodMagicMythos alloc] init]];
+    [mythoi addObject:[[DreamsOfSunkenCityMythos alloc] init]];
+    [mythoi addObject:[[NoOneCanHelpMythos alloc] init]];
+    [mythoi addObject:[[NodensFavorMythos alloc] init]];
+    [mythoi addObject:[[PlanetaryAlignmentMythos alloc] init]];
+    [mythoi addObject:[[RlyehRisingMythos alloc] init]];
+    [mythoi addObject:[[SolarEclipseMythos alloc] init]];
+    [mythoi addObject:[[ChillOfTheGraveMythos alloc] init]];
+    [mythoi addObject:[[ManInBlackMythos alloc] init]];
+    [mythoi addObject:[[ThingsOfDarknessMythos alloc] init]];
+    
+    //RUMORS
+    [mythoi addObject:[[DisturbingTheDeadMythos alloc] init]];
+    [mythoi addObject:[[GoodWorkUndoneMythos alloc] init]];
+    [mythoi addObject:[[GreatRitualMythos alloc] init]];
+    [mythoi addObject:[[SouthsideStranglerStrikesMythos alloc] init]];
+    [mythoi addObject:[[StarsAreRightMythos alloc] init]];
+    [mythoi addObject:[[TerribleExperimentMythos alloc] init]];
+    
     return mythoi;
 }
 
@@ -139,32 +172,14 @@
 
 +(NSArray*)arkhamHorrorAncientOnes {
     NSMutableArray *goos = [NSMutableArray new];
-    AncientOne *goo;
-    
-    goo = [[AncientOneAzathoth alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneCthulhu alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneHastur alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneIthaqua alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneNyarlathotep alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneShubNiggurath alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneYig alloc] init];
-    [goos addObject:goo];
-    
-    goo = [[AncientOneYogSothoth alloc] init];
-    [goos addObject:goo];
-    
+    [goos addObject:[[AncientOneAzathoth alloc] init]];
+    [goos addObject:[[AncientOneCthulhu alloc] init]];
+    [goos addObject:[[AncientOneHastur alloc] init]];
+    [goos addObject:[[AncientOneIthaqua alloc] init]];
+    [goos addObject:[[AncientOneNyarlathotep alloc] init]];
+    [goos addObject:[[AncientOneShubNiggurath alloc] init]];
+    [goos addObject:[[AncientOneYig alloc] init]];
+    [goos addObject:[[AncientOneYogSothoth alloc] init]];
     return goos;
 }
 
@@ -316,69 +331,6 @@
 
 +(NSMutableArray*)arkhamHorrorMonsters {
     
-    /*
-     
-     MONSTERS
-     Name                       Movement    Toughness   Dimension   Count   Mask Monster
-     ---------------------------------------------------------------------------------
-     Dhole                      Normal      3	        Circle 		1
-     Fire Vampire               Flying      1	        Star        2
-     Flying Polyp               Flying      3	        Hexagon 	1
-     Formless Spawn             Normal      2	        Hexagon 	2
-     Ghost                      Stationary	1	        Crescent 	3
-     Ghoul                      Normal      1	        Hexagon 	3
-     Gug                        Normal      3	        Slash 		2
-     High Priest                Normal      2	        Plus 		1
-     Shoggoth                   Fast        3	        Diamond 	2
-     Star Spawn                 Normal      3	        Plus 		2
-     Vampire                    Normal      1	        Crescent 	1
-     Witch                      Normal      1	        Circle 		2
-     Zombie                     Normal      1	        Crescent 	3
-     
-     
-     Name                       Awareness   Horror Rating/Damage    Combat Rating/Damage
-     -----------------------------------------------------------------------------------
-     Dhole                      -1          -1/4                    -3/4
-     Fire Vampire               +0          +0/0                    -2/2
-     Flying Polyp               +0          -2/4                    -3/3
-     Formless Spawn             +0          -1/2                    -2/2
-     Ghost                      -3          -2/2                    -3/2
-     Ghoul                      -3          +0/1                    -1/1
-     Gug                        -2          -1/2                    -2/4
-     High Priest                -2          +1/1                    -2/2
-     Shoggoth                   -1          -1/3                    -1/3
-     Star Spawn                 -1          -3/2                    -3/3
-     Vampire                    -3          +0/2                    -3/3
-     Witch                      -1          +0/0                    -3/2
-     Zombie                     +1          -1/1                    -1/2
-     
-     
-     Name                       P.Resist    M.Resist    Ambush  Endless Nightmarish Overwhelming
-     -------------------------------------------------------------------------------------------
-     Dhole                      Resist      Resist      No      No      1           1
-     Fire Vampire               Immune      No          Yes     No      0           0
-     Flying Polyp               Resist      No          No      No      1           1
-     Formless Spawn             Immune      No          No      No      0           0
-     Ghost                      Immune      No          No      No      0           0
-     Ghoul                      No          No          Yes     No      0           0
-     Gug                        No          No          No      No      0           1
-     High Priest                No          Immune      No      No      0           0
-     Shoggoth                   Resist      No          No      No      1           0
-     Star Spawn                 No          No          No      No      0           0
-     Vampire                    Resist      No          No      No      0           0
-     Witch                      No          No          No      No      0           0
-     Zombie                     No          No          No      No      0           0
-     
-     
-     
-     MONSTER UNIQUE RULES
-     ----------------------
-     Ghost - undead
-     Vampie - undead
-     Zombie - undead
-     
-     */
-    
     // Uniques!
     NSMutableArray *arkhamHorrorMonsters = [NSMutableArray new];
     Monster *monster;
@@ -399,11 +351,6 @@
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
     
-    monster = [[ManiacMonster alloc] init];
-    [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:monster];
-    [arkhamHorrorMonsters addObject:monster];
-    
     monster = [[MiGoMonster alloc] init];
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
@@ -421,11 +368,7 @@
     monster = [[Monster alloc] init];
     monster.name = @"Byakhee";
     monster.movementType = MonsterMovementTypeFlying;
-    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
-    monster.toughness = 1;
     monster.awareness = -2;
-    monster.horrorRating = -1;
-    monster.horrorDamage = 1;
     monster.combatRating = 0;
     monster.combatDamage = 2;
     [arkhamHorrorMonsters addObject:monster];
@@ -434,14 +377,11 @@
     
     monster = [[Monster alloc] init];
     monster.name = @"Cultist";
-    monster.movementType = MonsterMovementTypeNormal;
     monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
-    monster.toughness = 1;
     monster.awareness = -3;
     monster.horrorRating = 0;
     monster.horrorDamage = 0;
-    monster.combatRating = 1; // positive combat rating
-    monster.combatDamage = 1;
+    monster.combatRating = 1;
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
@@ -457,10 +397,182 @@
     monster.awareness = -2;
     monster.horrorRating = 0;
     monster.horrorDamage = 3;
-    monster.combatRating = -1;
     monster.combatDamage = 3;
     monster.nightmarishRating = 1;
     monster.physicalResistance = MonsterDamageImmunityResist;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Maniac";
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+    monster.horrorRating = 0;
+    monster.horrorDamage = 0;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Dhole";
+    monster.toughness = 3;
+    monster.horrorDamage = 4;
+    monster.combatRating = -3;
+    monster.combatDamage = 4;
+    monster.physicalResistance = MonsterDamageImmunityResist;
+    monster.magicalResistance = MonsterDamageImmunityResist;
+    monster.nightmarishRating = 1;
+    monster.overwhelmingRating = 1;
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Fire Vampire";
+    monster.movementType = MonsterMovementTypeFlying;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolStar];
+    monster.awareness = 0;
+    monster.horrorRating = 0;
+    monster.horrorDamage = 0;
+    monster.combatRating = -2;
+    monster.combatDamage = 2;
+    monster.physicalResistance = MonsterDamageImmunityImmune;
+    monster.canAmbush = YES;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Flying Polyp";
+    monster.movementType = MonsterMovementTypeFlying;
+    monster.toughness = 3;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
+    monster.awareness = 0;
+    monster.horrorRating = -2;
+    monster.horrorDamage = 4;
+    monster.combatRating = -3;
+    monster.combatDamage = 3;
+    monster.physicalResistance = MonsterDamageImmunityResist;
+    monster.nightmarishRating = 1;
+    monster.overwhelmingRating = 1;
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Formless Spawn";
+    monster.toughness = 2;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
+    monster.awareness = 0;
+    monster.horrorDamage = 2;
+    monster.combatRating = -2;
+    monster.combatDamage = 2;
+    monster.physicalResistance = MonsterDamageImmunityImmune;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Ghost";
+    monster.movementType = MonsterMovementTypeStationary;
+    monster.toughness = 2;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+    monster.awareness = -3;
+    monster.horrorRating = -2;
+    monster.horrorDamage = 2;
+    monster.combatRating = -3;
+    monster.combatDamage = 2;
+    monster.physicalResistance = MonsterDamageImmunityImmune;
+    monster.isUndead = YES;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Shoggoth";
+    monster.movementType = MonsterMovementTypeFast;
+    monster.toughness = 3;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolDiamond];
+    monster.horrorDamage = 3;
+    monster.combatDamage = 3;
+    monster.physicalResistance = MonsterDamageImmunityResist;
+    monster.nightmarishRating = 1;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Gug";
+    monster.toughness = 3;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
+    monster.awareness = -2;
+    monster.horrorDamage = 2;
+    monster.combatRating = -2;
+    monster.combatDamage = 4;
+    monster.overwhelmingRating = 1;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Ghoul";
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
+    monster.awareness = -3;
+    monster.horrorRating = 0;
+    monster.canAmbush = YES;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"High Priest";
+    monster.toughness = 2;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolPlus];
+    monster.awareness = -2;
+    monster.horrorRating = 1;
+    monster.combatRating = -2;
+    monster.combatDamage = 2;
+    monster.magicalResistance = MonsterDamageImmunityImmune;
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Star Spawn";
+    monster.toughness = 3;
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolPlus];
+    monster.horrorRating = -3;
+    monster.horrorDamage = 2;
+    monster.combatRating = -3;
+    monster.combatDamage = 3;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Vampire";
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+    monster.awareness = -3;
+    monster.horrorRating = 0;
+    monster.horrorDamage = 2;
+    monster.combatRating = -3;
+    monster.combatDamage = 3;
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Vampire";
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+    monster.awareness = -3;
+    monster.horrorRating = 0;
+    monster.horrorDamage = 2;
+    monster.combatRating = -3;
+    monster.combatDamage = 3;
+    monster.isUndead = YES;
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Witch";
+    monster.horrorRating = 0;
+    monster.horrorDamage = 0;
+    monster.combatRating = -3;
+    monster.combatDamage = 2;
+    [arkhamHorrorMonsters addObject:monster];
+    [arkhamHorrorMonsters addObject:monster];
+    
+    monster = [[Monster alloc] init];
+    monster.name = @"Zombie";
+    monster.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
+    monster.combatDamage = 2;
+    monster.isUndead = YES;
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
     [arkhamHorrorMonsters addObject:monster];
@@ -506,41 +618,17 @@
 
 +(NSMutableArray*)arkhamHorrorAllies {
     NSMutableArray *allies = [NSMutableArray new];
-    
-    Ally *ally;
-    
-    ally = [[AllyAnnaKaslow alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyDuke alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyEricColt alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyJohnLegrasse alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyProfessorArmitage alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyRichardUptonPickman alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyRubyStandish alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyRyanDean alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllySirWilliamBrinton alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyThomasFMalone alloc] init];
-    [allies addObject:ally];
-    
-    ally = [[AllyTomMountainMurphy alloc] init];
-    [allies addObject:ally];
+    [allies addObject:[[AllyAnnaKaslow alloc] init]];
+    [allies addObject:[[AllyDuke alloc] init]];
+    [allies addObject:[[AllyEricColt alloc] init]];
+    [allies addObject:[[AllyJohnLegrasse alloc] init]];
+    [allies addObject:[[AllyProfessorArmitage alloc] init]];
+    [allies addObject:[[AllyRichardUptonPickman alloc] init]];
+    [allies addObject:[[AllyRubyStandish alloc] init]];
+    [allies addObject:[[AllyRyanDean alloc] init]];
+    [allies addObject:[[AllySirWilliamBrinton alloc] init]];
+    [allies addObject:[[AllyThomasFMalone alloc] init]];
+    [allies addObject:[[AllyTomMountainMurphy alloc] init]];
     
     return allies;
 }
@@ -621,7 +709,6 @@
     Item *item;
     
     // WEAPONS
-    // ------------------
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
     item.itemClass = ItemClassificationPhysicalWeapon;
@@ -630,7 +717,7 @@
     [(WeaponItem*)item setCombatBonus:1];
     item.price = 2;
     item.hands = 1;
-    [commons addObject:item]; // count = 2
+    [commons addObject:item];
     
     item = [[WeaponItem alloc] init];
     item.cardType = CardTypeCommonItem;
@@ -857,7 +944,7 @@
     [(MovementItem*)item setUsableInOtherWorld:NO];
     [commons addObject:item];
     
-    [commons addObjectsFromArray:commons];
+    [commons addObjectsFromArray:commons]; // double all items
     return commons;
 }
 

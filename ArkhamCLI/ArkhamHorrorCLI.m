@@ -367,9 +367,9 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
         callback(@"Mike",donePicking);
     });
 }
--(void)priority:(BOOL)cutsLine dieRoll:(NSUInteger)dieMax callback:(AHRandomEvent)callback {
+-(void)priority:(BOOL)cutsLine dieRoll:(NSUInteger)sides callback:(AHRandomEvent)callback {
     AHScheduleBlock(cutsLine, ^{
-        NSUInteger roll = arc4random_uniform((unsigned int)dieMax)+1;
+        NSUInteger roll = arc4random_uniform((unsigned int)sides)+1;
         callback(roll);
     });
 }

@@ -28,7 +28,6 @@
 @property (nonatomic) BOOL canAmbush;
 @property (nonatomic) BOOL isEndless;
 @property (nonatomic) BOOL isUndead;
-@property (nonatomic) BOOL isMaskMonster;
 
 @property (nonatomic) MonsterDamageImmunity physicalResistance;
 @property (nonatomic) MonsterDamageImmunity magicalResistance;
@@ -55,9 +54,6 @@
 @interface HoundOfTindalosMonster : Monster
 // move to nearest investigator in arkham, excepting plays in asylum or hospital. If tie, then tracks lowest Sneak.
 // If tie, the first player chooses. If there no players on the same board as Hound, moves through the train station to the closest investigator.
-@end
-@interface ManiacMonster : Monster
-// if terror >= 6, maniac's combat rating = -2, combat damage is 3, is Endless
 @end
 @interface MiGoMonster : Monster
 // if pass combat check against mi-go, remove from game and draw 1 unique

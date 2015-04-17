@@ -20,9 +20,19 @@
     if (self){
         self.name = @"Monster Prototype";
         self.toughness = 1;
-        self.awareness = 0;
+        self.awareness = -1;
+        self.horrorRating = -1;
+        self.horrorDamage = 1;
+        self.combatRating = -1;
+        self.combatDamage = 1;
         self.movementType = MonsterMovementTypeNormal;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
+        self.physicalResistance = MonsterDamageImmunityNone;
+        self.magicalResistance = MonsterDamageImmunityNone;
+        self.canAmbush = NO;
+        self.isUndead = NO;
+        self.nightmarishRating = 0;
+        self.overwhelmingRating = 0;
     }
     return self;
 }
@@ -215,11 +225,9 @@
     if (self) {
         self.name = @"Dimensional Shambler";
         self.movementType = MonsterMovementTypeFast;
-        self.toughness = 1;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
         self.awareness = -3;
         self.horrorRating = -2;
-        self.horrorDamage = 1;
         self.combatRating = -2;
         self.combatDamage = 0;
     }
@@ -237,14 +245,12 @@
     self = [super init];
     if (self) {
         self.name = @"Elder Thing";
-        self.movementType = MonsterMovementTypeNormal;
         self.toughness = 2;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolDiamond];
         self.awareness = -2;
         self.horrorRating = -3;
         self.horrorDamage = 2;
         self.combatRating = 0;
-        self.combatDamage = 1;
     }
     return self;
 }
@@ -266,10 +272,8 @@
         self.movementType = MonsterMovementTypeUnique;
         self.toughness = 2;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolSquare];
-        self.awareness = -1;
         self.horrorRating = -2;
         self.horrorDamage = 4;
-        self.combatRating = -1;
         self.combatDamage = 3;
     }
     return self;
@@ -342,26 +346,6 @@
 }
 @end
 
-@implementation ManiacMonster
-// Maniac - if terror >= 6, maniac's combat rating = -2, combat damage is 3, is Endless
--(id)init {
-    self = [super init];
-    if (self) {
-        self.name = @"Maniac";
-        self.movementType = MonsterMovementTypeNormal;
-        self.toughness = 1;
-        self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
-        self.awareness = -1;
-        self.horrorRating = 0;
-        self.horrorDamage = 0;
-        self.combatRating = -1;
-        self.combatDamage = 1;
-    }
-    return self;
-}
-
-@end
-
 @implementation MiGoMonster
 // Mi-Go - if pass combat check against mi-go, remove from game and draw 1 unique
 -(id)init {
@@ -369,13 +353,9 @@
     if (self) {
         self.name = @"Mi-Go";
         self.movementType = MonsterMovementTypeFlying;
-        self.toughness = 1;
-        self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
         self.awareness = -2;
-        self.horrorRating = -1;
         self.horrorDamage = 2;
         self.combatRating = 0;
-        self.combatDamage = 1;
     }
     return self;
 }
@@ -394,8 +374,6 @@
         self.toughness = 2;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
         self.awareness = -2;
-        self.horrorRating = -1;
-        self.horrorDamage = 1;
         self.combatRating = -2;
         self.combatDamage = 0;
     }
@@ -416,8 +394,6 @@
     self = [super init];
     if (self) {
         self.name = @"The Black Man";
-        self.movementType = MonsterMovementTypeNormal;
-        self.toughness = 1;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolCrescent];
         self.awareness = -3;
         self.horrorRating = 0;
@@ -435,11 +411,8 @@
     self = [super init];
     if (self) {
         self.name = @"The Bloated Woman";
-        self.movementType = MonsterMovementTypeNormal;
         self.toughness = 2;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolHexagon];
-        self.awareness = -1;
-        self.horrorRating = -1;
         self.horrorDamage = 2;
         self.combatRating = -2;
         self.combatDamage = 2;
@@ -454,12 +427,8 @@
     self = [super init];
     if (self) {
         self.name = @"The Dark Pharoah";
-        self.movementType = MonsterMovementTypeNormal;
         self.toughness = 2;
         self.dimension = [Dimension ofType:MonsterDimensionSymbolSlash];
-        self.awareness = -1;
-        self.horrorRating = -1;
-        self.horrorDamage = 1;
         self.combatRating = -3;
         self.combatDamage = 3;
     }
@@ -475,12 +444,8 @@
         self.name = @"Warlock";
         self.movementType = MonsterMovementTypeStationary;
         self.toughness = 2;
-        self.dimension = [Dimension ofType:MonsterDimensionSymbolCircle];
         self.awareness = -2;
-        self.horrorRating = -1;
-        self.horrorDamage = 1;
         self.combatRating = -3;
-        self.combatDamage = 1;
     }
     return self;
 }
