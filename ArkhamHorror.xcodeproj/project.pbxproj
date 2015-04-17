@@ -66,6 +66,8 @@
 		BEE5B9FB1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */; };
 		BEE5B9FE1AE05EAD007D8D9E /* RumorMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */; };
 		BEE5B9FF1AE05EAD007D8D9E /* RumorMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */; };
+		BEE5BA031AE17B46007D8D9E /* OtherWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5BA021AE17B46007D8D9E /* OtherWorld.m */; };
+		BEE5BA041AE17B46007D8D9E /* OtherWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5BA021AE17B46007D8D9E /* OtherWorld.m */; };
 		BEEF09021AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
 		BEEF09031AB74C3D00155C45 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF09011AB74C3D00155C45 /* Dimension.m */; };
 		BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0D04F1AA794E700ADFC88 /* Ally.m */; };
@@ -165,6 +167,8 @@
 		BEE5B9F91AE05E0D007D8D9E /* EnvironmentMythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentMythos.m; sourceTree = "<group>"; };
 		BEE5B9FC1AE05EAD007D8D9E /* RumorMythos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RumorMythos.h; sourceTree = "<group>"; };
 		BEE5B9FD1AE05EAD007D8D9E /* RumorMythos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RumorMythos.m; sourceTree = "<group>"; };
+		BEE5BA011AE17B46007D8D9E /* OtherWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherWorld.h; sourceTree = "<group>"; };
+		BEE5BA021AE17B46007D8D9E /* OtherWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherWorld.m; sourceTree = "<group>"; };
 		BEEF09001AB74C3D00155C45 /* Dimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dimension.h; sourceTree = "<group>"; };
 		BEEF09011AB74C3D00155C45 /* Dimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dimension.m; sourceTree = "<group>"; };
 		BEF0D04E1AA794E700ADFC88 /* Ally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ally.h; sourceTree = "<group>"; };
@@ -374,6 +378,8 @@
 				BE085F4C1A9BBA7A00FEAB0E /* Location.m */,
 				BE4CFD561A9CF37B0034581D /* Neighborhood.h */,
 				BE4CFD571A9CF37B0034581D /* Neighborhood.m */,
+				BEE5BA011AE17B46007D8D9E /* OtherWorld.h */,
+				BEE5BA021AE17B46007D8D9E /* OtherWorld.m */,
 			);
 			name = locations;
 			sourceTree = "<group>";
@@ -576,6 +582,7 @@
 				BE085F121A9B9AEA00FEAB0E /* AppDelegate.m in Sources */,
 				BEF0D0501AA794E700ADFC88 /* Ally.m in Sources */,
 				BE085F0F1A9B9AEA00FEAB0E /* main.m in Sources */,
+				BEE5BA031AE17B46007D8D9E /* OtherWorld.m in Sources */,
 				BE085F4D1A9BBA7A00FEAB0E /* Location.m in Sources */,
 				BE085F3E1A9B9E8600FEAB0E /* AncientOne.m in Sources */,
 				BEE5B9F41AE05B9B007D8D9E /* HeadlineMythos.m in Sources */,
@@ -604,6 +611,7 @@
 				BE241B801AC45DB9009C63B6 /* MFJSONObject.m in Sources */,
 				BE0F7E2B1AAF6F6700C337F1 /* ArkhamHorrorCLI.m in Sources */,
 				BE0F7E341AAF6FBA00C337F1 /* PESGraphRoute.m in Sources */,
+				BEE5BA041AE17B46007D8D9E /* OtherWorld.m in Sources */,
 				BEE5B9FB1AE05E0D007D8D9E /* EnvironmentMythos.m in Sources */,
 				BE0F7E411AAF6FF500C337F1 /* Game.m in Sources */,
 				BE0F7E3B1AAF6FE100C337F1 /* Card.m in Sources */,

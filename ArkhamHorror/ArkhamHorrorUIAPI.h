@@ -14,12 +14,9 @@
 
 typedef void(^AHSkillCheckEvent)(NSArray *rolls);
 typedef void(^AHSelectEvent)(NSArray* selected, NSArray *rejected);
-
 typedef void(^AHAncientOneSelectEvent)(NSString *selected);
 typedef void(^AHPlayerSelectEvent)(NSString *selected, BOOL done);
-
 typedef void(^AHRandomEvent)(NSUInteger random);
-
 typedef void(^AHEvent)(void);
 
 @protocol ArkhamHorrorUIAPI <NSObject>

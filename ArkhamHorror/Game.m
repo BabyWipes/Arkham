@@ -189,7 +189,7 @@ static Game *singletonInstance = nil;
 
 -(void)setupDecks:(NSDictionary*)settings {
     
-
+    
     [self setupItems:settings];
     self.uniquesDeck = [NSMutableArray new];
     self.spellsDeck = [NSMutableArray new];
@@ -344,7 +344,7 @@ static Game *singletonInstance = nil;
 
 -(void)upkeepRefresh { // all investigators items, spells, etc refresh
     NSLog(@"phase: upkeep refresh");
-
+    
     for (Investigator *investigator in self.investigators){
         for (Item *item in investigator.commonItems){
             item.exhausted = NO;
@@ -365,7 +365,7 @@ static Game *singletonInstance = nil;
 // bank loans, retainers, blessings, and curses are not rolled for during the first upkeep after they are gained, you still get the effect
 -(void)upkeepAction {
     NSLog(@"phase: upkeep action");
-
+    
     Investigator *currentPlayer = self.investigators[self.currentPlayerIndex];
     
     // TODO - a player may resolve these events in any order
@@ -449,52 +449,52 @@ static Game *singletonInstance = nil;
 }
 -(void)movementArkham {
     NSLog(@"phase: move arkham");
-
+    
     [self advanceGamePhase];
 }
 -(void)movementOtherWorld {
     NSLog(@"phase: move other world");
-
+    
     [self advanceGamePhase];
 }
 -(void)movementDelayed {
     NSLog(@"phase: move delayed");
-
+    
     [self advanceGamePhase];
 }
 -(void)encounterArkhamNoGate {
     NSLog(@"phase: arkham no gate");
-
+    
     [self advanceGamePhase];
 }
 -(void)encounterArkhamGate {
     NSLog(@"phase: arkham gate");
-
+    
     [self advanceGamePhase];
 }
 -(void)encounterOtherWorld {
     NSLog(@"phase: encounter other world");
-
+    
     [self advanceGamePhase];
 }
 -(void)mythosGatesSpawn {
     NSLog(@"phase: gates spawn");
-
+    
     [self advanceGamePhase];
 }
 -(void)mythosPlaceClues {
     NSLog(@"phase: mythos place clues");
-
+    
     [self advanceGamePhase];
 }
 -(void)mythosMoveMonsters {
     NSLog(@"phase: mythos move monsters");
-
+    
     [self advanceGamePhase];
 }
 -(void)mythosEffect {
     NSLog(@"phase: mythos effect");
-
+    
     [self advanceGamePhase];
 }
 
@@ -514,66 +514,6 @@ static Game *singletonInstance = nil;
     // you may spend clue tokens on a 1 to 1 basis to get an extra die before or after a skill check
     // it does not change the check modifier, it only adds a die, so even a player who would normally auto-fail a check by having < 1 dice may attempt it
     // They may spend clue tokens before rolling any dice, after rolling some dice, or all dice
-}
-
--(void)drawMythos {
-    Mythos *newMythos = (Mythos*)[self.mythosDeck drawOne];
-    if (newMythos.mythosType == MythosTypeStoryContinues){
-        // discard this mythos, shuffle mythos deck, redraw mythos
-        [self.mythosDeck discard:newMythos];
-        [self.mythosDeck shuffle];
-        [self drawMythos];
-        return;
-    }
-    else if (newMythos.mythosType == MythosTypeEnvironmentMystic ||
-        newMythos.mythosType == MythosTypeEnvironmentUrban ||
-        newMythos.mythosType == MythosTypeEnvironmentWeather) {
-        // dispose of old environment mythos and unset it's effects,
-        // apply new effect
-        if (self.currentMythosEnvironment != nil){
-            [self.currentMythosEnvironment removeEnvironmentEffect:self];
-            [self.mythosDeck discard:self.currentMythosEnvironment];
-        }
-        self.currentMythosEnvironment = (EnvironmentMythos*)newMythos;
-        [self.currentMythosEnvironment applyEnvironmentEffect:self];
-
-    }
-    else if (newMythos.mythosType == MythosTypeHeadline) {
-        // apply it's one-off effect
-        [(HeadlineMythos*)newMythos applyHeadlineEffect:self];
-        
-    }
-    else if (newMythos.mythosType == MythosTypeRumor) {
-        if (self.currentMythosRumor == nil){
-            self.currentMythosRumor = (RumorMythos*)newMythos;
-            [self.currentMythosRumor applyRumorEffect:self];
-            // apply the mythos, apply the ongoing effect
-        }
-    }
-    else if (newMythos.mythosType == MythosTypeStoryContinues){
-        // discard this mythos, shuffle mythos deck, redraw mythos
-    }
-    
-    self.currentMythosWhiteDimensions = newMythos.whiteDimensions;
-    self.currentMythosBlackDimensions = newMythos.blackDimensions;
-    
-    Location *gateLoc = [self locationNamed:newMythos.gateLocation];
-    Location *clueLoc = [self locationNamed:newMythos.clueLocation];
-    
-    [self openGate:gateLoc];
-    
-    // if no gate at clueLoc, if no investigators there
-    [self placeClue:clueLoc];
-    // else if 1 investigator there, they immediately pick it up
-    // else first player decides who gets clue
-}
-
--(void)openGate:(Location*)gateLocation {
-    
-}
-
--(void)placeClue:(Location*)clueLocation {
-    clueLocation.cluesHere++;
 }
 
 -(void)incrementTerror {
@@ -616,9 +556,24 @@ static Game *singletonInstance = nil;
 }
 
 #pragma mark - Game Utils
+#pragma mark - lookups
 
--(NSArray*)routeFrom:(Location*)a to:(Location*)b {
-    return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
+-(Monster*)monsterNamed:(NSString*)monsterName {
+    for (Monster *monster in self.monsterCup){
+        if ([monster.name isEqualToString:monsterName]){
+            return monster;
+        }
+    }
+    return nil;
+}
+
+-(Neighborhood*)neighborhoodNamed:(NSString*)neighborhoodName {
+    for (Neighborhood *hood in self.neighborhoods){
+        if ([hood.name isEqualToString:neighborhoodName]){
+            return hood;
+        }
+    }
+    return nil;
 }
 
 -(Location*)locationNamed:(NSString*)name {
@@ -642,6 +597,12 @@ static Game *singletonInstance = nil;
         }
     }
     return nil;
+}
+
+#pragma mark - Movement
+
+-(NSArray*)routeFrom:(Location*)a to:(Location*)b {
+    return [PathFinder graph:self.pathFindingGraph routeFrom:a to:b];
 }
 
 -(void)movable:(Movable*)movable followPath:(NSArray*)path {
@@ -752,6 +713,68 @@ static Game *singletonInstance = nil;
         investigator.hasBankLoan = YES;
         [self investigator:investigator getMoney:10];
     }
+}
+
+#pragma mark - mythos actions 
+
+-(void)drawMythos {
+    Mythos *newMythos = (Mythos*)[self.mythosDeck drawOne];
+    if (newMythos.mythosType == MythosTypeStoryContinues){
+        // discard this mythos, shuffle mythos deck, redraw mythos
+        [self.mythosDeck discard:newMythos];
+        [self.mythosDeck shuffle];
+        [self drawMythos];
+        return;
+    }
+    else if (newMythos.mythosType == MythosTypeEnvironmentMystic ||
+             newMythos.mythosType == MythosTypeEnvironmentUrban ||
+             newMythos.mythosType == MythosTypeEnvironmentWeather) {
+        // dispose of old environment mythos and unset it's effects,
+        // apply new effect
+        if (self.currentMythosEnvironment != nil){
+            [self.currentMythosEnvironment removeEnvironmentEffect:self];
+            [self.mythosDeck discard:self.currentMythosEnvironment];
+        }
+        self.currentMythosEnvironment = (EnvironmentMythos*)newMythos;
+        [self.currentMythosEnvironment applyEnvironmentEffect:self];
+        
+    }
+    else if (newMythos.mythosType == MythosTypeHeadline) {
+        // apply it's one-off effect
+        [(HeadlineMythos*)newMythos applyHeadlineEffect:self];
+        
+    }
+    else if (newMythos.mythosType == MythosTypeRumor) {
+        if (self.currentMythosRumor == nil){
+            self.currentMythosRumor = (RumorMythos*)newMythos;
+            [self.currentMythosRumor applyRumorEffect:self];
+            // apply the mythos, apply the ongoing effect
+        }
+    }
+    else if (newMythos.mythosType == MythosTypeStoryContinues){
+        // discard this mythos, shuffle mythos deck, redraw mythos
+    }
+    
+    self.currentMythosWhiteDimensions = newMythos.whiteDimensions;
+    self.currentMythosBlackDimensions = newMythos.blackDimensions;
+    
+    Location *gateLoc = [self locationNamed:newMythos.gateLocation];
+    Location *clueLoc = [self locationNamed:newMythos.clueLocation];
+    
+    [self openGate:gateLoc];
+    
+    // if no gate at clueLoc, if no investigators there
+    [self placeClue:clueLoc];
+    // else if 1 investigator there, they immediately pick it up
+    // else first player decides who gets clue
+}
+
+-(void)openGate:(Location*)gateLocation {
+    
+}
+
+-(void)placeClue:(Location*)clueLocation {
+    clueLocation.cluesHere++;
 }
 
 @end
