@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *investigatorsHere;
+
 @end

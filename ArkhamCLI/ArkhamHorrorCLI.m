@@ -12,6 +12,7 @@
 #import "SettingsManager.h"
 #import "Neighborhood.h"
 #import "Location.h"
+#import "Movable.h"
 #import "Monster.h"
 #import "Item.h"
 #import "Macros.h"
@@ -181,32 +182,32 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)printInvestigator:(Investigator*)investigator {
     [self printHBar:27];
     
-    [self println:[self stringf:@"%@, %@",investigator.name, investigator.occupation] minWidth:27];
-    [self println:[self stringf:@" SAN: %li/%li",investigator.sanity, investigator.maxSanity] minWidth:27];
-    [self println:[self stringf:@" STA: %li/%li",investigator.stamina, investigator.maxStamina] minWidth:27];
-    [self println:[self stringf:@" Cash: $%li",investigator.money] minWidth:27];
-    [self println:[self stringf:@" Clues: %li",investigator.clues] minWidth:27];
-    [self println:[self stringf:@" Gate Trophies: %li",investigator.gateTrophies] minWidth:27];
+    [self println:FORMAT(@"%@, %@",investigator.name, investigator.occupation) minWidth:27];
+    [self println:FORMAT(@" SAN: %li/%li",investigator.sanity, investigator.maxSanity) minWidth:27];
+    [self println:FORMAT(@" STA: %li/%li",investigator.stamina, investigator.maxStamina) minWidth:27];
+    [self println:FORMAT(@" Cash: $%li",investigator.money) minWidth:27];
+    [self println:FORMAT(@" Clues: %li",investigator.clues) minWidth:27];
+    [self println:FORMAT(@" Gate Trophies: %li",investigator.gateTrophies) minWidth:27];
     [self println:@"" minWidth:27];
     
     
-    [self println:[self stringf:@" Speed: %li",investigator.speed] minWidth:27];
-    [self println:[self stringf:@"        %li :Sneak",investigator.sneak] minWidth:27];
+    [self println:FORMAT(@" Speed: %li",investigator.speed) minWidth:27];
+    [self println:FORMAT(@"        %li :Sneak",investigator.sneak) minWidth:27];
     [self println:@"" minWidth:27];
     
-    [self println:[self stringf:@" Fight: %li",investigator.fight] minWidth:27];
-    [self println:[self stringf:@"        %li :Will",investigator.will] minWidth:27];
+    [self println:FORMAT(@" Fight: %li",investigator.fight) minWidth:27];
+    [self println:FORMAT(@"        %li :Will",investigator.will) minWidth:27];
     [self println:@"" minWidth:27];
     
-    [self println:[self stringf:@"  Lore: %li",investigator.lore] minWidth:27];
-    [self println:[self stringf:@"        %li :Luck",investigator.luck] minWidth:27];
+    [self println:FORMAT(@"  Lore: %li",investigator.lore) minWidth:27];
+    [self println:FORMAT(@"        %li :Luck",investigator.luck) minWidth:27];
     [self println:@"" minWidth:27];
     
     
     if (investigator.monsterTrophies.count > 0){
         [self println:@"Monster Trophies:" minWidth:27];
         for (Monster *monster in investigator.monsterTrophies){
-            [self println:[self stringf:@"%@, %li",monster.name,monster.toughness] minWidth:27];
+            [self println:FORMAT(@"%@, %li",monster.name,monster.toughness) minWidth:27];
         }
         [self println:@"" minWidth:27];
     }
@@ -264,17 +265,9 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
     [self printHBar:27];
 }
 
--(NSString*)stringf:(NSString *)format, ... {
-    va_list args;
-    va_start(args, format);
-    NSString *ret = [[NSString alloc] initWithFormat:format arguments:args];
-    va_end(args);
-    return ret;
-}
-
 -(NSString*)coloredString:(NSString*)text {
-    NSString *colorFormatString = [self stringf:@"%c[%d;%d;%dm",kEscapeChar,self.printMode,self.foreground,self.background];
-    text = [self stringf:@"%@%@%lu",colorFormatString,text,kEscapeChar];
+    NSString *colorFormatString = FORMAT(@"%c[%lu;%lu;%lum",kEscapeChar,(unsigned long)self.printMode,(unsigned long)self.foreground,(unsigned long)self.background);
+    text = FORMAT(@"%@%@%hhd",colorFormatString,text,kEscapeChar);
     return text;
 }
 
@@ -346,6 +339,14 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 
 #pragma mark - ArkhamHorror UI API
 
+-(void)priority:(BOOL)cutsLine move:(Movable*)movable from:(Location*)start to:(Location*)end callback:(AHEvent)callback {
+    AHScheduleBlock(cutsLine, ^{
+        [self println:FORMAT(@"Moving %@ from %@ to %@",movable.name,start.name,end.name)];
+        movable.currentLocation = end;
+        callback();
+    });
+}
+
 -(void)priority:(BOOL)cutsLine ancientOneSetup:(AHAncientOneSelectEvent)callback{
     AHScheduleBlock(cutsLine, ^{
         // TODO may be random or selected
@@ -357,8 +358,12 @@ typedef NS_ENUM(NSUInteger, ColorPrintingBackground){
 -(void)priority:(BOOL)cutsLine event:(AHEvent)callback {
     AHScheduleBlock(cutsLine, callback);
 }
+
 -(void)priority:(BOOL)cutsLine focusEvent:(AHEvent)callback {
-    
+    AHScheduleBlock(cutsLine,^{
+        NSLog(@"faking focus");
+        callback();
+    });
 }
 -(void)priority:(BOOL)cutsLine playerSetupEvent:(AHPlayerSelectEvent)callback {
     AHScheduleBlock(cutsLine, ^{

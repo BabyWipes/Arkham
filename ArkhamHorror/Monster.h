@@ -13,7 +13,6 @@
 #import "Dimension.h"
 
 @interface Monster : Movable
-@property (strong, nonatomic) NSString *name;
 
 @property (nonatomic) NSInteger toughness;
 @property (nonatomic) NSInteger awareness;

@@ -11,7 +11,6 @@
 
 @interface Investigator : Movable
 
-@property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *occupation;
 @property (strong, nonatomic) NSString *home;
 
@@ -52,7 +51,7 @@
 @property (strong, nonatomic) NSMutableArray *allies;
 
 @property (strong, nonatomic) NSMutableArray *monsterTrophies;
-@property (nonatomic) NSInteger *gateTrophies;
+@property (nonatomic) NSInteger gateTrophies;
 
 -(BOOL)blessed;
 -(void)setBlessed:(BOOL)blessed;

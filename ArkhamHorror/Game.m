@@ -558,6 +558,51 @@ static Game *singletonInstance = nil;
 #pragma mark - Game Utils
 #pragma mark - lookups
 
+-(Item*)spellNamed:(NSString*)spellName {
+    for (Item *spell in self.spellsDeck){
+        if ([spell.name isEqualToString:spellName]){
+            return spell;
+        }
+    }
+    return nil;
+}
+
+-(Ally*)allyNamed:(NSString*)allyName {
+    for (Ally *ally in self.alliesDeck){
+        if ([ally.name isEqualToString:allyName]){
+            return ally;
+        }
+    }
+    return nil;
+}
+
+-(Skill*)skillNamed:(NSString*)skillName {
+    for (Skill *skill in self.skillsDeck){
+        if ([skill.name isEqualToString:skillName]){
+            return skill;
+        }
+    }
+    return nil;
+}
+
+-(Item*)uniqueItemNamed:(NSString*)itemName {
+    for (Item *item in self.uniquesDeck){
+        if ([item.name isEqualToString:itemName]){
+            return item;
+        }
+    }
+    return nil;
+}
+
+-(Item*)commonItemNamed:(NSString*)itemName {
+    for (Item *item in self.commonsDeck){
+        if ([item.name isEqualToString:itemName]){
+            return item;
+        }
+    }
+    return nil;
+}
+
 -(Monster*)monsterNamed:(NSString*)monsterName {
     for (Monster *monster in self.monsterCup){
         if ([monster.name isEqualToString:monsterName]){
@@ -713,6 +758,31 @@ static Game *singletonInstance = nil;
         investigator.hasBankLoan = YES;
         [self investigator:investigator getMoney:10];
     }
+}
+
+-(void)investigator:(Investigator*)investigator moveFromLocation:(Location*)startLocation toLocation:(Location*)destLocation{
+    if (startLocation.monstersHere.count > 0){
+        // attempt evade all monsters
+        for (Monster *monster in startLocation.monstersHere){
+            [self investigator:investigator evadeMonster:monster];
+        }
+        // you must evade all of them before leaving
+        // if you fail evade against a monster, take combat damage, their movement is over, enter combat with monster
+    }
+    else {
+        // just move to new location
+    }
+}
+
+-(void)investigator:(Investigator*)investigator evadeMonster:(Monster*)monster {
+    [self investigator:investigator rollSkillCheck:SkillCheckTypeEvade checkModifier:monster.awareness difficulty:1];
+
+}
+
+#pragma mark - monster actions
+
+-(void)attackInvestigator:(Investigator*)player withMonster:(Monster*)monster {
+    
 }
 
 #pragma mark - mythos actions 

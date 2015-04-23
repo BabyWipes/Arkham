@@ -22,4 +22,7 @@
 #   define logVerbose(...)
 #endif
 
+#define FORMAT(fmt, ... ) [NSString stringWithFormat:(fmt), ##__VA_ARGS__]
+
+
 #endif

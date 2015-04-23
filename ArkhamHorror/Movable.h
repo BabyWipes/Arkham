@@ -13,6 +13,7 @@
 #import "MFJSONObject.h"
 
 @interface Movable : MFJSONObject
+@property (strong, nonatomic) NSString *name;
 @property (weak, nonatomic) Neighborhood *currentNeighborhood;
 @property (weak, nonatomic) Location *currentLocation;
 @end

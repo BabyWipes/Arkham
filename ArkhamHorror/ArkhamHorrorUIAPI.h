@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Movable.h"
 
 // shorthand notation to make priority clearer
 #define push(_eventName)    priority:YES _eventName
@@ -28,6 +29,7 @@ typedef void(^AHEvent)(void);
 -(void)priority:(BOOL)cutsLine focusEvent:(AHEvent)callback;
 -(void)priority:(BOOL)cutsLine dieRoll:(NSUInteger)sides callback:(AHRandomEvent)callback;
 -(void)priority:(BOOL)cutsLine skillCheckEvent:(NSInteger)dieToRoll difficulty:(NSInteger)difficulty callback:(AHSkillCheckEvent)callback;
+-(void)priority:(BOOL)cutsLine move:(Movable*)movable from:(Location*)start to:(Location*)end callback:(AHEvent)callback;
 -(void)priority:(BOOL)cutsLine event:(AHEvent)callback;
 
 @end
