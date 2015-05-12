@@ -771,6 +771,9 @@ static Game *singletonInstance = nil;
     }
     else {
         // just move to new location
+        [self.uiDelegate push(move:investigator from:startLocation to:destLocation callback:^{
+            NSLog(@"did move!");
+        })];
     }
 }
 
