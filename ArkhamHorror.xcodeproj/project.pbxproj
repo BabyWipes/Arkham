@@ -58,7 +58,6 @@
 		BE4CFD581A9CF37B0034581D /* Neighborhood.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4CFD571A9CF37B0034581D /* Neighborhood.m */; };
 		BE7570E61AB22E49004B3998 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7570E51AB22E49004B3998 /* SettingsManager.m */; };
 		BE7570E71AB22E49004B3998 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7570E51AB22E49004B3998 /* SettingsManager.m */; };
-		BE7570E91AB2321D004B3998 /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = BE7570E81AB2321D004B3998 /* Default.json */; };
 		BEA88DEA1AA50959000D9972 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA88DE91AA50959000D9972 /* Game.m */; };
 		BEE5B9F41AE05B9B007D8D9E /* HeadlineMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */; };
 		BEE5B9F51AE05B9B007D8D9E /* HeadlineMythos.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE5B9F31AE05B9B007D8D9E /* HeadlineMythos.m */; };
@@ -157,7 +156,6 @@
 		BE624F211ABDDC670006C638 /* GameEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEventDelegate.h; sourceTree = "<group>"; };
 		BE7570E41AB22E49004B3998 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		BE7570E51AB22E49004B3998 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
-		BE7570E81AB2321D004B3998 /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Default.json; sourceTree = "<group>"; };
 		BE7570EA1AB23358004B3998 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		BEA88DE81AA50959000D9972 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		BEA88DE91AA50959000D9972 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 		BE085F341A9B9C7600FEAB0E /* ArkhamHorror-core */ = {
 			isa = PBXGroup;
 			children = (
-				BE436DA01A9BC6F20091BBF9 /* Game Defaults */,
 				BE0F7DED1AAE2DE900C337F1 /* Lib */,
 				BE0F7E061AAF4CB100C337F1 /* categories */,
 				BE4CFD5B1A9CF96F0034581D /* Utils */,
@@ -287,9 +284,9 @@
 		BE085F351A9B9C7C00FEAB0E /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BE085F321A9B9B0000FEAB0E /* ViewController.xib */,
 				BE085F131A9B9AEA00FEAB0E /* ViewController.h */,
 				BE085F141A9B9AEA00FEAB0E /* ViewController.m */,
+				BE085F321A9B9B0000FEAB0E /* ViewController.xib */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -361,14 +358,6 @@
 				BEEF09011AB74C3D00155C45 /* Dimension.m */,
 			);
 			name = "bad guys";
-			sourceTree = "<group>";
-		};
-		BE436DA01A9BC6F20091BBF9 /* Game Defaults */ = {
-			isa = PBXGroup;
-			children = (
-				BE7570E81AB2321D004B3998 /* Default.json */,
-			);
-			name = "Game Defaults";
 			sourceTree = "<group>";
 		};
 		BE4CFD591A9CF3840034581D /* locations */ = {
@@ -538,7 +527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE085F1D1A9B9AEA00FEAB0E /* LaunchScreen.xib in Resources */,
-				BE7570E91AB2321D004B3998 /* Default.json in Resources */,
 				BE085F331A9B9B0000FEAB0E /* ViewController.xib in Resources */,
 				BE085F1A1A9B9AEA00FEAB0E /* Images.xcassets in Resources */,
 			);
