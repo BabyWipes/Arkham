@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "echo \"Sourcing ~/.zshrc\"\nsource ~/.zshrc\ncd ${SRCROOT}\necho \"Cleaning...\"\nxctool -reporter json-compilation-database:compile_commands.json clean\necho \"Building compilation report json database...\"\nxctool -reporter json-compilation-database:compile_commands.json build\necho \"OCLint rules:\"\ncat .oclint_rules\necho \"\"\necho \"Running OCLint against database, this might take a while...\"\noclint-json-compilation-database -v -- $(cat .oclint_rules)| sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+			shellScript = "echo \"Sourcing ~/.zshrc\"\nsource ~/.zshrc\ncd ${SRCROOT}\necho \"Cleaning...\"\nxctool -reporter json-compilation-database:compile_commands.json clean\necho \"Building compilation report json database...\"\nxctool -reporter json-compilation-database:compile_commands.json build\necho \"OCLint rules:\"\ncat .oclint_rules\necho \"\"\necho \"OCLint excludes Files/Folders:\"\ncat .oclint_excludes\necho \"\"\necho \"Running OCLint against database, this might take a while...\"\noclint-json-compilation-database $(cat .oclint_excludes) -- $(cat .oclint_rules)| sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
 		};
 /* End PBXShellScriptBuildPhase section */
 
