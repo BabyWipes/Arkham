@@ -45,7 +45,7 @@
     if (self) {
         
         // Set the default weight of the edge to be 1
-        self.weight = [NSNumber numberWithInt:1];
+        self.weight = @(1);
     }
     
     return self;

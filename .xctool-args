@@ -1,0 +1,5 @@
+[
+  "-project", "ArkhamHorror.xcodeproj",
+  "-scheme", "ArkhamCLI",
+  "-configuration", "Debug"
+]
